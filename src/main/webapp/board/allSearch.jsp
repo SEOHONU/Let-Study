@@ -185,10 +185,7 @@
                                             </div>
                                         </form>
                                     </nav>
-                    
-                    
                                 </div>
-    
                                 <div class="col12" style="text-align: center;">공백</div>
                                 <div class="col-12">스터디
                                     <div class="row bodysubstudy">
@@ -358,17 +355,5 @@
                 </div>
             </div>
             <div class="row footer">풋터</div>
-    
     </body>
-    <script>
-    $(window).resize(function () {
-    
-    })
-    
-        // $(window).resize(function () {
-        //     var banner = $('.container').width();
-        //     $('.header').width(banner);
-        // });
-    </script>
-    
     </html>
