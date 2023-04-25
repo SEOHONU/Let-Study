@@ -18,13 +18,13 @@
                 integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
             <script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
             <style>
-                * {
+                /* * {
                     box-sizing: border-box;
                 }
 
                 div {
                     border: 1px solid black;
-                }
+                } */
 
                 .container {
                     position: relative;
