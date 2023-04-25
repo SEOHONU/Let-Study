@@ -110,19 +110,21 @@
                                     <div class="col-12">
                                         <a href="/index.jsp">logo</a>
                                     </div>
-                                    <div class="col-12 subsearchbox">
-                                        <i class="fa-solid fa-arrow-left" id="searsubback"></i>
-                                        <select>
-                                            <option value="대">대</option>
-                                            <option value="중">중</option>
-                                            <option value="소">소</option>
-                                        </select>
-                                        <input type="text" class="form-control" placeholder="통합검색창"
-                                            aria-label="Username" aria-describedby="basic-addon1"
-                                            style="width: 40%; padding: 0; display: inline;">
-                                        <button type="button" class="btn btn-success"
-                                            style="z-index: 0; background-color: rgb(60, 117, 121); padding: 0;">검색</button>
-                                    </div>
+                                    <form class="container-fluid" action="/board/allSearch.jsp">
+                                        <div class="col-12 subsearchbox">
+                                            <i class="fa-solid fa-arrow-left" id="searsubback"></i>
+                                            <select name="selectsearch">
+                                                <option value="대">대</option>
+                                                <option value="중">중</option>
+                                                <option value="소">소</option>
+                                            </select>
+                                            <input type="text" class="form-control" placeholder="통합검색창"
+                                                aria-label="Username" aria-describedby="basic-addon1"
+                                                style="width: 40%; padding: 0; display: inline;" name="searchtitle">
+                                            <button type="submit" class="btn btn-success"
+                                                style="z-index: 0; background-color: rgb(60, 117, 121); padding: 0;">검색</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="col-lg-4 d-none d-lg-block order-lg-1">
@@ -270,7 +272,7 @@
                     <div class="col-lg-8 d-none d-lg-block"
                         style="text-align: center; background-color: rgb(30, 60, 62);">
 
-                        <form class="container-fluid">
+                        <form class="container-fluid" action="/board/allSearch.jsp">
                             <div class="input-group" style=" margin-top: 10px; margin-bottom: 10px;">
                                 <select>
                                     <option value="대">대분할</option>
@@ -281,7 +283,7 @@
                                 <input type="text" class="form-control" placeholder="통합검색창" aria-label="Username"
                                     aria-describedby="basic-addon1">
                                 &nbsp;
-                                <button type="button" class="btn btn-success"
+                                <button type="submit" class="btn btn-success"
                                     style="z-index: 0; background-color: rgb(60, 117, 121);">검색</button>
                             </div>
                         </form>
@@ -608,9 +610,6 @@
                 $('.navi').width(banner);
             });
 
-            $(".btn-success").on("click", function () {
-                location.href = "/board/allsearch.jsp";
-            })
 
             var hamberger = document.querySelector("#hamberger");
             var navisub = document.querySelector(".navisub");
