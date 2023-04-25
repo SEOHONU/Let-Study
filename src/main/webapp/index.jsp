@@ -114,9 +114,9 @@
                                         <div class="col-12 subsearchbox">
                                             <i class="fa-solid fa-arrow-left" id="searsubback"></i>
                                             <select name="selectsearch">
-                                                <option value="대">대</option>
-                                                <option value="중">중</option>
-                                                <option value="소">소</option>
+                                                <option value="제목">제목</option>
+                                                <option value="내용">내용</option>
+                                                <option value="작성자">작성자</option>
                                             </select>
                                             <input type="text" class="form-control" placeholder="통합검색창"
                                                 aria-label="Username" aria-describedby="basic-addon1"
@@ -275,9 +275,9 @@
                         <form class="container-fluid" action="/board/allSearch.jsp">
                             <div class="input-group" style=" margin-top: 10px; margin-bottom: 10px;">
                                 <select>
-                                    <option value="대">대분할</option>
-                                    <option value="중">중분할</option>
-                                    <option value="소">소분할</option>
+                                    <option value="제목">제목</option>
+                                    <option value="내용">내용</option>
+                                    <option value="작성자">작성자</option>
                                 </select>
                                 &nbsp;
                                 <input type="text" class="form-control" placeholder="통합검색창" aria-label="Username"
