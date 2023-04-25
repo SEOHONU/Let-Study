@@ -49,7 +49,7 @@
                     <div class="row">
     
                         <div class="col-6 col-lg-2 order-2 order-lg-first">
-                            <a href="mainys.html"> logo </a>
+                            <a href="/index.jsp"> logo </a>
                         </div>
                         <div class="col-lg-4 d-none d-lg-block order-lg-1">
                             여백
