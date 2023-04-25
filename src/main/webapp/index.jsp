@@ -113,14 +113,14 @@
                                     <form class="container-fluid" action="/board/allSearch.jsp">
                                         <div class="col-12 subsearchbox">
                                             <i class="fa-solid fa-arrow-left" id="searsubback"></i>
-                                            <select name="selectsearch">
+                                            <select name="select">
                                                 <option value="제목">제목</option>
                                                 <option value="내용">내용</option>
                                                 <option value="작성자">작성자</option>
                                             </select>
                                             <input type="text" class="form-control" placeholder="통합검색창"
                                                 aria-label="Username" aria-describedby="basic-addon1"
-                                                style="width: 40%; padding: 0; display: inline;" name="searchtitle">
+                                                style="width: 40%; padding: 0; display: inline;" name="title">
                                             <button type="submit" class="btn btn-success"
                                                 style="z-index: 0; background-color: rgb(60, 117, 121); padding: 0;">검색</button>
                                         </div>
@@ -141,7 +141,7 @@
                                             <!-- 네비햄버거 누를시 나오는거 -->
                                             <div class="col-12 navisub">
                                                 <div class="row" style="text-align: right;">
-                                                    <div class="col-12 navisubstudy"><a href="스터디 게시판으로">스터디</a></div>
+                                                    <div class="col-12 navisubstudy"><a href="/select.studyboard">스터디</a></div>
                                                     <div class="col-12 navisubjoongo"><a href="중고책 게시판으로">중고책</a></div>
                                                     <div class="col-12 navisubfreeboard"><a href="자유 게시판으로">자유게시판</a>
                                                     </div>
@@ -167,7 +167,7 @@
                             </div>
                             <div class="col-lg-1 d-none d-lg-block order-lg-2" style="text-align: center;">
                                 <a href="스터디 게시판으로">
-                                    <button class="btn btn-sm btn-outline-secondary" type="button">Study</button>
+                                    <button class="btn btn-sm btn-outline-secondary" type="button" id="study">Study</button>
                                 </a>
                             </div>
                             <div class="col-lg-1 d-none d-lg-block order-lg-3" style="text-align: center;">
@@ -274,14 +274,14 @@
 
                         <form class="container-fluid" action="/board/allSearch.jsp">
                             <div class="input-group" style=" margin-top: 10px; margin-bottom: 10px;">
-                                <select>
+                                <select name="selecet">
                                     <option value="제목">제목</option>
                                     <option value="내용">내용</option>
                                     <option value="작성자">작성자</option>
                                 </select>
                                 &nbsp;
                                 <input type="text" class="form-control" placeholder="통합검색창" aria-label="Username"
-                                    aria-describedby="basic-addon1">
+                                    aria-describedby="basic-addon1" name="title">
                                 &nbsp;
                                 <button type="submit" class="btn btn-success"
                                     style="z-index: 0; background-color: rgb(60, 117, 121);">검색</button>
@@ -639,6 +639,10 @@
                 }
             });
 
+            $("#study").on("cilck", function(){
+            	location.href = "/select.studyboard"
+            })
+            
         </script>
 
         </html>
