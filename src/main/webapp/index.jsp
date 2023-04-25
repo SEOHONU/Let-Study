@@ -16,6 +16,7 @@
                 crossorigin="anonymous"></script>
             <script src="https://code.jquery.com/jquery-3.6.4.js"
                 integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+            <script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
             <style>
                 * {
                     box-sizing: border-box;
@@ -105,7 +106,26 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6 col-lg-2 order-2 order-lg-first" id="logo">
-                                <a href="mainys.html">logo</a>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <a href="/index.jsp">logo</a>
+                                    </div>
+                                    <form class="container-fluid" action="/board/allSearch.jsp">
+                                        <div class="col-12 subsearchbox">
+                                            <i class="fa-solid fa-arrow-left" id="searsubback"></i>
+                                            <select name="selectsearch">
+                                                <option value="대">대</option>
+                                                <option value="중">중</option>
+                                                <option value="소">소</option>
+                                            </select>
+                                            <input type="text" class="form-control" placeholder="통합검색창"
+                                                aria-label="Username" aria-describedby="basic-addon1"
+                                                style="width: 40%; padding: 0; display: inline;" name="searchtitle">
+                                            <button type="submit" class="btn btn-success"
+                                                style="z-index: 0; background-color: rgb(60, 117, 121); padding: 0;">검색</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                             <div class="col-lg-4 d-none d-lg-block order-lg-1">
                                 여백
@@ -114,53 +134,79 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="row">
-                                            <div class="col-12 hamberger">
-                                                네비햄버거
+                                            <div class="col-12">
+                                                <i class="fa-solid fa-bars" id="hamberger"></i>
                                             </div>
 
                                             <!-- 네비햄버거 누를시 나오는거 -->
-                                        <div class="col-12 navisub">
-                                            <div class="row" style="text-align: right;">
-                                                <div class="col-12 navisubstudy"><a href="스터디 게시판으로">스터디</a></div>
-                                                <div class="col-12 navisubjoongo"><a href="중고책 게시판으로">중고책</a></div>
-                                                <div class="col-12 navisubfreeboard"><a href="자유 게시판으로">자유게시판</a></div>
-                                                <div class="col-12 navisublicence"><a href="자격증 게시판으로">자격증</a></div>
+                                            <div class="col-12 navisub">
+                                                <div class="row" style="text-align: right;">
+                                                    <div class="col-12 navisubstudy"><a href="스터디 게시판으로">스터디</a></div>
+                                                    <div class="col-12 navisubjoongo"><a href="중고책 게시판으로">중고책</a></div>
+                                                    <div class="col-12 navisubfreeboard"><a href="자유 게시판으로">자유게시판</a>
+                                                    </div>
+                                                    <div class="col-12 navisublicence"><a href="자격증 게시판으로">자격증</a></div>
+                                                </div>
                                             </div>
-                                        </div>
-
-                                            <div class="col-12"><a href="회원가입 페이지">회원가입</a></div>
+                                            <div class="col-6"><a href="회원가입 페이지로"><i
+                                                        class="fa-solid fa-user-plus"></i></a></div>
+                                            <div class="col-6"><a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
                                             <div class="col-12">공백</div>
-                                            <div class="col-12 subsearch">검색</div>
+                                            <div class="col-12 subsearch"><i class="fa-solid fa-magnifying-glass"
+                                                    id="subsearchclick"></i>
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-2">
-                                <a href="스터디 게시판으로">스터디</a>
+                            <div class="col-lg-1 d-none d-lg-block order-lg-2" style="text-align: center;">
+                                <a href="스터디 게시판으로">
+                                    <button class="btn btn-sm btn-outline-secondary" type="button">Study</button>
+                                </a>
                             </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-3">
-                                <a href="중고책 게시판으로">중고책</a>
+                            <div class="col-lg-1 d-none d-lg-block order-lg-3" style="text-align: center;">
+                                <a href="중고책 게시판으로">
+                                    <button class="btn btn-sm btn-outline-secondary" type="button">Sencond</button>
+                                </a>
                             </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-4">
-                                <a href="자유 게시판으로">자유게시판</a>
+                            <div class="col-lg-1 d-none d-lg-block order-lg-4" style="text-align: center;">
+                                <a href="자유 게시판으로">
+                                    <button class="btn btn-sm btn-outline-secondary" type="button">Board</button>
+                                </a>
                             </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-5">
-                                <a href="자격증 게시판으로">자격증</a>
+                            <div class="col-lg-1 d-none d-lg-block order-lg-5" style="text-align: center;">
+                                <a href="자격증 게시판으로">
+                                    <button class="btn btn-sm btn-outline-secondary" type="button">Licence</button>
+                                </a>
                             </div>
+                            <!-- <div class="col-2 d-block d-lg-none order-3"></div> -->
                             <div class="col-lg-2 d-none d-lg-block  order-lg-last">
                                 <div class="row">
-                                    <div class="col-6"><a href="로그인 페이지로">로그인</a></div>
-                                    <div class="col-6"><a href="회원가입 페이지로">회원가입</a></div>
+                                    <div class="col-3 login"><a href="로그인 페이지로"><i
+                                                class="fa-solid fa-right-to-bracket"></i></a></div>
+                                    <div class="col-3 signup"><a href="회원가입 페이지로"><i
+                                                class="fa-solid fa-user-plus"></i></a></div>
+                                    <div class="col-3 profile"><a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a>
+                                    </div>
+                                    <div class="col-3 logout"><a href="로그아웃 페이지로"><i
+                                                class="fa-solid fa-right-from-bracket"></i></a></div>
                                 </div>
                             </div>
+
                             <div class="col-2 d-block d-lg-none order-last">
                                 <div class="row">
                                     <div class="col-12">공백</div>
-                                    <div class="col-12"><a href="로그인 페이지">로그인</a></div>
+                                    <div class="col-6"><a href="로그인 페이지로"><i
+                                                class="fa-solid fa-right-to-bracket"></i></a></div>
+
+                                    <div class="col-6"><a href="로그아웃 페이지로"><i
+                                                class="fa-solid fa-right-from-bracket"></i></a></div>
                                 </div>
                             </div>
                         </div>
@@ -222,29 +268,29 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-2 d-none d-lg-block">공백</div>
-                    <div class="col-lg-8 d-none d-lg-block" style="text-align: center;">
+                    <div class="col-lg-2 d-none d-lg-block" style="background-color: rgb(30, 60, 62);">공백</div>
+                    <div class="col-lg-8 d-none d-lg-block"
+                        style="text-align: center; background-color: rgb(30, 60, 62);">
 
-                        <nav class="navbar navbar-light bg-light">
-                            <form class="container-fluid">
-                                <div class="input-group">
-                                    <select>
-                                        <option value="대">대분할</option>
-                                        <option value="중">중분할</option>
-                                        <option value="소">소분할</option>
-                                    </select>
-                                    &nbsp;
-                                    <input type="text" class="form-control" placeholder="통합검색창" aria-label="Username"
-                                        aria-describedby="basic-addon1">
-                                    &nbsp;
-                                    <button type="button" class="btn btn-success" style="z-index: 0;">검색</button>
-                                </div>
-                            </form>
-                        </nav>
+                        <form class="container-fluid" action="/board/allSearch.jsp">
+                            <div class="input-group" style=" margin-top: 10px; margin-bottom: 10px;">
+                                <select>
+                                    <option value="대">대분할</option>
+                                    <option value="중">중분할</option>
+                                    <option value="소">소분할</option>
+                                </select>
+                                &nbsp;
+                                <input type="text" class="form-control" placeholder="통합검색창" aria-label="Username"
+                                    aria-describedby="basic-addon1">
+                                &nbsp;
+                                <button type="submit" class="btn btn-success"
+                                    style="z-index: 0; background-color: rgb(60, 117, 121);">검색</button>
+                            </div>
+                        </form>
 
 
                     </div>
-                    <div class="col-lg-2 d-none d-lg-block">공백</div>
+                    <div class="col-lg-2 d-none d-lg-block" style="background-color: rgb(30, 60, 62);">공백</div>
                 </div>
                 <div class="row">
                     <div class="col-1 col-sm-2">공백</div>
@@ -383,8 +429,8 @@
                                     <div class="col-12"><a href="중고책 게시판">중고책</a></div>
                                     <div class="col-12">
                                         <div class="row">
-                                            <div class="col-1">공백</div>
-                                            <div class="col-12 col-sm-10">
+                                            <div class="col-1 col-lg-2">공백</div>
+                                            <div class="col-10 col-lg-8">
                                                 <div class="row">
                                                     <div class="col-6 ">
                                                         <a href="최신 올라온 중고책 게시글">
@@ -480,7 +526,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-1">공백</div>
+                                            <div class="col-1 col-lg-2">공백</div>
                                         </div>
                                     </div>
 
@@ -549,6 +595,7 @@
             $('.cir').height(cir * 1);
             $('.circlesub').height(cirsWidth * 1);
             $('.circle').height(cirWidth * 1);
+
             $(window).resize(function () {
                 var cirsWidth = $('.circlesub').width();
                 var cirWidth = $('.circle').width();
@@ -561,12 +608,37 @@
                 $('.slide').height(slide * 0.5)
                 var banner = $('.banner').width();
                 $('.navi').width(banner);
-
-
             });
-            $(".btn-success").on("click", function () {
-                location.href = "totalsearchys.html";
-            })
+
+
+            var hamberger = document.querySelector("#hamberger");
+            var navisub = document.querySelector(".navisub");
+            navisub.style.display = "none";
+
+            hamberger.addEventListener("click", function () {
+                if (navisub.style.display === "block") {
+                    navisub.style.display = "none";
+                } else {
+                    navisub.style.display = "block";
+                }
+            });
+
+
+            var searsub = document.querySelector(".subsearchbox");
+            var searsubswitch = document.querySelector("#subsearchclick")
+            var searsubback = document.querySelector("#searsubback");
+            searsub.style.display = "none";
+            searsubswitch.addEventListener("click", function () {
+                if (searsub.style.display === "none") {
+                    searsub.style.display = "block";
+                }
+            });
+            searsubback.addEventListener("click", function () {
+                if (searsub.style.display === "block") {
+                    searsub.style.display = "none";
+                }
+            });
+
         </script>
 
         </html>
