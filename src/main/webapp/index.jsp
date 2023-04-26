@@ -142,7 +142,7 @@
                                             <div class="col-12 navisub">
                                                 <div class="row" style="text-align: right;">
                                                     <div class="col-12 navisubstudy"><a href="/select.studyboard">스터디</a></div>
-                                                    <div class="col-12 navisubjoongo"><a href="중고책 게시판으로">중고책</a></div>
+                                                    <div class="col-12 navisubjoongo"><a href="/selectBound.secondHand">중고책</a></div>
                                                     <div class="col-12 navisubfreeboard"><a href="자유 게시판으로">자유게시판</a>
                                                     </div>
                                                     <div class="col-12 navisublicence"><a href="자격증 게시판으로">자격증</a></div>
