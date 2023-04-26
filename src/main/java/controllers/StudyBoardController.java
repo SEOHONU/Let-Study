@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.StudyBoardDAO;
+import dao.StudyReplyDAO;
 import dto.StudyBoardDTO;
+import dto.StudyReplyDTO;
 import statics.Settings;
 
 @WebServlet("*.studyboard")
@@ -47,6 +49,9 @@ public class StudyBoardController extends HttpServlet {
 				int currentPage = Integer.parseInt(request.getParameter("cpage"));
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				StudyBoardDTO dto = dao.selectdetailstudyboard(seq);
+				StudyReplyDAO rdao = StudyReplyDAO.getInstance();
+				List<StudyReplyDTO> list = rdao.selectreply(seq);
+				request.setAttribute("replylist", list);
 				request.setAttribute("dto", dto);
 				request.setAttribute("cpage", currentPage);
 				request.getRequestDispatcher("/studyboard/detailselectstudyboard.jsp").forward(request, response);
