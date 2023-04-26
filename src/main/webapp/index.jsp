@@ -110,7 +110,7 @@
                                     <div class="col-12">
                                         <a href="/index.jsp">logo</a>
                                     </div>
-                                    <form class="container-fluid" action="/board/allSearch.jsp">
+                                    <form class="container-fluid" action="/allsearch.maincontroller">
                                         <div class="col-12 subsearchbox">
                                             <i class="fa-solid fa-arrow-left" id="searsubback"></i>
                                             <select name="select">
@@ -166,12 +166,12 @@
                                 </div>
                             </div>
                             <div class="col-lg-1 d-none d-lg-block order-lg-2" style="text-align: center;">
-                                <a href="스터디 게시판으로">
+                                <a href="/select.studyboard">
                                     <button class="btn btn-sm btn-outline-secondary" type="button" id="study">Study</button>
                                 </a>
                             </div>
                             <div class="col-lg-1 d-none d-lg-block order-lg-3" style="text-align: center;">
-                                <a href="중고책 게시판으로">
+                                <a href="/selectBound.secondHand">
                                     <button class="btn btn-sm btn-outline-secondary" type="button">Sencond</button>
                                 </a>
                             </div>
@@ -272,9 +272,9 @@
                     <div class="col-lg-8 d-none d-lg-block"
                         style="text-align: center; background-color: rgb(30, 60, 62);">
 
-                        <form class="container-fluid" action="/board/allSearch.jsp">
+                        <form class="container-fluid" action="/allsearch.maincontroller">
                             <div class="input-group" style=" margin-top: 10px; margin-bottom: 10px;">
-                                <select name="selecet">
+                                <select name="select">
                                     <option value="제목">제목</option>
                                     <option value="내용">내용</option>
                                     <option value="작성자">작성자</option>
