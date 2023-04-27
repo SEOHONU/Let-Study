@@ -11,8 +11,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import dto.Sh_CommentsDTO;
+import dto.FreeBoardDTO;
 import dto.SecondHandDTO;
+import dto.Sh_CommentsDTO;
 import dto.StudyBoardDTO;
 
 public class MainDAO {
@@ -97,26 +98,31 @@ public class MainDAO {
 			}
 		}
 	}
-//	public void boardsearch(String select, String writer) throws Exception {
-//		String boardsql = "";
-//		if (select.equals("제목")) {
-//			boardsql = "select * from board where title like %?%";
-//		} else if (select.equals("내용")) {
-//			boardsql = "select * from board where content like %?%";
-//		} else if (select.equals("작성자")) {
-//			boardsql = "select * from board where writer like %?%";
-//		}
-//		try (Connection con = this.getconnection(); PreparedStatement pstmt = con.prepareStatement(boardsql);) {
-//			pstmt.setString(1, writer);
-//			try (ResultSet rs = pstmt.executeQuery()) {
-//				List<CommentsDTO>result = new ArrayList<>();
-//				while(rs.next()) {
-//					String title = rs.getString("title");
-//					String content = rs.getString("content");
-//					dto = new dto(title, content, writer);
-//					result.add(dto);
-//				}return result;
-//			}
-//		}
-//	}
+	public List<FreeBoardDTO> boardsearch(String select, String free) throws Exception {
+		String boardsql = "";
+		if (select.equals("제목")) {
+			boardsql = "select * from board where board_title like ?";
+		} else if (select.equals("내용")) {
+			boardsql = "select * from board where board_contents like ?";
+		} else if (select.equals("작성자")) {
+			boardsql = "select * from board where board_writer like ?";
+		}
+		try (Connection con = this.getconnection(); PreparedStatement pstmt = con.prepareStatement(boardsql);) {
+			pstmt.setString(1, "%" + free + "%");
+			try (ResultSet rs = pstmt.executeQuery()) {
+				List<FreeBoardDTO>result = new ArrayList<>();
+				while(rs.next()) {
+					int seq = rs.getInt("board_seq");
+					String title = rs.getString("board_title");
+					String content = rs.getString("board_contents");
+					String writer = rs.getString("board_writer");
+					int view_count = rs.getInt("board_view_count");
+					Timestamp write_date = rs.getTimestamp("board_write_date");
+					
+					FreeBoardDTO dto = new FreeBoardDTO(seq, title, content, writer, view_count, write_date);
+					result.add(dto);
+				}return result;
+			}
+		}
+	}
 }

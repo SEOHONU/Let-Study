@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.MainDAO;
+import dto.FreeBoardDTO;
 import dto.SecondHandDTO;
 import dto.StudyBoardDTO;
 
@@ -21,21 +22,24 @@ public class MainController extends HttpServlet {
 		try {
 		if (cmd.equals("/study.maincontroller")) {
 
-		} else if (cmd.equals("/joongo.maincontroller")) {
-
-		} else if (cmd.equals("/board.maincontroller")) {
-
-		} else if (cmd.equals("/licence.maincontroller")) {
-
+		
 		} else if (cmd.equals("/allsearch.maincontroller")) {
 			String select = request.getParameter("select");
 			String title = request.getParameter("title");
 			MainDAO dao = MainDAO.getInstance();
 			List<SecondHandDTO> sdto = dao.joongosearch(select, title);
 			List<StudyBoardDTO> stdto = dao.studysearch(select, title);
+			List<FreeBoardDTO> fdto = dao.boardsearch(select, title);
 			request.setAttribute("sdto", sdto);
 			request.setAttribute("stdto", stdto);
+			request.setAttribute("fdto", fdto);
 			request.getRequestDispatcher("/board/allSearch.jsp").forward(request, response);
+			
+		} else if (cmd.equals("/joongo.maincontroller")) {
+
+		} else if (cmd.equals("/board.maincontroller")) {
+
+		} else if (cmd.equals("/licence.maincontroller")) {
 		}
 		}catch(Exception e) {
 			e.printStackTrace();

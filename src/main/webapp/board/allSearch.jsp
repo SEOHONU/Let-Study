@@ -259,9 +259,10 @@
                                                                             <div class="card-body">
                                                                                 <h5 class="card-title">${second.title}
                                                                                 </h5>
-                                                                                <p class="card-text">${second.writer}</p>
+                                                                                <p class="card-text">${second.writer}
+                                                                                </p>
                                                                                 <p class="card-text">
-                                                                                    <small 
+                                                                                    <small
                                                                                         class="text-body-secondary">${second.contents}</small>
                                                                                 </p>
                                                                             </div>
@@ -285,8 +286,9 @@
                                                                             <div class="card-body">
                                                                                 <h5 class="card-title">${second.title}
                                                                                 </h5>
-                                                                                <p class="card-text">${second.writer}</p>
-                                                                                <p class="card-text"><small 
+                                                                                <p class="card-text">${second.writer}
+                                                                                </p>
+                                                                                <p class="card-text"><small
                                                                                         class="text-body-secondary">${second.contents}</small>
                                                                                 </p>
                                                                             </div>
@@ -393,12 +395,10 @@
                                 <div class="col12" style="text-align: center;">공백</div>
                                 <div class="col-12">자유게시판
                                     <div class="row bodysubstudy">
-                                        <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
-                                        <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
-                                        <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
-                                        <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
-                                        <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
-                                        <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
+                                       <c:forEach var="free" items="${fdto}" begin="0" end="5">
+                                            <div class="col-9"><a href="자유게시판 관련검색 최신순">${fdto.board_title}</a></div>
+                                            <div class="col-3"><a href="자유게시판 관련검색 최신순">${fdto.board_writer}</a></div>
+                                        </c:forEach>
                                     </div>
                                 </div>
                                 <div class="col12" style="text-align: right;">
