@@ -70,7 +70,7 @@ public class FreeBoardController extends HttpServlet {
 			}else if(cmd.equals("/contentList.freeBoard")) {
 				List<FreeBoardDTO> result = dao.selectList();
 				request.setAttribute("boardList", result);
-				request.getRequestDispatcher("/freeBoard/listFreeBoard.jsp").forward(request, response);
+				request.getRequestDispatcher("/freeBoard/FreeBoardList.jsp").forward(request, response);
 			}
 			// 게시글 디테일 뷰
 			else if(cmd.equals("/detail.freeBoard")) {
@@ -96,23 +96,11 @@ public class FreeBoardController extends HttpServlet {
 				FreeReplyDAO daoRP = FreeReplyDAO.getInstance();
 				List<FreeReplyDTO> replyResult = daoRP.selectReply(seq);
 				request.setAttribute("replyResult", replyResult);
-				request.getRequestDispatcher("/freeBoard/detailFreeBoard.jsp").forward(request, response);
-			}else if(cmd.equals("/updateMove.freeBoard")){
-				System.out.println("수정하기 창으로 이동");	
-				int board_seq = Integer.parseInt(request.getParameter("seq"));
-				System.out.println(board_seq);
-				
-				String title = (String)request.getParameter("title");
-				System.out.println(title);
-				String content = (String)request.getParameter("content");
-				System.out.println("내용 :"+ content);
-				
-					request.setAttribute("board_seq", board_seq);
-					request.setAttribute("title", title);
-					request.setAttribute("content", content);
-					request.getRequestDispatcher("/freeBoard/updateFreeBoard.jsp").forward(request, response);
-			}else if(cmd.equals("/freeBoard/updateFreeBoard.jsp")) {
-//				
+				request.getRequestDispatcher("/freeBoard/FreeBoardContents.jsp").forward(request, response);
+			}else if(cmd.equals("/update.freeBoard")) {
+				System.out.println("업데이트 서블릿 도착");
+				// 업데이트 준비물(보드): 시퀀스, 제목, 내용
+				// 업데이트 준비물(파일) : 보드(부모)시퀀스, 
 				
 				
 			}
