@@ -94,7 +94,7 @@ a {
 
 				<div class="btn">
 					<button class="btn btn-primary" id="btnLogin">로그인</button>
-					<button class="btn btn-light" id="btnJoin">회원가입</button>
+					<button class="btn btn-light" id="btnJoin" type="button">회원가입</button>
 				</div>
 			</form>
 		</div>
