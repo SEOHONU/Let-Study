@@ -73,8 +73,6 @@ public class SecondHandController extends HttpServlet {
 				SecondHandDTO dto = shDAO.selectContents(targetSeq);
 				List<Sh_CommentsDTO> list = cmDAO.selectComments(targetSeq);
 				for(Sh_CommentsDTO s : list) {
-					System.out.println("----------------------");
-					System.out.println(s.getParent_seq());
 				}
 				request.setAttribute("list", list);
 				request.setAttribute("currentPage", currentPage);
