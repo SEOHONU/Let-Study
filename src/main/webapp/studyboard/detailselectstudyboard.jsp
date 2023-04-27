@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -15,7 +14,7 @@
 </head>
 <body>
 	<c:choose>
-		<c:when test="${dto.writer == 213}">
+		<c:when test="${dto.writer == 2132}">
 			<style>
         * {
             box-sizing: border-box;
@@ -95,7 +94,13 @@
         #replytext {
             padding-right: 90px;
             min-height: 80px;
+            max-height: 80px;
+            overflow: auto;
         }
+        
+        #replytext::-webkit-scrollbar {
+  			display: none;
+		}
 
         #replywritebtn {
             position: absolute;
@@ -226,28 +231,48 @@
                 	<button type="button" id="deletebtn">삭제하기</button>
                 	<a href="/select.studyboard?cpage=${cpage}"><button>목록으로</button></a>
             	</div>
-            	<div class="col-12" id="replyfont">
-                	댓글
-            	</div>
-            	<div class="col-12">
-                	<div class="row">
-                    	<div class="col-12">1. 누구누구 : 어쩌구 저쩌구</div>
-                    	<div class="col-12">2. 구누구누 : 저쩌구 어쩌구</div>
-                    	<div class="col-12">3. 구구누누 : 어쩌저 쩌구구</div>
-                	</div>
-            	</div>
-            	<div class="col-12 p-0" id="replywritebox">
-                	<div contenteditable="true" id="replytext"></div>
-                	<button id="replywritebtn">작성하기</button>
-            	</div>
         	</div>
         	<input type="hidden" name="cpage" value="${cpage}">
         	<input type="hidden" name="writer" value="${dto.writer}">
         	<input type="hidden" name="seq" value="${dto.seq}">
         </form>
-        <div class="row footer">
-            <div class="col-12">아래 대충 띄어놓기</div>
-        </div>
+        <form action="/insert.studyreply" method="post" id="replyForm">
+        	<div class="row footer">
+        		<div class="col-12" id="replyfont">
+                	댓글
+            	</div>
+            	<div class="col-12">
+                	<div class="row" id="allreplybox">
+                    	<c:forEach var="i" items="${replylist}">
+                			<div class="col-12">
+                				<div>
+                					작성자 : ${i.writer}
+                				</div>
+                				<div>
+                					${i.contents}
+                				</div>
+                				<input type="hidden" value="${i.seq}">
+                				<c:if test="${i.writer == 213}">
+                					<div align="right">
+                						<button type="button" class="replyupdatebtn">수정하기</button>
+                						<button type="button" class="replydeletebtn">삭제하기</button>
+                					</div>
+                				</c:if>
+                			</div>
+                		</c:forEach>
+                	</div>
+            	</div>
+            	<div class="col-12 p-0" id="replywritebox">
+                	<div contenteditable="true" id="replytext"></div>
+                	<input type="hidden" name="studyreplycontents" id="studyreplycontents">
+                	<button type="submit" id="replywritebtn">작성하기</button>
+            	</div>
+            	<div class="col-12">아래 대충 띄어놓기</div>
+        	</div>
+        	<input type="hidden" name="studyreplywriter" value="213">
+        	<input type="hidden" name="cpage" value="${cpage}">
+        	<input type="hidden" name="parent_seq" value="${dto.seq}">
+        </form>
     </div>
     <script>
     	$("#deletebtn").on("click",function(){
@@ -274,6 +299,16 @@
     		$("#hiddentitle").val($("#title").html());
     		$("#hiddencontents").val($("#contents").html());
     		$("#hiddendetailcontents").val($("#detailcontents").html());
+    	})
+    	$("#replyForm").on("submit",function(){
+    		$("#studyreplycontents").val($("#replytext").html());
+    	})
+    	$("#allreplybox").on("click",".replydeletebtn",function(){
+    		if(confirm("댓글을 삭제하시겠습니까?")){
+    			let seq = $(this).parent().prev().val();
+    			console.log(seq);
+    			location.href="/delete.studyreply?cpage="+${cpage}+"&parent_seq="+${dto.seq}+"&seq="+seq;
+    		}
     	})
     </script>
 		</c:when>
@@ -358,7 +393,14 @@
         #replytext{
             padding-right: 90px;
             min-height: 80px;
+            max-height: 80px;
+            overflow: auto;
         }
+        
+        #replytext::-webkit-scrollbar {
+  			display: none;
+		}
+        
         #replywritebtn{
             position: absolute;
             right: 5px;
@@ -425,9 +467,9 @@
                     </div>
                     <div class="col-10">
                         <div id="studybtnbox">
-                            <h3>${dto.title}</h3><br>
-                            ${dto.writer}<br>
-                            ${dto.contents}<br>
+                            <h3>${dto.title}</h3>
+                            <div>${dto.contents}</div>
+                            <div>작성자 : ${dto.writer}</div>
                             <button id="reportbtn">신고하기</button>
                             <button id="applybtn">신청하기</button>    
                         </div>
@@ -441,7 +483,9 @@
                     <div class="ratio ratio-1x1">지도</div>
                 </div>
             </div>
-            <div class="col-6">상세내역</div>
+            <div class="col-6">상세내역<br>
+            	<div>${dto.detailcontents}</div>
+            </div>
             <div class="col-3 p-0">
                 <div class="row m-0">
                     <div class="col-12 ratio" style="--bs-aspect-ratio: 130%;">
@@ -462,7 +506,7 @@
                     <div class="col-1">
                         <div class="ratio ratio-1x1" id="studyprint"></div>
                         <div class="nicknamebox" align="center">host</div>
-                        <div>${dto.writer}</div>
+                        <div align="center">${dto.writer}</div>
                     </div>
                     <div class="col-1">
                         <div class="ratio ratio-1x1" id="studyprint"></div>
@@ -473,25 +517,57 @@
             <div class="col-12" id="totitle">
             	<a href="/select.studyboard?cpage=${cpage}"><button>목록으로</button></a>
             </div>
-            <div class="col-12" id="replyfont">
-                댓글
-            </div>
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-12">1. 누구누구 : 어쩌구 저쩌구</div>
-                    <div class="col-12">2. 구누구누 : 저쩌구 어쩌구</div>
-                    <div class="col-12">3. 구구누누 : 어쩌저 쩌구구</div>
-                </div>
-            </div>
-            <div class="col-12 p-0" id="replywritebox">
-                <div contenteditable="true" id="replytext"></div>
-                <button id="replywritebtn">작성하기</button>
-            </div>
         </div>
-        <div class="row footer">
-            <div class="col-12">아래 대충 띄어놓기</div>
-        </div>
+        <form action="/insert.studyreply" method="post" id="replyForm">
+        	<div class="row footer">
+        		<div class="col-12" id="replyfont">
+                	댓글
+            	</div>
+            	<div class="col-12">
+                	<div class="row" id="allreplybox">
+                    	<c:forEach var="i" items="${replylist}">
+                			<div class="col-12">
+                				<div>
+                					작성자 : ${i.writer}
+                				</div>
+                				<div>
+                					${i.contents}
+                				</div>
+                				<input type="hidden" value="${i.seq}">
+                				<c:if test="${i.writer == 213}">
+                					<div align="right">
+                						<button type="button">수정하기</button>
+                						<button type="button" class="replydeletebtn">삭제하기</button>
+                					</div>
+                				</c:if>
+                			</div>
+                		</c:forEach>
+                	</div>
+            	</div>
+            	<div class="col-12 p-0" id="replywritebox">
+                	<div contenteditable="true" id="replytext"></div>
+                	<input type="hidden" name="studyreplycontents" id="studyreplycontents">
+                	<button type="submit" id="replywritebtn">작성하기</button>
+            	</div>
+            	<div class="col-12">아래 대충 띄어놓기</div>
+        	</div>
+        	<input type="hidden" name="studyreplywriter" value="213">
+        	<input type="hidden" name="cpage" value="${cpage}">
+        	<input type="hidden" name="parent_seq" value="${dto.seq}">
+        </form>
     </div>
+    <script>
+    	$("#replyForm").on("submit",function(){
+			$("#studyreplycontents").val($("#replytext").html());
+		})
+		$("#allreplybox").on("click",".replydeletebtn",function(){
+			if(confirm("댓글을 삭제하시겠습니까?")){
+				let seq = $(this).parent().prev().val();
+				console.log(seq);
+				location.href="/delete.studyreply?cpage="+${cpage}+"&parent_seq="+${dto.seq}+"&seq="+seq;
+			}
+		})
+    </script>
 		</c:otherwise>
 	</c:choose>
 </body>

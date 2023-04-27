@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -80,7 +80,8 @@
                                 <input type="button" value="삭제하기" onclick="confirmDel()">
                                 <input type="button" value="판매완료" onclick="confirmSell()">
                             </c:if> <input type="button"
-                                onclick="location.href='/selectBound.secondHand?currentPage=${currentPage}'" value="돌아가기">
+                                onclick="location.href='/selectBound.secondHand?currentPage=${currentPage}'"
+                                value="돌아가기">
                         </td>
                     </tr>
                 </table>
@@ -90,7 +91,7 @@
         <hr>
         <div class="row">
             <div class="col-lg-2 d-none d-lg-block">여백</div>
-            <form action="/insertComments.comments" method="post" class="col-lg-8 col-12">
+            <form action="/insertComments.shComments" method="post" class="col-lg-8 col-12">
                 <table border="1" align="center">
                     <tr>
                         <td colspan="2">${loginId} <input type="hidden" name="writer" value="${loginId}"> <input
@@ -109,38 +110,112 @@
         </div>
         <hr>
         <c:forEach var="i" items="${list}">
-            <div class="row">
-                <div class="col-lg-2 d-none d-lg-block">여백</div>
-                <form action="" class="col-lg-8 col-12">
-                    <table border="1" align="center" class="comment">
-                        <tr>
-                            <td align="left">${i.com_writer}</td>
-                            <td align="right">${i.detailDate}</td>
-                        </tr>
-                        <tr>
-                            <td align="left" class="commentTd"><textarea name=""
-                                    class="comment">${i.com_contents}</textarea></td>
-                            <td align="right"><input type="button" value="수정"> <input type="button" value="삭제"> <input
-                                    type="button" value="대댓글" class="writeReplyBtn"></td>
-                        </tr>
-                    </table>
-                </form>
-                <div class="col-lg-2 d-none d-lg-block">여백</div>
-            </div>
-            <hr>
+            <c:choose>
+                <c:when test="${i.parent_seq != 0}">
+              		<script>
+              			console.log("i.parent_seq : "+${i.parent_seq});
+              			var rowDiv = $("<div class='row'>");
+              			var modForm = $("<form action='/modifyComments.shComments' class='col-lg-7 col-12'>");
+              			modForm.onsubmit = "return confirm('답글을 수정하시겠습니까?')";
+              			var hidden_currentPage = $("<input type='hidden' name='currentPage' value='${currentPage}'>");
+              			var hidden_board_seq = $("<input type='hidden' name='board_seq' value='${dto.seq}'>");
+              			var hidden_com_seq = $("<input type='hidden' name='com_seq' value='${i.com_seq}'>");
+              			
+              			var table = $("<table border='1' align='center' class='comment'>");
+              			
+              			var tr1 = $("<tr>");
+              			var tr2 = $("<tr>");
+              			
+              			var space1 = $("<div class='col-lg-2 d-none d-lg-block'>");
+              			var space2 = $("<div class='col-lg-2 d-none d-lg-block'>");
+              			
+              			var replySpace = $("<div class='col-lg-1 d-none d-lg-block'>");
+              			replySpace.text("ㄴ");
+              			var td_writer = $("<td align='left'>");
+              			var td_date = $("<td align='right'>");
+              			td_writer.text("${i.com_writer}");
+              			td_date.text("${i.detailDate}");
+              			
+              			td_comment = $("<td align='left' class='commentTd'>");
+              			textarea = $("<textarea name='contents' class='comment' readonly>");
+              			textarea.text("${i.com_contents}");
+              			td_comment.append(textarea);
+              			
+              			td_control = $("<td align='right'>");
+              			if(${i.com_writer == loginId}){
+              				let modBtn = $("<input type='button' value='수정' class='modCom'>");
+              				let delBtn = $("<input type='button' value='삭제' class='delCom' seq='${i.com_seq}'>");
+              				td_control.append(modBtn);
+              				td_control.append(delBtn);
+              			}
+              			modForm.append(hidden_currentPage);
+              			modForm.append(hidden_board_seq);
+              			modForm.append(hidden_com_seq);
+              			modForm.append(table);
+              			
+              			table.append(tr1);
+              			table.append(tr2);
+              			
+              			tr1.append(td_writer);
+              			tr1.append(td_date);
+              			tr2.append(td_comment);
+              			tr2.append(td_control);
+              			rowDiv.append(space1);
+              			rowDiv.append(replySpace);
+              			rowDiv.append(modForm);
+              			rowDiv.append(space2);
+              			
+              			var targetDiv = $(document).find($("div[com_seq=${i.parent_seq}]"));
+              			targetDiv.after(rowDiv);
+              		</script>
+                </c:when>
+                <c:otherwise>
+                    <div class="row" com_seq="${i.com_seq}">
+                        <div class="col-lg-2 d-none d-lg-block">여백</div>
+                        <form action="/modifyComments.shComments" class="col-lg-8 col-12"
+                            onsubmit="return confirm('댓글을 수정하시겠습니까?')">
+                            <input type="hidden" name="currentPage" value="${currentPage}">
+                            <input type="hidden" name="board_seq" value="${dto.seq}">
+                            <input type="hidden" name="com_seq" value="${i.com_seq}">
+                            <table border="1" align="center" class="comment">
+                                <tr>
+                                    <td align="left">${i.com_writer}</td>
+                                    <td align="right">${i.detailDate}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left" class="commentTd">
+                                        <textarea name="contents" class="comment" readonly>${i.com_contents}</textarea>
+                                    </td>
+                                    <td align="right">
+                                        <c:if test="${i.com_writer == loginId}">
+                                            <input type="button" value="수정" class="modCom">
+                                            <input type="button" value="삭제" class='delCom' seq="${i.com_seq}">
+                                        </c:if>
+                                        <input type="button" value="대댓글" class="writeReplyBtn" com_seq="${i.com_seq}">
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                        <div class="col-lg-2 d-none d-lg-block">여백</div>
+                    </div>
+                    <hr>
+                </c:otherwise>
+            </c:choose>
         </c:forEach>
     </div>
     <script>
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
             mapOption = {
-                center: new kakao.maps.LatLng(37.5582053468995, 127.027507006183), // 지도의 중심좌표
+                center: new kakao.maps.LatLng(${ dto.lat }, ${ dto.lng }), // 지도의 중심좌표
                 level: 3 // 지도의 확대 레벨
             };
 
         var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
         // 마커가 표시될 위치입니다 
-        var markerPosition = new kakao.maps.LatLng(37.5582053468995, 127.027507006183);
+        var markerPosition = new kakao.maps.LatLng(${ dto.lat }, ${ dto.lng });
+
+
 
         // 마커를 생성합니다
         var marker = new kakao.maps.Marker({
@@ -157,14 +232,21 @@
         // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
         // marker.setMap(null);    
         $(".writeReplyBtn").on("click", function () {
-            let replyForm = $("<form action='reply'>");
+            let com_seq = $(this).attr("com_seq");
+            let replyForm = $("<form action='/insertReply.shReply'>");
             let replyWriter = $("<input type='text' value='${loginId}' readonly>");
-            let replyContents = $("<textarea class='writeReply'>");
-            let replySubmit = $("<button>");
+            let replyContents = $("<textarea class='writeReply' name='contents'>");
+            let replySubmit = $("<input type='submit' value='답글쓰기'>");
             let replyCancle = $("<input type='button' value='취소'>");
+            let hidden_board_seq = $("<input type='hidden' name='board_seq'>");
+            hidden_board_seq.val("${dto.seq}");
+            let hidden_currentPage = $("<input type='hidden' name='currentPage'>");
+            hidden_currentPage.val("${currentPage}");
+            let hidden_com_seq = $("<input type='hidden' name='com_seq'>");
+            hidden_com_seq.val(com_seq);
             replyCancle.on("click", function () {
                 location.reload();
-            })
+            });
             let table = $("<table border='1' align='center'>");
             let tr1 = $("<tr>");
             let tr2 = $("<tr>");
@@ -172,13 +254,16 @@
             let td2 = $("<td class='replyTd'>");
             let td3 = $("<td align='right'>");
             tr1.append(td1);
+            tr1.append(hidden_com_seq);
+            tr1.append(hidden_board_seq);
+            tr1.append(hidden_currentPage);
+
             tr2.append(td2);
             tr2.append(td3);
             table.append(tr1);
             table.append(tr2);
             td1.append(replyWriter);
             td2.append(replyContents);
-            replySubmit.text("대댓글쓰기");
             td3.append(replySubmit);
             td3.append(replyCancle);
             replyForm.append(table);
@@ -187,7 +272,7 @@
         });
         function confirmDel() {
             if (confirm("정말 ${dto.title} 글을 삭제하시겠습니까?")); {
-                alert("삭제 완료");
+                alert("삭제 완료되었습니다");
                 location.href = "/deleteContents.secondHand?seq=${dto.seq}&currentPage=${currentPage}";
             }
         }
@@ -196,6 +281,27 @@
                 alert("판매완료 처리 되었습니다");
             }
         }
+        $(".delCom").on("click", function () {
+            let seq = $(this).attr("seq");
+            if (confirm("댓글을 삭제하시겠습니까?")) {
+                alert("삭제 완료되었습니다.");
+                location.href = "/deleteComments.shComments?com_seq=" + seq + "&currentPage=${currentPage}&board_seq=${dto.seq}";
+            }
+        });
+        $(".modCom").on("click", function () {
+            $(this).parent().prev().find($(".comment")).removeAttr("readonly");
+            let submit = $("<input type='submit' value='수정하기'>");
+            let cancle = $("<input type='button' value='취소'>");
+            cancle.on("click", function () {
+                location.reload();
+            })
+            let target = $(this).closest($("td"));
+            $(this).next().next().hide();
+            $(this).next().hide();
+            $(this).hide();
+            target.append(submit);
+            target.append(cancle);
+        })
         $("#modify").on("click", function () {
             marker.setMap(null);
             infowindow.setMap(null);

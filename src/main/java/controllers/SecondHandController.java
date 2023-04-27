@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CommentsDAO;
+import commons.EncryptionUtils;
+import dao.Sh_CommentsDAO;
 import dao.SecondHandDAO;
-import dto.CommentsDTO;
+import dto.Sh_CommentsDTO;
 import dto.SecondHandDTO;
 import statics.Settings;
 
@@ -24,12 +25,12 @@ public class SecondHandController extends HttpServlet {
 		String cmd = request.getRequestURI();
 		System.out.println("cmd : "+cmd);
 		SecondHandDAO shDAO = SecondHandDAO.getInstance();
-		CommentsDAO cmDAO = CommentsDAO.getInstance();
+		Sh_CommentsDAO cmDAO = Sh_CommentsDAO.getInstance();
 		try {
 			if(cmd.equals("/secondHandList.secondHand")) {
 				response.sendRedirect("/secondHand/secondHandList.jsp");
 			}
-			else if(cmd.equals("/writeForm.secondHand")) {
+			else if(cmd.equals("/secondHandWriteForm.secondHand")) {
 				response.sendRedirect("/secondHand/secondHandWriteForm.jsp");
 			}
 			else if(cmd.equals("/insert.secondHand")) {
@@ -38,6 +39,9 @@ public class SecondHandController extends HttpServlet {
 				String contents = request.getParameter("contents");
 				double lat = Double.parseDouble(request.getParameter("lat"));
 				double lng = Double.parseDouble(request.getParameter("lng"));
+				writer = EncryptionUtils.AntiXSS(writer);
+				title = EncryptionUtils.AntiXSS(title);
+				contents = EncryptionUtils.AntiXSS(contents);
 				SecondHandDTO dto = new SecondHandDTO();
 				dto.setWriter(writer);
 				dto.setTitle(title);
@@ -67,7 +71,9 @@ public class SecondHandController extends HttpServlet {
 				int targetSeq = Integer.parseInt(request.getParameter("seq"));
 				shDAO.secondHandBoardViewUp(targetSeq);
 				SecondHandDTO dto = shDAO.selectContents(targetSeq);
-				List<CommentsDTO> list = cmDAO.selectComments(targetSeq);
+				List<Sh_CommentsDTO> list = cmDAO.selectComments(targetSeq);
+				for(Sh_CommentsDTO s : list) {
+				}
 				request.setAttribute("list", list);
 				request.setAttribute("currentPage", currentPage);
 				request.setAttribute("dto", dto);
@@ -84,6 +90,8 @@ public class SecondHandController extends HttpServlet {
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				String title = request.getParameter("title");
 				String contents = request.getParameter("contents");
+				title = EncryptionUtils.AntiXSS(title);
+				contents = EncryptionUtils.AntiXSS(contents);
 				double lat = Double.parseDouble(request.getParameter("lat"));
 				double lng = Double.parseDouble(request.getParameter("lng"));
 				SecondHandDTO dto = new SecondHandDTO(seq, title, contents,

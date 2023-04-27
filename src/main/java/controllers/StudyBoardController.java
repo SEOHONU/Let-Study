@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.StudyBoardDAO;
+import dao.StudyReplyDAO;
 import dto.StudyBoardDTO;
+import dto.StudyReplyDTO;
 import statics.Settings;
 
 @WebServlet("*.studyboard")
@@ -23,7 +25,8 @@ public class StudyBoardController extends HttpServlet {
 		try {
 			StudyBoardDAO dao = StudyBoardDAO.getInstance();
 			if(cmd.equals("/select.studyboard")) {
-				int currentPage = Integer.parseInt(request.getParameter("cpage"));
+				int currentPage = request.getParameter("cpage") == null ? 1 
+						: Integer.parseInt(request.getParameter("cpage"));
 				if(currentPage < 0) {
 					currentPage = 1;
 				}else if(currentPage > (int)Math.ceil(dao.getRecordCount()/(double)Settings.BOARD_RECORD_COUNT_PER_PAGE)) {
@@ -48,6 +51,9 @@ public class StudyBoardController extends HttpServlet {
 				int currentPage = Integer.parseInt(request.getParameter("cpage"));
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				StudyBoardDTO dto = dao.selectdetailstudyboard(seq);
+				StudyReplyDAO rdao = StudyReplyDAO.getInstance();
+				List<StudyReplyDTO> list = rdao.selectreply(seq);
+				request.setAttribute("replylist", list);
 				request.setAttribute("dto", dto);
 				request.setAttribute("cpage", currentPage);
 				request.getRequestDispatcher("/studyboard/detailselectstudyboard.jsp").forward(request, response);
