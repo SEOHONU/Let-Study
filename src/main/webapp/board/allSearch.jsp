@@ -62,7 +62,7 @@
                                             <div class="col-12">
                                                 네비햄버거
                                             </div>
-                                            <div class="col-12 navisub">
+                                            <!-- <div class="col-12 navisub">
                                                 <div class="row" style="text-align: right;">
                                                     <div class="col-12 navisubstudy"><a href="스터디 게시판으로">스터디</a></div>
                                                     <div class="col-12 navisubjoongo"><a href="중고책 게시판으로">중고책</a></div>
@@ -71,7 +71,7 @@
                                                     <div class="col-12 navisublicence"><a href="자격증 게시판으로">자격증</a></div>
                                                 </div>
 
-                                            </div>
+                                            </div> -->
                                             <div class="col-12"><a href="회원가입 페이지">회원가입</a></div>
                                         </div>
                                     </div>
@@ -161,8 +161,8 @@
                 <div class="row body">
 
                     <div class="col-12" style="height: 100px;">
-                    통합검색
-                   </div>
+                        통합검색
+                    </div>
                     <div class="col-12">
                         <div class="row bodysub">
                             <div class="col-2">공백</div>
@@ -183,7 +183,8 @@
                                                     </select>
                                                     &nbsp;
                                                     <input type="text" class="form-control" placeholder="통합검색창"
-                                                        aria-label="Username" aria-describedby="basic-addon1" name="title">
+                                                        aria-label="Username" aria-describedby="basic-addon1"
+                                                        name="title">
                                                     &nbsp;
                                                     <button type="submit" class="btn btn-success"
                                                         style="z-index: 0;">검색</button>
@@ -194,54 +195,41 @@
                                     <div class="col12" style="text-align: center;">공백</div>
                                     <div class="col-12">스터디
                                         <div class="row bodysubstudy">
-                                            <div class="col-12 col-lg-3">
-                                                <a href="스터디 관련검색 최신">
-                                                    <div class="card">
-                                                        <img src="..." class="card-img-top" alt="...">
-                                                        <div class="card-body" style="text-align: center;">
-                                                            <h5 class="card-title">${stdto[0].title}</h5>
-                                                            <p class="card-text">${stdto[0].contents}</p>
-                                                            <a href="#" class="btn btn-primary">참여하기</a>
+
+                                            <c:forEach var="study" items="${stdto}" begin="0" end="3">
+                                                <c:choose>
+                                                    <c:when test="${stdto.indexOf(study) > 1}">
+                                                        <div class="col-3 d-none d-lg-block">
+                                                            <a href="스터디 관련검색 최신">
+                                                                <div class="card">
+                                                                    <img src="..." class="card-img-top" alt="...">
+                                                                    <div class="card-body" style="text-align: center;">
+                                                                        <h5 class="card-title">${study.title}</h5>
+                                                                        <p class="card-text">${study.contents}</p>
+                                                                        <a href="#" class="btn btn-primary">참여하기</a>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
                                                         </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-lg-3">
-                                                <a href="스터디 관련검색 최신">
-                                                    <div class="card">
-                                                        <img src="..." class="card-img-top" alt="...">
-                                                        <div class="card-body" style="text-align: center;">
-                                                            <h5 class="card-title">${stdto[1].title}</h5>
-                                                            <p class="card-text">${stdto[1].contents}</p>
-                                                            <a href="#" class="btn btn-primary">참여하기</a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <div class="col-12 col-lg-3">
+                                                            <a href="스터디 관련검색 최신">
+                                                                <div class="card">
+                                                                    <img src="..." class="card-img-top" alt="...">
+                                                                    <div class="card-body" style="text-align: center;">
+                                                                        <h5 class="card-title">${study.title}</h5>
+                                                                        <p class="card-text">${study.contents}</p>
+                                                                        <a href="#" class="btn btn-primary">참여하기</a>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
                                                         </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-3 d-none d-lg-block">
-                                                <a href="스터디 관련검색 최신">
-                                                    <div class="card">
-                                                        <img src="..." class="card-img-top" alt="...">
-                                                        <div class="card-body" style="text-align: center;">
-                                                            <h5 class="card-title">${stdto[2].title}</h5>
-                                                            <p class="card-text">${stdto[2].contents}</p>
-                                                            <a href="#" class="btn btn-primary">참여하기</a>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-3 d-none d-lg-block">
-                                                <a href="스터디 관련검색 최신">
-                                                    <div class="card">
-                                                        <img src="..." class="card-img-top" alt="...">
-                                                        <div class="card-body" style="text-align: center;">
-                                                            <h5 class="card-title">${stdto[3].title}</h5>
-                                                            <p class="card-text">${stdto[3].contents}</p>
-                                                            <a href="#" class="btn btn-primary">참여하기</a>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+
+
                                             <div class="col12" style="text-align: right;">
                                                 <a href="스터디 관련검색 최신순으로 정리되어 있게 전부 보여주는거">
                                                     더보기
@@ -250,9 +238,69 @@
                                         </div>
                                     </div>
                                     <div class="col12" style="text-align: center;">공백</div>
+
+
                                     <div class="col-12">중고책
                                         <div class="row bodysubstudy">
-                                            <div class="col-12 col-lg-6">
+
+                                            <c:forEach var="second" items="${sdto}" begin="0" end="3">
+                                                <c:choose>
+                                                    <c:when test="${sdto.indexOf(second) > 1}">
+                                                        <div class="col-6 d-none d-lg-block">
+                                                            <a href="중고책 관련검색 최신">
+                                                                <div class="card mb-3" style="max-width: 540px;">
+                                                                    <div class="row g-0">
+                                                                        <div class="col-md-4">
+                                                                            <img src="..."
+                                                                                class="img-fluid rounded-start"
+                                                                                alt="...">
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title">${second.title}
+                                                                                </h5>
+                                                                                <p class="card-text">${second.writer}</p>
+                                                                                <p class="card-text">
+                                                                                    <small 
+                                                                                        class="text-body-secondary">${second.contents}</small>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <div class="col-12 col-lg-6">
+                                                            <a href="중고책 관련검색 최신">
+                                                                <div class="card mb-3" style="max-width: 540px;">
+                                                                    <div class="row g-0">
+                                                                        <div class="col-md-4">
+                                                                            <img src="..."
+                                                                                class="img-fluid rounded-start"
+                                                                                alt="...">
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title">${second.title}
+                                                                                </h5>
+                                                                                <p class="card-text">${second.writer}</p>
+                                                                                <p class="card-text"><small 
+                                                                                        class="text-body-secondary">${second.contents}</small>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+
+
+                                            <%-- <div class="col-12 col-lg-6">
                                                 <a href="중고책 관련검색 최신">
                                                     <div class="card mb-3" style="max-width: 540px;">
                                                         <div class="row g-0">
@@ -272,102 +320,101 @@
                                                         </div>
                                                     </div>
                                                 </a>
-                                            </div>
-                                            <div class="col-12 col-lg-6">
-                                                <a href="중고책 관련검색 최신">
-                                                    <div class="card mb-3" style="max-width: 540px;">
-                                                        <div class="row g-0">
-                                                            <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start"
-                                                                    alt="...">
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="card-body">
-                                                                    <h5 class="card-title">${sdto[1].title}</h5>
-                                                                    <p class="card-text">${sdto[1].writer}</p>
-                                                                    <p class="card-text"><small
-                                                                            class="text-body-secondary">${sdto[1].contents}</small>
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-6 d-none d-lg-block">
-                                                <a href="중고책 관련검색 최신">
-                                                    <div class="card mb-3" style="max-width: 540px;">
-                                                        <div class="row g-0">
-                                                            <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start"
-                                                                    alt="...">
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="card-body">
-                                                                    <h5 class="card-title">${sdto[2].title}</h5>
-                                                                    <p class="card-text">${sdto[2].writer}</p>
-                                                                    <p class="card-text"><small
-                                                                            class="text-body-secondary">${sdto[2].contents}</small>
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-6 d-none d-lg-block">
-                                                <a href="중고책 관련검색 최신">
-                                                    <div class="card mb-3" style="max-width: 540px;">
-                                                        <div class="row g-0">
-                                                            <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start"
-                                                                    alt="...">
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="card-body">
-                                                                    <h5 class="card-title">${sdto[3].title}</h5>
-                                                                    <p class="card-text">${sdto[3].writer}</p>
-                                                                    <p class="card-text"><small
-                                                                            class="text-body-secondary">${sdto[3].contents}</small>
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-12" style="text-align: right;">
-                                                <a href="중고책  관련검색 최신순으로 정리되어 있게 전부 보여주는거">
-                                                    더보기
-                                                </a>
-                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col12" style="text-align: center;">공백</div>
-                                    <div class="col-12">자유게시판
-                                        <div class="row bodysubstudy">
-                                            <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
-                                            <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
-                                            <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
-                                            <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
-                                            <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
-                                            <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
+                                        <div class="col-12 col-lg-6">
+                                            <a href="중고책 관련검색 최신">
+                                                <div class="card mb-3" style="max-width: 540px;">
+                                                    <div class="row g-0">
+                                                        <div class="col-md-4">
+                                                            <img src="..." class="img-fluid rounded-start" alt="...">
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">${sdto[1].title}</h5>
+                                                                <p class="card-text">${sdto[1].writer}</p>
+                                                                <p class="card-text"><small
+                                                                        class="text-body-secondary">${sdto[1].contents}</small>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
-                                    </div>
-                                    <div class="col12" style="text-align: right;">
-                                        <a href="자유게시판 관련검색 최신순으로 정리되어 있게 전부 보여주는거">
-                                            더보기
-                                        </a>
-                                    </div>
-                                    <div class="col12" style="text-align: center;">공백</div>
-                                </div>
+                                        <div class="col-6 d-none d-lg-block">
+                                            <a href="중고책 관련검색 최신">
+                                                <div class="card mb-3" style="max-width: 540px;">
+                                                    <div class="row g-0">
+                                                        <div class="col-md-4">
+                                                            <img src="..." class="img-fluid rounded-start" alt="...">
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">${sdto[2].title}</h5>
+                                                                <p class="card-text">${sdto[2].writer}</p>
+                                                                <p class="card-text"><small
+                                                                        class="text-body-secondary">${sdto[2].contents}</small>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-6 d-none d-lg-block">
+                                            <a href="중고책 관련검색 최신">
+                                                <div class="card mb-3" style="max-width: 540px;">
+                                                    <div class="row g-0">
+                                                        <div class="col-md-4">
+                                                            <img src="..." class="img-fluid rounded-start" alt="...">
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">${sdto[3].title}</h5>
+                                                                <p class="card-text">${sdto[3].writer}</p>
+                                                                <p class="card-text"><small
+                                                                        class="text-body-secondary">${sdto[3].contents}</small>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div> --%>
 
+
+                                        <div class="col-12" style="text-align: right;">
+                                            <a href="중고책  관련검색 최신순으로 정리되어 있게 전부 보여주는거">
+                                                더보기
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col12" style="text-align: center;">공백</div>
+                                <div class="col-12">자유게시판
+                                    <div class="row bodysubstudy">
+                                        <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
+                                        <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
+                                        <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
+                                        <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
+                                        <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
+                                        <div class="col-12"><a href="자유게시판 관련검색 최신순">검색어 1</a></div>
+                                    </div>
+                                </div>
+                                <div class="col12" style="text-align: right;">
+                                    <a href="자유게시판 관련검색 최신순으로 정리되어 있게 전부 보여주는거">
+                                        더보기
+                                    </a>
+                                </div>
+                                <div class="col12" style="text-align: center;">공백</div>
                             </div>
-                            <div class="col-2">공백</div>
+
                         </div>
+                        <div class="col-2">공백</div>
                     </div>
                 </div>
-                <div class="row footer">풋터</div>
+            </div>
+            <div class="row footer">풋터</div>
         </body>
 
         </html>

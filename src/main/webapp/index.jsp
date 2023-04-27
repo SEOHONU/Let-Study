@@ -113,8 +113,9 @@
                                     <div class="col-12">
                                         <a href="/index.jsp">logo</a>
                                     </div>
-                                    <form class="container-fluid" action="/allsearch.maincontroller">
-                                        <div class="col-12 subsearchbox">
+
+                                    <div class="col-12 subsearchbox">
+                                        <form class="container-fluid" action="/allsearch.maincontroller">
                                             <i class="fa-solid fa-arrow-left" id="searsubback"></i> <select
                                                 name="select">
                                                 <option value="제목">제목</option>
@@ -125,8 +126,9 @@
                                                 style="width: 40%; padding: 0; display: inline;" name="title">
                                             <button type="submit" class="btn btn-success"
                                                 style="z-index: 0; background-color: rgb(60, 117, 121); padding: 0;">검색</button>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-lg-4 d-none d-lg-block order-lg-1">여백</div>
@@ -148,7 +150,7 @@
                                                         <a href="/selectBound.secondHand">중고책</a>
                                                     </div>
                                                     <div class="col-12 navisubfreeboard">
-                                                        <a href="자유 게시판으로">자유게시판</a>
+                                                        <a href="/contentList.freeBoard">자유게시판</a>
                                                     </div>
                                                     <div class="col-12 navisublicence">
                                                         <a href="자격증 게시판으로">자격증</a>
@@ -156,10 +158,11 @@
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                <a href="회원가입 페이지로"><i class="fa-solid fa-user-plus"></i></a>
+                                                <a href="회원가입 페이지로"><i
+                                                        class="fa-solid fa-user-plus"></i></a><!--로그인안됐을때-->
                                             </div>
                                             <div class="col-6">
-                                                <a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a>
+                                                <a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a><!--로그인됐을때-->
                                             </div>
                                         </div>
                                     </div>
@@ -176,39 +179,40 @@
                             </div>
                             <div class="col-lg-1 d-none d-lg-block order-lg-2" style="text-align: center;">
                                 <a href="/select.studyboard">
-                                    <button class="btn btn-sm btn-outline-secondary" type="button"
-                                        id="study">Study</button>
+                                    Study
                                 </a>
                             </div>
                             <div class="col-lg-1 d-none d-lg-block order-lg-3" style="text-align: center;">
                                 <a href="/selectBound.secondHand">
-                                    <button class="btn btn-sm btn-outline-secondary" type="button">Sencond</button>
+                                    Sencond
                                 </a>
                             </div>
                             <div class="col-lg-1 d-none d-lg-block order-lg-4" style="text-align: center;">
-                                <a href="자유 게시판으로">
-                                    <button class="btn btn-sm btn-outline-secondary" type="button">Board</button>
+                                <a href="/contentList.freeBoard">
+                                    Board
                                 </a>
                             </div>
                             <div class="col-lg-1 d-none d-lg-block order-lg-5" style="text-align: center;">
                                 <a href="자격증 게시판으로">
-                                    <button class="btn btn-sm btn-outline-secondary" type="button">Licence</button>
+                                    Licence
                                 </a>
                             </div>
                             <!-- <div class="col-2 d-block d-lg-none order-3"></div> -->
                             <div class="col-lg-2 d-none d-lg-block  order-lg-last">
                                 <div class="row">
                                     <div class="col-3 login">
-                                        <a href="로그인 페이지로"><i class="fa-solid fa-right-to-bracket"></i></a>
+                                        <a href="로그인 페이지로"><i
+                                                class="fa-solid fa-right-to-bracket"></i></a><!--로그인안됐을때-->
                                     </div>
                                     <div class="col-3 signup">
-                                        <a href="회원가입 페이지로"><i class="fa-solid fa-user-plus"></i></a>
+                                        <a href="회원가입 페이지로"><i class="fa-solid fa-user-plus"></i></a><!--로그인안됐을때-->
                                     </div>
                                     <div class="col-3 profile">
-                                        <a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a>
+                                        <a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a><!--로그인됐을때-->
                                     </div>
                                     <div class="col-3 logout">
-                                        <a href="로그아웃 페이지로"><i class="fa-solid fa-right-from-bracket"></i></a>
+                                        <a href="로그아웃 페이지로"><i
+                                                class="fa-solid fa-right-from-bracket"></i></a><!--로그인됐을때-->
                                     </div>
                                 </div>
                             </div>
@@ -666,6 +670,7 @@
                     searsub.style.display = "none";
                 }
             });
+
 
             $("#study").on("cilck", function () {
                 location.href = "/select.studyboard"

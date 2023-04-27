@@ -47,11 +47,8 @@ public class MainDAO {
 		} else if (select.equals("작성자")) {
 			joongosql = "select * from secondHand where writer like ?";
 		}
-		try (
-				Connection con = this.getconnection();
-				PreparedStatement pstmt = con.prepareStatement(joongosql);
-				) {
-			pstmt.setString(1, "%"+secondhand+"%");
+		try (Connection con = this.getconnection(); PreparedStatement pstmt = con.prepareStatement(joongosql);) {
+			pstmt.setString(1, "%" + secondhand + "%");
 			try (ResultSet rs = pstmt.executeQuery()) {
 				List<SecondHandDTO> result = new ArrayList<>();
 				while (rs.next()) {
@@ -64,8 +61,8 @@ public class MainDAO {
 					double lat = rs.getDouble("lat");
 					double lng = rs.getDouble("lng");
 					String selled = rs.getString("selled");
-					SecondHandDTO dto = new SecondHandDTO(seq, title, contents, writer, write_date,
-							view_count, lat, lng, selled);
+					SecondHandDTO dto = new SecondHandDTO(seq, title, contents, writer, write_date, view_count, lat,
+							lng, selled);
 					result.add(dto);
 				}
 				return result;
@@ -83,10 +80,10 @@ public class MainDAO {
 			studysql = "select * from studyboard where writer like ?";
 		}
 		try (Connection con = this.getconnection(); PreparedStatement pstmt = con.prepareStatement(studysql);) {
-			pstmt.setString(1, "%"+study+"%");
+			pstmt.setString(1, "%" + study + "%");
 			try (ResultSet rs = pstmt.executeQuery()) {
 				List<StudyBoardDTO> result = new ArrayList<>();
-				while(rs.next()) {
+				while (rs.next()) {
 					int seq = rs.getInt("seq");
 					String writer = rs.getString("writer");
 					String title = rs.getString("title");
@@ -94,7 +91,7 @@ public class MainDAO {
 					String detailcontents = rs.getString("detailcontents");
 					int view_count = rs.getInt("view_count");
 					Timestamp write_date = rs.getTimestamp("write_date");
-					result.add(new StudyBoardDTO(seq,writer,title,contents,detailcontents,view_count,write_date));
+					result.add(new StudyBoardDTO(seq, writer, title, contents, detailcontents, view_count, write_date));
 				}
 				return result;
 			}
