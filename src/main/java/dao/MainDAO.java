@@ -11,14 +11,14 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import dto.CommentsDTO;
+import dto.Sh_CommentsDTO;
 import dto.SecondHandDTO;
 import dto.StudyBoardDTO;
 
 public class MainDAO {
 
 	SecondHandDTO sdto = new SecondHandDTO();
-	CommentsDTO cdto = new CommentsDTO();
+	Sh_CommentsDTO cdto = new Sh_CommentsDTO();
 	StudyBoardDTO stdto = new StudyBoardDTO();
 	private static MainDAO instance = null;
 
