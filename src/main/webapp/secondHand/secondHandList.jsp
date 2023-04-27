@@ -30,8 +30,7 @@
 <script>
         $(function () {
             $("#shWrite").on("click", function () {
-                location.href = "/secondHandWriteForm.secondHand
-                ";
+                location.href = "/secondHandWriteForm.secondHand";
             });
         });
     </script>

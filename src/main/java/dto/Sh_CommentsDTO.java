@@ -3,15 +3,15 @@ package dto;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
-public class CommentsDTO {
+public class Sh_CommentsDTO {
 	private int com_seq;
 	private String com_writer;
 	private String com_contents;
 	private Timestamp com_write_date;
 	private int board_seq;
 	private int parent_seq;
-	public CommentsDTO() {}
-	public CommentsDTO(int com_seq, String com_writer, String com_contents, Timestamp com_write_date, int board_seq,
+	public Sh_CommentsDTO() {}
+	public Sh_CommentsDTO(int com_seq, String com_writer, String com_contents, Timestamp com_write_date, int board_seq,
 			int parent_seq) {
 		super();
 		this.com_seq = com_seq;
