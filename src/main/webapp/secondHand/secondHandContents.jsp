@@ -112,10 +112,65 @@ pageEncoding="UTF-8"%>
         <c:forEach var="i" items="${list}">
             <c:choose>
                 <c:when test="${i.parent_seq != 0}">
-              		<c:out value="답글!!"></c:out>
+              		<script>
+              			console.log("i.parent_seq : "+${i.parent_seq});
+              			var rowDiv = $("<div class='row'>");
+              			var modForm = $("<form action='/modifyComments.shComments' class='col-lg-7 col-12'>");
+              			modForm.onsubmit = "return confirm('답글을 수정하시겠습니까?')";
+              			var hidden_currentPage = $("<input type='hidden' name='currentPage' value='${currentPage}'>");
+              			var hidden_board_seq = $("<input type='hidden' name='board_seq' value='${dto.seq}'>");
+              			var hidden_com_seq = $("<input type='hidden' name='com_seq' value='${i.com_seq}'>");
+              			
+              			var table = $("<table border='1' align='center' class='comment'>");
+              			
+              			var tr1 = $("<tr>");
+              			var tr2 = $("<tr>");
+              			
+              			var space1 = $("<div class='col-lg-2 d-none d-lg-block'>");
+              			var space2 = $("<div class='col-lg-2 d-none d-lg-block'>");
+              			
+              			var replySpace = $("<div class='col-lg-1 d-none d-lg-block'>");
+              			replySpace.text("ㄴ");
+              			var td_writer = $("<td align='left'>");
+              			var td_date = $("<td align='right'>");
+              			td_writer.text("${i.com_writer}");
+              			td_date.text("${i.detailDate}");
+              			
+              			td_comment = $("<td align='left' class='commentTd'>");
+              			textarea = $("<textarea name='contents' class='comment' readonly>");
+              			textarea.text("${i.com_contents}");
+              			td_comment.append(textarea);
+              			
+              			td_control = $("<td align='right'>");
+              			if(${i.com_writer == loginId}){
+              				let modBtn = $("<input type='button' value='수정' class='modCom'>");
+              				let delBtn = $("<input type='button' value='삭제' class='delCom' seq='${i.com_seq}'>");
+              				td_control.append(modBtn);
+              				td_control.append(delBtn);
+              			}
+              			modForm.append(hidden_currentPage);
+              			modForm.append(hidden_board_seq);
+              			modForm.append(hidden_com_seq);
+              			modForm.append(table);
+              			
+              			table.append(tr1);
+              			table.append(tr2);
+              			
+              			tr1.append(td_writer);
+              			tr1.append(td_date);
+              			tr2.append(td_comment);
+              			tr2.append(td_control);
+              			rowDiv.append(space1);
+              			rowDiv.append(replySpace);
+              			rowDiv.append(modForm);
+              			rowDiv.append(space2);
+              			
+              			var targetDiv = $(document).find($("div[com_seq=${i.parent_seq}]"));
+              			targetDiv.after(rowDiv);
+              		</script>
                 </c:when>
                 <c:otherwise>
-                    <div class="row">
+                    <div class="row" com_seq="${i.com_seq}">
                         <div class="col-lg-2 d-none d-lg-block">여백</div>
                         <form action="/modifyComments.shComments" class="col-lg-8 col-12"
                             onsubmit="return confirm('댓글을 수정하시겠습니까?')">
@@ -146,7 +201,6 @@ pageEncoding="UTF-8"%>
                     <hr>
                 </c:otherwise>
             </c:choose>
-
         </c:forEach>
     </div>
     <script>
