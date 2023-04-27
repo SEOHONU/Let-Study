@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import dto.StudyBoardDTO;
+import statics.Setting;
 import statics.Settings;
 
 public class StudyBoardDAO {
@@ -58,6 +59,7 @@ public class StudyBoardDAO {
 			}
 		}
 	}
+	
 	
 	public int getRecordCount() throws Exception{
 		String sql = "select count(*) from studyboard";
@@ -127,6 +129,7 @@ public class StudyBoardDAO {
 		return list;
 
 	}
+
 	public StudyBoardDTO selectdetailstudyboard(int seq1) throws Exception{
 		String sql = "select * from studyboard where seq = ?";
 		try(

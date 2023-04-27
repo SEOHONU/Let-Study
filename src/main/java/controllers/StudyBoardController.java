@@ -31,6 +31,7 @@ public class StudyBoardController extends HttpServlet {
 				}
 				int start = currentPage * Settings.BOARD_RECORD_COUNT_PER_PAGE - (Settings.BOARD_RECORD_COUNT_PER_PAGE-1);
 				int end = currentPage * Settings.BOARD_RECORD_COUNT_PER_PAGE;
+				
 				int first = (currentPage-1)/Settings.BOARD_NAVI_COUNT_PER_PAGE*Settings.BOARD_NAVI_COUNT_PER_PAGE;
 				int last = (currentPage-1)/Settings.BOARD_NAVI_COUNT_PER_PAGE*Settings.BOARD_NAVI_COUNT_PER_PAGE+Settings.BOARD_NAVI_COUNT_PER_PAGE+1;
 				System.out.println(start+"/"+end);
