@@ -125,4 +125,27 @@ public class MainDAO {
 			}
 		}
 	}
+	public List<SecondHandDTO> mainjoongo() throws Exception {
+		String sql = "select * from secondHand";
+		try(Connection con = this.getconnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+						ResultSet rs = pstmt.executeQuery();){
+			List<SecondHandDTO>result = new ArrayList<>();
+			while(rs.next()) {
+				int seq = rs.getInt("seq");
+				String title = rs.getString("title");
+				String contents = rs.getString("contents");
+				String writer = rs.getString("writer");
+				Timestamp write_date = rs.getTimestamp("write_date");
+				int view_count = rs.getInt("view_count");
+				double lat = rs.getDouble("lat");
+				double lng = rs.getDouble("lng");
+				String selled = rs.getString("selled");
+				SecondHandDTO dto = new SecondHandDTO(seq, title, contents, writer, write_date, view_count, lat,
+						lng, selled);
+				result.add(dto);
+			}
+			return result;
+		}
+	}
 }

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import dao.MainDAO;
 import dto.FreeBoardDTO;
 import dto.SecondHandDTO;
@@ -19,6 +22,8 @@ public class MainController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String cmd = request.getRequestURI();
+		MainDAO dao = MainDAO.getInstance();
+		Gson g = new Gson();
 		try {
 		if (cmd.equals("/study.maincontroller")) {
 
@@ -26,7 +31,7 @@ public class MainController extends HttpServlet {
 		} else if (cmd.equals("/allsearch.maincontroller")) {
 			String select = request.getParameter("select");
 			String title = request.getParameter("title");
-			MainDAO dao = MainDAO.getInstance();
+			
 			List<SecondHandDTO> sdto = dao.joongosearch(select, title);
 			List<StudyBoardDTO> stdto = dao.studysearch(select, title);
 			List<FreeBoardDTO> fdto = dao.boardsearch(select, title);
@@ -34,7 +39,10 @@ public class MainController extends HttpServlet {
 			request.setAttribute("stdto", stdto);
 			request.setAttribute("fdto", fdto);
 			request.getRequestDispatcher("/board/allSearch.jsp").forward(request, response);
-			
+		}else if (cmd.equals("/mainjoongolist.maincontroller")) {
+			List<SecondHandDTO> sdto = dao.mainjoongo();
+			String resp = g.toJson(sdto);
+			response.getWriter().append(resp);
 		} else if (cmd.equals("/joongo.maincontroller")) {
 
 		} else if (cmd.equals("/board.maincontroller")) {
