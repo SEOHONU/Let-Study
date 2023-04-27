@@ -158,11 +158,12 @@
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                <a href="회원가입 페이지로"><i
-                                                        class="fa-solid fa-user-plus"></i></a><!--로그인안됐을때-->
+                                                <a href="회원가입 페이지로"><i class="fa-solid fa-user-plus"></i></a>
+                                                <!--로그인안됐을때-->
                                             </div>
                                             <div class="col-6">
-                                                <a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a><!--로그인됐을때-->
+                                                <a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a>
+                                                <!--로그인됐을때-->
                                             </div>
                                         </div>
                                     </div>
@@ -178,41 +179,35 @@
                                 </div>
                             </div>
                             <div class="col-lg-1 d-none d-lg-block order-lg-2" style="text-align: center;">
-                                <a href="/select.studyboard">
-                                    Study
-                                </a>
+                                <a href="/select.studyboard"> Study </a>
                             </div>
                             <div class="col-lg-1 d-none d-lg-block order-lg-3" style="text-align: center;">
-                                <a href="/selectBound.secondHand">
-                                    Sencond
-                                </a>
+                                <a href="/selectBound.secondHand"> Sencond </a>
                             </div>
                             <div class="col-lg-1 d-none d-lg-block order-lg-4" style="text-align: center;">
-                                <a href="/contentList.freeBoard">
-                                    Board
-                                </a>
+                                <a href="/contentList.freeBoard"> Board </a>
                             </div>
                             <div class="col-lg-1 d-none d-lg-block order-lg-5" style="text-align: center;">
-                                <a href="자격증 게시판으로">
-                                    Licence
-                                </a>
+                                <a href="자격증 게시판으로"> Licence </a>
                             </div>
                             <!-- <div class="col-2 d-block d-lg-none order-3"></div> -->
                             <div class="col-lg-2 d-none d-lg-block  order-lg-last">
                                 <div class="row">
                                     <div class="col-3 login">
-                                        <a href="로그인 페이지로"><i
-                                                class="fa-solid fa-right-to-bracket"></i></a><!--로그인안됐을때-->
+                                        <a href="/member/loginForm.jsp"><i class="fa-solid fa-right-to-bracket"></i></a>
+                                        <!--로그인안됐을때-->
                                     </div>
                                     <div class="col-3 signup">
-                                        <a href="회원가입 페이지로"><i class="fa-solid fa-user-plus"></i></a><!--로그인안됐을때-->
+                                        <a href="회원가입 페이지로"><i class="fa-solid fa-user-plus"></i></a>
+                                        <!--로그인안됐을때-->
                                     </div>
                                     <div class="col-3 profile">
-                                        <a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a><!--로그인됐을때-->
+                                        <a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a>
+                                        <!--로그인됐을때-->
                                     </div>
                                     <div class="col-3 logout">
-                                        <a href="로그아웃 페이지로"><i
-                                                class="fa-solid fa-right-from-bracket"></i></a><!--로그인됐을때-->
+                                        <a href="로그아웃 페이지로"><i class="fa-solid fa-right-from-bracket"></i></a>
+                                        <!--로그인됐을때-->
                                     </div>
                                 </div>
                             </div>
@@ -221,7 +216,7 @@
                                 <div class="row">
                                     <div class="col-12">공백</div>
                                     <div class="col-6">
-                                        <a href="로그인 페이지로"><i class="fa-solid fa-right-to-bracket"></i></a>
+                                        <a href="/member/loginForm.jsp"><i class="fa-solid fa-right-to-bracket"></i></a>
                                     </div>
 
                                     <div class="col-6">
@@ -463,11 +458,11 @@
                                                 <div class="row">
                                                     <div class="col-1 col-lg-2">공백</div>
                                                     <div class="col-10 col-lg-8">
-                                                        <div class="row">
+                                                        <div class="row" id="joong">
 
 
-                                                            
-                                                            <div class="col-6">
+
+                                                            <!-- <div class="col-6">
                                                                 <a href="최신 올라온 중고책 게시글">
                                                                     <div class="card mb-3" style="max-width: 540px;">
                                                                         <div class="row g-0">
@@ -478,31 +473,58 @@
                                                                             </div>
                                                                             <div class="col-md-8">
                                                                                 <div class="card-body">
-                                                                                    <h5 class="card-title" id="subtitle">
+                                                                                    <h5 class="card-title"
+                                                                                        id="subtitle">
                                                                                     </h5>
                                                                                     <p class="card-text"></p>
                                                                                     <p class="card-text">
                                                                                         <small
-                                                                                            class="text-body-secondary" id="subwriter"></small>
+                                                                                            class="text-body-secondary"
+                                                                                            id="subwriter"></small>
                                                                                     </p>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </a>
-                                                            </div>
+                                                            </div> -->
                                                             <script>
                                                                 $(window).on("load", function () {
                                                                     $.ajax({
                                                                         url: "/mainjoongolist.maincontroller",
                                                                         dataType: "json"
                                                                     }).done(function (resp) {
-                                                                    	var subtitle = $("#subtitle");
-                                                                    	var subwriter = $("#subwriter");
-                                                                    	
-                                                                        for (var a = 0; a < 6; a++) {
-                                                                        	var title = resp[a].title;
+                                                                        var textfront1 = '<div class="col-6">'
+                                                                        var textfront2 = '<a href="최신 올라온 중고책 게시글">'
+                                                                        var textfront3 = '<div class="card mb-3" style = "max-width: 540px;">'
+                                                                        var textfront4 = '<div class="row g-0">'
+                                                                        var textfront5 = '<div class="col-md-4">'
+                                                                        var textfront6 = `<img src="..."
+                                                                                            class="img-fluid rounded-start"
+                                                                                            alt="...">`
+                                                                        var textfront7 = '<div class="col-md-8">'
+                                                                        var textfront8 = '<div class="card-body">'
+                                                                        var subtitle = '<h5 class="card-title" id="subtitle">'
+                                                                        var textmiddle1 = '<p class="card-text">'
+                                                                        var textmiddle2 = '<p class="card-text">'
+                                                                        var subwriter = '<small class="text-body-secondary" id="subwriter">'
+
+                                                                        for (var a = 0; a < 4; a++) {
+                                                                            var title = resp[a].title;
                                                                             var writer = resp[a].writer;
+                                                                            $("#joong").append(textfront1);
+                                                                            textfront1.append(textfront2);
+                                                                            textfront2.append(textfront3);
+                                                                            textfront3.append(textfront4);
+                                                                            textfront4.append(textfront5);
+                                                                            textfront5.append(textfront6);
+                                                                            textfront4.append(textfront7);
+                                                                            textfront4.append(textfront8);
+                                                                            textfront4.append(subtitle);
+                                                                            textfront4.append(textmiddle1);
+                                                                            textfront4.append(textmiddle2);
+                                                                            textfront4.append(textmiddle3);
+                                                                            textmiddle3.append(textmiddle2);
                                                                             subtitle.append().text(title);
                                                                             subwriter.append().text(writer);
                                                                         }
