@@ -462,7 +462,7 @@
 
 
 
-                                                            <!-- <div class="col-6">
+                                                            <div class="col-6">
                                                                 <a href="최신 올라온 중고책 게시글">
                                                                     <div class="card mb-3" style="max-width: 540px;">
                                                                         <div class="row g-0">
@@ -487,49 +487,20 @@
                                                                         </div>
                                                                     </div>
                                                                 </a>
-                                                            </div> -->
+                                                            </div>
                                                             <script>
                                                                 $(window).on("load", function () {
                                                                     $.ajax({
                                                                         url: "/mainjoongolist.maincontroller",
                                                                         dataType: "json"
                                                                     }).done(function (resp) {
-                                                                        var textfront1 = '<div class="col-6">'
-                                                                        var textfront2 = '<a href="최신 올라온 중고책 게시글">'
-                                                                        var textfront3 = '<div class="card mb-3" style = "max-width: 540px;">'
-                                                                        var textfront4 = '<div class="row g-0">'
-                                                                        var textfront5 = '<div class="col-md-4">'
-                                                                        var textfront6 = `<img src="..."
-                                                                                            class="img-fluid rounded-start"
-                                                                                            alt="...">`
-                                                                        var textfront7 = '<div class="col-md-8">'
-                                                                        var textfront8 = '<div class="card-body">'
-                                                                        var subtitle = '<h5 class="card-title" id="subtitle">'
-                                                                        var textmiddle1 = '<p class="card-text">'
-                                                                        var textmiddle2 = '<p class="card-text">'
-                                                                        var subwriter = '<small class="text-body-secondary" id="subwriter">'
-
-                                                                        for (var a = 0; a < 4; a++) {
-                                                                            var title = resp[a].title;
-                                                                            var writer = resp[a].writer;
-                                                                            $("#joong").append(textfront1);
-                                                                            textfront1.append(textfront2);
-                                                                            textfront2.append(textfront3);
-                                                                            textfront3.append(textfront4);
-                                                                            textfront4.append(textfront5);
-                                                                            textfront5.append(textfront6);
-                                                                            textfront4.append(textfront7);
-                                                                            textfront4.append(textfront8);
-                                                                            textfront4.append(subtitle);
-                                                                            textfront4.append(textmiddle1);
-                                                                            textfront4.append(textmiddle2);
-                                                                            textfront4.append(textmiddle3);
-                                                                            textmiddle3.append(textmiddle2);
-                                                                            subtitle.append().text(title);
-                                                                            subwriter.append().text(writer);
-                                                                        }
-                                                                    });
-                                                                })
+                                                                        var title = resp[a].title;
+                                                                        var writer = resp[a].writer;
+                                                                        console.log(title,writer);
+                                                                        $("#subtitle").append().text(title);
+                                                                        $("#subwriter").append().text(writer);
+                                                                    }
+                                                                )});
                                                             </script>
 
 

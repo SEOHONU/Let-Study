@@ -32,7 +32,7 @@ public class MembersDAO {
 		return ds.getConnection();
 	}
 
-	//·Î±×ÀÎ
+	//ï¿½Î±ï¿½ï¿½ï¿½
 	public boolean isMember(String id, String pw) throws Exception {
 		String sql = "select * from members where id=? and pw=?";
 		try (Connection con = this.getConnection(); 
@@ -46,7 +46,7 @@ public class MembersDAO {
 		}
 	}
 	
-	//È¸¿ø°¡ÀÔ
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public boolean isIdExist(String id) throws Exception {
 		String sql = "select * from members where id=?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -78,7 +78,7 @@ public class MembersDAO {
 		}
 	}
 		
-	// È¸¿øÁ¤º¸Ãâ·Â
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public MembersDTO myInfoSelect(String id) throws Exception {
 		String sql = "select * from members where id=?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -103,7 +103,7 @@ public class MembersDAO {
 		}
 	}
 
-	//È¸¿øÁ¤º¸¼öÁ¤
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public int update(MembersDTO dto) throws Exception {
 		String sql = "update members set pw=?,nickname=?,contact=?,email=?,zipcode=?,address1=?,address2=? where id =?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -124,7 +124,7 @@ public class MembersDAO {
 
 	}
 
-	//È¸¿øÅ»Åð
+	//È¸ï¿½ï¿½Å»ï¿½ï¿½
 	public void memberOut(String id) throws Exception {
 		String sql = "delete from members where id=?";
 		try (Connection con = this.getConnection(); 
