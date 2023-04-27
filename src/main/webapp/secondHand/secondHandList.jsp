@@ -42,7 +42,9 @@
 			<div class="col-12">
 				<div class="row">
 					<div class="col-4 col-lg-2 order-2 order-lg-first">logo</div>
-					<div class="col-lg-4 d-none d-lg-block order-lg-1">여백</div>
+					<div class="col-lg-4 d-none d-lg-block order-lg-1">
+						<a href="/selectBound.secondHand?currentPage=1">1페이지로</a>
+					</div>
 					<div class="col-4 d-block d-lg-none order-1">햄버거</div>
 					<div class="col-lg-1 d-none d-lg-block order-lg-2">menu1</div>
 					<div class="col-lg-1 d-none d-lg-block order-lg-3">menu2</div>
@@ -58,20 +60,12 @@
 					<div class="col-lg-2 d-none d-lg-block">여백</div>
 					<div class="col-lg-3">중고책</div>
 					<div class="col-lg-5">
-						<form action="">
-							<select name="" id="">
-								<option value="">옵션</option>
-								<option value="">옵션</option>
-								<option value="">옵션</option>
-							</select> <select name="" id="">
-								<option value="">옵션</option>
-								<option value="">옵션</option>
-								<option value="">옵션</option>
-							</select> <select name="" id="">
-								<option value="">옵션</option>
-								<option value="">옵션</option>
-								<option value="">옵션</option>
-							</select> <input type="text" placeholder="검색창">
+						<form action="/searchSecondHand.secondHand">
+							<select name="option" id="option">
+								<option value="title">글 제목</option>
+								<option value="writer">작성자</option>
+							</select>
+							<input type="text" placeholder="검색어 입력" name="searchText">
 							<button>검색</button>
 						</form>
 					</div>
@@ -170,23 +164,55 @@
 				<div class="row">
 					<div class="col-4"></div>
 					<div class="col-4" align="center">
-						<c:forEach var="i" items="${pageNavi }" varStatus="status">
-							<c:choose>
-								<c:when test="${i eq '◀' }">
-									<a
-										href="/selectBound.secondHand?currentPage=${pageNavi[status.index+1]-1 }">${i }
-									</a>
-								</c:when>
-								<c:when test="${i eq '▶' }">
-									<a
-										href="/selectBound.secondHand?currentPage=${pageNavi[status.index-1]+1 }">${i }
-									</a>
-								</c:when>
-								<c:otherwise>
-									<a href="/selectBound.secondHand?currentPage=${i}">${i}</a>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
+						<c:choose>
+							<c:when test="${searchText != null}">
+								<c:forEach var="i" items="${pageNavi}" varStatus="status">
+									<c:choose>
+										<c:when test="${i eq '◀' }">
+											<a
+												href="/searchSecondHand.secondHand?
+												currentPage=${pageNavi[status.index+1]-1}&
+												option=${option}&
+												searchText=${searchText}">${i }
+											</a>
+										</c:when>
+										<c:when test="${i eq '▶' }">
+											<a
+												href="/searchSecondHand.secondHand?
+												currentPage=${pageNavi[status.index-1]+1}&
+												option=${option}&
+												searchText=${searchText}">${i }
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a href="/searchSecondHand.secondHand?
+											currentPage=${i}&
+											option=${option}&
+											searchText=${searchText}">${i}</a>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="i" items="${pageNavi}" varStatus="status">
+									<c:choose>
+										<c:when test="${i eq '◀' }">
+											<a
+												href="/selectBound.secondHand?currentPage=${pageNavi[status.index+1]-1 }">${i }
+											</a>
+										</c:when>
+										<c:when test="${i eq '▶' }">
+											<a
+												href="/selectBound.secondHand?currentPage=${pageNavi[status.index-1]+1 }">${i }
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a href="/selectBound.secondHand?currentPage=${i}">${i}</a>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</c:otherwise>						
+						</c:choose>
 					</div>
 					<div class="col-4" align="right">
 						<input type="button" value="글쓰기" id="shWrite">
