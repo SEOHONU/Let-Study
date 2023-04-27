@@ -22,7 +22,7 @@ public class MemberController extends HttpServlet {
 		if(cmd.equals("/idCheck.member")) {
 			
 			String id = request.getParameter("id"); 
-			MembersDAO dao = MembersDAO.getInstacne();
+			MembersDAO dao = MembersDAO.getInstance();
 			boolean result = dao.isIdExist(id);
 			
 			request.setAttribute("checkedId", result); 
@@ -33,7 +33,7 @@ public class MemberController extends HttpServlet {
 			
 			String id = request.getParameter("id"); 
 			String pw = request.getParameter("pw"); 
-			boolean result = MembersDAO.getInstacne().isMember(id, pw); 
+			boolean result = MembersDAO.getInstance().isMember(id, pw); 
 			if(result) {
 				request.getSession().setAttribute("loggedID", id); 
 			}
@@ -52,7 +52,7 @@ public class MemberController extends HttpServlet {
 			String roadAddress = request.getParameter("roadAddress");
 			String detailAddress = request.getParameter("detailAddress"); 
 			
-			MembersDAO dao = MembersDAO.getInstacne(); 
+			MembersDAO dao = MembersDAO.getInstance(); 
 			// 회원가입일자 받는 법 몰라서 null로 받음 
 			MembersDTO dto = new MembersDTO(id, pw, name, nickname, contact, email, zipcode, roadAddress, detailAddress  , null , "mg1");
 			int result = dao.insertAll(dto); 

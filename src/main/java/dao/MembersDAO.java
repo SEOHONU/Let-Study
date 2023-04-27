@@ -15,7 +15,7 @@ public class MembersDAO {
 	
 	private static MembersDAO instance = null;
 	
-	public synchronized static MembersDAO getInstacne() {
+	public synchronized static MembersDAO getInstance() {
 	
 		if(instance == null) {
 			instance = new MembersDAO(); 
