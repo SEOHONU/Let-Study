@@ -95,7 +95,32 @@ public class FreeBoardDAO {
 		}
 	}
 	
+	public int update(int seq,String title, String content) throws Exception{
+		String sql = "update board set board_title=?, board_contents=?, board_write_date =sysdate where board_seq=?";
+		try(
+		Connection con = this.getConnection();
+		PreparedStatement pstat = con.prepareStatement(sql);
+		){
+			pstat.setString(1, title);
+			pstat.setString(2, content);
+			pstat.setInt(3,seq);
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
 	
+	public int deleteBySeq(int seq) throws Exception{
+		String sql = "delete from board where board_seq =?";
+
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+
+			pstat.setInt(1, seq);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
 
 
 	}

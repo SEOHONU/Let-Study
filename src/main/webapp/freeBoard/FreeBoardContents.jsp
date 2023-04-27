@@ -43,6 +43,25 @@
 .margin {
 	height: 20px;
 }
+
+.reply_text {
+	height: 50px;
+}
+
+.reply_info {
+	font-size: 13px;
+}
+
+.replyBtn {
+	background-color: transparent;
+	border: none;
+	position: relative;
+	left: 10px;
+}
+
+#margin10 {
+	height: 10px;
+}
 </style>
 
 </head>
@@ -98,60 +117,67 @@
 		<div class="row">
 			<div class="col margin">여백</div>
 		</div>
-		<div class="row rowTitle">
-			<div class="col colTitle">
-			<input type="text" placeholder="제목을 입력해주세요" id="titleInput"
-							name="title" value="${list.title}" readonly>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-				<div>${list.writer}</div>
-				<div>${list.write_date}</div>
-			</div>
-		</div>
-		<!--파일 첨부 출력 -->
-		<c:choose>
-			<c:when test="${fileResult!=null}">
-				<div class="row">
-					<div class="col">
-						<a
-							href="/download.file?sysName=${fileResult.sysName}&oriName=${fileResult.oriName}">${fileResult.oriName}</a>
-					</div>
+		<form action="/update.freeBoard" method="post" id="updateFreeBoard">
+			<div class="row rowTitle">
+				<div class="col colTitle">
+					<input type="hidden" value="${list.seq}" name="boardSeq"> <input
+						type="text" placeholder="제목을 입력해주세요" id="titleInput" name="title"
+						value="${list.title}" readonly>
 				</div>
-			</c:when>
-		</c:choose>
-		
-		<!-- 게시글 출력 -->
-		<div class="row">
-		<div contenteditable="false" id="content" name="content" placeholder="내용을 입력해주세요" style="height:500px">
-		${list.content}
-		</div>
-		</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div>${list.writer}</div>
+					<div>${list.write_date}</div>
+				</div>
+			</div>
+			<!--파일 첨부 출력 -->
+			<c:choose>
+				<c:when test="${fileResult!=null}">
+					<div class="row">
+						<div class="col">
+							<a
+								href="/download.file?sysName=${fileResult.sysName}&oriName=${fileResult.oriName}">${fileResult.oriName}</a>
+						</div>
+					</div>
+				</c:when>
+			</c:choose>
 
-		<!-- 수정, 삭제하기 버튼 -->
-	<%-- 	<c:choose>
+			<!-- 게시글 출력 -->
+			<div class="row">
+				<div contenteditable="false" id="content" placeholder="내용을 입력해주세요"
+					style="height: 500px">${list.content}</div>
+				<input type="hidden" name="realContent" id="realContent">
+			</div>
+
+			<!-- 수정, 삭제하기 버튼 -->
+			<%-- 	<c:choose>
 		<c:when test="${sessionScope.loginID eq list.writer}"> --%>
-		<div class="row updateBoardRow">
-		<div class="col updateBoardCol">
-		<a href="/contentList.freeBoard"><input type="button" value="돌아가기"></a>
-		<input type="button" value="수정" id="updateBtn">
-		<input type="button" value="삭제">
-		<inpyt type="button" value="수정완료">
-		</div>
-		</div>
-	<%-- 	</c:when>
+			<div class="row btnsBoardRow">
+				<div class="col btnsBoardCol" id="btnsBoardCol">
+					<a href="/contentList.freeBoard"> <input type="button"
+						value="돌아가기"></a> <input type="button" value="수정"
+						id="updateBtn"> <a href="delete.freeBoard?seq=${list.seq}">
+						<input type="button" value="삭제">
+					</a>
+				</div>
+			</div>
+			<%-- 	</c:when>
 		</c:choose> --%>
-
+			<div id="margin10"></div>
+		</form>
 		<!-- 댓글출력 -->
 		<div class="row">
 			<div class="col reply_area">
 				<div class="reply_area">
 					<c:forEach var="i" items="${replyResult}">
-						<div class="nickname">${i.writer}</div>
-						<div class="reply_text">${i.contents}</div>
+						<div class="nickname" readonly>${i.writer}</div>
+						<div class="reply_text" readonly>${i.contents}</div>
 						<div class="reply_info">
-							<span class="reply_date">${i.write_date}</span> 
+							<span class="reply_date" readonly>${i.write_date}</span>
+							<button class="replyBtn replyUpdate">댓글수정</button>
+							<button class="replyBtn">댓글삭제</button>
+							<div id="margin10"></div>
 						</div>
 					</c:forEach>
 				</div>
@@ -172,22 +198,33 @@
 
 
 	<script>
-	/* 댓글 입력 */
+		/* 댓글 입력 */
 		$("#replyInsert").on("click", function() {
-			location.href = "/insert.reply?seq=" + ${list.seq}
-			+"&replyContent=" + $('#replyContent').val();
+			location.href = "/insert.reply?seq=" + ${list.seq}+"&replyContent=" + $('#replyContent').val();
 		})
-		
-		
-		/* 수정하기, 수정 버튼 숨기기*/
-		$("#updateBtn").on("click", function(){
+
+		/* 게시글 수정하기, 수정 버튼 숨기기*/
+		$("#updateBtn").on("click", function() {
 			$("#titleInput").removeAttr("readonly");
-			alert("title readonly 지움");
 			$("#content").attr("contenteditable", true);
-			alert("content의 속성값 true 줌");
 			$("#updateBtn").hide();
+			
+			let updateComplete = $("<button>");
+			updateComplete.text("수정완료");
+			updateComplete.attr("type", "submit");
+			
+			$("#btnsBoardCol").append(updateComplete);
 		})
 		
+		$("#updateFreeBoard").on("submit", function(){
+			$("#realContent").val($("#content").html());
+		})
+		
+		
+		$(".replyUpdate").on("click", function(){
+			$(this).parent().parent().children().attr("style","background-color: pink;");
+			alert("댓글창 수정가능해요!!")
+		})
 		
 		
 	</script>

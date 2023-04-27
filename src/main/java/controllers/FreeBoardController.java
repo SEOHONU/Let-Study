@@ -48,7 +48,6 @@ public class FreeBoardController extends HttpServlet {
 				String title = multi.getParameter("title");
 				String content= multi.getParameter("realContent");			
 				System.out.println(writer+"   " + title +"   "+ content);
-				System.out.println("writeform에서 값 넘어온것 확인");
 				
 				int result = dao.insert(writer, title, content);
 
@@ -76,8 +75,8 @@ public class FreeBoardController extends HttpServlet {
 			else if(cmd.equals("/detail.freeBoard")) {
 			
 				//닉네임가져오기!!!!!!!!!!!!!!!!!!!!!!마이페이지에서 넘겨줘야하나?
-				String nick_name = (String)request.getSession().getAttribute("nickname");
-				request.setAttribute("nick_name", nick_name);
+//				String nick_name = (String)request.getSession().getAttribute("nickname");
+//				request.setAttribute("nick_name", nick_name);
 				
 				// 게시글 시퀀스 받아오기
 				int seq = Integer.parseInt(request.getParameter("seq"));
@@ -97,13 +96,23 @@ public class FreeBoardController extends HttpServlet {
 				List<FreeReplyDTO> replyResult = daoRP.selectReply(seq);
 				request.setAttribute("replyResult", replyResult);
 				request.getRequestDispatcher("/freeBoard/FreeBoardContents.jsp").forward(request, response);
+			// 게시글 업데이트
 			}else if(cmd.equals("/update.freeBoard")) {
 				System.out.println("업데이트 서블릿 도착");
 				// 업데이트 준비물(보드): 시퀀스, 제목, 내용
 				// 업데이트 준비물(파일) : 보드(부모)시퀀스, 
-				
-				
+				int seq = Integer.parseInt(request.getParameter("boardSeq"));
+				String title = (String)request.getParameter("title");
+				String content = (String)request.getParameter("realContent");
+				int result = dao.update(seq, title, content);
+				response.sendRedirect("detail.freeBoard?seq="+seq);
+			// 게시글 삭제
+			}else if(cmd.equals("/delete.freeBoard")){
+				int seq = Integer.parseInt(request.getParameter("seq"));
+				int result = dao.deleteBySeq(seq);
+				response.sendRedirect("/contentList.freeBoard");
 			}
+			
 					
 
 		}catch(Exception e) {
