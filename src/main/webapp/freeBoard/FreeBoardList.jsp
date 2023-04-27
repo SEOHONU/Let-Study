@@ -246,7 +246,7 @@
                 <!-- 글쓰기 버튼 -->
                 <div class="row writeBtnRow">
                     <div class="col writeBtnCol">
-                        <a href="/freeBoard/writeFreeBoard.jsp">
+                        <a href="/freeBoard/FreeBoardWriteForm.jsp">
                             <button type="button" class="btn btn-success">글쓰기</button></a>
                     </div>
                 </div>
