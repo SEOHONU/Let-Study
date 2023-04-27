@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회원가입 폼</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link
@@ -24,7 +26,6 @@
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
-
 <style>
 * {
 	font-family: 'Noto Sans KR', sans-serif;
@@ -75,9 +76,6 @@ h2 {
 	margin-top: 36px;
 }
 </style>
-
-
-
 <body>
 
 	<form method="post" action="/joinMember.member" id="joinMember">
@@ -141,7 +139,7 @@ h2 {
 				<!-- 월 -->
 				<div class="col-2">
 					<label for="#" style="color: transparent;">.</label> <select
-						class="form-control" required>
+						class="form-control" name="birthMonth" required>
 						<option selected>월</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -195,8 +193,8 @@ h2 {
 			<div class="row form-group">
 				<div class="col-3"></div>
 				<div class="col-6">
-					<label for="zipcodeInput">우편번호</label> <input type="text"
-						class="form-control" id="zipcode" name="zipcode" readonly>
+					<label for="zipcodeInput">우편번호</label> 
+					<input type="text" class="form-control" id="zipcode" name="zipcode" readonly>
 					<input type="button" onclick="sample4_execDaumPostcode()"
 						value="우편번호 찾기" id="searchZipcode">
 				</div>
@@ -205,8 +203,8 @@ h2 {
 			<div class="row form-group">
 				<div class="col-3"></div>
 				<div class="col-6">
-					<label for="roadAddressInput">도로명주소</label> <input type="text"
-						class="form-control" id="roadAddress" name="roadAddress">
+					<label for="roadAddressInput">도로명주소</label> 
+					<input type="text" class="form-control" id="roadAddress" name="roadAddress">
 				</div>
 				<div class="col-3"></div>
 			</div>
@@ -219,25 +217,109 @@ h2 {
 				<div class="col-3"></div>
 			</div>
 			<div class="btnsParent text-center">
-				<button class="btn btn-primary" id="btnJoin">가입하기</button>
+				<button type="submit" class="btn btn-primary" id="btnJoin">가입하기</button>
 				<button type="button" class="btn btn-light" id="btnCancel">취소하기</button>
 			</div>
+		</div>
 	</form>
-	</div>
 
 	<script>
-	
-	
-		let regexId = /^[a-z]+[a-z0-9]{6,20}$/;
-		let regexPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
-		let regexName = /^[가-힣]{2,5}$/;
-		let regexBirthYear = /^[12][0-9]{3}$/;
-		let regexBirthDay = /^[0-9]{2}$/;
-		let regexNickname = /^[a-zA-Z0-9가-힣]{2,10}$/;
-		let regexContact = /^(01[016789])([1-9]\d{2,3})\d{4}$/;
-		let regexEmail = /[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+/;
-	</script>
+ 
+        var idValIdFlag = false;
 
+        $("#idCheck").on("click",function(){
+        window.open("/idCheck.member?id="+$("#id").val(),"","width=200px,height=200px"); 
+        })
+
+        $("#idInput").on("keyup",function(){
+            idValIdFlag= false; 
+        })
+
+        let regexId = /^[a-z]+[a-z0-9]{6,20}$/;
+        let regexPw =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/; 
+        let regexName = /^[가-힣]{2,5}$/; 
+        let regexBirthYear = /^[12][0-9]{3}$/; 
+        let regexBirthDay = /^[0-9]{2}$/; 
+        let regexNickname = /^[a-zA-Z0-9가-힣]{2,10}$/; 
+        let regexContact = /^(01[016789])([1-9]\d{2,3})\d{4}$/; 
+        let regexEmail = /[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+/; 
+
+        $("#idCheck").on("click", function(){
+            let id = $("id").val(); 
+            let resultId = regexId.test(idInput);
+            if (!resultId) {
+                alert("아이디 양식이 다릅니다."); 
+                return false; 
+            } else {
+                window.open("idCheck?id=" + document.getElementById("id").value,"??" ,"top=100px,left=100px,heigt=500px,width=800px")
+            }
+        })
+
+        $("#pw").on("keyup", function(){
+            if($("#pw").val() == $("#pwCheck").val()) {
+                $("#pwFeedback").html("비밀번호가 일치합니다.").css({"color":"#fd1d1d"});
+            } else {
+                $("#pwFeedback").html("비밀번호가 일치하지 않습니다.").css({"color":"#fd1d1d"});
+            }
+        })
+
+        $("#pwCheck").on("keyup",function(){
+            if($("#pwCheck").val() == $("#pwCheck").val()) {
+                $("#pwFeedback").html("비밀번호가 일치합니다.").css({"color":"#fd1d1d"});
+            }else {
+                $("#pwFeedback").html("비밀번호가 일치하지 않습니다.").css({"color":"#fd1d1d"}); 
+            }
+        })
+
+        document.getElementById("searchZipcode").onclick = function() {
+            new daum.Postcode({
+        oncomplete: function(data) {
+           document.getElementById("zipcode").value = data.zonecode;
+           document.getElementById("roadAddress").value =  data.address; 
+        }
+            }).open();
+
+        }
+
+        // 취소 버튼 누르면 전페이지로 
+        // $("#btnCancel").on("click", function(){
+        // })
+
+       let joinMember = document.getElementById("joinmember");
+       joinMember.onsubmit = function() {
+        let id = $("#id").val(); 
+        let resultId = regexId.test(id); 
+        let pw = $("#pw").val(); 
+        let resultPw = regexPw.test(pw); 
+        let name = $("#name").val(); 
+        let resultName = regexName.test(name); 
+        let birthYear = $("#birthYear").val();
+        let resultBirthYear = regexBirthYear.test(birthYear); 
+        let birthDay = $("#birthDay").val(); 
+        let resultBirthDay = regexBirthDay.test(birthDay); 
+        let nickname = $("#nickname").val(); 
+        let reusultNickname = regexNickname.test(nickname); 
+        let contact = $("#contact").val(); 
+        let resultContact = regexContact.test(contact); 
+        let email = $("#email").val(); 
+        let resultEmail = regexEmail.test(email); 
+
+        if(!resultId){
+            alert("아이디 양식이 다릅니다.");
+            return false; 
+        }
+        if(!resultPw){
+            alert("비밀번호 양식이 다릅니다.");
+            return false; 
+        }
+        if(!resultName){
+            alert
+        }
+
+       }  
+
+
+    </script>
 
 </body>
 </html>
