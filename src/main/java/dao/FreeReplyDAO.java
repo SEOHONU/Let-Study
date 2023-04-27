@@ -34,7 +34,6 @@ public class FreeReplyDAO {
 	}
 	
 	public ArrayList<FreeReplyDTO> selectReply(int p_seq) throws Exception{
-		System.out.println("댓글 출력 서블릿 도착");
 
 		String sql = "select * from board_reply where board_seq = ? order by reply_seq desc";
 		try(
