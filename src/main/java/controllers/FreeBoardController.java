@@ -112,7 +112,9 @@ public class FreeBoardController extends HttpServlet {
 					request.setAttribute("content", content);
 					request.getRequestDispatcher("/freeBoard/updateFreeBoard.jsp").forward(request, response);
 			}else if(cmd.equals("/freeBoard/updateFreeBoard.jsp")) {
-//				
+				System.out.println("업데이트 서블릿 도착");
+				// 업데이트 준비물(보드): 시퀀스, 제목, 내용
+				// 업데이트 준비물(파일) : 보드(부모)시퀀스, 
 				
 				
 			}
