@@ -11,14 +11,14 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import dto.CommentsDTO;
+import dto.Sh_CommentsDTO;
 
-public class CommentsDAO {
-	private CommentsDAO() {}
-	private static CommentsDAO instance = null;
-	public synchronized static CommentsDAO getInstance() {
+public class Sh_CommentsDAO {
+	private Sh_CommentsDAO() {}
+	private static Sh_CommentsDAO instance = null;
+	public synchronized static Sh_CommentsDAO getInstance() {
 		if(instance == null) {
-			instance = new CommentsDAO();
+			instance = new Sh_CommentsDAO();
 		}
 		return instance;
 	}
@@ -27,7 +27,7 @@ public class CommentsDAO {
 		DataSource ds = (DataSource)iCtx.lookup("java:/comp/env/jdbc/ora");
 		return ds.getConnection();
 	}
-	public int insertComments(CommentsDTO dto) throws Exception{
+	public int insertComments(Sh_CommentsDTO dto) throws Exception{
 		String sql = "insert into comments values(com_seq.nextval, ?, ?, default, ?, null)";
 		try(
 				Connection con = this.getConnection();
@@ -41,8 +41,22 @@ public class CommentsDAO {
 			return result;
 		}
 	}
-	public List<CommentsDTO> selectComments(int target_board_seq) throws Exception{
-		String sql = "select * from comments where board_seq = ?";
+	public int updateComments(int com_seq, String contents) throws Exception{
+		String sql = "update comments set com_contents = ?, com_write_date = default "
+				+ "where com_Seq = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, contents);
+			pstat.setInt(2, com_seq);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	public List<Sh_CommentsDTO> selectComments(int target_board_seq) throws Exception{
+		String sql = "select * from comments where board_seq = ? order by 1";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -51,7 +65,7 @@ public class CommentsDAO {
 			try(
 					ResultSet rs = pstat.executeQuery();
 					){
-				List<CommentsDTO> list = new ArrayList<>();
+				List<Sh_CommentsDTO> list = new ArrayList<>();
 				while(rs.next()) {
 					int seq = rs.getInt(1);
 					String writer = rs.getString(2);
@@ -59,10 +73,22 @@ public class CommentsDAO {
 					Timestamp write_date = rs.getTimestamp(4);
 					int board_seq = rs.getInt(5);
 					int parent_seq = rs.getInt(6);
-					list.add(new CommentsDTO(seq, writer, contents, write_date, board_seq, parent_seq));
+					list.add(new Sh_CommentsDTO(seq, writer, contents, write_date, board_seq, parent_seq));
 				}
 				return list;
 			}
+		}
+	}
+	public int deleteComments(int com_seq) throws Exception{
+		String sql = "delete from comments where com_seq = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, com_seq);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
 		}
 	}
 }
