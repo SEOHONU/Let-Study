@@ -23,7 +23,6 @@ public class SecondHandController extends HttpServlet {
 		request.setCharacterEncoding("utf8");
 		response.setContentType("text/html; charset=utf8;");
 		String cmd = request.getRequestURI();
-		System.out.println("cmd : "+cmd);
 		SecondHandDAO shDAO = SecondHandDAO.getInstance();
 		Sh_CommentsDAO cmDAO = Sh_CommentsDAO.getInstance();
 		try {
@@ -58,12 +57,30 @@ public class SecondHandController extends HttpServlet {
 						(Settings.SH_BOARD_RECORD_COUNT_PER_PAGE - 1);
 				int endRecord = currentPage * Settings.SH_BOARD_RECORD_COUNT_PER_PAGE;
 				List<SecondHandDTO> recordList = shDAO.selectRecordByPage(startRecord, endRecord);
-				System.out.println("recordList : "+recordList);
 				List<String> pageNavi = shDAO.getPageNavi(currentPage);
-				System.out.println("pageNavi : "+pageNavi);
 				request.setAttribute("currentPage", currentPage);
 				request.setAttribute("recordList", recordList);
 				request.setAttribute("pageNavi", pageNavi);
+				request.getRequestDispatcher("/secondHand/secondHandList.jsp").forward(request, response);
+			}
+			else if(cmd.equals("/searchSecondHand.secondHand")) {
+				int currentPage = request.getParameter("currentPage") == null ? 1 
+						: Integer.parseInt(request.getParameter("currentPage"));
+				String option = request.getParameter("option");
+				String searchText = request.getParameter("searchText");
+				searchText = searchText.trim();
+				searchText = EncryptionUtils.AntiXSS(searchText);
+				int startRecord = (currentPage * Settings.SH_BOARD_RECORD_COUNT_PER_PAGE) - 
+						(Settings.SH_BOARD_RECORD_COUNT_PER_PAGE - 1);
+				int endRecord = currentPage * Settings.SH_BOARD_RECORD_COUNT_PER_PAGE;
+				List<SecondHandDTO> recordList = 
+						shDAO.searchRecordByPage(startRecord, endRecord, searchText, option);
+				List<String> pageNavi = shDAO.getPageNaviSearch(currentPage, searchText, option);
+				request.setAttribute("currentPage", currentPage);
+				request.setAttribute("recordList", recordList);
+				request.setAttribute("pageNavi", pageNavi);
+				request.setAttribute("option", option);
+				request.setAttribute("searchText", searchText);
 				request.getRequestDispatcher("/secondHand/secondHandList.jsp").forward(request, response);
 			}
 			else if(cmd.equals("/secondHandBoardContents.secondHand")) {
@@ -72,8 +89,6 @@ public class SecondHandController extends HttpServlet {
 				shDAO.secondHandBoardViewUp(targetSeq);
 				SecondHandDTO dto = shDAO.selectContents(targetSeq);
 				List<Sh_CommentsDTO> list = cmDAO.selectComments(targetSeq);
-				for(Sh_CommentsDTO s : list) {
-				}
 				request.setAttribute("list", list);
 				request.setAttribute("currentPage", currentPage);
 				request.setAttribute("dto", dto);
