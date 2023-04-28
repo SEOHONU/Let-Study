@@ -93,14 +93,16 @@ a {
 				</div>
 
 				<div class="btn">
-					<button class="btn btn-primary" id="btnLogin">로그인</button>
-					<button class="btn btn-light" id="btnJoin">회원가입</button>
+					<button type="button" class="btn btn-primary" id="btnLogin">로그인</button>
+					<button type="button" class="btn btn-light" id="btnJoin">회원가입</button>
 				</div>
 			</form>
 		</div>
 	</div>
 
 	<script>
+	
+	//로그인 성공시 추가해야됨 
 		$("#btnJoin").on("click", function() {
 			location.href = "/member/joinForm.jsp";
 		});

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,12 +52,6 @@ h2 {
 	width: calc(100% -120px);
 }
 
-#idCheck {
-	position: absolute;
-	right: 20px;
-	top: 0;
-	margin-top: 36px;
-}
 /* 
     .btnsParent{
         display: flex;
@@ -95,7 +89,7 @@ h2 {
 					<label for="idInput">아이디*</label> <input type="text"
 						class="form-control" id="id" name="id" placeholder="아이디 입력(6~20자)"
 						required>
-					<button class="btn btn-primary btn-sm" id="idCheck" type="button">중복확인</button>
+					<div id="idFeedback"></div>
 				</div>
 				<div class="col-3"></div>
 
@@ -222,12 +216,73 @@ h2 {
 				<button class="btn btn-primary" id="btnJoin">가입하기</button>
 				<button type="button" class="btn btn-light" id="btnCancel">취소하기</button>
 			</div>
+		</div>
 	</form>
-	</div>
 
 	<script>
 	
-	
+		$("#id").focusout(function() {
+
+			let id = $("#id").val();
+
+			$.ajax({
+				url : "/idCheck.member",
+				type : "post",
+				dataType : "json",
+				data : {
+					id : id
+				},
+				success : function(resp) {
+					if (resp) {
+						console.log(resp);
+						$("#idFeedback").html("이미 존재하는 아이디입니다.");
+						$("#idFeedback").css({
+							color : "red"
+						});
+					} else {
+						$("#idFeedback").html("사용가능한 아이디입니다.");
+						$("#idFeedback").css({
+							color : "blue"
+						});
+					}
+				},
+				error : function(xhr, status, error) {
+					console.log(xhr);
+					console.log(status);
+					console.log(error);
+				}
+
+			})
+		})
+
+		$("#id").on("keyup", function() {
+			idValIdFlag = false;
+		});
+
+		$("#pw").on("keyup", function() {
+			if ($("#pw").val() == $("#pwCheck").val()) {
+				$("#pwFeedback").html("비밀번호가 일치합니다.").css({
+					color : "#fd1d1d"
+				});
+			} else {
+				$("#pwFeedback").html("비밀번호가 일치하지 않습니다.").css({
+					color : "#fd1d1d"
+				});
+			}
+		});
+
+		$("#pwCheck").on("keyup", function() {
+			if ($("#pwCheck").val() == $("#pwCheck").val()) {
+				$("#pwFeedback").html("비밀번호가 일치합니다.").css({
+					color : "#fd1d1d"
+				});
+			} else {
+				$("#pwFeedback").html("비밀번호가 일치하지 않습니다.").css({
+					color : "#fd1d1d"
+				});
+			}
+		});
+
 		let regexId = /^[a-z]+[a-z0-9]{6,20}$/;
 		let regexPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
 		let regexName = /^[가-힣]{2,5}$/;
@@ -236,6 +291,85 @@ h2 {
 		let regexNickname = /^[a-zA-Z0-9가-힣]{2,10}$/;
 		let regexContact = /^(01[016789])([1-9]\d{2,3})\d{4}$/;
 		let regexEmail = /[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+/;
+
+	      $("#idCheck").on("click", function () {
+	          let id = $("id").val();
+	          let resultId = regexId.test(idInput);
+	          if (!resultId) {
+	            alert("아이디 양식이 다릅니다.");
+	            return false;
+	          } 
+	          
+		let joinMember = document.getElementById("joinMember");
+		// onsubmit 이벤트는 버튼에 주는게 아니라 form태그에 준다
+
+		joinMember.onsubmit = function() {
+			let id = $("#id").val();
+			let resultId = regexId.test(id);
+			let pw = $("#pw").val();
+			let resultPw = regexPw.test(pw);
+			let name = $("#name").val();
+			let resultName = regexName.test(name);
+			let birthYear = $("#birthYear").val();
+			let resultBirthYear = regexBirthYear.test(birthYear);
+			let birthDay = $("#birthDay").val();
+			let resultBirthDay = regexBirthDay.test(birthDay);
+			let nickname = $("#nickname").val();
+			let reusultNickname = regexNickname.test(nickname);
+			let contact = $("#contact").val();
+			let resultContact = regexContact.test(contact);
+			let email = $("#email").val();
+			let resultEmail = regexEmail.test(email);
+
+			if (!resultId) {
+				alert("아이디 양식이 다릅니다.");
+				return false;
+			}
+			if (!resultPw) {
+				alert("비밀번호 양식이 다릅니다.");
+				return false;
+			}
+			if (!resultName) {
+				alert("이름 양식이 다릅니다.");
+				return false;
+			}
+
+			if (!resultBirthYear) {
+				alert("태어난 년도 4자리를 입력해주세요");
+				return false;
+			}
+			
+			if(!resultBirthDay) {
+				alert("태어난 생일 일자의 숫자 두자리로 입력해주세요");
+				return false; 
+			}
+
+			if (!reusultNickname) {
+				alert("닉네임 양식이 다릅니다");
+				return false;
+			}
+			if (!resultContact) {
+				alert("연락처 양식이 다릅니다. ");
+				return false;
+			}
+
+			if (!resultEmail) {
+				alert("이메일 양식이 다릅니다.");
+				return false;
+			}
+		};
+
+		// 우편번호 카카오 api
+
+		document.getElementById("searchZipcode").onclick = function() {
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
+							document.getElementById("zipcodeInput").value = data.zonecode;
+							document.getElementById("roadAddress").value = data.address;
+						},
+					}).open();
+		};
 	</script>
 
 

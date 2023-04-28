@@ -60,20 +60,37 @@ public class MembersDAO {
 		}
 	}
 	
+	public String getNickname(String id) throws Exception {
+		String sql = "select nickname from members where id =?"; 
+		try(Connection con = this.getConnection(); 
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, id);
+			try(ResultSet rs = pstat.executeQuery()){
+				rs.next();
+				String nickname = rs.getString("nickname");
+				return nickname;
+			}
+			
+			
+			
+		}
+	}
+	
 	public int insertAll(MembersDTO dto) throws Exception {
 		
-		String sql = "insert into members values (?,?,?,?,?,?,?,?,sysdate,'mg1')"; 
+		String sql = "insert into members values (?,?,?,?,?,?,?,?,?,?,sysdate)"; 
 		try(Connection con = this.getConnection(); 
 				PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, dto.getId());
 			pstat.setString(2, EncryptionUtils.sha512(dto.getPw())); 
 			pstat.setString(3, dto.getName());
-			pstat.setString(4, dto.getNickname());
-			pstat.setString(5, dto.getContact());
-			pstat.setString(6, dto.getEmail());
-			pstat.setString(7, dto.getZipcode());
-			pstat.setString(8, dto.getAddress1());
-			pstat.setString(9, dto.getAddress2());
+			pstat.setString(4, dto.getBirth_date());
+			pstat.setString(5, dto.getNickname());
+			pstat.setString(6, dto.getContact());
+			pstat.setString(7, dto.getEmail());
+			pstat.setString(8, dto.getZipcode());
+			pstat.setString(9, dto.getAddress1());
+			pstat.setString(10, dto.getAddress2());
 			int result = pstat.executeUpdate(); 
 			con.commit();
 			return result; 

@@ -7,6 +7,7 @@ public class MembersDTO {
 	private String id;
 	private String pw; 
 	private String name; 
+	private String birth_date;
 	private String nickname;
 	private String contact;
 	private String email;
@@ -14,16 +15,16 @@ public class MembersDTO {
 	private String address1;
 	private String address2;
 	private Timestamp join_date;
-	private String grade_code;
 	
 	public MembersDTO() {}
 
-	public MembersDTO(String id, String pw, String name, String nickname, String contact, String email, String zipcode,
-			String address1, String address2, Timestamp join_date, String grade_code) {
+	public MembersDTO(String id, String pw, String name, String birth_date, String nickname, String contact,
+			String email, String zipcode, String address1, String address2, Timestamp join_date, String grade_code) {
 		super();
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
+		this.birth_date = birth_date;
 		this.nickname = nickname;
 		this.contact = contact;
 		this.email = email;
@@ -31,7 +32,6 @@ public class MembersDTO {
 		this.address1 = address1;
 		this.address2 = address2;
 		this.join_date = join_date;
-		this.grade_code = grade_code;
 	}
 
 	public String getId() {
@@ -56,6 +56,14 @@ public class MembersDTO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getBirth_date() {
+		return birth_date;
+	}
+
+	public void setBirth_date(String birth_date) {
+		this.birth_date = birth_date;
 	}
 
 	public String getNickname() {
@@ -114,14 +122,8 @@ public class MembersDTO {
 		this.join_date = join_date;
 	}
 
-	public String getGrade_code() {
-		return grade_code;
-	}
 
-	public void setGrade_code(String grade_code) {
-		this.grade_code = grade_code;
-	}; 
-	
+
 		
 	
 	
