@@ -255,19 +255,20 @@ h2 {
             }
         })
 
-        $("#pw").on("keyup", function(){
-            if($("#pw").val() == $("#pwCheck").val()) {
-                $("#pwFeedback").html("비밀번호가 일치합니다.").css({"color":"#fd1d1d"});
+    
+        
+         $("#pw").on("keyup", function (e) {
+            if ($("#pwCheck").val() == $("#pw").val()) {
+                $("#pwFeedback").html("비밀번호가 일치합니다.");
             } else {
-                $("#pwFeedback").html("비밀번호가 일치하지 않습니다.").css({"color":"#fd1d1d"});
+               $("#pwFeedback").html("비밀번호가 일치하지 않습니다.").css({"color":"#fd1d1d"});
             }
         })
-
-        $("#pwCheck").on("keyup",function(){
-            if($("#pwCheck").val() == $("#pwCheck").val()) {
-                $("#pwFeedback").html("비밀번호가 일치합니다.").css({"color":"#fd1d1d"});
-            }else {
-                $("#pwFeedback").html("비밀번호가 일치하지 않습니다.").css({"color":"#fd1d1d"}); 
+        $("#pwCheck").on("keyup", function (e) {
+            if ($("#pwCheck").val() == $("#pw").val()) {
+                $("#pwFeedback").html("비밀번호가 일치합니다.");
+            } else {
+                $("#pwFeedback").html("비밀번호가 일치하지 않습니다.").css({"color":"#fd1d1d"});
             }
         })
 
@@ -282,8 +283,9 @@ h2 {
         }
 
         // 취소 버튼 누르면 전페이지로 
-        // $("#btnCancel").on("click", function(){
-        // })
+         $("#btnCancel").on("click", function(){
+        	 location.href="/login.member";
+         })
 
        let joinMember = document.getElementById("joinmember");
        joinMember.onsubmit = function() {

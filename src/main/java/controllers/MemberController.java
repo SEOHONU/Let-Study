@@ -29,13 +29,15 @@ public class MemberController extends HttpServlet {
 				System.out.println("로그인");
 				String id = request.getParameter("id");
 				String pw = EncryptionUtils.sha512(request.getParameter("pw"));
+				String nickname = dao.getNickname(id);
+				System.out.println("닉네임 : " + nickname);
+				request.getSession().setAttribute("loggedNickname", nickname);
 				System.out.println(id + ":" + pw);
 				boolean result = dao.isMember(id, pw);
 				if (result) {
 					request.getSession().setAttribute("loggedID", id);
 				}
 				response.sendRedirect("/index.jsp");
-				
 				
 			// 로그아웃 
 			} else if (cmd.equals("/logout.member")) {
@@ -91,16 +93,17 @@ public class MemberController extends HttpServlet {
 				String detailAddress = request.getParameter("detailAddress");
 				MembersDTO dto = new MembersDTO(id, pw, name, birth_date, nickname, contact, email, zipcode, roadAddress, detailAddress, null, null);
 				dao.update(dto);
-				response.sendRedirect("/");
-				//////// 마이페이지메인
+				response.sendRedirect("/myPage/mypageMainForm.jsp");
+				
 
 				// 회원탈퇴 
 			} else if (cmd.equals("/memberOut.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
 				dao.memberOut(id);
 				response.sendRedirect("/index.jsp");
-			}
+			} 
 
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			// response.sendRedirect("/error.jsp");

@@ -162,7 +162,7 @@
                                                 <!--로그인안됐을때-->
                                             </div>
                                             <div class="col-6">
-                                                <a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a>
+                                                <a href="/myPage/mypageMainForm.jsp"><i class="fa-solid fa-user"></i></a>
                                                 <!--로그인됐을때-->
                                             </div>
                                         </div>
@@ -202,7 +202,7 @@
                                         <!--로그인안됐을때-->
                                     </div>
                                     <div class="col-3 profile">
-                                        <a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a>
+                                        <a href="/myPage/mypageMainForm.jsp"><i class="fa-solid fa-user"></i></a>
                                         <!--로그인됐을때-->
                                     </div>
                                     <div class="col-3 logout">

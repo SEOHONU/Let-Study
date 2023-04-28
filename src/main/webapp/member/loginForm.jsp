@@ -72,38 +72,39 @@ a {
 </style>
 
 <body>
-	<div class="container">
-		<div class="loginBox">
-			<h2>로그인</h2>
-			<form action="/login.member" method="post">
-				<div class="form-group">
-					<input type="text" class="form-control" id="id" name="id"
-						placeholder="아이디" />
-				</div>
-				<div class="form-group">
-					<input type="password" class="form-control" id="pw" name="pw"
-						placeholder="비밀번호" />
-				</div>
-				<div class="checkBox">
-					<label><input type="checkbox"
-						name="rememberId" value="1" /> 아이디 기억하기</label>
-				</div>
-				<div class="findIdPw">
-					<a href="#">아이디/비밀번호 찾기</a>
-				</div>
+	<form action="/login.member" method="post">
+		<div class="container">
+			<div class="loginBox">
+				<h2>로그인</h2>
+				<form action="/login.member" method="post">
+					<div class="form-group">
+						<input type="text" class="form-control" id="id" name="id"
+							placeholder="아이디" />
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" id="pw" name="pw"
+							placeholder="비밀번호" />
+					</div>
+					<div class="checkBox">
+						<label><input type="checkbox" name="rememberId" value="1" />
+							아이디 기억하기</label>
+					</div>
+					<div class="findIdPw">
+						<a href="#">아이디/비밀번호 찾기</a>
+					</div>
 
-				<div class="btn">
-					<button class="btn btn-primary" id="btnLogin">로그인</button>
-					<button class="btn btn-light" id="btnJoin">회원가입</button>
-				</div>
-			</form>
+					<div class="btn">
+						<button type="submit" class="btn btn-primary" id="btnLogin">로그인</button>
+						<button type="button" class="btn btn-light" id="btnJoin" >회원가입</button>
+					</div>
+			</div>
 		</div>
-	</div>
-
+	</form>
+	
 	<script>
 		$("#btnJoin").on("click", function() {
 			location.href = "/member/joinForm.jsp";
-		});
+		})
 	</script>
 
 

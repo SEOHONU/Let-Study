@@ -17,8 +17,6 @@ public class MembersDTO {
 	private Timestamp join_date;
 	private String grade_code;
 	
-	
-	
 	public MembersDTO() {
 		super();
 		
