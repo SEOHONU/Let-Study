@@ -16,9 +16,9 @@ public class FreeReplyController extends HttpServlet {
 			String cmd=request.getRequestURI();
 			request.setCharacterEncoding("utf8");
 			response.setContentType("text/html; charset=utf8");
+			FreeReplyDAO dao = FreeReplyDAO.getInstance();
 
 			try {
-			
 				if(cmd.equals("/insert.reply")){
 					String writer = "아이디";
 					request.setAttribute("writer", writer);
@@ -26,14 +26,22 @@ public class FreeReplyController extends HttpServlet {
 					
 					int boardSeq = Integer.parseInt(request.getParameter("seq"));
 					String replyContent = request.getParameter("replyContent");
-					FreeReplyDAO dao = FreeReplyDAO.getInstance();
-					System.out.println("작성자 아이디 : " + writer);
-					System.out.println("게시판 seq : " + boardSeq);
-					System.out.println("댓글 : " + replyContent);
 					dao.insertReply(writer, replyContent, boardSeq);
 					// 주의하기!!
 					response.sendRedirect("/detail.freeBoard?seq="+boardSeq);
 
+				}else if(cmd.equals("/update.reply")){
+					int board_seq = Integer.parseInt(request.getParameter("seq"));
+					int reply_seq = Integer.parseInt(request.getParameter("replySeq"));
+					String reply_content = (String)request.getParameter("replyContent");
+					dao.updateReply(reply_content, reply_seq);
+					
+					response.sendRedirect("/detail.freeBoard?seq="+board_seq);
+				}else if(cmd.equals("/delete.reply")) {
+					int board_seq = Integer.parseInt(request.getParameter("seq"));
+					int reply_seq = Integer.parseInt(request.getParameter("replySeq"));
+					int result = dao.deleteBySeq(reply_seq);
+					response.sendRedirect("/detail.freeBoard?seq="+board_seq);
 				}
 
 
