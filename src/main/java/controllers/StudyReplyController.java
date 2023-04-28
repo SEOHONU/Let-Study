@@ -23,9 +23,9 @@ public class StudyReplyController extends HttpServlet {
 			if(cmd.equals("/insert.studyreply")) {
 				int currentPage = Integer.parseInt(request.getParameter("cpage"));
 				int parent_seq = Integer.parseInt(request.getParameter("parent_seq"));
-//				String writer = request.getParameter("studyreplywriter");
+				String id = (String) request.getSession().getAttribute("loggedID");
 				String contents = request.getParameter("studyreplycontents");
-				dao.insertreply(new StudyReplyDTO(0,"213",contents,null,parent_seq));
+				dao.insertreply(new StudyReplyDTO(0,id,contents,null,parent_seq));
 				response.sendRedirect("/inner.studyboard?cpage="+currentPage+"&seq="+parent_seq);
 			}else if(cmd.equals("/delete.studyreply")) {
 				int currentPage = Integer.parseInt(request.getParameter("cpage"));

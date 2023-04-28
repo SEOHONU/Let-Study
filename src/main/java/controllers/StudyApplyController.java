@@ -37,7 +37,6 @@ public class StudyApplyController extends HttpServlet {
 				String gresult = g.toJson(result);
 				response.getWriter().append(gresult);
 			}else if(cmd.equals("/update.studyapply")) {
-				int currentPage = Integer.parseInt(request.getParameter("cpage"));
 				int seq = Integer.parseInt(request.getParameter("board_seq"));
 				String id = request.getParameter("id");
 				int result = dao.updateapply(new StudyBoardMembersDTO(id, seq, null));

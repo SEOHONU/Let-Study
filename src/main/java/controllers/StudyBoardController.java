@@ -71,24 +71,26 @@ public class StudyBoardController extends HttpServlet {
 				dao.deletestudyboard(seq);
 				response.sendRedirect("/select.studyboard?cpage="+currentPage);
 			}else if(cmd.equals("/insert.studyboard")) {
+				String id = (String) request.getSession().getAttribute("loggedID");
 				String title = request.getParameter("title");
 				String contents = request.getParameter("contents");
 				String detailcontents = request.getParameter("detailcontents");
 				double lat = Double.parseDouble(request.getParameter("lat"));
 				double lng = Double.parseDouble(request.getParameter("lng"));
 				String mapname = request.getParameter("mapname");
-				dao.insertstudyboard(new StudyBoardDTO(0,null,title,contents,detailcontents,0,null,lat,lng,mapname));
+				dao.insertstudyboard(new StudyBoardDTO(0,id,title,contents,detailcontents,0,null,lat,lng,mapname));
 				response.sendRedirect("/select.studyboard?cpage=1");
 			}else if(cmd.equals("/update.studyboard")) {
 				int currentPage = Integer.parseInt(request.getParameter("cpage"));
 				int seq = Integer.parseInt(request.getParameter("seq"));
+				String id = (String) request.getSession().getAttribute("loggedID");
 				String title = request.getParameter("title");
 				String contents = request.getParameter("contents");
 				String detailcontents = request.getParameter("detailcontents");
 				double lat = Double.parseDouble(request.getParameter("lat"));
-				double lng = Double.parseDouble(request.getParameter("lng")); 
+				double lng = Double.parseDouble(request.getParameter("lng"));
 				String mapname = request.getParameter("mapname");
-				dao.updatestudyboard(new StudyBoardDTO(seq,"213",title,contents,detailcontents,0,null,lat,lng,mapname));
+				dao.updatestudyboard(new StudyBoardDTO(seq,id,title,contents,detailcontents,0,null,lat,lng,mapname));
 				response.sendRedirect("/inner.studyboard?cpage="+currentPage+"&seq="+seq);
 			}
 		}catch(Exception e) {
