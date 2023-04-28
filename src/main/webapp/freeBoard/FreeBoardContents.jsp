@@ -52,7 +52,7 @@
 	font-size: 13px;
 }
 
-.replyBtn {
+.nonBorderBtn {
 	background-color: transparent;
 	border: none;
 	position: relative;
@@ -117,7 +117,7 @@
 		<div class="row">
 			<div class="col margin">여백</div>
 		</div>
-		<form action="/update.freeBoard" method="post" id="updateFreeBoard">
+		<form action="/update.freeBoard" method="post" id="updateFreeBoard" enctype="multipart/form-data" >
 			<div class="row rowTitle">
 				<div class="col colTitle">
 					<input type="hidden" value="${list.seq}" name="seq"> <input
@@ -138,11 +138,18 @@
 						<div class="col">
 							<a
 								href="/download.file?sysName=${fileResult.sysName}&oriName=${fileResult.oriName}">${fileResult.oriName}</a>
+							<a
+								href="/delete.file?file_seq=${fileResult.seq}&board_seq=${list.seq}"><input
+								type="button" class="nonBorderBtn">x</a>
 						</div>
 					</div>
 				</c:when>
 			</c:choose>
-
+			<div class="row fileRow">
+				<div class="col fileCol">
+					<input type="file" name="file" id="file" dir="rtl" style="display:none">
+				</div>
+			</div>
 			<!-- 게시글 출력 -->
 			<div class="row">
 				<div contenteditable="false" id="content" placeholder="내용을 입력해주세요"
@@ -167,27 +174,29 @@
 			<div id="margin10"></div>
 		</form>
 		<!-- 댓글출력 -->
-		<form action="/update.reply" method="post">
-		<div class="row">
-			<div class="col reply_area">
-				<div class="reply_area">
-					<c:forEach var="i" items="${replyResult}">
-						<div class="nickname" readonly>${i.writer}</div>
-						<input type="text" class="reply_text" name="replyContent" value="${i.contents}" readonly>
-						<div class="reply_info">
-							<span class="reply_date" readonly>${i.write_date}</span>
-							<input type="button" class="replyBtn replyUpdate" value="댓글수정">
-							<a href="/delete.reply?seq=${list.seq}&replySeq=${i.seq}">
-							<input type="button" class="replyBtn" value="댓글삭제"></a>
-							<input type="submit" class="replyBtn" value="수정완료" style="display:none">
-							<input type="hidden" value="${i.seq}" name="replySeq">
-							<input type="hidden" value="${list.seq}" name="seq">
-							<div id="margin10"></div>
-						</div>
-					</c:forEach>
+		<form action="/update.reply"  method="post" >
+			<div class="row">
+				<div class="col reply_area">
+					<div class="reply_area">
+						<c:forEach var="i" items="${replyResult}">
+							<div class="nickname" readonly>${i.writer}</div>
+							<input type="text" class="reply_text" name="replyContent"
+								value="${i.contents}" readonly>
+							<div class="reply_info">
+								<span class="reply_date" readonly>${i.write_date}</span> <input
+									type="button" class="nonBorderBtn replyUpdate" value="댓글수정">
+								<a href="/delete.reply?seq=${list.seq}&replySeq=${i.seq}"> <input
+									type="button" class="nonBorderBtn" value="댓글삭제"></a> <input
+									type="submit" class="nonBorderBtn" value="수정완료"
+									style="display: none"> <input type="hidden"
+									value="${i.seq}" name="replySeq"> <input type="hidden"
+									value="${list.seq}" name="seq">
+								<div id="margin10"></div>
+							</div>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
-		</div>
 		</form>
 		<!-- 댓글입력 -->
 		<div class="row rowReplyInput">
@@ -206,7 +215,8 @@
 	<script>
 		/* 댓글 입력 */
 		$("#replyInsert").on("click", function() {
-			location.href = "/insert.reply?seq=" + ${list.seq}+"&replyContent=" + $('#replyContent').val();
+			location.href = "/insert.reply?seq=" + ${list.seq}
+			+"&replyContent=" + $('#replyContent').val();
 		})
 
 		/* 게시글 수정하기, 수정 버튼 숨기기*/
@@ -214,27 +224,26 @@
 			$("#titleInput").removeAttr("readonly");
 			$("#content").attr("contenteditable", true);
 			$("#updateBtn").hide();
-			
+
 			let updateComplete = $("<button>");
 			updateComplete.text("수정완료");
 			updateComplete.attr("type", "submit");
-			
+
 			$("#btnsBoardCol").append(updateComplete);
+			$("#file").css("display", "block");
 		})
-		
-		$("#updateFreeBoard").on("submit", function(){
+
+		$("#updateFreeBoard").on("submit", function() {
 			$("#realContent").val($("#content").html());
 		})
-		
+
 		/* 댓글 수정하기  */
-		$(".replyUpdate").on("click", function(){
+		$(".replyUpdate").on("click", function() {
 			$(this).parent().prev().removeAttr("readonly");
 			$(this).hide();
-		 	$(this).next().css("display","none");
-		    $(this).next().next().css("display","inline-block");
+			$(this).next().css("display", "none");
+			$(this).next().next().css("display", "inline-block");
 		})
-		
-		
 	</script>
 </body>
 

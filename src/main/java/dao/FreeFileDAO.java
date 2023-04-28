@@ -29,13 +29,14 @@ public class FreeFileDAO {
 	}
 // 게시글 입력
 	public int insert(FreeFileDTO dto) throws Exception{
-		String sql = "insert into fr_files values(fr_file_seq.nextval,?,?,board_seq.nextval+1)";
+		String sql = "insert into fr_files values(fr_file_seq.nextval,?,?,?)";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
 			pstat.setString(1, dto.getOriName());
 			pstat.setString(2, dto.getSysName());
+			pstat.setInt(3, dto.getParent_seq());
 			int result = pstat.executeUpdate();
 			if(result==1) {
 				System.out.println("파일 업로드 성공");
@@ -43,7 +44,7 @@ public class FreeFileDAO {
 			return result;
 		}
 	}
-	// 게시글이 있는지 없는지
+	// 파일 있는지 없는지
 	public boolean findFile(int p_seq) throws Exception{
 		String sql = "select * from fr_files where board_seq =?";
 		try(Connection con = this.getConnection();
@@ -71,5 +72,18 @@ public class FreeFileDAO {
 			}
 		}
 	}
+	public int delete(int seq) throws Exception{
+		String sql = "delete from fr_files where file_seq =? ";
+		try(
+		Connection con = this.getConnection();
+		PreparedStatement pstat = con.prepareStatement(sql)
+		){
+			pstat.setInt(1, seq);
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
+
+	
 	
 }

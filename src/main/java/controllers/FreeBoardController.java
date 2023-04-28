@@ -83,8 +83,6 @@ public class FreeBoardController extends HttpServlet {
 				System.out.println(currentPage);
 				List<FreeBoardDTO> list = dao.selectFreeBoard(start, end);
 				List<String> pageNavi = dao.getPageNavi(dao.getRecordCount(), currentPage);
-//				List<FreeBoardDTO> result = dao.selectList();
-//				request.setAttribute("boardList", result);
 				request.setAttribute("list", list);
 				request.setAttribute("navi", pageNavi);
 				request.setAttribute("cpage", currentPage);
@@ -121,11 +119,34 @@ public class FreeBoardController extends HttpServlet {
 				request.getRequestDispatcher("/freeBoard/FreeBoardContents.jsp").forward(request, response);
 			// 게시글 업데이트
 			}else if(cmd.equals("/update.freeBoard")) {
-				int seq = Integer.parseInt(request.getParameter("seq"));
-				String title = (String)request.getParameter("title");
-				String content = (String)request.getParameter("realContent");
+				String realPath = request.getServletContext().getRealPath("freeBoardUpload");
+				System.out.println("다운로드 파일 경로 : " + realPath);
+				File realPathFile = new File(realPath);
+				if(!realPathFile.exists()) {
+					realPathFile.mkdir();
+				}
+				
+				MultipartRequest multi = new MultipartRequest(request,realPath,1024*1024*10,"utf8",new DefaultFileRenamePolicy());				
+				
+				int seq = Integer.parseInt(multi.getParameter("seq"));
+				String title = multi.getParameter("title");
+				String content= multi.getParameter("realContent");			
+				
 				int result = dao.update(seq, title, content);
-				response.sendRedirect("detail.freeBoard?seq="+seq);
+				String oriName = multi.getOriginalFileName("file");
+				String sysName = multi.getFilesystemName("file");
+				FreeFileDTO dto = new FreeFileDTO(0,oriName, sysName, seq);
+				
+				if(oriName==null) {
+					System.out.println("!!!!!!파일이 없어서 바로 넘어감!!!!!");
+					response.sendRedirect("detail.freeBoard?seq="+seq);
+				}else {
+					System.out.println("!!!!!파일이 있어서 dao거쳐서 넘어감!!!!!");
+					FreeFileDAO fileDao = FreeFileDAO.getInstance();
+					int result2 = fileDao.insert(dto);
+					response.sendRedirect("detail.freeBoard?seq="+seq);
+				}
+				
 			// 게시글 삭제
 			}else if(cmd.equals("/delete.freeBoard")){
 				int seq = Integer.parseInt(request.getParameter("seq"));
