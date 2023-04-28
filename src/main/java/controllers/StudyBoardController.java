@@ -30,7 +30,8 @@ public class StudyBoardController extends HttpServlet {
 			StudyBoardDAO dao = StudyBoardDAO.getInstance();
 			Gson g = new Gson();
 			if(cmd.equals("/select.studyboard")) {
-				int currentPage = Integer.parseInt(request.getParameter("cpage"));
+				int currentPage = request.getParameter("cpage") == null ? 1 
+						: Integer.parseInt(request.getParameter("cpage"));
 				if(currentPage < 0) {
 					currentPage = 1;
 				}else if(currentPage > (int)Math.ceil(dao.getRecordCount()/(double)Settings.BOARD_RECORD_COUNT_PER_PAGE)) {
@@ -51,7 +52,8 @@ public class StudyBoardController extends HttpServlet {
 				request.setAttribute("end", last);
 				request.getRequestDispatcher("/studyboard/selectstudyboard.jsp").forward(request, response);
 			}else if(cmd.equals("/inner.studyboard")) {
-				int currentPage = Integer.parseInt(request.getParameter("cpage"));
+				int currentPage = request.getParameter("cpage") == null ? 1 
+						: Integer.parseInt(request.getParameter("cpage"));
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				StudyBoardDTO dto = dao.selectdetailstudyboard(seq);
 				StudyBoardMembersDAO sbmdao = StudyBoardMembersDAO.getInstance();
@@ -66,7 +68,8 @@ public class StudyBoardController extends HttpServlet {
 				request.setAttribute("cpage", currentPage);
 				request.getRequestDispatcher("/studyboard/detailselectstudyboard.jsp").forward(request, response);
 			}else if(cmd.equals("/delete.studyboard")) {
-				int currentPage = Integer.parseInt(request.getParameter("cpage"));
+				int currentPage = request.getParameter("cpage") == null ? 1 
+						: Integer.parseInt(request.getParameter("cpage"));
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				dao.deletestudyboard(seq);
 				response.sendRedirect("/select.studyboard?cpage="+currentPage);
@@ -81,7 +84,8 @@ public class StudyBoardController extends HttpServlet {
 				dao.insertstudyboard(new StudyBoardDTO(0,id,title,contents,detailcontents,0,null,lat,lng,mapname));
 				response.sendRedirect("/select.studyboard?cpage=1");
 			}else if(cmd.equals("/update.studyboard")) {
-				int currentPage = Integer.parseInt(request.getParameter("cpage"));
+				int currentPage = request.getParameter("cpage") == null ? 1 
+						: Integer.parseInt(request.getParameter("cpage"));
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				String id = (String) request.getSession().getAttribute("loggedID");
 				String title = request.getParameter("title");
