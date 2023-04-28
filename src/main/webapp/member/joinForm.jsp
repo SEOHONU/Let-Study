@@ -286,7 +286,7 @@ h2 {
         // })
 
        let joinMember = document.getElementById("joinmember");
-       $("#joinmember").on("click",function() {
+       joinMember.onsubmit = function() {
         let id = $("#id").val(); 
         let resultId = regexId.test(id); 
         let pw = $("#pw").val(); 
