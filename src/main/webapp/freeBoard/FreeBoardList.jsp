@@ -231,7 +231,7 @@
                             <th class="d-none d-md-block col-md-1 center">조회수</th>
                         </tr>
                     </thead>
-                    <c:forEach var="i" items="${boardList}">
+                    <c:forEach var="i" items="${list}">
                         <tr class="row">
                             <td class="col-4 col-md-1 center">${i.seq}</td>
                             <td class="col-8 col-md-5 "><a href="/detail.freeBoard?seq=${i.seq}">${i.title}</a></td>
@@ -246,12 +246,12 @@
                 <!-- 글쓰기 버튼 -->
                 <div class="row writeBtnRow">
                     <div class="col writeBtnCol">
-                        <a href="/freeBoard/writeFreeBoard.jsp">
+                        <a href="/freeBoard/FreeBoardWriteForm.jsp">
                             <button type="button" class="btn btn-success">글쓰기</button></a>
                     </div>
                 </div>
                 <!-- 페이지 네비 -->
-                <div class="block" id="pageNavi">
+                <!-- <div class="block" id="pageNavi">
                     <ul class="pagination">
                         <li class="previous first">
                             <a href="">
@@ -281,7 +281,34 @@
                         </li>
 
                     </ul>
-                </div>
+                </div> -->
+                
+                			<div class="col-12" align="center">
+				<c:forEach var="i" items="${navi}">
+					<c:choose>
+						<c:when test="${i eq '<<'}">
+							<a
+								href="/contentList.freeBoard?cpage=${start}">${i}</a>
+						</c:when>
+						<c:when test="${i eq '<'}">
+							<a
+								href="/contentList.freeBoard?cpage=${cpage-1}">${i}</a>
+						</c:when>
+						<c:when test="${i eq '>'}">
+							<a
+								href="/contentList.freeBoard?cpage=${cpage+1}">${i}</a>
+						</c:when>
+						<c:when test="${i eq '>>'}">
+							<a
+								href="/contentList.freeBoard?cpage=${end}">${i}</a>
+						</c:when>
+						<c:otherwise>
+							<a
+								href="/contentList.freeBoard?cpage=${i}">${i}</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</div>
 
 
                 <!-- 푸터 -->
