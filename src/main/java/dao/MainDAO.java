@@ -61,9 +61,8 @@ public class MainDAO {
 					int view_count = rs.getInt("view_count");
 					double lat = rs.getDouble("lat");
 					double lng = rs.getDouble("lng");
-					String selled = rs.getString("selled");
 					SecondHandDTO dto = new SecondHandDTO(seq, title, contents, writer, write_date, view_count, lat,
-							lng, selled);
+							lng);
 					result.add(dto);
 				}
 				return result;
@@ -92,7 +91,10 @@ public class MainDAO {
 					String detailcontents = rs.getString("detailcontents");
 					int view_count = rs.getInt("view_count");
 					Timestamp write_date = rs.getTimestamp("write_date");
-					result.add(new StudyBoardDTO(seq, writer, title, contents, detailcontents, view_count, write_date));
+					double lat = rs.getDouble("lat");
+					double lng = rs.getDouble("lng");
+					String mapname = rs.getString("mapname");
+					result.add(new StudyBoardDTO(seq,writer,title,contents,detailcontents,view_count,write_date,lat,lng,mapname));
 				}
 				return result;
 			}
@@ -140,9 +142,8 @@ public class MainDAO {
 				int view_count = rs.getInt("view_count");
 				double lat = rs.getDouble("lat");
 				double lng = rs.getDouble("lng");
-				String selled = rs.getString("selled");
 				SecondHandDTO dto = new SecondHandDTO(seq, title, contents, writer, write_date, view_count, lat,
-						lng, selled);
+						lng);
 				result.add(dto);
 			}
 			return result;
