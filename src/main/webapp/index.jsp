@@ -599,13 +599,6 @@
             });
 
 
-            const lgQuery = window.matchMedia('(min-width: 992px) and (max-width: 1199px) and (orientation: landscape)');
-
-            if (lgQuery.matches) {
-                const divElement = document.getElementById('#subsearchback');
-                divElement.style.display = 'none';
-            }
-
             $("#subsearchclick").on("click", function () {
                 if ($("#subsearch").css("display", "none")) {//돋보기있는 div
                     $("#subsearchback").css("display", "block")//검색창있는 div
