@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -11,10 +12,13 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d79f132798324278c93739a54ae859c&libraries=services"></script>
 </head>
 <body>
+
 	<c:choose>
-		<c:when test="${dto.writer == 2132}">
+		<c:when test="${dto.writer == 213}">
 			<style>
         * {
             box-sizing: border-box;
@@ -74,6 +78,11 @@
         #applybox>div {
             height: 30%;
         }
+        
+        .applybtnyorn{
+        	position: relative;
+        	bottom: 0px;
+        }
 
         .nicknamebox {
             overflow: hidden;
@@ -112,6 +121,9 @@
     	$(function(){
     		$("#acceptbtn").css("display","none");
     		$("#cancelbtn").css("display","none");
+    		$(".replyacceptbtn").css("display","none");
+    		$(".replycancelbtn").css("display","none");
+    		$("#update_map_search").css("display","none");
     	})
     </script>
     <div class="container">
@@ -190,7 +202,19 @@
         	<div class="row body">
             	<div class="col-3">
                 	<div class="row">
-                    	<div class="ratio ratio-1x1">지도</div>
+                		<div class="col-12">
+                    		<div class="ratio ratio-1x1">
+                    			<div id="map" style="width:100%;height:100%"></div>
+                    		</div>
+                    	</div>
+                	</div>
+                	<div class="row" id="update_map_search">
+                		<div class="col-12">
+                    		<input type="text" placeholder="주소입력" name="mapname" value="${dto.mapname}" id="target" required>
+                    		<input type="button" value="검색" id="mapsearch">
+                    		<input type="hidden" name="lat" value="${dto.lat}" id="Lat" required>
+                    		<input type="hidden" name="lng" value="${dto.lng}" id="Lng" required>
+                    	</div>
                 	</div>
             	</div>
             	<div class="col-6">상세 내역<br>
@@ -200,12 +224,17 @@
             	<div class="col-3 p-0">
                 	<div class="row m-0">
                    		<div class="col-12 ratio" style="--bs-aspect-ratio: 130%;">
-                        	<div class="row m-0" id="applybox">
-                            	<div>신청자1</div>
-                            	<div>신청자2</div>
-                            	<div>신청자3</div>
-                            	<div>신청자4</div>
-                            	<div>신청자5</div>
+                        	<div class="row m-0 p-0" id="applybox">
+                        		<c:forEach var="sbm" items="${sbmlist}">
+                        			<div class="col-12 p-0">
+                        				<div>${sbm.id}</div>
+                        				<div class="applybtnyorn" align="right">
+                        					<button type="button" class="applyacceptbtn">수락</button>
+                        					<input type="hidden" value="${sbm.yorN}">
+                        					<button type="button" class="applycancelbtn">거절</button>
+                        				</div>
+                        			</div>
+                        		</c:forEach>
                         	</div>
                     	</div>
                 	</div>
@@ -218,10 +247,12 @@
                         	<div class="d-none d-md-block nicknamebox" align="center">host</div>
                         	<div align="center">${dto.writer}</div>
                     	</div>
-                    	<div class="col-1">
+                    	<c:forEach var="cksbm" items="${cksbmlist}">
+                    		<div class="col-1">
                         	<div class="ratio ratio-1x1 studyguestprint"></div>
-                        	<div class="d-none d-md-block nicknamebox" align="center">확정아이디</div>
+                        	<div class="d-none d-md-block nicknamebox" align="center">${cksbm.id}</div>
                     	</div>
+                    	</c:forEach>
                 	</div>
             	</div>
             	<div class="col-12" id="btnbox">
@@ -229,7 +260,7 @@
             		<button type="button" id="cancelbtn">취소</button>
                 	<button type="button" id="updatebtn">수정하기</button>
                 	<button type="button" id="deletebtn">삭제하기</button>
-                	<a href="/select.studyboard?cpage=${cpage}"><button>목록으로</button></a>
+                	<a href="/select.studyboard?cpage=${cpage}"><button type="button">목록으로</button></a>
             	</div>
         	</div>
         	<input type="hidden" name="cpage" value="${cpage}">
@@ -254,6 +285,8 @@
                 				<input type="hidden" value="${i.seq}">
                 				<c:if test="${i.writer == 213}">
                 					<div align="right">
+                						<button type="button" class="replyacceptbtn">확인</button>
+                						<button type="button" class="replycancelbtn">취소</button>
                 						<button type="button" class="replyupdatebtn">수정하기</button>
                 						<button type="button" class="replydeletebtn">삭제하기</button>
                 					</div>
@@ -275,6 +308,29 @@
         </form>
     </div>
     <script>
+    	$("#applybox").on("click",".applyacceptbtn",function(){
+    		$.ajax({
+    			url:"/update.studyapply",
+    			data:{
+    				board_seq:${dto.seq},
+    				id:$(this).next().val(),
+    				cpage:${cpage}
+    			}
+    		}).done(function(){
+    			location.href="/inner.studyboard?cpage="+${cpage}+"&seq="+${dto.seq};
+    		})
+    	})
+    	$("#applybox").on("click",".applycancelbtn",function(){
+    		$.ajax({
+    			url:"/delete.studyapply",
+    			data:{
+    				board_seq:${dto.seq},
+    				id:$(this).prev().val()
+    			}
+    		}).done(function(){
+    			location.href="/inner.studyboard?cpage="+${cpage}+"&seq="+${dto.seq};
+    		})
+    	})
     	$("#deletebtn").on("click",function(){
     		if(confirm("게시글을 삭제 하시겠습니까?")){
     			location.href="/delete.studyboard?cpage="+${cpage}+"&seq="+${dto.seq};
@@ -289,9 +345,10 @@
     		$("#title").attr("contenteditable","true");
     		$("#contents").attr("contenteditable","true");
     		$("#detailcontents").attr("contenteditable","true");
+    		$("#update_map_search").css("display","");
     	})
     	$("#cancelbtn").on("click",function(){
-    		if(confirm("수정을 취소하시겠습니까?")){
+    		if(confirm("게시글 수정을 취소하시겠습니까?")){
     			location.reload();
     		}
     	})
@@ -309,6 +366,103 @@
     			console.log(seq);
     			location.href="/delete.studyreply?cpage="+${cpage}+"&parent_seq="+${dto.seq}+"&seq="+seq;
     		}
+    	})
+    	$("#allreplybox").on("click",".replyupdatebtn",function(){
+    		$(this).css("display","none");
+    		$(this).prev().css("display","");
+    		$(this).prev().prev().css("display","");
+    		$(".replyupdatebtn").attr("disabled","true");
+    		$(".replydeletebtn").attr("disabled","true");
+    		$(this).parent().prev().prev().attr("contenteditable","true");
+    	})
+    	$("#allreplybox").on("click",".replyacceptbtn",function(){
+    		$.ajax({
+    			url:"/update.studyreply",
+    			type:"post",
+    			data:{
+    				seq:$(this).parent().prev().val(),
+    				contents:$(this).parent().prev().prev().html()
+    			}
+    		}).done(function(){
+    			location.reload();
+    		})
+    	})
+    	$("#allreplybox").on("click",".replycancelbtn",function(){
+    		if(confirm("댓글 수정을 취소하시겠습니까?")){
+    			location.reload();
+    		}
+    	})
+    </script>
+    <script>
+    	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    	mapOption = {
+        	center: new kakao.maps.LatLng(${ dto.lat }, ${ dto.lng }), // 지도의 중심좌표
+        	level: 3 // 지도의 확대 레벨
+    	};
+
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+		// 마커가 표시될 위치입니다 
+		var markerPosition = new kakao.maps.LatLng(${ dto.lat }, ${ dto.lng });
+
+
+
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+    		position: markerPosition
+		});
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+
+		var infowindow = new kakao.maps.InfoWindow({
+    		content: '<div style="width:150px;text-align:center;padding:6px 0;">만날위치</div>'
+		});
+		infowindow.open(map, marker);
+    </script>
+    <script>
+    	$("#target").on("click",function(){
+    		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+            mapOption = {
+                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
+
+        // 지도를 생성합니다    
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        // 주소-좌표 변환 객체를 생성합니다
+        var geocoder = new kakao.maps.services.Geocoder();
+
+        // 주소로 좌표를 검색합니다
+        $("#mapsearch").on("click", function () {
+            let target = $("#target").val();
+            geocoder.addressSearch(target, function (result, status) {
+
+                // 정상적으로 검색이 완료됐으면 
+                if (status === kakao.maps.services.Status.OK) {
+                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                    let Lat = coords.getLat();
+                    let Lng = coords.getLng();
+                    $("#Lat").val(Lat);
+                    $("#Lng").val(Lng);
+                    if ($("#Lat").val() != "위도") {
+                        $("#submit").removeAttr("disabled");
+                    }
+                    // 결과값으로 받은 위치를 마커로 표시합니다
+                    var marker = new kakao.maps.Marker({
+                        map: map,
+                        position: coords
+                    });
+                    // 인포윈도우로 장소에 대한 설명을 표시합니다
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content: '<div style="width:150px;text-align:center;padding:6px 0;">만날위치</div>'
+                    });
+                    	infowindow.open(map, marker);
+                    	// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                    	map.setCenter(coords);
+                	}
+            	});
+        	});
     	})
     </script>
 		</c:when>
@@ -407,6 +561,12 @@
             bottom: 5px;
         }
     </style>
+    <script>
+    	$(function(){
+    		$(".replyacceptbtn").css("display","none");
+    		$(".replycancelbtn").css("display","none");
+    	})
+    </script>
     <div class="container">
         <div class="row navi">
             <div class="col-12">
@@ -470,7 +630,6 @@
                             <h3>${dto.title}</h3>
                             <div>${dto.contents}</div>
                             <div>작성자 : ${dto.writer}</div>
-                            <button id="reportbtn">신고하기</button>
                             <button id="applybtn">신청하기</button>    
                         </div>
                     </div>
@@ -480,7 +639,9 @@
         <div class="row body">
             <div class="col-3">
                 <div class="row">
-                    <div class="ratio ratio-1x1">지도</div>
+                    <div class="ratio ratio-1x1">
+                    	<div id="map" style="width:100%;height:100%"></div>
+                    </div>
                 </div>
             </div>
             <div class="col-6">상세내역<br>
@@ -515,7 +676,7 @@
                 </div>
             </div>
             <div class="col-12" id="totitle">
-            	<a href="/select.studyboard?cpage=${cpage}"><button>목록으로</button></a>
+            	<a href="/select.studyboard?cpage=${cpage}"><button type="button">목록으로</button></a>
             </div>
         </div>
         <form action="/insert.studyreply" method="post" id="replyForm">
@@ -536,7 +697,9 @@
                 				<input type="hidden" value="${i.seq}">
                 				<c:if test="${i.writer == 213}">
                 					<div align="right">
-                						<button type="button">수정하기</button>
+                						<button type="button" class="replyacceptbtn">확인</button>
+                						<button type="button" class="replycancelbtn">취소</button>
+                						<button type="button" class="replyupdatebtn">수정하기</button>
                 						<button type="button" class="replydeletebtn">삭제하기</button>
                 					</div>
                 				</c:if>
@@ -557,6 +720,20 @@
         </form>
     </div>
     <script>
+    	$("#applybtn").on("click",function(){
+    		$.ajax({
+    			url:"/insert.studyapply",
+    			data:{
+    				id:"214",
+    				board_seq:${dto.seq}
+    			}
+    		}).done(function(resp){
+    			resp = JSON.parse(resp);
+    			if(resp > 0){
+    				alert("신청 완료");
+    			}
+    		})
+    	})
     	$("#replyForm").on("submit",function(){
 			$("#studyreplycontents").val($("#replytext").html());
 		})
@@ -567,6 +744,57 @@
 				location.href="/delete.studyreply?cpage="+${cpage}+"&parent_seq="+${dto.seq}+"&seq="+seq;
 			}
 		})
+		$("#allreplybox").on("click",".replyupdatebtn",function(){
+    		$(this).css("display","none");
+    		$(this).prev().css("display","");
+    		$(this).prev().prev().css("display","");
+    		$(".replyupdatebtn").attr("disabled","true");
+    		$(".replydeletebtn").attr("disabled","true");
+    		$(this).parent().prev().prev().attr("contenteditable","true");
+    	})
+    	$("#allreplybox").on("click",".replyacceptbtn",function(){
+    		$.ajax({
+    			url:"/update.studyreply",
+    			type:"post",
+    			data:{
+    				seq:$(this).parent().prev().val(),
+    				contents:$(this).parent().prev().prev().html()
+    			}
+    		}).done(function(){
+    			location.reload();
+    		})
+    	})
+    	$("#allreplybox").on("click",".replycancelbtn",function(){
+    		if(confirm("댓글 수정을 취소하시겠습니까?")){
+    			location.reload();
+    		}
+    	})
+    </script>
+    <script>
+    	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    	mapOption = {
+        	center: new kakao.maps.LatLng(${ dto.lat }, ${ dto.lng }), // 지도의 중심좌표
+        	level: 3 // 지도의 확대 레벨
+    	};
+
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+		// 마커가 표시될 위치입니다 
+		var markerPosition = new kakao.maps.LatLng(${ dto.lat }, ${ dto.lng });
+
+
+
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+    		position: markerPosition
+		});
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+
+		var infowindow = new kakao.maps.InfoWindow({
+    		content: '<div style="width:150px;text-align:center;padding:6px 0;">만날위치</div>'
+		});
+		infowindow.open(map, marker);
     </script>
 		</c:otherwise>
 	</c:choose>

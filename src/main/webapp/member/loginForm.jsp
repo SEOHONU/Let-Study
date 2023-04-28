@@ -93,20 +93,23 @@ a {
 						<a href="#">아이디/비밀번호 찾기</a>
 					</div>
 
+
 					<div class="btn">
 						<button type="submit" class="btn btn-primary" id="btnLogin">로그인</button>
-						<button type="button" class="btn btn-light" id="btnJoin" >회원가입</button>
+						<button type="button" class="btn btn-light" id="btnJoin">회원가입</button>
 					</div>
+			</div>
+			<div class="btn">
+				<button class="btn btn-primary" id="btnLogin">로그인</button>
+				<button class="btn btn-light" id="btnJoin" type="button">회원가입</button>
 			</div>
 		</div>
 	</form>
-	
+
 	<script>
 		$("#btnJoin").on("click", function() {
 			location.href = "/member/joinForm.jsp";
 		})
 	</script>
-
-
 </body>
 </html>

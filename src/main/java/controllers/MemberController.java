@@ -24,13 +24,13 @@ public class MemberController extends HttpServlet {
 		MembersDAO dao = MembersDAO.getInstacne();
 
 		try {
-			// ·Î±×ÀÎ 
+			// login ë¡œê·¸ì¸
 			if (cmd.equals("/login.member")) {
-				System.out.println("·Î±×ÀÎ");
+				System.out.println("ï¿½Î±ï¿½ï¿½ï¿½");
 				String id = request.getParameter("id");
 				String pw = EncryptionUtils.sha512(request.getParameter("pw"));
 				String nickname = dao.getNickname(id);
-				System.out.println("´Ğ³×ÀÓ : " + nickname);
+				System.out.println("ï¿½Ğ³ï¿½ï¿½ï¿½ : " + nickname);
 				request.getSession().setAttribute("loggedNickname", nickname);
 				System.out.println(id + ":" + pw);
 				boolean result = dao.isMember(id, pw);
@@ -38,13 +38,12 @@ public class MemberController extends HttpServlet {
 					request.getSession().setAttribute("loggedID", id);
 				}
 				response.sendRedirect("/index.jsp");
-				
-			// ·Î±×¾Æ¿ô 
+
 			} else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
 
-			// È¸¿ø°¡ÀÔ 
+			// insert íšŒì›ê°€ì…
 			} else if (cmd.equals("/idCheck.member")) {
 				String id = request.getParameter("id");
 				boolean result = dao.isIdExist(id);
@@ -72,14 +71,14 @@ public class MemberController extends HttpServlet {
 				response.sendRedirect("/member/loginForm.jsp");
 				
 
-				// È¸¿øÁ¤º¸Ãâ·Â 
+				// select íšŒì›ì •ë³´ ì¶œë ¥
 			} else if (cmd.equals("/myInfoSelect.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
 				MembersDTO dto = dao.myInfoSelect(id);
 				request.setAttribute("myInfo", dto);
 				request.getRequestDispatcher("/member/memberInfo.jsp").forward(request, response);
 
-				// È¸¿øÁ¤º¸¼öÁ¤ 
+				// update íšŒì›ì •ë³´ìˆ˜ì • 
 			} else if (cmd.equals("/update.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
 				String pw = request.getParameter("pw");
@@ -94,9 +93,9 @@ public class MemberController extends HttpServlet {
 				MembersDTO dto = new MembersDTO(id, pw, name, birth_date, nickname, contact, email, zipcode, roadAddress, detailAddress, null, null);
 				dao.update(dto);
 				response.sendRedirect("/myPage/mypageMainForm.jsp");
-				
 
-				// È¸¿øÅ»Åğ 
+
+				// delete íšŒì›íƒˆí‡´
 			} else if (cmd.equals("/memberOut.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
 				dao.memberOut(id);

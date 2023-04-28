@@ -33,7 +33,7 @@ public class SecondHandController extends HttpServlet {
 				response.sendRedirect("/secondHand/secondHandWriteForm.jsp");
 			}
 			else if(cmd.equals("/insert.secondHand")) {
-				String writer = (String)request.getSession().getAttribute("loginId");
+				String writer = (String)request.getSession().getAttribute("loggedId");
 				String title = request.getParameter("title");
 				String contents = request.getParameter("contents");
 				double lat = Double.parseDouble(request.getParameter("lat"));
@@ -110,7 +110,7 @@ public class SecondHandController extends HttpServlet {
 				double lat = Double.parseDouble(request.getParameter("lat"));
 				double lng = Double.parseDouble(request.getParameter("lng"));
 				SecondHandDTO dto = new SecondHandDTO(seq, title, contents,
-						null, null, 0, lat, lng, null);
+						null, null, 0, lat, lng);
 				int result = shDAO.modifyContents(dto);
 				response.sendRedirect("/secondHandBoardContents.secondHand?seq="+seq+"&currentPage="+currentPage);
 			}
