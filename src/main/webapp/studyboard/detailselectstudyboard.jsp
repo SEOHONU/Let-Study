@@ -18,7 +18,7 @@
 <body>
 
 	<c:choose>
-		<c:when test="${dto.writer == 213}">
+		<c:when test="${dto.writer == loggedID}">
 			<style>
         * {
             box-sizing: border-box;
@@ -283,7 +283,7 @@
                 					${i.contents}
                 				</div>
                 				<input type="hidden" value="${i.seq}">
-                				<c:if test="${i.writer == 213}">
+                				<c:if test="${i.writer == loggedID}">
                 					<div align="right">
                 						<button type="button" class="replyacceptbtn">확인</button>
                 						<button type="button" class="replycancelbtn">취소</button>
@@ -695,7 +695,7 @@
                 					${i.contents}
                 				</div>
                 				<input type="hidden" value="${i.seq}">
-                				<c:if test="${i.writer == 213}">
+                				<c:if test="${i.writer == loggedID}">
                 					<div align="right">
                 						<button type="button" class="replyacceptbtn">확인</button>
                 						<button type="button" class="replycancelbtn">취소</button>
@@ -724,7 +724,7 @@
     		$.ajax({
     			url:"/insert.studyapply",
     			data:{
-    				id:"214",
+    				id:${loggedID},
     				board_seq:${dto.seq}
     			}
     		}).done(function(resp){

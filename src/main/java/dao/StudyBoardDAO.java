@@ -173,17 +173,18 @@ public class StudyBoardDAO {
 	}
 	
 	public int insertstudyboard(StudyBoardDTO dto) throws Exception{
-		String sql = "insert into studyboard values (studyboard_seq.nextval,'213',?,?,?,default,default,?,?,?)";
+		String sql = "insert into studyboard values (studyboard_seq.nextval,?,?,?,?,default,default,?,?,?)";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
-			pstat.setString(1, dto.getTitle());
-			pstat.setString(2, dto.getContents());
-			pstat.setString(3, dto.getDetailcontents());
-			pstat.setDouble(4, dto.getLat());
-			pstat.setDouble(5, dto.getLng());
-			pstat.setString(6, dto.getMapname());
+			pstat.setString(1, dto.getWriter());
+			pstat.setString(2, dto.getTitle());
+			pstat.setString(3, dto.getContents());
+			pstat.setString(4, dto.getDetailcontents());
+			pstat.setDouble(5, dto.getLat());
+			pstat.setDouble(6, dto.getLng());
+			pstat.setString(7, dto.getMapname());
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
