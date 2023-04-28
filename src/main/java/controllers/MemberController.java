@@ -53,10 +53,17 @@ public class MemberController extends HttpServlet {
 				String name = request.getParameter("name");
 
 				String birthYear = request.getParameter("birthYear");
-				String birthMonth = request.getParameter("birthMonth");
+			int birthMonth1 = Integer.parseInt(request.getParameter("birthMonth"));
+			String birthMonth;
+			if(birthMonth1>0 && birthMonth1<10) {
+				birthMonth = "0"+birthMonth1;
+			}
+			
 				String birthDay = request.getParameter("birthDay");
-				String birth_date = birthYear + birthMonth + birthDay;
+				String birth_date = birthYear + birthMonth1 + birthDay;
 
+				
+				
 				String nickname = request.getParameter("nickname");
 				String contact = request.getParameter("contact");
 				String email = request.getParameter("email");
