@@ -98,7 +98,7 @@ public class MemberController extends HttpServlet {
 				response.sendRedirect("/myPage/mypageMainForm.jsp");
 				// delete 회원탈퇴
 			} else if (cmd.equals("/memberOut.member")) {
-				String id = (String) request.getParameter("id");
+				String id = (String) request.getSession().getAttribute("loggedID");
 				dao.memberOut(id);
 				response.sendRedirect("/index.jsp");
 			} 

@@ -48,7 +48,7 @@ public class FreeBoardDAO {
 	}
 	
 	public List<FreeBoardDTO> selectFreeBoard(int start, int end) throws Exception{
-		String sql = "select * from (SELECT id,pw,name,birth_date,nickname,contact,email,zipcode,address1,address2,join_date,grade_code,rank() over(order by id desc) rank from members2) where rank between ? and ?";
+		 String sql = "select * from (select board_seq,board_title,board_contents,board_writer,board_view_count,board_write_date,rank() over(order by board_seq desc) rank from board) where rank between ? and ?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
