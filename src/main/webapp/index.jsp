@@ -82,6 +82,14 @@
                 #carouselExampleDark {
                     z-index: 0;
                 }
+
+                #subsearch {
+                    display: block;
+                }
+
+                #subsearchback {
+                    display: none;
+                }
             </style>
         </head>
 
@@ -109,33 +117,52 @@
 
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-6 col-lg-2 order-2 order-lg-first" id="logo">
+                            <div class="col-8 col-lg-2 order-2 order-lg-first" id="logo">
                                 <div class="row">
                                     <div class="col-12">
                                         <a href="/index.jsp">logo</a>
-                                    </div>
 
-                                    <div class="col-12 subsearchbox">
-                                        <form class="container-fluid" action="/allsearch.maincontroller">
-                                            <i class="fa-solid fa-arrow-left" id="searsubback"></i> <select
-                                                name="select">
-                                                <option value="제목">제목</option>
-                                                <option value="내용">내용</option>
-                                                <option value="작성자">작성자</option>
-                                            </select> <input type="text" class="form-control" placeholder="통합검색창"
-                                                aria-label="Username" aria-describedby="basic-addon1"
-                                                style="width: 40%; padding: 0; display: inline;" name="title">
-                                            <button type="submit" class="btn btn-success"
-                                                style="z-index: 0; background-color: rgb(60, 117, 121); padding: 0;">검색</button>
-                                        </form>
                                     </div>
-
+                                    <div class="col-12 d-lg-none d-block">
+                                        <div class="row">
+                                            <div class="col-12" id="subsearch">
+                                                <i class="fa-solid fa-magnifying-glass" id="subsearchclick"
+                                                    style="display: inline;"></i>
+                                            </div>
+                                            <div class="col-12" id="subsearchback">
+                                                <form class="container-fluid" action="/allsearch.maincontroller"
+                                                    style="padding:0px;">
+                                                    <i class="fa-solid fa-arrow-left" id="searsubback"
+                                                        style="display: inline;"></i> <select name="select">
+                                                        <option value="제목">제목</option>
+                                                        <option value="내용">내용</option>
+                                                        <option value="작성자">작성자</option>
+                                                    </select> <input type="text" class="form-control"
+                                                        placeholder="통합검색창" aria-label="Username"
+                                                        aria-describedby="basic-addon1"
+                                                        style="width: 40%; padding: 0; display: inline;" name="title">
+                                                    <button type="submit" class="btn btn-success"
+                                                        style="z-index: 0; background-color: rgb(60, 117, 121); padding: 0;">검색</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <!-- <div class="col-12 col-lg-12 col-lg-none subsearchbox">
+                                    </div> -->
+
+                                <!-- <div class="col-12 subsearch">
+                                    
+                                    <div class="row"> -->
+
+
                             </div>
+
                             <div class="col-lg-4 d-none d-lg-block order-lg-1">여백</div>
-                            <div class="col-4 d-block d-lg-none order-1">
+                            <div class="col-2 d-block d-lg-none order-1">
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-12">
                                         <div class="row">
                                             <div class="col-12">
                                                 <i class="fa-solid fa-bars" id="hamberger"></i>
@@ -158,24 +185,24 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-6">
-                                                <a href="/member/joinForm.jsp"><i class="fa-solid fa-user-plus"></i></a>
-                                                <!--로그인안됐을때-->
-                                            </div>
-                                            <div class="col-6">
-                                                <a href="/myPage/mypageMainForm.jsp"><i class="fa-solid fa-user"></i></a>
-                                                <!--로그인됐을때-->
-                                            </div>
+                                            <c:choose>
+                                                <c:when test="${loggedID==null}">
+                                                    <div class="col-12">
+                                                        <a href="/member/joinForm.jsp"><i
+                                                                class="fa-solid fa-user-plus"></i></a>
+                                                        <!--로그인안됐을때-->
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="col-12">
+                                                        <a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a>
+                                                        <!--로그인됐을때-->
+                                                    </div>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <div class="col-12">공백</div>
-                                            <div class="col-12 subsearch">
-                                                <i class="fa-solid fa-magnifying-glass" id="subsearchclick"></i>
-                                            </div>
-                                        </div>
-                                    </div>
+
 
                                 </div>
                             </div>
@@ -194,35 +221,54 @@
                             <!-- <div class="col-2 d-block d-lg-none order-3"></div> -->
                             <div class="col-lg-2 d-none d-lg-block  order-lg-last">
                                 <div class="row">
-                                    <div class="col-3 login">
-                                        <a href="/member/loginForm.jsp"><i class="fa-solid fa-right-to-bracket"></i></a>
-                                        <!--로그인안됐을때-->
-                                    </div>
-                                    <div class="col-3 signup">
-                                        <a href="/member/joinForm.jsp"><i class="fa-solid fa-user-plus"></i></a>
-                                        <!--로그인안됐을때-->
-                                    </div>
-                                    <div class="col-3 profile">
-                                        <a href="/myPage/mypageMainForm.jsp"><i class="fa-solid fa-user"></i></a>
-                                        <!--로그인됐을때-->
-                                    </div>
-                                    <div class="col-3 logout">
-                                        <a href="로그아웃 페이지로"><i class="fa-solid fa-right-from-bracket"></i></a>
-                                        <!--로그인됐을때-->
-                                    </div>
+
+                                    <c:choose>
+                                        <c:when test="${loggedID==null}">
+                                            <div class="col-6 login">
+                                                <a href="/member/loginForm.jsp"><i
+                                                        class="fa-solid fa-right-to-bracket"></i></a>
+                                                <!--로그인안됐을때-->
+                                            </div>
+                                            <div class="col-6 signup">
+                                                <a href="/member/joinForm.jsp"><i class="fa-solid fa-user-plus"></i></a>
+                                                <!--로그인안됐을때-->
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="col-6 profile">
+                                                <a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a>
+                                                <!--로그인됐을때-->
+                                            </div>
+                                            <div class="col-6 logout">
+                                                <a href="/logout.member"><i
+                                                        class="fa-solid fa-right-from-bracket"></i></a>
+                                                <!--로그인됐을때-->
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+
                                 </div>
                             </div>
 
                             <div class="col-2 d-block d-lg-none order-last">
                                 <div class="row">
-                                    <div class="col-12">공백</div>
-                                    <div class="col-6">
-                                        <a href="/member/loginForm.jsp"><i class="fa-solid fa-right-to-bracket"></i></a>
-                                    </div>
-
-                                    <div class="col-6">
-                                        <a href="로그아웃 페이지로"><i class="fa-solid fa-right-from-bracket"></i></a>
-                                    </div>
+                                    
+                                    <c:choose>
+                                        <c:when test="${loggedID==null}">
+                                        <div class="col-12">　</div>
+                                            <div class="col-12" style="text-align: right;">
+                                                <a href="/member/loginForm.jsp"><i
+                                                        class="fa-solid fa-right-to-bracket"></i></a>
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                        <div class="col-12">${sessionScope.loggedID}회원</div>
+                                            <div class="col-12" style="text-align: right;">
+                                                <a href="/logout.member"><i
+                                                        class="fa-solid fa-right-from-bracket"></i></a>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
                         </div>
@@ -457,13 +503,13 @@
                                             </div>
                                             <div class="col-12">
                                                 <div class="row">
-                                                    <div class="col-1 col-lg-2">공백</div>
-                                                    <div class="col-10 col-lg-8">
+                                                    <div class="col-1 col-xl-2">여백</div>
+                                                    <div class="col-10 col-xl-8">
                                                         <div class="row" id="joong">
 
                                                         </div>
                                                     </div>
-                                                    <div class="col-1 col-lg-2">공백</div>
+                                                    <div class="col-1 col-xl-2">여백</div>
                                                 </div>
                                             </div>
 
@@ -553,20 +599,17 @@
                 }
             });
 
-            var searsub = document.querySelector(".subsearchbox");
-            var searsubswitch = document.querySelector("#subsearchclick")
-            var searsubback = document.querySelector("#searsubback");
-            searsub.style.display = "none";
-            searsubswitch.addEventListener("click", function () {
-                if (searsub.style.display === "none") {
-                    searsub.style.display = "block";
+
+            $("#subsearchclick").on("click", function () {
+                if ($("#subsearch").css("display", "none")) {//돋보기있는 div
+                    $("#subsearchback").css("display", "block")//검색창있는 div
                 }
-            });
-            searsubback.addEventListener("click", function () {
-                if (searsub.style.display === "block") {
-                    searsub.style.display = "none";
+            })
+            $("#searsubback").on("click", function () {
+                if ($("#subsearchback").css("display", "none")) {//돋보기있는 div
+                    $("#subsearch").css("display", "block");//검색창있는 div
                 }
-            });
+            })
 
 
             $("#study").on("cilck", function () {
@@ -578,28 +621,26 @@
                     url: "/mainjoongolist.maincontroller",
                     dataType: "json"
                 }).done(function (resp) {
-                	let sdto = JSON.parse(resp.sdto);
-                	for (var a = sdto.length - 1; a >= 0 && a >= sdto.length - 4; a--) {
-                		
+                    let sdto = JSON.parse(resp.sdto);
+                    for (var a = sdto.length - 1; a >= 0 && a >= sdto.length - 4; a--) {
                         let ppage = JSON.parse(resp.page);
-                		var page = sdto[a].seq;
-                		if(a >= sdto.length - 2){
-                			var textfront1 = $('<div class="col-12 col-sm-6"></div>');
-                		}else if(a >= sdto.length - 4){
-                			var textfront1 = $('<div class="col-6 d-none d-sm-block"></div>');
-                		}
-                    
-                    var textfront2 = $('<a href="/secondHandBoardContents.secondHand?seq='+ page +'&currentPage='+ppage+'"></a>')
-                    var textfront3 = $('<div class="card mb-3" style = "max-width: 540px;"> </div>')
-                    var textfront4 = $('<div class="row g-0"></div>')
-                    var textfront5 = $('<div class="col-md-4"></div>')
-                    var textfront6 = $('<img src="..." class="img-fluid rounded-start" alt="...">')
-                    var textfront7 = $('<div class="col-md-8"></div>')
-                    var textfront8 = $('<div class="card-body"></div>')
-                    var subtitle = $('<h5 class="card-title" id="subtitle"></h5>')
-                    var textmiddle1 = $('<p class="card-text"></p>')
-                    var textmiddle2 = $('<p class="card-text"></p>')
-                    var subwriter = $('<small class="text-body-secondary" id="subwriter"></small>')
+                        var page = sdto[a].seq;
+                        if (a >= sdto.length - 2) {
+                            var textfront1 = $('<div class="col-12 col-sm-6"></div>');
+                        } else if (a >= sdto.length - 4) {
+                            var textfront1 = $('<div class="col-6 d-none d-sm-block"></div>');
+                        }
+                        var textfront2 = $('<a href="/secondHandBoardContents.secondHand?seq=' + page + '&currentPage=' + ppage + '"></a>')
+                        var textfront3 = $('<div class="card mb-3" style = "max-width: 540px;"> </div>')
+                        var textfront4 = $('<div class="row g-0"></div>')
+                        var textfront5 = $('<div class="col-md-4"></div>')
+                        var textfront6 = $('<img src="..." class="img-fluid rounded-start" alt="...">')
+                        var textfront7 = $('<div class="col-md-8"></div>')
+                        var textfront8 = $('<div class="card-body"></div>')
+                        var subtitle = $('<h5 class="card-title" id="subtitle"></h5>')
+                        var textmiddle1 = $('<p class="card-text"></p>')
+                        var textmiddle2 = $('<p class="card-text"></p>')
+                        var subwriter = $('<small class="text-body-secondary" id="subwriter"></small>')
                         var title = sdto[a].title;
                         var writer = sdto[a].writer;
                         $("#joong").append(textfront1);
@@ -618,11 +659,11 @@
                         subwriter.append(writer);
                     }
                 })
-                
-                
-             
+
+
+
             });
-            
+
         </script>
 
         </html>
