@@ -98,22 +98,6 @@
                 <!-- 헤더 네비 -->
                 <div class="row navi">
 
-                    <!-- 검색부분 누를시 나오는 것
-                <div class="col-1" style="text-align: right;">←</div>
-                <div class="col-11">
-                    <nav class="navbar navbar-light bg-light">
-                        <form class="container-fluid">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="통합검색창" aria-label="Username"
-                                    aria-describedby="basic-addon1">
-                                &nbsp;
-                                <button type="button" class="btn btn-success">검색</button>
-                            </div>
-                        </form>
-                    </nav>
-                </div> -->
-
-
                     <div class="col-12">
                         <div class="row">
                             <div class="col-8 col-lg-2 order-2 order-lg-first" id="logo">
@@ -147,14 +131,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- <div class="col-12 col-lg-12 col-lg-none subsearchbox">
-                                    </div> -->
-
-                                <!-- <div class="col-12 subsearch">
-                                    
-                                    <div class="row"> -->
-
 
                             </div>
 
@@ -194,7 +170,7 @@
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div class="col-12">
-                                                        <a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a>
+                                                        <a href="/myInfoSelect.member"><i class="fa-solid fa-user"></i></a>
                                                         <!--로그인됐을때-->
                                                     </div>
                                                 </c:otherwise>
@@ -217,7 +193,6 @@
                             <div class="col-lg-1 d-none d-lg-block order-lg-5" style="text-align: center;">
                                 <a href="자격증 게시판으로"> Licence </a>
                             </div>
-                            <!-- <div class="col-2 d-block d-lg-none order-3"></div> -->
                             <div class="col-lg-2 d-none d-lg-block  order-lg-last">
                                 <div class="row">
 
@@ -235,7 +210,7 @@
                                         </c:when>
                                         <c:otherwise>
                                             <div class="col-6 profile">
-                                                <a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a>
+                                                <a href="/myInfoSelect.member"><i class="fa-solid fa-user"></i></a>
                                                 <!--로그인됐을때-->
                                             </div>
                                             <div class="col-6 logout">
@@ -658,9 +633,6 @@
                         subwriter.append(writer);
                     }
                 })
-
-
-
             });
 
         </script>
