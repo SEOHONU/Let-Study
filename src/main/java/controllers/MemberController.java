@@ -24,25 +24,24 @@ public class MemberController extends HttpServlet {
 		MembersDAO dao = MembersDAO.getInstacne();
 
 		try {
-			// �α��� 
+			// login 로그인
 			if (cmd.equals("/login.member")) {
-				System.out.println("�α���");
 				String id = request.getParameter("id");
 				String pw = EncryptionUtils.sha512(request.getParameter("pw"));
 				String nickname = dao.getNickname(id);
-				System.out.println("�г��� : " + nickname);
 				request.getSession().setAttribute("loggedNickname", nickname);
 				System.out.println(id + ":" + pw);
 				boolean result = dao.isMember(id, pw);
 				if (result) {
 					request.getSession().setAttribute("loggedID", id);
 				}
+
 				response.sendRedirect("/index.jsp");
 			} else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
 
-				// ȸ������ 
+			// insert 회원가입
 			} else if (cmd.equals("/idCheck.member")) {
 				String id = request.getParameter("id");
 				boolean result = dao.isIdExist(id);
@@ -70,14 +69,14 @@ public class MemberController extends HttpServlet {
 				response.sendRedirect("/member/loginForm.jsp");
 
 
-				// ȸ��������� 
+				// select 회원정보 출력
 			} else if (cmd.equals("/myInfoSelect.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
 				MembersDTO dto = dao.myInfoSelect(id);
 				request.setAttribute("myInfo", dto);
 				request.getRequestDispatcher("/member/memberInfo.jsp").forward(request, response);
 
-				// ȸ���������� 
+				// update 회원정보수정 
 			} else if (cmd.equals("/update.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
 				String pw = request.getParameter("pw");
@@ -92,7 +91,7 @@ public class MemberController extends HttpServlet {
 				MembersDTO dto = new MembersDTO(id, pw, name, birth_date, nickname, contact, email, zipcode, roadAddress, detailAddress, null, null);
 				dao.update(dto);
 				response.sendRedirect("/myPage/mypageMainForm.jsp");
-				// ȸ��Ż�� 
+				// delete 회원탈퇴
 			} else if (cmd.equals("/memberOut.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
 				dao.memberOut(id);
