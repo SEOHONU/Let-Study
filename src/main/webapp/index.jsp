@@ -170,7 +170,7 @@
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div class="col-12">
-                                                        <a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a>
+                                                        <a href="/myInfoSelect.member"><i class="fa-solid fa-user"></i></a>
                                                         <!--로그인됐을때-->
                                                     </div>
                                                 </c:otherwise>
@@ -210,7 +210,7 @@
                                         </c:when>
                                         <c:otherwise>
                                             <div class="col-6 profile">
-                                                <a href="회원정보 페이지로"><i class="fa-solid fa-user"></i></a>
+                                                <a href="/myInfoSelect.member"><i class="fa-solid fa-user"></i></a>
                                                 <!--로그인됐을때-->
                                             </div>
                                             <div class="col-6 logout">
