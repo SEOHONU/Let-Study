@@ -37,19 +37,11 @@ public class MemberController extends HttpServlet {
 				}
 
 				response.sendRedirect("/index.jsp");
-<<<<<<< HEAD
-
-=======
->>>>>>> 4d6aa709c7a2b9748c9ac806f8491e91556fee10
 			} else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
 
-<<<<<<< HEAD
 			// insert 회원가입
-=======
-				// ȸ������ 
->>>>>>> 4d6aa709c7a2b9748c9ac806f8491e91556fee10
 			} else if (cmd.equals("/idCheck.member")) {
 				String id = request.getParameter("id");
 				boolean result = dao.isIdExist(id);
@@ -98,15 +90,8 @@ public class MemberController extends HttpServlet {
 				String detailAddress = request.getParameter("detailAddress");
 				MembersDTO dto = new MembersDTO(id, pw, name, birth_date, nickname, contact, email, zipcode, roadAddress, detailAddress, null, null);
 				dao.update(dto);
-<<<<<<< HEAD
-
 				response.sendRedirect("/myPage/mypageMainForm.jsp");
-			
 				// delete 회원탈퇴
-=======
-				response.sendRedirect("/myPage/mypageMainForm.jsp");
-				// ȸ��Ż�� 
->>>>>>> 4d6aa709c7a2b9748c9ac806f8491e91556fee10
 			} else if (cmd.equals("/memberOut.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
 				dao.memberOut(id);
