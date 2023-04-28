@@ -16,16 +16,9 @@ public class MembersDTO {
 	private String address2;
 	private Timestamp join_date;
 	private String grade_code;
-	
-	
-	
-	public MembersDTO() {
-		super();
-		
-	}
+
 	public MembersDTO(String id, String pw, String name, String birth_date, String nickname, String contact,
 			String email, String zipcode, String address1, String address2, Timestamp join_date, String grade_code) {
-		super();
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
@@ -111,7 +104,4 @@ public class MembersDTO {
 	public void setGrade_code(String grade_code) {
 		this.grade_code = grade_code;
 	}
-	
-	
-
 }

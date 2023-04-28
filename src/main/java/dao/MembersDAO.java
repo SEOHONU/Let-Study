@@ -94,9 +94,9 @@ public class MembersDAO {
 				String address1 = rs.getString("address1");
 				String address2 = rs.getString("address2");
 
-				Timestamp sysdate = null;
+				Timestamp join_date = rs.getTimestamp("join_date");
 				MembersDTO dto = new MembersDTO(myid, null, name, birth_date, nickname, contact, email, zipcode,
-						address1, address2, sysdate, null);
+						address1, address2, join_date, null);
 				return dto;
 			}
 		}
