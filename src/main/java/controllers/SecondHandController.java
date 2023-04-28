@@ -84,7 +84,8 @@ public class SecondHandController extends HttpServlet {
 				request.getRequestDispatcher("/secondHand/secondHandList.jsp").forward(request, response);
 			}
 			else if(cmd.equals("/secondHandBoardContents.secondHand")) {
-				int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+				int currentPage = request.getParameter("cpage") == null ? 1 
+						: Integer.parseInt(request.getParameter("cpage"));
 				int targetSeq = Integer.parseInt(request.getParameter("seq"));
 				shDAO.secondHandBoardViewUp(targetSeq);
 				SecondHandDTO dto = shDAO.selectContents(targetSeq);
@@ -101,7 +102,8 @@ public class SecondHandController extends HttpServlet {
 				response.sendRedirect("/selectBound.secondHand?currentPage="+currentPage);
 			}
 			else if(cmd.equals("/modifyContents.secondHand")) {
-				int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+				int currentPage = request.getParameter("cpage") == null ? 1 
+						: Integer.parseInt(request.getParameter("cpage"));
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				String title = request.getParameter("title");
 				String contents = request.getParameter("contents");
