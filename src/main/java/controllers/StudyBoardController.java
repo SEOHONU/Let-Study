@@ -9,9 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import dao.StudyBoardDAO;
+import dao.StudyBoardMembersDAO;
 import dao.StudyReplyDAO;
 import dto.StudyBoardDTO;
+import dto.StudyBoardMembersDTO;
 import dto.StudyReplyDTO;
 import statics.Settings;
 
@@ -24,9 +28,9 @@ public class StudyBoardController extends HttpServlet {
 		String cmd = request.getRequestURI();
 		try {
 			StudyBoardDAO dao = StudyBoardDAO.getInstance();
+			Gson g = new Gson();
 			if(cmd.equals("/select.studyboard")) {
-				int currentPage = request.getParameter("cpage") == null ? 1 
-						: Integer.parseInt(request.getParameter("cpage"));
+				int currentPage = Integer.parseInt(request.getParameter("cpage"));
 				if(currentPage < 0) {
 					currentPage = 1;
 				}else if(currentPage > (int)Math.ceil(dao.getRecordCount()/(double)Settings.BOARD_RECORD_COUNT_PER_PAGE)) {
@@ -50,8 +54,13 @@ public class StudyBoardController extends HttpServlet {
 				int currentPage = Integer.parseInt(request.getParameter("cpage"));
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				StudyBoardDTO dto = dao.selectdetailstudyboard(seq);
+				StudyBoardMembersDAO sbmdao = StudyBoardMembersDAO.getInstance();
+				List<StudyBoardMembersDTO> sbmlist = sbmdao.selectapply(seq);
+				List<StudyBoardMembersDTO> cksbmlist = sbmdao.selectapplycheck(seq);
 				StudyReplyDAO rdao = StudyReplyDAO.getInstance();
 				List<StudyReplyDTO> list = rdao.selectreply(seq);
+				request.setAttribute("sbmlist", sbmlist);
+				request.setAttribute("cksbmlist", cksbmlist);
 				request.setAttribute("replylist", list);
 				request.setAttribute("dto", dto);
 				request.setAttribute("cpage", currentPage);
@@ -65,7 +74,10 @@ public class StudyBoardController extends HttpServlet {
 				String title = request.getParameter("title");
 				String contents = request.getParameter("contents");
 				String detailcontents = request.getParameter("detailcontents");
-				dao.insertstudyboard(new StudyBoardDTO(0,null,title,contents,detailcontents,0,null));
+				double lat = Double.parseDouble(request.getParameter("lat"));
+				double lng = Double.parseDouble(request.getParameter("lng"));
+				String mapname = request.getParameter("mapname");
+				dao.insertstudyboard(new StudyBoardDTO(0,null,title,contents,detailcontents,0,null,lat,lng,mapname));
 				response.sendRedirect("/select.studyboard?cpage=1");
 			}else if(cmd.equals("/update.studyboard")) {
 				int currentPage = Integer.parseInt(request.getParameter("cpage"));
@@ -73,8 +85,11 @@ public class StudyBoardController extends HttpServlet {
 				String title = request.getParameter("title");
 				String contents = request.getParameter("contents");
 				String detailcontents = request.getParameter("detailcontents");
-				dao.updatestudyboard(new StudyBoardDTO(seq,"213",title,contents,detailcontents,0,null));
-				response.sendRedirect("/select.studyboard?cpage="+currentPage);
+				double lat = Double.parseDouble(request.getParameter("lat"));
+				double lng = Double.parseDouble(request.getParameter("lng")); 
+				String mapname = request.getParameter("mapname");
+				dao.updatestudyboard(new StudyBoardDTO(seq,"213",title,contents,detailcontents,0,null,lat,lng,mapname));
+				response.sendRedirect("/inner.studyboard?cpage="+currentPage+"&seq="+seq);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

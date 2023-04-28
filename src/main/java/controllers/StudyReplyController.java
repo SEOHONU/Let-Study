@@ -33,6 +33,11 @@ public class StudyReplyController extends HttpServlet {
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				dao.deletereply(seq);
 				response.sendRedirect("/inner.studyboard?cpage="+currentPage+"&seq="+parent_seq);
+			}else if(cmd.equals("/update.studyreply")) {
+				int seq = Integer.parseInt(request.getParameter("seq"));
+				String contents = request.getParameter("contents");
+				int result = dao.updatereply(seq, contents);
+				response.getWriter().append((char)result);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
