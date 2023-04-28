@@ -245,7 +245,7 @@ h2 {
         let regexEmail = /[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+/; 
 
         $("#idCheck").on("click", function(){
-            let id = $("id").val(); 
+            let id = $("#id").val(); 
             let resultId = regexId.test(id);
             if (!resultId) {
                 alert("아이디 양식이 다릅니다."); 
@@ -288,7 +288,7 @@ h2 {
        let joinMember = document.getElementById("joinmember");
        joinMember.onsubmit = function() {
         let id = $("#id").val(); 
-        let resultId = regexId.test(id); 
+        let resultId = regexId.test(idInput); 
         let pw = $("#pw").val(); 
         let resultPw = regexPw.test(pw); 
         let name = $("#name").val(); 
@@ -316,7 +316,7 @@ h2 {
             alert
         }
 
-       });
+       };
 
 
     </script>
