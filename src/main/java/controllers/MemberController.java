@@ -26,17 +26,17 @@ public class MemberController extends HttpServlet {
 		try {
 			// login 로그인
 			if (cmd.equals("/login.member")) {
-				System.out.println("�α���");
 				String id = request.getParameter("id");
 				String pw = EncryptionUtils.sha512(request.getParameter("pw"));
 				String nickname = dao.getNickname(id);
-				System.out.println("�г��� : " + nickname);
 				request.getSession().setAttribute("loggedNickname", nickname);
 				System.out.println(id + ":" + pw);
 				boolean result = dao.isMember(id, pw);
 				if (result) {
 					request.getSession().setAttribute("loggedID", id);
 				}
+
+				response.sendRedirect("/index.jsp");
 
 			} else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
@@ -91,6 +91,7 @@ public class MemberController extends HttpServlet {
 				String detailAddress = request.getParameter("detailAddress");
 				MembersDTO dto = new MembersDTO(id, pw, name, birth_date, nickname, contact, email, zipcode, roadAddress, detailAddress, null, null);
 				dao.update(dto);
+
 				response.sendRedirect("/myPage/mypageMainForm.jsp");
 			
 				// delete 회원탈퇴
