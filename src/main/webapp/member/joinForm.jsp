@@ -246,7 +246,7 @@ h2 {
 
         $("#idCheck").on("click", function(){
             let id = $("id").val(); 
-            let resultId = regexId.test(idInput);
+            let resultId = regexId.test(id);
             if (!resultId) {
                 alert("아이디 양식이 다릅니다."); 
                 return false; 
@@ -286,7 +286,7 @@ h2 {
         // })
 
        let joinMember = document.getElementById("joinmember");
-       joinMember.onsubmit = function() {
+       $("#joinmember").on("click",function() {
         let id = $("#id").val(); 
         let resultId = regexId.test(id); 
         let pw = $("#pw").val(); 
@@ -316,7 +316,7 @@ h2 {
             alert
         }
 
-       }  
+       });
 
 
     </script>

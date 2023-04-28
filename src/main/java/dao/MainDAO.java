@@ -126,7 +126,7 @@ public class MainDAO {
 		}
 	}
 	public List<SecondHandDTO> mainjoongo() throws Exception {
-		String sql = "select * from secondHand order by seq desc";
+		String sql = "select * from secondHand";
 		try(Connection con = this.getconnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 						ResultSet rs = pstmt.executeQuery();){

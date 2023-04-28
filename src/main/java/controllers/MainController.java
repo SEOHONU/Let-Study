@@ -40,9 +40,16 @@ public class MainController extends HttpServlet {
 			request.setAttribute("fdto", fdto);
 			request.getRequestDispatcher("/board/allSearch.jsp").forward(request, response);
 		}else if (cmd.equals("/mainjoongolist.maincontroller")) {
-			List<SecondHandDTO> sdto = dao.mainjoongo();
-			String resp = g.toJson(sdto);
-			response.getWriter().append(resp);
+			List<SecondHandDTO> dto = dao.mainjoongo();
+			int currentPage = request.getParameter("currentPage") == null ? 1 
+					: Integer.parseInt(request.getParameter("currentPage"));
+			String sdto = g.toJson(dto);
+			String page = g.toJson(currentPage);
+			JsonObject resp = new JsonObject();
+			resp.addProperty("sdto", sdto);
+			resp.addProperty("page", page);
+			response.getWriter().append(resp.toString());
+			
 		} else if (cmd.equals("/joongo.maincontroller")) {
 
 		} else if (cmd.equals("/board.maincontroller")) {

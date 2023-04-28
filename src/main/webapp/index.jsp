@@ -158,7 +158,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                <a href="회원가입 페이지로"><i class="fa-solid fa-user-plus"></i></a>
+                                                <a href="/member/joinForm.jsp"><i class="fa-solid fa-user-plus"></i></a>
                                                 <!--로그인안됐을때-->
                                             </div>
                                             <div class="col-6">
@@ -198,7 +198,7 @@
                                         <!--로그인안됐을때-->
                                     </div>
                                     <div class="col-3 signup">
-                                        <a href="회원가입 페이지로"><i class="fa-solid fa-user-plus"></i></a>
+                                        <a href="/member/joinForm.jsp"><i class="fa-solid fa-user-plus"></i></a>
                                         <!--로그인안됐을때-->
                                     </div>
                                     <div class="col-3 profile">
@@ -577,9 +577,18 @@
                     url: "/mainjoongolist.maincontroller",
                     dataType: "json"
                 }).done(function (resp) {
-                	for (var a = 0; a < 4; a++) {
-                    var textfront1 = $('<div class="col-6"></div>');
-                    var textfront2 = $('<a href="최신 올라온 중고책 게시글"></a>')
+                	let sdto = JSON.parse(resp.sdto);
+                	for (var a = sdto.length - 1; a >= 0 && a >= sdto.length - 4; a--) {
+                		
+                        let ppage = JSON.parse(resp.page);
+                		var page = sdto[a].seq;
+                		if(a >= sdto.length - 2){
+                			var textfront1 = $('<div class="col-12 col-sm-6"></div>');
+                		}else if(a >= sdto.length - 4){
+                			var textfront1 = $('<div class="col-6 d-none d-sm-block"></div>');
+                		}
+                    
+                    var textfront2 = $('<a href="/secondHandBoardContents.secondHand?seq='+ page +'&currentPage='+ppage+'"></a>')
                     var textfront3 = $('<div class="card mb-3" style = "max-width: 540px;"> </div>')
                     var textfront4 = $('<div class="row g-0"></div>')
                     var textfront5 = $('<div class="col-md-4"></div>')
@@ -590,8 +599,8 @@
                     var textmiddle1 = $('<p class="card-text"></p>')
                     var textmiddle2 = $('<p class="card-text"></p>')
                     var subwriter = $('<small class="text-body-secondary" id="subwriter"></small>')
-                        var title = resp[a].title;
-                        var writer = resp[a].writer;
+                        var title = sdto[a].title;
+                        var writer = sdto[a].writer;
                         $("#joong").append(textfront1);
                         textfront1.append(textfront2);
                         textfront2.append(textfront3);
@@ -606,9 +615,11 @@
                         textmiddle2.append(subwriter);
                         subtitle.append(title);
                         subwriter.append(writer);
-                        
                     }
                 })
+                
+                
+             
             });
             
         </script>
