@@ -120,7 +120,7 @@
 		<form action="/update.freeBoard" method="post" id="updateFreeBoard">
 			<div class="row rowTitle">
 				<div class="col colTitle">
-					<input type="hidden" value="${list.seq}" name="boardSeq"> <input
+					<input type="hidden" value="${list.seq}" name="seq"> <input
 						type="text" placeholder="제목을 입력해주세요" id="titleInput" name="title"
 						value="${list.title}" readonly>
 				</div>
@@ -167,22 +167,28 @@
 			<div id="margin10"></div>
 		</form>
 		<!-- 댓글출력 -->
+		<form action="/update.reply" method="post">
 		<div class="row">
 			<div class="col reply_area">
 				<div class="reply_area">
 					<c:forEach var="i" items="${replyResult}">
 						<div class="nickname" readonly>${i.writer}</div>
-						<div class="reply_text" readonly>${i.contents}</div>
+						<input type="text" class="reply_text" name="replyContent" value="${i.contents}" readonly>
 						<div class="reply_info">
 							<span class="reply_date" readonly>${i.write_date}</span>
-							<button class="replyBtn replyUpdate">댓글수정</button>
-							<button class="replyBtn">댓글삭제</button>
+							<input type="button" class="replyBtn replyUpdate" value="댓글수정">
+							<a href="/delete.reply?seq=${list.seq}&replySeq=${i.seq}">
+							<input type="button" class="replyBtn" value="댓글삭제"></a>
+							<input type="submit" class="replyBtn" value="수정완료" style="display:none">
+							<input type="hidden" value="${i.seq}" name="replySeq">
+							<input type="hidden" value="${list.seq}" name="seq">
 							<div id="margin10"></div>
 						</div>
 					</c:forEach>
 				</div>
 			</div>
 		</div>
+		</form>
 		<!-- 댓글입력 -->
 		<div class="row rowReplyInput">
 
@@ -220,10 +226,12 @@
 			$("#realContent").val($("#content").html());
 		})
 		
-		
+		/* 댓글 수정하기  */
 		$(".replyUpdate").on("click", function(){
-			$(this).parent().parent().children().attr("style","background-color: pink;");
-			alert("댓글창 수정가능해요!!")
+			$(this).parent().prev().removeAttr("readonly");
+			$(this).hide();
+		 	$(this).next().css("display","none");
+		    $(this).next().next().css("display","inline-block");
 		})
 		
 		
