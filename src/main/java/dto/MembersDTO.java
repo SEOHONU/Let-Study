@@ -18,6 +18,7 @@ public class MembersDTO {
 	private String grade_code;
 	
 	public MembersDTO() {}
+
 	public MembersDTO(String id, String pw, String name, String birth_date, String nickname, String contact,
 			String email, String zipcode, String address1, String address2, Timestamp join_date, String grade_code) {
 		this.id = id;
