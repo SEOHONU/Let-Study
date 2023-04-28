@@ -236,7 +236,7 @@
                             <td class="col-4 col-md-1 center">${i.seq}</td>
                             <td class="col-8 col-md-5 "><a href="/detail.freeBoard?seq=${i.seq}">${i.title}</a></td>
                             <td class="d-none d-md-block col-md-3 center">${i.writer}</td>
-                            <td class="d-none d-md-block col-md-2 center">${i.write_date}</td>
+                            <td class="d-none d-md-block col-md-2 center">${i.detailDate}</td>
                             <td class="d-none d-md-block col-md-1 center">${i.view_count}</td>
                         </tr>
                     </c:forEach>
