@@ -6,7 +6,7 @@ public class MembersDTO {
 	
 	private String id;
 	private String pw; 
-	private String name; 
+	private String name;
 	private String birth_date;
 	private String nickname;
 	private String contact;
@@ -16,12 +16,11 @@ public class MembersDTO {
 	private String address2;
 	private Timestamp join_date;
 	private String grade_code;
-
 	
 	public MembersDTO() {
-		super();
-		
+		super();		
 	}
+
 	public MembersDTO(String id, String pw, String name, String birth_date, String nickname, String contact,
 			String email, String zipcode, String address1, String address2, Timestamp join_date, String grade_code) {
 		this.id = id;
@@ -55,12 +54,15 @@ public class MembersDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getBirth_date() {
 		return birth_date;
 	}
+
 	public void setBirth_date(String birth_date) {
 		this.birth_date = birth_date;
 	}
+
 	public String getNickname() {
 		return nickname;
 	}

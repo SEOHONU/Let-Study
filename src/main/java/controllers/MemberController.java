@@ -37,7 +37,6 @@ public class MemberController extends HttpServlet {
 				if (result) {
 					request.getSession().setAttribute("loggedID", id);
 				}
-				response.sendRedirect("/index.jsp");
 
 			} else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
@@ -93,8 +92,7 @@ public class MemberController extends HttpServlet {
 				MembersDTO dto = new MembersDTO(id, pw, name, birth_date, nickname, contact, email, zipcode, roadAddress, detailAddress, null, null);
 				dao.update(dto);
 				response.sendRedirect("/myPage/mypageMainForm.jsp");
-
-
+			
 				// delete 회원탈퇴
 			} else if (cmd.equals("/memberOut.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
