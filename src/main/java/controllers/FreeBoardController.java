@@ -101,10 +101,11 @@ public class FreeBoardController extends HttpServlet {
 				
 				// 게시글 시퀀스 받아오기
 				int seq = Integer.parseInt(request.getParameter("seq"));
+				// 게시글 조회수
+				dao.freeBoardViewUp(seq);
 				// 게시글 출력
 				FreeBoardDTO list = dao.selectDetail(seq);
 				request.setAttribute("list", list);
-				
 				// 파일 출력
 				FreeFileDAO daoF = FreeFileDAO.getInstance();
 				
