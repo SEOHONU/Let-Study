@@ -41,7 +41,6 @@ public class MemberController extends HttpServlet {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
 
-			// insert 회원가입
 			} else if (cmd.equals("/idCheck.member")) {
 				String id = request.getParameter("id");
 				boolean result = dao.isIdExist(id);

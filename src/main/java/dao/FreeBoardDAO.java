@@ -138,7 +138,7 @@ public class FreeBoardDAO {
 			pstat.setString(1, title);
 			pstat.setString(2, content);
 			pstat.setString(3, writer);
-			pstat.setInt(4, 1);
+			pstat.setInt(4, 0);
 
 			int result = pstat.executeUpdate();
 			con.commit();
@@ -218,9 +218,21 @@ public class FreeBoardDAO {
 			return result;
 		}
 	}
+	
+	public int freeBoardViewUp (int seq) throws Exception{
+		String sql = "update board set board_view_count = board_view_count + 1 where board_seq = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, seq);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
 
-
+		}
 	}
+}
 
 
 

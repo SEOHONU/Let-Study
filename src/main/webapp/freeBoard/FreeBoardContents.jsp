@@ -128,7 +128,7 @@
 			<div class="row">
 				<div class="col">
 					<div>${list.writer}</div>
-					<div>${list.write_date}</div>
+					<div>${list.formedDate}</div>
 				</div>
 			</div>
 			<!--파일 첨부 출력 -->
