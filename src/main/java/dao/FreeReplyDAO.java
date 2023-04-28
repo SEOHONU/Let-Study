@@ -34,9 +34,8 @@ public class FreeReplyDAO {
 	}
 	
 	public ArrayList<FreeReplyDTO> selectReply(int p_seq) throws Exception{
-		System.out.println("댓글 출력 서블릿 도착");
 
-		String sql = "select * from board_reply where board_seq = ? order by reply_seq desc";
+		String sql = "select * from fr_reply where board_seq = ? order by reply_seq asc";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -60,7 +59,7 @@ public class FreeReplyDAO {
 	}
 	
 	public int insertReply(String writer, String contents, int boardSeq) throws Exception{
-		String sql ="insert into board_reply values(reply_seq.nextval, ?,?,sysdate, ? )";
+		String sql ="insert into fr_reply values(fr_reply_seq.nextval, ?,?,sysdate, ? )";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setString(1, writer);
@@ -71,33 +70,35 @@ public class FreeReplyDAO {
 			con.commit();
 			return result;
 		}
-
-	}
-
-	public void deleteBySeq(int replySeq) throws Exception{
-		String sql = "delete from board_reply where reply_seq=?";
-		try(Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				){
-			pstat.setInt(1, replySeq);
-			pstat.executeUpdate();
-			con.commit();
-		}
 	}
 
 	
-	public void updateReply (String content, int seq) throws Exception{
-	String sql = "update board_reply set contents=?, reply_write_date = sysdate where seq =?";
+	public void updateReply (String content, int reply_seq) throws Exception{
+	String sql = "update fr_reply set reply_contents=?, reply_write_date = sysdate where reply_seq =?";
 	try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);
 			){
 		pstat.setString(1, content);
-		pstat.setInt(2, seq);
+		pstat.setInt(2, reply_seq);
 		pstat.executeUpdate();
 		con.commit();
 		System.out.println("업데이트 완료");
 	}
 }
+	
+
+	public int deleteBySeq(int replySeq) throws Exception{
+		String sql = "delete from fr_reply where reply_seq=?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, replySeq);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+
 	
 	
 	

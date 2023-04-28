@@ -29,7 +29,7 @@ public class FreeFileDAO {
 	}
 // 게시글 입력
 	public int insert(FreeFileDTO dto) throws Exception{
-		String sql = "insert into files values(file_seq.nextval,?,?,board_seq.nextval+1)";
+		String sql = "insert into fr_files values(fr_file_seq.nextval,?,?,board_seq.nextval+1)";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -45,7 +45,7 @@ public class FreeFileDAO {
 	}
 	// 게시글이 있는지 없는지
 	public boolean findFile(int p_seq) throws Exception{
-		String sql = "select * from files where board_seq =?";
+		String sql = "select * from fr_files where board_seq =?";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, p_seq);
@@ -56,7 +56,7 @@ public class FreeFileDAO {
 	}
 	// 게시글 리스트 출력
 	public FreeFileDTO selectByP_seq(int p_seq) throws Exception{
-		String sql = "select * from files where board_seq =?";
+		String sql = "select * from fr_files where board_seq =?";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, p_seq);
