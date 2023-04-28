@@ -12,7 +12,6 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import dto.StudyBoardDTO;
-import statics.Setting;
 import statics.Settings;
 
 public class StudyBoardDAO {
