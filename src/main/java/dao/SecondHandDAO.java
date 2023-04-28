@@ -32,7 +32,7 @@ public class SecondHandDAO {
 	}
 	public int insertSecondHand(SecondHandDTO dto) throws Exception{
 		String sql = "insert into secondHand values"
-				+ "(sh_seq.nextval, ?, ?, ?, default, default, ?, ?, default)";
+				+ "(sh_seq.nextval, ?, ?, ?, default, default, ?, ?)";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -135,9 +135,8 @@ public class SecondHandDAO {
 				int view_count = rs.getInt(6);
 				double lat = rs.getDouble(7);
 				double lng = rs.getDouble(8);
-				String selled = rs.getString(9);
 				return new SecondHandDTO(seq, title, contents, writer, write_date,
-						view_count, lat, lng, selled);
+						view_count, lat, lng);
 			}
 		}
 	}
@@ -164,9 +163,8 @@ public class SecondHandDAO {
 					int view_count = rs.getInt("view_count");
 					double lat = rs.getDouble("LAT");
 					double lng = rs.getDouble("LNG");
-					String selled = rs.getString("SELLED");
 					recordList.add(new SecondHandDTO(seq, title, contents, writer,
-							write_date, view_count, lat, lng, selled));
+							write_date, view_count, lat, lng));
 				}
 				return recordList;
 			}
@@ -198,9 +196,8 @@ public class SecondHandDAO {
 					int view_count = rs.getInt("view_count");
 					double lat = rs.getDouble("LAT");
 					double lng = rs.getDouble("LNG");
-					String selled = rs.getString("SELLED");
 					recordList.add(new SecondHandDTO(seq, title, contents, writer,
-							write_date, view_count, lat, lng, selled));
+							write_date, view_count, lat, lng));
 				}
 				return recordList;
 			}

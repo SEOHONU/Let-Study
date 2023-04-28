@@ -61,9 +61,8 @@ public class MainDAO {
 					int view_count = rs.getInt("view_count");
 					double lat = rs.getDouble("lat");
 					double lng = rs.getDouble("lng");
-					String selled = rs.getString("selled");
 					SecondHandDTO dto = new SecondHandDTO(seq, title, contents, writer, write_date, view_count, lat,
-							lng, selled);
+							lng);
 					result.add(dto);
 				}
 				return result;
@@ -140,9 +139,8 @@ public class MainDAO {
 				int view_count = rs.getInt("view_count");
 				double lat = rs.getDouble("lat");
 				double lng = rs.getDouble("lng");
-				String selled = rs.getString("selled");
 				SecondHandDTO dto = new SecondHandDTO(seq, title, contents, writer, write_date, view_count, lat,
-						lng, selled);
+						lng);
 				result.add(dto);
 			}
 			return result;

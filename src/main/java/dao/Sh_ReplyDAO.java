@@ -27,7 +27,7 @@ public class Sh_ReplyDAO {
 		return ds.getConnection();
 	}
 	public int insertReply(Sh_CommentsDTO dto) throws Exception{
-		String sql = "insert into comments values(com_seq.nextval, ?, ?, default, ?, ?)";
+		String sql = "insert into sh_comments values(sh_com_seq.nextval, ?, ?, default, ?, ?)";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
