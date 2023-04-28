@@ -81,4 +81,18 @@ public class StudyReplyDAO {
 		}
 	}
 	
+	public int updatereply(int seq, String contents) throws Exception{
+		String sql = "update studyreply set contents = ? where seq = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, contents);
+			pstat.setInt(2, seq);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	
 }

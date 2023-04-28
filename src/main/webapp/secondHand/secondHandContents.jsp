@@ -75,7 +75,7 @@ pageEncoding="UTF-8"%>
                     </tr>
                     <tr>
                         <td colspan="3" align="center">
-                            <c:if test="${dto.writer == loginId}">
+                            <c:if test="${dto.writer == loggedId}">
                                 <input type="button" value="수정하기" id="modify">
                                 <input type="button" value="삭제하기" onclick="confirmDel()">
                                 <input type="button" value="판매완료" onclick="confirmSell()">
@@ -94,7 +94,7 @@ pageEncoding="UTF-8"%>
             <form action="/insertComments.shComments" method="post" class="col-lg-8 col-12">
                 <table border="1" align="center">
                     <tr>
-                        <td colspan="2">${loginId} <input type="hidden" name="writer" value="${loginId}"> <input
+                        <td colspan="2">${loggedId} <input type="hidden" name="writer" value="${loggedId}"> <input
                                 type="hidden" name="seq" value="${dto.seq}"> <input type="hidden" name="currentPage"
                                 value="${currentPage}">
                         </td>
@@ -142,7 +142,7 @@ pageEncoding="UTF-8"%>
               			td_comment.append(textarea);
               			
               			td_control = $("<td align='right'>");
-              			if(${i.com_writer == loginId}){
+              			if(${i.com_writer == loggedId}){
               				let modBtn = $("<input type='button' value='수정' class='modCom'>");
               				let delBtn = $("<input type='button' value='삭제' class='delCom' seq='${i.com_seq}'>");
               				td_control.append(modBtn);
@@ -187,7 +187,7 @@ pageEncoding="UTF-8"%>
                                         <textarea name="contents" class="comment" readonly>${i.com_contents}</textarea>
                                     </td>
                                     <td align="right">
-                                        <c:if test="${i.com_writer == loginId}">
+                                        <c:if test="${i.com_writer == loggedId}">
                                             <input type="button" value="수정" class="modCom">
                                             <input type="button" value="삭제" class='delCom' seq="${i.com_seq}">
                                         </c:if>
@@ -234,7 +234,7 @@ pageEncoding="UTF-8"%>
         $(".writeReplyBtn").on("click", function () {
             let com_seq = $(this).attr("com_seq");
             let replyForm = $("<form action='/insertReply.shReply'>");
-            let replyWriter = $("<input type='text' value='${loginId}' readonly>");
+            let replyWriter = $("<input type='text' value='${loggedId}' readonly>");
             let replyContents = $("<textarea class='writeReply' name='contents'>");
             let replySubmit = $("<input type='submit' value='답글쓰기'>");
             let replyCancle = $("<input type='button' value='취소'>");

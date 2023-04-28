@@ -35,7 +35,7 @@ public class FreeReplyDAO {
 	
 	public ArrayList<FreeReplyDTO> selectReply(int p_seq) throws Exception{
 
-		String sql = "select * from board_reply where board_seq = ? order by reply_seq asc";
+		String sql = "select * from fr_reply where board_seq = ? order by reply_seq asc";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -59,7 +59,7 @@ public class FreeReplyDAO {
 	}
 	
 	public int insertReply(String writer, String contents, int boardSeq) throws Exception{
-		String sql ="insert into board_reply values(reply_seq.nextval, ?,?,sysdate, ? )";
+		String sql ="insert into fr_reply values(fr_reply_seq.nextval, ?,?,sysdate, ? )";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setString(1, writer);
@@ -74,7 +74,7 @@ public class FreeReplyDAO {
 
 	
 	public void updateReply (String content, int reply_seq) throws Exception{
-	String sql = "update board_reply set reply_contents=?, reply_write_date = sysdate where reply_seq =?";
+	String sql = "update fr_reply set reply_contents=?, reply_write_date = sysdate where reply_seq =?";
 	try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);
 			){
@@ -88,7 +88,7 @@ public class FreeReplyDAO {
 	
 
 	public int deleteBySeq(int replySeq) throws Exception{
-		String sql = "delete from board_reply where reply_seq=?";
+		String sql = "delete from fr_reply where reply_seq=?";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){

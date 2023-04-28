@@ -22,7 +22,7 @@ public class Sh_ReplyController extends HttpServlet {
 		Sh_ReplyDAO reDAO = Sh_ReplyDAO.getInstance();
 		try {
 			if(cmd.equals("/insertReply.shReply")) {
-				String com_writer = (String)request.getSession().getAttribute("loginId");
+				String com_writer = (String)request.getSession().getAttribute("loggedId");
 				String contents = request.getParameter("contents");
 				int com_seq = Integer.parseInt(request.getParameter("com_seq"));
 				int currentPage = Integer.parseInt(request.getParameter("currentPage"));
