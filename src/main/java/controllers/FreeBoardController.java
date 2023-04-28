@@ -69,8 +69,7 @@ public class FreeBoardController extends HttpServlet {
 			// 자유게시판 목록 리스트 보기			
 			}else if(cmd.equals("/contentList.freeBoard")) {
 				
-				int currentPage = request.getParameter("cpage") == null ? 1 
-						: Integer.parseInt(request.getParameter("cpage"));
+				int currentPage = request.getParameter("cpage") == null ? 1 : Integer.parseInt(request.getParameter("cpage"));
 				if(currentPage < 0) {
 					currentPage = 1;
 				}else if(currentPage > (int)Math.ceil(dao.getRecordCount()/(double)Settings.BOARD_RECORD_COUNT_PER_PAGE)) {

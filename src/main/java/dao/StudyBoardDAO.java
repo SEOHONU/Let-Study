@@ -34,7 +34,7 @@ public class StudyBoardDAO {
 	}
 	
 	public List<StudyBoardDTO> selectStudyBoard(int start, int end) throws Exception{
-		String sql = "select * from (select seq,writer,title,contents,detailcontents,view_count,write_date,rank() over(order by seq desc) rank from studyboard) where rank between ? and ?";
+		String sql = "select * from (select seq,writer,title,contents,detailcontents,view_count,write_date,lat,lng,mapname,rank() over(order by seq desc) rank from studyboard) where rank between ? and ?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -53,7 +53,10 @@ public class StudyBoardDAO {
 					String detailcontents = rs.getString("detailcontents");
 					int view_count = rs.getInt("view_count");
 					Timestamp write_date = rs.getTimestamp("write_date");
-					list.add(new StudyBoardDTO(seq,writer,title,contents,detailcontents,view_count,write_date));
+					double lat = rs.getDouble("lat");
+					double lng = rs.getDouble("lng");
+					String mapname = rs.getString("mapname");
+					list.add(new StudyBoardDTO(seq,writer,title,contents,detailcontents,view_count,write_date,lat,lng,mapname));
 				}
 				return list;
 			}
@@ -149,7 +152,10 @@ public class StudyBoardDAO {
 					String detailcontents = rs.getString("detailcontents");
 					int view_count = rs.getInt("view_count");
 					Timestamp write_date = rs.getTimestamp("write_date");
-					dto = new StudyBoardDTO(seq,writer,title,contents,detailcontents,view_count,write_date);
+					double lat = rs.getDouble("lat");
+					double lng = rs.getDouble("lng");
+					String mapname = rs.getString("mapname");
+					dto = new StudyBoardDTO(seq,writer,title,contents,detailcontents,view_count,write_date,lat,lng,mapname);
 				}
 				return dto;
 			}
@@ -170,14 +176,18 @@ public class StudyBoardDAO {
 	}
 	
 	public int insertstudyboard(StudyBoardDTO dto) throws Exception{
-		String sql = "insert into studyboard values (studyboard_seq.nextval,'213',?,?,?,default,default)";
+		String sql = "insert into studyboard values (studyboard_seq.nextval,?,?,?,?,default,default,?,?,?)";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
-			pstat.setString(1, dto.getTitle());
-			pstat.setString(2, dto.getContents());
-			pstat.setString(3, dto.getDetailcontents());
+			pstat.setString(1, dto.getWriter());
+			pstat.setString(2, dto.getTitle());
+			pstat.setString(3, dto.getContents());
+			pstat.setString(4, dto.getDetailcontents());
+			pstat.setDouble(5, dto.getLat());
+			pstat.setDouble(6, dto.getLng());
+			pstat.setString(7, dto.getMapname());
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
@@ -185,7 +195,7 @@ public class StudyBoardDAO {
 	}
 	
 	public int updatestudyboard(StudyBoardDTO dto) throws Exception{
-		String sql = "update studyboard set title = ?, contents = ?, detailcontents = ? where seq = ?";
+		String sql = "update studyboard set title = ?, contents = ?, detailcontents = ?, lat = ?, lng = ?, mapname = ? where seq = ?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -193,7 +203,10 @@ public class StudyBoardDAO {
 			pstat.setString(1, dto.getTitle());
 			pstat.setString(2, dto.getContents());
 			pstat.setString(3, dto.getDetailcontents());
-			pstat.setInt(4, dto.getSeq());
+			pstat.setDouble(4, dto.getLat());
+			pstat.setDouble(5, dto.getLng());
+			pstat.setString(6, dto.getMapname());
+			pstat.setInt(7, dto.getSeq());
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;

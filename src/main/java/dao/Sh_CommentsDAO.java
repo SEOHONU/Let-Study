@@ -28,7 +28,7 @@ public class Sh_CommentsDAO {
 		return ds.getConnection();
 	}
 	public int insertComments(Sh_CommentsDTO dto) throws Exception{
-		String sql = "insert into comments values(com_seq.nextval, ?, ?, default, ?, null)";
+		String sql = "insert into sh_comments values(sh_com_seq.nextval, ?, ?, default, ?, null)";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class Sh_CommentsDAO {
 		}
 	}
 	public int updateComments(int com_seq, String contents) throws Exception{
-		String sql = "update comments set com_contents = ?, com_write_date = default "
+		String sql = "update sh_comments set com_contents = ?, com_write_date = default "
 				+ "where com_Seq = ?";
 		try(
 				Connection con = this.getConnection();
@@ -56,7 +56,7 @@ public class Sh_CommentsDAO {
 		}
 	}
 	public List<Sh_CommentsDTO> selectComments(int target_board_seq) throws Exception{
-		String sql = "select * from comments where board_seq = ? order by 1";
+		String sql = "select * from sh_comments where board_seq = ? order by 1";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -80,7 +80,7 @@ public class Sh_CommentsDAO {
 		}
 	}
 	public int deleteComments(int com_seq) throws Exception{
-		String sql = "delete from comments where com_seq = ?";
+		String sql = "delete from sh_comments where sh_com_seq = ?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);

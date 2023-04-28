@@ -31,7 +31,7 @@ public class MembersDAO {
 		return ds.getConnection();
 	}
 
-	//�α���
+
 	public boolean isMember(String id, String pw) throws Exception {
 		String sql = "select * from members where id=? and pw=?";
 		try (Connection con = this.getConnection(); 
@@ -44,8 +44,8 @@ public class MembersDAO {
 			}
 		}
 	}
-	
-	//ȸ������
+
+
 	public boolean isIdExist(String id) throws Exception {
 		String sql = "select * from members where id=?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -55,11 +55,11 @@ public class MembersDAO {
 			return result;
 		}
 	}
-	
+
 	public int insert (MembersDTO dto) throws Exception {
 		String sql = "insert into members values(?,?,?,?,?,?,?,?,?,?,sysdate,null)";
 		try (Connection con = this.getConnection(); 
-			PreparedStatement pstat = con.prepareStatement(sql);) {
+				PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, dto.getId());
 			pstat.setString(2, dto.getPw());
 			pstat.setString(3, dto.getName());
@@ -76,8 +76,8 @@ public class MembersDAO {
 			return result;
 		}
 	}
-		
-	// ȸ���������
+
+
 	public MembersDTO myInfoSelect(String id) throws Exception {
 		String sql = "select * from members where id=?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -94,20 +94,20 @@ public class MembersDAO {
 				String address1 = rs.getString("address1");
 				String address2 = rs.getString("address2");
 
-				Timestamp sysdate = null;
+				Timestamp join_date = rs.getTimestamp("join_date");
 				MembersDTO dto = new MembersDTO(myid, null, name, birth_date, nickname, contact, email, zipcode,
-						address1, address2, sysdate, null);
+						address1, address2, join_date, null);
 				return dto;
 			}
 		}
 	}
 
-	//ȸ����������
+
 	public int update(MembersDTO dto) throws Exception {
 		String sql = "update members set pw=?,nickname=?,contact=?,email=?,zipcode=?,address1=?,address2=? where id =?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, dto.getPw());
-			
+
 			pstat.setString(2, dto.getNickname());
 			pstat.setString(3, dto.getContact());
 			pstat.setString(4, dto.getEmail());
@@ -123,15 +123,35 @@ public class MembersDAO {
 
 	}
 
-	//ȸ��Ż��
+
 	public void memberOut(String id) throws Exception {
 		String sql = "delete from members where id=?";
 		try (Connection con = this.getConnection(); 
-			PreparedStatement pstat = con.prepareStatement(sql);) {
+				PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, id);
-
 			pstat.executeUpdate();
 			con.commit();
 		}
+	}
+
+
+
+
+	public String getNickname(String id) throws Exception{
+		String sql = "select nickname from members where id=?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, id);
+			pstat.executeUpdate();
+			try(ResultSet rs = pstat.executeQuery()){
+				rs.next();
+				String result= rs.getString("nickname");
+				return result;
+			}
+		}
+
+
+
+
 	}
 }
