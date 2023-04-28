@@ -38,7 +38,13 @@ public class MemberController extends HttpServlet {
 					request.getSession().setAttribute("loggedID", id);
 				}
 				response.sendRedirect("/index.jsp");
+<<<<<<< HEAD
+				
+				
+			// �α׾ƿ� 
+=======
         
+>>>>>>> 3f3a72188a0b0955fedf46b189e86d5edcf5db62
 			} else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
@@ -92,10 +98,16 @@ public class MemberController extends HttpServlet {
 				String detailAddress = request.getParameter("detailAddress");
 				MembersDTO dto = new MembersDTO(id, pw, name, birth_date, nickname, contact, email, zipcode, roadAddress, detailAddress, null, null);
 				dao.update(dto);
+<<<<<<< HEAD
+				response.sendRedirect("/");
+				//////// ��������������
+
+=======
 
 				response.sendRedirect("/myPage/mypageMainForm.jsp");
 				
 
+>>>>>>> 3f3a72188a0b0955fedf46b189e86d5edcf5db62
 				// ȸ��Ż�� 
 			} else if (cmd.equals("/memberOut.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
