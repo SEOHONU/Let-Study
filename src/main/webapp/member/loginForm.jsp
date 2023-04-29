@@ -76,50 +76,32 @@ a {
 		<div class="container">
 			<div class="loginBox">
 				<h2>로그인</h2>
-				<form action="/login.member" method="post">
-					<div class="form-group">
-						<input type="text" class="form-control" id="id" name="id"
-							placeholder="아이디" />
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-control" id="pw" name="pw"
-							placeholder="비밀번호" />
-					</div>
-					<div class="checkBox">
-						<label><input type="checkbox" name="rememberId" value="1" />
-							아이디 기억하기</label>
-					</div>
-					<div class="findIdPw">
-						<a href="#">아이디/비밀번호 찾기</a>
-					</div>
-
-					<div class="btn">
-						<button type="submit" class="btn btn-primary" id="btnLogin">로그인</button>
-						<button type="button" class="btn btn-light" id="btnJoin">회원가입</button>
-					</div>
-			</div>
-			<div class="btn">
-				<button class="btn btn-primary" id="btnLogin">로그인</button>
-				<button class="btn btn-light" id="btnJoin" type="button">회원가입</button>
-			</div>
+				<div class="form-group">
+					<input type="text" class="form-control" id="id" name="id"
+						placeholder="아이디" />
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control" id="pw" name="pw"
+						placeholder="비밀번호" />
+				</div>
+				<div class="checkBox">
+					<label><input type="checkbox" name="rememberId" value="1" />
+						아이디 기억하기</label>
+				</div>
+				<div class="findIdPw">
+					<a href="#">아이디/비밀번호 찾기</a>
+				</div>
 
 				<div class="btn">
-<<<<<<< HEAD
-					<button type="button" class="btn btn-primary" id="btnLogin">로그인</button>
+					<button type="submit" class="btn btn-primary" id="btnLogin">로그인</button>
 					<button type="button" class="btn btn-light" id="btnJoin">회원가입</button>
-=======
-					<button class="btn btn-primary" id="btnLogin">로그인</button>
-					<button class="btn btn-light" id="btnJoin" type="button">회원가입</button>
->>>>>>> 243d87fed8fc5a0344d356c9e88f91dd95636e23
 				</div>
-			</form>
-
+			</div>
 		</div>
 	</form>
 
 	<script>
-	
-	//로그인 성공시 추가해야됨 
+		//로그인 성공시 추가해야됨 
 		$("#btnJoin").on("click", function() {
 			location.href = "/member/joinForm.jsp";
 		})

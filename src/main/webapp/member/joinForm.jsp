@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-=======
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
->>>>>>> 243d87fed8fc5a0344d356c9e88f91dd95636e23
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,14 +71,12 @@ h2 {
 }
 </style>
 <body>
-
 	<form method="post" action="/joinMember.member" id="joinMember">
 		<div class="container">
 			<div class="row header">
 				<div class="col-12">
 					<h1 class="join-header text-center">회원가입</h1>
 					<h2 class="text-center">회원이 되어 다양한 혜택을 경험해보세요</h2>
-
 				</div>
 			</div>
 			<div class="row form-group">
@@ -93,9 +88,7 @@ h2 {
 					<div id="idFeedback"></div>
 				</div>
 				<div class="col-3"></div>
-
 			</div>
-
 			<div class="row form-group">
 				<div class="col-3"></div>
 				<div class="col-6">
@@ -221,8 +214,6 @@ h2 {
 	</form>
 
 	<script>
-<<<<<<< HEAD
-	
 		$("#id").focusout(function() {
 
 			let id = $("#id").val();
@@ -360,9 +351,7 @@ h2 {
 				return false;
 			}
 		};
-
 		// 우편번호 카카오 api
-
 		document.getElementById("searchZipcode").onclick = function() {
 			new daum.Postcode(
 					{
@@ -372,107 +361,6 @@ h2 {
 						},
 					}).open();
 		};
-	</script>
-=======
- 
-        var idValIdFlag = false;
->>>>>>> 243d87fed8fc5a0344d356c9e88f91dd95636e23
-
-        $("#idCheck").on("click",function(){
-        window.open("/idCheck.member?id="+$("#id").val(),"","width=200px,height=200px"); 
-        })
-
-        $("#idInput").on("keyup",function(){
-            idValIdFlag= false; 
-        })
-
-        let regexId = /^[a-z]+[a-z0-9]{6,20}$/;
-        let regexPw =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/; 
-        let regexName = /^[가-힣]{2,5}$/; 
-        let regexBirthYear = /^[12][0-9]{3}$/; 
-        let regexBirthDay = /^[0-9]{2}$/; 
-        let regexNickname = /^[a-zA-Z0-9가-힣]{2,10}$/; 
-        let regexContact = /^(01[016789])([1-9]\d{2,3})\d{4}$/; 
-        let regexEmail = /[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+/; 
-
-        $("#idCheck").on("click", function(){
-            let id = $("id").val(); 
-            let resultId = regexId.test(idInput);
-            if (!resultId) {
-                alert("아이디 양식이 다릅니다."); 
-                return false; 
-            } else {
-                window.open("idCheck?id=" + document.getElementById("id").value,"??" ,"top=100px,left=100px,heigt=500px,width=800px")
-            }
-        })
-
-    
-        
-         $("#pw").on("keyup", function (e) {
-            if ($("#pwCheck").val() == $("#pw").val()) {
-                $("#pwFeedback").html("비밀번호가 일치합니다.");
-            } else {
-               $("#pwFeedback").html("비밀번호가 일치하지 않습니다.").css({"color":"#fd1d1d"});
-            }
-        })
-        $("#pwCheck").on("keyup", function (e) {
-            if ($("#pwCheck").val() == $("#pw").val()) {
-                $("#pwFeedback").html("비밀번호가 일치합니다.");
-            } else {
-                $("#pwFeedback").html("비밀번호가 일치하지 않습니다.").css({"color":"#fd1d1d"});
-            }
-        })
-
-        document.getElementById("searchZipcode").onclick = function() {
-            new daum.Postcode({
-        oncomplete: function(data) {
-           document.getElementById("zipcode").value = data.zonecode;
-           document.getElementById("roadAddress").value =  data.address; 
-        }
-            }).open();
-
-        }
-
-        // 취소 버튼 누르면 전페이지로 
-         $("#btnCancel").on("click", function(){
-        	 location.href="/login.member";
-         })
-
-       let joinMember = document.getElementById("joinmember");
-       joinMember.onsubmit = function() {
-        let id = $("#id").val(); 
-        let resultId = regexId.test(id); 
-        let pw = $("#pw").val(); 
-        let resultPw = regexPw.test(pw); 
-        let name = $("#name").val(); 
-        let resultName = regexName.test(name); 
-        let birthYear = $("#birthYear").val();
-        let resultBirthYear = regexBirthYear.test(birthYear); 
-        let birthDay = $("#birthDay").val(); 
-        let resultBirthDay = regexBirthDay.test(birthDay); 
-        let nickname = $("#nickname").val(); 
-        let reusultNickname = regexNickname.test(nickname); 
-        let contact = $("#contact").val(); 
-        let resultContact = regexContact.test(contact); 
-        let email = $("#email").val(); 
-        let resultEmail = regexEmail.test(email); 
-
-        if(!resultId){
-            alert("아이디 양식이 다릅니다.");
-            return false; 
-        }
-        if(!resultPw){
-            alert("비밀번호 양식이 다릅니다.");
-            return false; 
-        }
-        if(!resultName){
-            alert
-        }
-
-       }
-
-
     </script>
-
 </body>
 </html>
