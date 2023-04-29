@@ -636,6 +636,18 @@
                 })
             });
 
+            
+            addEventListener("resize", function (event) {
+            	const bodySize = parseInt($("body").css("width"));
+            	if( bodySize > 768){
+            		const navisub = $(".navisub");
+            		if( navisub.css("display") == "block"){
+            			navisub.css("display","none");
+            		}
+            	}
+            });
+            
+            
         </script>
 
         </html>
