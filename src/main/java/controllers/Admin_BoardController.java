@@ -14,7 +14,6 @@ import dao.FreeBoardDAO;
 import dao.MembersDAO;
 import dao.SecondHandDAO;
 import dao.StudyBoardDAO;
-import dto.Admin_freeboardDTO;
 import dto.FreeBoardDTO;
 import dto.MembersDTO;
 import dto.SecondHandDTO;
@@ -34,7 +33,7 @@ public class Admin_BoardController extends HttpServlet {
 		Admin_DAO dao = Admin_DAO.getInstance();
 		StudyBoardDAO sbdao = StudyBoardDAO.getInstance();
 		FreeBoardDAO frdao = FreeBoardDAO.getInstance();
-		MembersDAO mbdao = MembersDAO.getInstacne();
+		MembersDAO mbdao = MembersDAO.getInstance();
 		try {
 			System.out.println("스터디 리스트 출력");
 			if (cmd.equals("/study_select.adminBoard")) {

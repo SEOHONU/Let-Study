@@ -12,7 +12,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import dto.Admin_freeboardDTO;
 import dto.FreeBoardDTO;
 import dto.MembersDTO;
 import dto.SecondHandDTO;
@@ -60,7 +59,11 @@ public class Admin_DAO {
 				String detailcontents = rs.getString("detailcontents");
 				int view_count = rs.getInt("view_count");
 				Timestamp write_date = rs.getTimestamp("write_date");
-				result.add(new StudyBoardDTO(seq, writer, title, contents, detailcontents, view_count, write_date));
+				double lat = rs.getDouble("lat");
+				double lng = rs.getDouble("lng");
+				String mapname = rs.getString("mapname");
+				result.add(new StudyBoardDTO
+						(seq, writer, title, contents, detailcontents, view_count, write_date, lat, lng, mapname));
 				System.out.println("AdminDAO 스터디리스트 출력");
 			}
 			return result;
@@ -82,9 +85,8 @@ public class Admin_DAO {
 				int view_count = rs.getInt(6);
 				double lat = rs.getDouble(7);
 				double lng = rs.getDouble(8);
-				String selled = rs.getString(9);
 
-				admin_SS.add(new SecondHandDTO(seq, title, contents, writer, write_date, view_count, lat, lng, selled));
+				admin_SS.add(new SecondHandDTO(seq, title, contents, writer, write_date, view_count, lat, lng));
 
 			}
 			return admin_SS;
@@ -210,7 +212,7 @@ public class Admin_DAO {
 
 				Timestamp join_date = rs.getTimestamp("join_date");
 				MembersDTO mbdto = new MembersDTO(myid, null, name, birth_date, nickname, contact, email, zipcode,
-						address1, address2, join_date, null);
+						address1, address2, join_date);
 				list.add(mbdto);
 				}
 				return list;

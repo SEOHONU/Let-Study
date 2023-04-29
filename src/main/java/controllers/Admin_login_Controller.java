@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Admin_DAO;
 import dto.Admin_DTO;
-import dto.Admin_freeboardDTO;
 
 @WebServlet("*.admin")
 public class Admin_login_Controller extends HttpServlet {
