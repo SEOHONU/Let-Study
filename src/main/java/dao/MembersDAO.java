@@ -15,7 +15,7 @@ public class MembersDAO {
 
 	private static MembersDAO instance = null;
 
-	public synchronized static MembersDAO getInstacne() {
+	public synchronized static MembersDAO getInstance() {
 		if (instance == null) {
 			instance = new MembersDAO();
 		}
@@ -56,7 +56,7 @@ public class MembersDAO {
 		}
 	}
 
-	public int insert (MembersDTO dto) throws Exception {
+	public int insertAll(MembersDTO dto) throws Exception {
 		String sql = "insert into members values(?,?,?,?,?,?,?,?,?,?,sysdate,null)";
 		try (Connection con = this.getConnection(); 
 				PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -96,7 +96,7 @@ public class MembersDAO {
 
 				Timestamp join_date = rs.getTimestamp("join_date");
 				MembersDTO dto = new MembersDTO(myid, null, name, birth_date, nickname, contact, email, zipcode,
-						address1, address2, join_date, null);
+						address1, address2, join_date);
 				return dto;
 			}
 		}

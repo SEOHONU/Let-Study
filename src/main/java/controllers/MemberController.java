@@ -7,74 +7,66 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import commons.EncryptionUtils;
+import com.google.gson.Gson;
 import dao.MembersDAO;
 import dto.MembersDTO;
 
 @WebServlet("*.member")
 public class MemberController extends HttpServlet {
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		String cmd = request.getRequestURI();
-		MembersDAO dao = MembersDAO.getInstacne();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String cmd = request.getRequestURI(); 
+		Gson g = new Gson();
+		MembersDAO dao = MembersDAO.getInstance();
 
 		try {
-			// login 로그인
-			if (cmd.equals("/login.member")) {
-				String id = request.getParameter("id");
-				String pw = EncryptionUtils.sha512(request.getParameter("pw"));
-				String nickname = dao.getNickname(id);
-				request.getSession().setAttribute("loggedNickname", nickname);
-				System.out.println(id + ":" + pw);
-				boolean result = dao.isMember(id, pw);
-				if (result) {
-					request.getSession().setAttribute("loggedID", id);
-				}
+			if(cmd.equals("/idCheck.member")) {
 
-				response.sendRedirect("/index.jsp");
-			} else if (cmd.equals("/logout.member")) {
+				String id = request.getParameter("id"); 
+				boolean result = dao.isIdExist(id);
+				String resp = g.toJson(result); 
+				response.getWriter().append(resp); 
+
+
+
+			}else if(cmd.equals("/login.member")) {
+
+				String id = request.getParameter("id"); 
+				String pw = request.getParameter("pw"); 
+				boolean result = MembersDAO.getInstance().isMember(id, pw); 
+				if(result) {
+					request.getSession().setAttribute("loggedID", id); 
+					String nickname = MembersDAO.getInstance().getNickname(id); 
+					request.getSession().setAttribute("nickname", nickname); 
+				}
+				// 닉네임 세션에 가져옴 
+				response.sendRedirect("");
+				//         로그인 성공하면 들어갈 페이지 입력해야함 
+			}else if(cmd.equals("/joinMember.member")) {
+
+				String id = request.getParameter("id"); 
+				String pw = request.getParameter("pw"); 
+				String name = request.getParameter("name"); 
+				//         생년월일 값 받아야함 
+				String birthYear = request.getParameter("birthYear"); 
+				String birthMonth = request.getParameter("birthMonth"); 
+				String birthDay = request.getParameter("birthDay"); 
+				//생년월일 값 받음 
+				String nickname = request.getParameter("nickname");
+				String contact = request.getParameter("contact"); 
+				String email = request.getParameter("email"); 
+				String zipcode = request.getParameter("zipcode"); 
+				String roadAddress = request.getParameter("roadAddress");
+				String detailAddress = request.getParameter("detailAddress"); 
+
+				// 회원가입일자 받는 법 몰라서 null로 받음 
+				MembersDTO dto = new MembersDTO
+						(id, pw, name, birthYear+""+birthMonth+""+birthDay, nickname, contact, email, zipcode, roadAddress, detailAddress, null);
+				int result = dao.insertAll(dto); 
+				// 회원가입하면 나타날 페이지 써야함 
+				response.sendRedirect(""); 
+			}else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
-
-			} else if (cmd.equals("/idCheck.member")) {
-				String id = request.getParameter("id");
-				boolean result = dao.isIdExist(id);
-				request.setAttribute("checkedId", result);
-				request.getRequestDispatcher("/member/idCheckForm.jsp").forward(request, response);
-			} else if (cmd.equals("/joinMember.member")) {
-				String id = request.getParameter("id");
-				String pw = EncryptionUtils.sha512(request.getParameter("pw"));
-				String name = request.getParameter("name");
-
-				String birthYear = request.getParameter("birthYear");
-			int birthMonth1 = Integer.parseInt(request.getParameter("birthMonth"));
-			String birthMonth;
-			if(birthMonth1>0 && birthMonth1<10) {
-				birthMonth = "0"+birthMonth1;
-			}
-			
-				String birthDay = request.getParameter("birthDay");
-				String birth_date = birthYear + birthMonth1 + birthDay;
-
-				
-				
-				String nickname = request.getParameter("nickname");
-				String contact = request.getParameter("contact");
-				String email = request.getParameter("email");
-				String zipcode = request.getParameter("zipcode");
-				String roadAddress = request.getParameter("roadAddress");
-				String detailAddress = request.getParameter("detailAddress");
-				MembersDTO dto = new MembersDTO(id, pw, name, birth_date, nickname, contact, email, zipcode,
-						roadAddress, detailAddress, null, null);
-				dao.insert(dto);
-				response.sendRedirect("/member/loginForm.jsp");
-
-
-				// select 회원정보 출력
 			} else if (cmd.equals("/myInfoSelect.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
 				MembersDTO dto = dao.myInfoSelect(id);
@@ -93,7 +85,7 @@ public class MemberController extends HttpServlet {
 				String zipcode = request.getParameter("zipcode");
 				String roadAddress = request.getParameter("roadAddress");
 				String detailAddress = request.getParameter("detailAddress");
-				MembersDTO dto = new MembersDTO(id, pw, name, birth_date, nickname, contact, email, zipcode, roadAddress, detailAddress, null, null);
+				MembersDTO dto = new MembersDTO(id, pw, name, birth_date, nickname, contact, email, zipcode, roadAddress, detailAddress, null);
 				dao.update(dto);
 				response.sendRedirect("/myPage/mypageMainForm.jsp");
 				// delete 회원탈퇴
@@ -102,18 +94,15 @@ public class MemberController extends HttpServlet {
 				dao.memberOut(id);
 				response.sendRedirect("/index.jsp");
 			} 
-
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			// response.sendRedirect("/error.jsp");
+		}catch (Exception e) {
+			e.printStackTrace(); 
+			response.sendRedirect("/error.jsp"); 
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
-
 
 	}
 }
