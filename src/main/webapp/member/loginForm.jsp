@@ -104,8 +104,13 @@ a {
 			</div>
 
 				<div class="btn">
+<<<<<<< HEAD
+					<button type="button" class="btn btn-primary" id="btnLogin">로그인</button>
+					<button type="button" class="btn btn-light" id="btnJoin">회원가입</button>
+=======
 					<button class="btn btn-primary" id="btnLogin">로그인</button>
 					<button class="btn btn-light" id="btnJoin" type="button">회원가입</button>
+>>>>>>> 243d87fed8fc5a0344d356c9e88f91dd95636e23
 				</div>
 			</form>
 
@@ -113,6 +118,8 @@ a {
 	</form>
 
 	<script>
+	
+	//로그인 성공시 추가해야됨 
 		$("#btnJoin").on("click", function() {
 			location.href = "/member/joinForm.jsp";
 		})
