@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <!DOCTYPE html>
@@ -19,26 +18,52 @@
                 integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
             <script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
             <style>
-                * {
+                /* * {
                     box-sizing: border-box;
                 }
 
                 div {
                     border: 1px solid black;
-                }
+                } */
 
                 .container {
                     position: relative;
                 }
 
+                .top {
+                    background-color: #3c757970;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    margin: 1px;
+                }
+
+
                 #baner {
                     padding: 0px;
                     position: relative;
+                    border: 1px solid #ddd;
+                    border-radius: 10px;
+                    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+                    background-color: #fff;
+                    margin: 10px;
                 }
 
                 .cir {
                     position: relative;
                     padding: 0%;
+                }
+
+                .searchbar {
+                    border: 1px solid #ddd;
+                    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+                    border-radius: 5px;
+                    margin: 5px;
+                }
+
+                .li {
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    padding: 10px;
                 }
 
                 .circle {
@@ -56,6 +81,10 @@
                 }
 
                 .joongo {
+                    border: 1px solid #ddd;
+                    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+                    border-radius: 5px;
+                    margin: 5px;
                     background-color: rgb(189, 189, 189);
                 }
 
@@ -90,16 +119,47 @@
                 #subsearchback {
                     display: none;
                 }
+
+                .naviname {
+                    cursor: pointer;
+                    transition-duration: 0.5s
+                }
+
+                .naviname:hover {
+                    background-color: #3c757970;
+                    color: white;
+
+                }
+
+                .jc {
+                    border: 1px solid #ddd;
+                    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+                    border-radius: 5px;
+                }
             </style>
+
+            <script>
+                function checkLogin(url) {
+                    var login = '<c:out value="${loggedID}"/>';
+                    if (login == "") {
+                        alert("로그인이 필요합니다.");
+                        location.href = "/index.jsp";
+                    } else {
+                        location.href = url;
+                    }
+                }
+            </script>
         </head>
 
         <body>
+
+
             <div class="container">
 
                 <!-- 헤더 네비 -->
                 <div class="row navi">
 
-                    <div class="col-12">
+                    <div class="col-12 top">
                         <div class="row">
                             <div class="col-8 col-lg-2 order-2 order-lg-first" id="logo">
                                 <div class="row">
@@ -113,9 +173,11 @@
                                                 <i class="fa-solid fa-magnifying-glass" id="subsearchclick"
                                                     style="display: inline;"></i>
                                             </div>
+
+
                                             <div class="col-12" id="subsearchback">
-                                                <form class="container-fluid" action="/allsearch.maincontroller"
-                                                    style="padding:0px;">
+                                                <form class="container-fluid" id="total_search"
+                                                    action="/allsearch.maincontroller" style="padding:0px;">
                                                     <i class="fa-solid fa-arrow-left" id="searsubback"
                                                         style="display: inline;"></i> <select name="select">
                                                         <option value="제목">제목</option>
@@ -125,9 +187,11 @@
                                                         placeholder="통합검색창" aria-label="Username"
                                                         aria-describedby="basic-addon1"
                                                         style="width: 40%; padding: 0; display: inline;" name="title">
-                                                    <button type="submit" class="btn btn-success"
+                                                    <button type="button" class="btn btn-success"
                                                         style="z-index: 0; background-color: rgb(60, 117, 121); padding: 0;">검색</button>
                                                 </form>
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -147,17 +211,21 @@
                                             <!-- 네비햄버거 누를시 나오는거 -->
                                             <div class="col-12 navisub">
                                                 <div class="row" style="text-align: right;">
-                                                    <div class="col-12 navisubstudy">
-                                                        <a href="/select.studyboard">스터디</a>
+                                                    <div class="col-12 naviname" style="text-align: center;"
+                                                        onclick="javascript:checkLogin('/select.studyboard');">
+                                                        Study
                                                     </div>
-                                                    <div class="col-12 navisubjoongo">
-                                                        <a href="/selectBound.secondHand">중고책</a>
+                                                    <div class="col-12 naviname" style="text-align: center;"
+                                                        onclick="javascript:checkLogin('/selectBound.secondHand');">
+                                                        second
                                                     </div>
-                                                    <div class="col-12 navisubfreeboard">
-                                                        <a href="/contentList.freeBoard">자유게시판</a>
+                                                    <div class="col-12 naviname" style="text-align: center;"
+                                                        onclick="javascript:checkLogin('/contentList.freeBoard');">
+                                                        free
                                                     </div>
-                                                    <div class="col-12 navisublicence">
-                                                        <a href="자격증 게시판으로">자격증</a>
+                                                    <div class="col-12 naviname" style="text-align: center;"
+                                                        onclick="javascript:checkLogin('/contentList.freeBoard');">
+                                                        licence
                                                     </div>
                                                 </div>
                                             </div>
@@ -171,7 +239,8 @@
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div class="col-12">
-                                                        <a href="/myPage/mypageMainForm.jsp"><i class="fa-solid fa-user"></i></a>
+                                                        <a href="/myPage/mypageMainForm.jsp"><i
+                                                                class="fa-solid fa-user"></i></a>
                                                         <!--로그인됐을때-->
                                                     </div>
                                                 </c:otherwise>
@@ -182,18 +251,25 @@
 
                                 </div>
                             </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-2" style="text-align: center;">
-                                <a href="/select.studyboard"> Study </a>
+
+
+                            <div class="col-lg-1 d-none d-lg-block order-lg-2 naviname" style="text-align: center;"
+                                onclick="javascript:checkLogin('/select.studyboard');">
+                                Study
                             </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-3" style="text-align: center;">
-                                <a href="/selectBound.secondHand"> Sencond </a>
+                            <div class="col-lg-1 d-none d-lg-block order-lg-3 naviname" style="text-align: center;"
+                                onclick="javascript:checkLogin('/selectBound.secondHand');">
+                                Sencond
                             </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-4" style="text-align: center;">
-                                <a href="/contentList.freeBoard"> Board </a>
+                            <div class="col-lg-1 d-none d-lg-block order-lg-4 naviname" style="text-align: center;"
+                                onclick="javascript:checkLogin('/contentList.freeBoard');">
+                                Board
                             </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-5" style="text-align: center;">
-                                <a href="자격증 게시판으로"> Licence </a>
+                            <div class="col-lg-1 d-none d-lg-block order-lg-5 naviname" style="text-align: center;"
+                                onclick="javascript:checkLogin('/자격증 게시판으로');">
+                                Licence
                             </div>
+
                             <div class="col-lg-2 d-none d-lg-block  order-lg-last">
                                 <div class="row">
 
@@ -211,7 +287,8 @@
                                         </c:when>
                                         <c:otherwise>
                                             <div class="col-6 profile">
-                                                <a href="/myPage/mypageMainForm.jsp"><i class="fa-solid fa-user"></i></a>
+                                                <a href="/myPage/mypageMainForm.jsp"><i
+                                                        class="fa-solid fa-user"></i></a>
                                                 <!--로그인됐을때-->
                                             </div>
                                             <div class="col-6 logout">
@@ -227,17 +304,17 @@
 
                             <div class="col-2 d-block d-lg-none order-last">
                                 <div class="row">
-                                    
+
                                     <c:choose>
                                         <c:when test="${loggedID==null}">
-                                        <div class="col-12">　</div>
+                                            <div class="col-12">　</div>
                                             <div class="col-12" style="text-align: right;">
                                                 <a href="/member/loginForm.jsp"><i
                                                         class="fa-solid fa-right-to-bracket"></i></a>
                                             </div>
                                         </c:when>
                                         <c:otherwise>
-                                        <div class="col-12">${sessionScope.loggedID}회원</div>
+                                            <div class="col-12">${sessionScope.loggedID}회원</div>
                                             <div class="col-12" style="text-align: right;">
                                                 <a href="/logout.member"><i
                                                         class="fa-solid fa-right-from-bracket"></i></a>
@@ -265,7 +342,7 @@
                             <div class="carousel-inner">
                                 <a href="인기 있는 스터디">
                                     <div class="carousel-item active" data-bs-interval="5000">
-                                        <img src="..." class="d-block w-100 slide" alt="...">
+                                        <img src="/image/다운로드.jpg" class="d-block  slide" alt="...">
                                         <div class="carousel-caption d-none d-md-block">
                                             <h5>인기있는 스터디</h5>
                                             <p>좋아요를 많이 받은 호스트의 스터디</p>
@@ -273,7 +350,7 @@
                                     </div>
                                 </a> <a href="등급 정보">
                                     <div class="carousel-item" data-bs-interval="5000">
-                                        <img src="..." class="d-block w-100 slide" alt="...">
+                                        <img src="/image/다운로드.jpg" class="d-block  slide" alt="...">
                                         <div class="carousel-caption d-none d-md-block">
                                             <h5>등급별로 혜택을 누려보세요</h5>
                                             <p>등급별 혜택 종류</p>
@@ -281,7 +358,7 @@
                                     </div>
                                 </a> <a href="임박 시험 날짜">
                                     <div class="carousel-item" data-bs-interval="5000">
-                                        <img src="..." class="d-block w-100 slide" alt="...">
+                                        <img src="/image/다운로드.jpg" class="d-block  slide" alt="...">
                                         <div class="carousel-caption d-none d-md-block">
                                             <h5>날짜가 임박한 시험</h5>
                                             <p>시험일자가 임박한 시험을 보여드립니다.</p>
@@ -302,23 +379,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row searchbar">
                     <div class="col-lg-2 d-none d-lg-block" style="background-color: rgb(30, 60, 62);">공백</div>
                     <div class="col-lg-8 d-none d-lg-block"
                         style="text-align: center; background-color: rgb(30, 60, 62);">
 
-                        <form class="container-fluid" action="/allsearch.maincontroller">
+                        <form class="container-fluid" id="total_search" action="/allsearch.maincontroller">
                             <div class="input-group" style="margin-top: 10px; margin-bottom: 10px;">
                                 <select name="select">
                                     <option value="제목">제목</option>
                                     <option value="내용">내용</option>
                                     <option value="작성자">작성자</option>
-                                </select> &nbsp; <input type="text" class="form-control" placeholder="통합검색창"
-                                    aria-label="Username" aria-describedby="basic-addon1" name="title"> &nbsp;
-                                <button type="submit" class="btn btn-success"
+                                </select> &nbsp;
+                                <input type="text" class="form-control" placeholder="통합검색창" aria-label="Username"
+                                    aria-describedby="basic-addon1" name="title" /> &nbsp;
+
+                                <button type="button" class="btn btn-success"
                                     style="z-index: 0; background-color: rgb(60, 117, 121);">검색</button>
                             </div>
                         </form>
+                        
+                        
+                       
 
 
                     </div>
@@ -330,16 +412,16 @@
                         <div class="row 스터디" style="text-align: center;">
                             <div class="col-12">공백</div>
                             <div class="col-12" style="text-align: left;">
-                                <a href="스터디 게시판으로가기">스터디 종류</a>
+                                <a onclick="javascript:checkLogin('/select.studyboard');">스터디 종류</a>
                             </div>
                             <div class="col-12">
                                 <div class="row">
-                                    <div class="col-3 d-none d-sm-block order-sm-first">
+                                    <div class="col-3 d-none d-sm-block order-sm-first li">
                                         <div class="row">
                                             <div class="col-12 cir">
                                                 <a href="기술사 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle"></div>
+                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -348,12 +430,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-3 d-none d-sm-block order-sm-1">
+                                    <div class="col-3 d-none d-sm-block order-sm-1 li">
                                         <div class="row">
                                             <div class="col-12 cir">
                                                 <a href="기능장 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle"></div>
+                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -362,12 +444,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-3 order-sm-2 order-2">
+                                    <div class="col-3 order-sm-2 order-2 li">
                                         <div class="row">
                                             <div class="col-12 cir">
                                                 <a href="기사 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle"></div>
+                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -376,12 +458,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-3 d-none d-sm-block order-sm-3">
+                                    <div class="col-3 d-none d-sm-block order-sm-3 li">
                                         <div class="row">
                                             <div class="col-12 cir">
                                                 <a href="산업기사 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle"></div>
+                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -390,12 +472,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-3 order-sm-4 order-1">
+                                    <div class="col-3 order-sm-4 order-1 li">
                                         <div class="row">
                                             <div class="col-12 cir">
                                                 <a href="기능사 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle"></div>
+                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -404,12 +486,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-3 order-sm-5 order-first">
+                                    <div class="col-3 order-sm-5 order-first li">
                                         <div class="row">
                                             <div class="col-12 cir">
                                                 <a href="서비스 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle"></div>
+                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -418,12 +500,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-3 d-none d-sm-block order-sm-last">
+                                    <div class="col-3 d-none d-sm-block order-sm-last li">
                                         <div class="row">
                                             <div class="col-12 cir">
                                                 <a href="국가기술자격 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle"></div>
+                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -432,12 +514,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-3 d-none d-sm-block order-sm-last">
+                                    <div class="col-3 d-none d-sm-block order-sm-last li">
                                         <div class="row">
                                             <div class="col-12 cir">
                                                 <a href="국가전문자격 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle"></div>
+                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -446,12 +528,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-3 d-sm-none d-block order-last">
+                                    <div class="col-3 d-sm-none d-block order-last li">
                                         <div class="row">
                                             <div class="col-12 cir">
                                                 <a href="더보기 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle"></div>
+                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -474,7 +556,7 @@
                                         <div class="row 중고책2">
                                             <div class="col-12">공백</div>
                                             <div class="col-12">
-                                                <a href="/selectBound.secondHand">중고책</a>
+                                                <a onclick="javascript:checkLogin('//selectBound.secondHand');">중고책</a>
                                             </div>
                                             <div class="col-12">
                                                 <div class="row">
@@ -605,9 +687,15 @@
                         } else if (a >= sdto.length - 4) {
                             var textfront1 = $('<div class="col-6 d-none d-sm-block"></div>');
                         }
-                        var textfront2 = $('<a href="/secondHandBoardContents.secondHand?seq=' + page + '&currentPage=' + ppage + '"></a>')
+
+                        // onclick="javascript:checkLogin('/selectBound.secondHand
+                        // ');"
+
+                        var textfront2 = $('<a onclick="javascript:checkLogin(\'/secondHandBoardContents.secondHand?seq=' + page + '&currentPage=' + ppage + '\');"></a>')
+
+                        // var textfront2 = $('<a href="/secondHandBoardContents.secondHand?seq=' + page + '&currentPage=' + ppage + '"></a>')
                         var textfront3 = $('<div class="card mb-3" style = "max-width: 540px;"> </div>')
-                        var textfront4 = $('<div class="row g-0"></div>')
+                        var textfront4 = $('<div class="row g-0 jc"></div>')
                         var textfront5 = $('<div class="col-md-4"></div>')
                         var textfront6 = $('<img src="..." class="img-fluid rounded-start" alt="...">')
                         var textfront7 = $('<div class="col-md-8"></div>')
@@ -634,20 +722,48 @@
                         subwriter.append(writer);
                     }
                 })
+
+
+                $(".btn-success").click(function () {
+                    const targetForm = $(this).closest("form");
+                    var login = '<c:out value="${loggedID}"/>';
+                    const inputText = targetForm.find(".form-control");
+                    if (login != "") { //성공
+                        if (inputText.val() == "") {
+                            alert("검색어를 입력해주세요");
+                            return;
+                        }
+                        targetForm.submit();
+                    } else {
+                        alert("로그인이 필요합니다");
+                    }
+                });
             });
 
-            
+            /* function loginpix(url){
+                var login = '<c:out value="${loggedID}"/>';
+                if( login != ""){ //성공
+                    }
+                    url.submit();
+                }else{
+                    alert("로그인이 필요합니다");
+                }
+            } */
+
+
             addEventListener("resize", function (event) {
-            	const bodySize = parseInt($("body").css("width"));
-            	if( bodySize > 768){
-            		const navisub = $(".navisub");
-            		if( navisub.css("display") == "block"){
-            			navisub.css("display","none");
-            		}
-            	}
+                const bodySize = parseInt($("body").css("width"));
+                if (bodySize > 992) {
+                    const navisub = $(".navisub");
+                    if (navisub.css("display") == "block") {
+                        navisub.css("display", "none");
+                    }
+                }
             });
-            
-            
+
+
+
         </script>
+
 
         </html>
