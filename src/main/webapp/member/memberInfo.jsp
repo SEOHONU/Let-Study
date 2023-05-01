@@ -74,7 +74,7 @@
         <div class="row header">
             <div class="col-12">
                 <h1 class="join-header text-center">개인정보수정</h1>
-                <h2 class="text-center">LetStudy에 오신 걸 환영합니다.</h2>
+                <h2 class="text-center">${loggedNickname}님, LetStudy에 오신 걸 환영합니다.</h2>
             
             </div>
         </div>
@@ -82,7 +82,7 @@
                 <div class="col-3"></div>
                 <div class="col-6">
                     <label for="idInput">아이디*</label>
-                    <input type="text" class="form-control" id="id" name="id" value="${myInfo.id}" readonly>
+                    <input type="text" class="form-control" id="id" name="id" value="${loggedID}" readonly>
                 </div>
                 <div class="col-3"></div>
                 
@@ -109,7 +109,7 @@
                 <div class="col-3"></div>
                 <div class="col-6">
                     <label for="nameInput">이름*</label>
-                    <input type="name" class="form-control" id="name" name="name" value="${myInfo.name}" readonly>
+                    <input type="text" class="form-control" id="name" name="name" value="${myInfo.name}" readonly>
                 </div>
                 <div class="col-3"></div>
             </div>
@@ -185,8 +185,8 @@
 
     <script>
     $("#btnCancel").on("click",function(){
-    	location.href="/myInfoSelect.member";
-    }///////////////////////////취소 버트 누르면 마이페이지로 이동 수정하기
+    	location.href="/myPage/mypageMainForm";
+    })
 
         var idValIdFlag = false;
 

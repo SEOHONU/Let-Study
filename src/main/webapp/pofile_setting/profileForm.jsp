@@ -103,6 +103,8 @@ div {
 
 <body>
 
+
+
 	<form action="/update.profile_settingController" method="get"
 		id="profileBox">
 		<div class="container">
@@ -120,51 +122,52 @@ div {
 				</div>
 				<div class="col-8">
 					<div id="profile">
-						<font size="6px"><b>Profile</b></font><br> 닉네임<br> <input
-							type="text" id="nickname" name="nickname" size='50'
-							value="${sessionScope.loggedNickname}" readonly><br>
+						<font size="6px"><b>Profile</b></font><br> 닉네임<br> 
+						<input type="text" id="nickname" name="nickname" size='50'
+							value="${loggedNickname}" readonly><br>
 
 						자기소개
 						<div id="introduce1">
-							<textarea id="introduceMyslef" name="introduceMyslef"
-								maxlength="180" value="${update.profile_introduce}" readonly></textarea>
+							<textarea name="introduceMyslef1" id="introduceMyslef1"
+								value="${select.profile_introduce}" readonly></textarea>
+								
 							<br>
 						</div>
 
 						<div id="introduce2">
 							<span id="counter"> 0 자 / 180자</span><br>
-							<textarea placeholder="내용을 입력하세요.(최대 180자)" id="introduceMyslef"
-								name="introduceMyslef" maxlength="180"></textarea>
+							<textarea placeholder="내용을 입력하세요.(최대 180자)" id="introduceMyslef2"
+								name="introduceMyslef2" maxlength="180">${select.profile_introduce}</textarea>
 							<br>
 						</div>
 
 						SNS<br>
 						<div class="instgram">
-							<i class="fa-brands fa-instagram"></i> <input type="text"
-								id="instagram" size='50'
-								value="www.instagram/${update.profile_instargram }" readonly>
+							<i class="fa-brands fa-instagram"></i> 
+							<input type="text" id="instagram" name ="instargram" size='50'
+								value="www.instargram/${select.profile_instargram }" readonly>
 						</div>
 						<div class="facebook">
-							<i class="fa-brands fa-facebook-f"></i> <input type="text"
-								id="facebook" name="facebook" size='50'
-								value="www.facebook/${update.profile_facebook }" readonly>
+							<i class="fa-brands fa-facebook-f"></i> 
+							<input type="text" id="facebook" name="facebook" size='50'
+								value="www.facebook/${select.profile_facebook }" readonly>
 						</div>
 						<div class="url">
-							<i class="fa-brands fa-internet-explorer"></i> <input type="text"
-								id="urlAdd" name="urlAdd" size='50'
-								value="${update.profile_url}" readonly>
+							<i class="fa-brands fa-internet-explorer"></i> 
+							<input type="text" id="urlAdd" name="url" size='50'
+								value="${select.profile_url}" readonly>
 						</div>
 						<input type="button" id="backBtn" value="취소" style="float: right"
-							onclick="location.href='/myPage/mypageMainForm.jsp'"> <input
-							type="submit" id="okBtn" value="확인" style="float: right">
-						<input type="button" id="updateBtn" value="수정"
-							style="float: right">
+							onclick="location.href='/myPage/mypageMainForm.jsp'"> 
+							<input type="submit" id="okBtn" value="확인" style="float: right">
+						<input type="button" id="updateBtn" value="수정" style="float: right">
 
 
 					</div>
 				</div>
 			</div>
 		</div>
+		<input  type="hidden" name="id" value="${loggedID}">
 	</form>
 
 
@@ -175,8 +178,9 @@ $(function(){
 	})
 	
 </script>
+
 	<script>
-    $("#introduceMyslef").keyup(function(e){
+    $("#introduceMyslef2").keyup(function(e){
         var introduceMyslef = $(this).val();
     $("#counter").html( introduceMyslef.length +'자 / 180자');
     

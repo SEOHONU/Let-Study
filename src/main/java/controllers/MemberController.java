@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import dao.MembersDAO;
+import dao.Profile_settingDAO;
 import dto.MembersDTO;
 
 @WebServlet("*.member")
@@ -27,7 +28,6 @@ public class MemberController extends HttpServlet {
 				response.getWriter().append(resp); 
 
 
-
 			}else if(cmd.equals("/login.member")) {
 
 				String id = request.getParameter("id"); 
@@ -36,7 +36,7 @@ public class MemberController extends HttpServlet {
 				if(result) {
 					request.getSession().setAttribute("loggedID", id); 
 					String nickname = MembersDAO.getInstance().getNickname(id); 
-					request.getSession().setAttribute("nickname", nickname); 
+					request.getSession().setAttribute("loggedNickname", nickname); 
 				}
 				// 닉네임 세션에 가져옴 
 				response.sendRedirect("/index.jsp");
@@ -63,7 +63,11 @@ public class MemberController extends HttpServlet {
 						(id, pw, name, birthYear+""+birthMonth+""+birthDay, nickname, contact, email, zipcode, roadAddress, detailAddress, null);
 				int result = dao.insertAll(dto); 
 				// 회원가입하면 나타날 페이지 써야함 
-				response.sendRedirect("/"); 
+				int result2 = dao.insertProfile(id, name);
+				response.sendRedirect("/index.jsp"); 
+				
+			
+				
 			}else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
@@ -73,7 +77,6 @@ public class MemberController extends HttpServlet {
 				MembersDTO dto = dao.myInfoSelect(id);
 				request.setAttribute("myInfo", dto);
 				request.getRequestDispatcher("/member/memberInfo.jsp").forward(request, response);
-
 				// update 회원정보수정 
 			} else if (cmd.equals("/update.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");

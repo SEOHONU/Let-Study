@@ -24,21 +24,31 @@ public class Profile_settingController extends HttpServlet {
 			
 		try {
 			if (cmd.equals("/select.profile_settingController")) {
-				String loginId = (String) request.getSession().getAttribute("loggedId");
-				response.sendRedirect("/profile_setting/profileForm.jsp");
+				String loginId = (String) request.getSession().getAttribute("loggedID");
+				Profile_settingDTO result = dao.select(loginId);
+				System.out.println("셀렉트");
+				
+				request.setAttribute("select", result);
+				response.sendRedirect("/pofile_setting/profileForm.jsp");
 			
+				
 			}else if (cmd.equals("/update.profile_settingController")) {
-				String loginId = (String) request.getSession().getAttribute("loggedId");
+				String loginId = request.getParameter("id");
 				String nickname = request.getParameter("nickname");
-				String introduce = request.getParameter("introduceMyslef");
+				String introduce = request.getParameter("introduceMyslef2");
 				String instargram = request.getParameter("instargram");
 				String facebook = request.getParameter("facebook");
 				String url = request.getParameter("url");
-				Profile_settingDTO result = dao.update(new Profile_settingDTO(loginId,nickname,introduce,instargram,facebook,url));
-				request.setAttribute("update",result);
-				request.getRequestDispatcher("/select.Profile_settingController").forward(request, response);
+				System.out.println("업데이트");
+				int result = dao.update(new Profile_settingDTO(loginId,nickname,introduce,instargram,facebook,url));
+				request.setAttribute("update", result);
 				
+				request.getRequestDispatcher("/select.profile_settingController").forward(request, response);
 			}
+			
+			
+			
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 			//response.sendRedirect("/error.jsp");

@@ -241,14 +241,14 @@ div {
 							<div class="nickname" align="center">
 								<b>${sessionScope.loggedNickname}</b>
 							</div>
-							<div class="greetings" align="center">Greetings</div>
+							<div class="greetings" align="center">${update.profile_introduce}</div>
 							<div id="circles">
 								<div id="message">
 									<a href=""><i class="fa-regular fa-envelope" id="pictogram"></i></a>
 								</div>
 								<div id="profileSetting">
 								
-									<a href="/pofile_setting/profileForm.jsp">
+									<a href="/select.profile_settingController">
 									<i class="fa-solid fa-gear"></i></a>
 								</div>
 							</div>
@@ -271,7 +271,7 @@ div {
 							</div>
 							<hr>
 							<div class="myInfo">
-								<a href="/member/memberInfo.jsp">
+								<a href="/myInfoSelect.member">
 									<button type="button">
 										<i class="fa-solid fa-gear"></i> 내 정보 관리
 									</button>

@@ -89,10 +89,21 @@ public class MembersDAO {
 	         pstat.setString(10, dto.getAddress2());
 	         int result = pstat.executeUpdate(); 
 	         con.commit();
-	         System.out.println("222");
+	         
 	         return result;
 	      }
 	   }
+	   
+		public int insertProfile(String id, String nickname) throws Exception {
+			 String sql = "insert into profile values (?,?,null,null,null,null)";
+			   try(Connection con = this.getConnection(); 
+					   PreparedStatement pstat = con.prepareStatement(sql);) {
+				   pstat.setString(1, id);
+				   pstat.setString(2, nickname);
+				   int result = pstat.executeUpdate();
+				   return result;
+		}
+		}
 
 
 	   public MembersDTO myInfoSelect(String id) throws Exception {
@@ -101,7 +112,6 @@ public class MembersDAO {
 	         pstat.setString(1, id);
 	         try (ResultSet rs = pstat.executeQuery();) {
 	            rs.next();
-	            String myid = rs.getString("id");
 	            String name = rs.getString("name");
 	            String birth_date = rs.getString("birth_date");
 	            String nickname = rs.getString("nickname");
@@ -112,7 +122,7 @@ public class MembersDAO {
 	            String address2 = rs.getString("address2");
 
 	            Timestamp join_date = rs.getTimestamp("join_date");
-	            MembersDTO dto = new MembersDTO(myid, null, name, birth_date, nickname, contact, email, zipcode,
+	            MembersDTO dto = new MembersDTO(id, null, name, birth_date, nickname, contact, email, zipcode,
 	                  address1, address2, join_date);
 	            return dto;
 	         }
@@ -150,4 +160,7 @@ public class MembersDAO {
 	         con.commit();
 	      }
 	   }
+
+
+
 }
