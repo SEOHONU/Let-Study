@@ -75,7 +75,7 @@ public class FreeBoardDAO {
 
 
 	public String getNicknameBySeq(int seq) throws Exception{
-		String sql = "SELECT m.nickname FROM board b INNER JOIN members m ON b.board_writer = m.id where b.board_seq =?";
+		String sql = "SELECT m.nickname FROM free_board b INNER JOIN members m ON b.board_writer = m.id where b.board_seq =?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
