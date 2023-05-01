@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import dao.FreeFileDAO;
 import dao.FreeBoardDAO;
+import dao.FreeFileDAO;
 import dao.FreeReplyDAO;
-import dto.FreeFileDTO;
+import dto.FreeBoardAndMemberDTO;
 import dto.FreeBoardDTO;
-import dto.FreeReplyDTO;
-import dto.StudyBoardDTO;
+import dto.FreeFileDTO;
+import dto.ReplyAndMemberDTO;
 import statics.Settings;
 
 @WebServlet("*.freeBoard")
@@ -79,7 +79,7 @@ public class FreeBoardController extends HttpServlet {
 				int end = currentPage * Settings.BOARD_RECORD_COUNT_PER_PAGE;
 				int first = (currentPage-1)/Settings.BOARD_NAVI_COUNT_PER_PAGE*Settings.BOARD_NAVI_COUNT_PER_PAGE;
 				int last = (currentPage-1)/Settings.BOARD_NAVI_COUNT_PER_PAGE*Settings.BOARD_NAVI_COUNT_PER_PAGE+Settings.BOARD_NAVI_COUNT_PER_PAGE+1;
-				List<FreeBoardDTO> list = dao.selectFreeBoard(start, end);
+				List<FreeBoardAndMemberDTO> list = dao.selectFreeBoardList(start, end);
 				
 				List<String> pageNavi = dao.getPageNavi(dao.getRecordCount(), currentPage);
 				request.setAttribute("list", list);
@@ -119,7 +119,7 @@ public class FreeBoardController extends HttpServlet {
 				}
 				// 댓글 출력
 				FreeReplyDAO daoRP = FreeReplyDAO.getInstance();
-				List<FreeReplyDTO> replyResult = daoRP.selectReply(seq);
+				List<ReplyAndMemberDTO> replyResult = daoRP.selectReply(seq);
 				request.setAttribute("replyResult", replyResult);
 				request.getRequestDispatcher("/freeBoard/FreeBoardContents.jsp").forward(request, response);
 			// 게시글 업데이트
