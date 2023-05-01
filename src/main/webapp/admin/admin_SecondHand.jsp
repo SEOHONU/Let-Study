@@ -149,7 +149,7 @@
 					<li class="nav-item"><a class="nav-link"
 						href="/secondHand.adminBoard?cpage=1">중고책게시판 관리</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/admin_userBoard.jsp">회원관리</a></li>
+						href="/user_Board.adminBoard?cpage=1">회원관리</a></li>
 					<!--<li class="nav-item"><a class="nav-link disabled" href="#"
               tabindex="-1" aria-disabled="true">배너관리</a></li>-->
 
@@ -198,7 +198,7 @@
 								<tr>
 									<td>no : ${i.seq}</td>
 									<td>${i.writer}</td>
-									<td>${i.title}</td>
+									<td><a href="secondHandBoardContents.secondHand?seq=${i.seq}&currentPage=1">${i.title}</a></td>
 									<td class="col d-none d-md-block" style="height: 55px;">${i.view_count}</td>
 									<td>${i.detailDate}</td>
 									<td><a
