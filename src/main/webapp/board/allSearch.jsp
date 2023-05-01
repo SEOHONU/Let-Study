@@ -44,61 +44,7 @@
         <body>
 
             <div class="container">
-
-                <div class="row navi">
-                    <div class="col-12">
-                        <div class="row">
-
-                            <div class="col-6 col-lg-2 order-2 order-lg-first">
-                                <a href="/index.jsp"> logo </a>
-                            </div>
-                            <div class="col-lg-4 d-none d-lg-block order-lg-1">
-                                여백
-                            </div>
-                            <div class="col-4 d-block d-lg-none order-1">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                네비햄버거
-                                            </div>
-                                            <div class="col-12"><a href="회원가입 페이지">회원가입</a></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <div class="col-12 subsearch">검색</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-2">
-                                <a href="스터디 게시판으로">스터디</a>
-                            </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-3">
-                                <a href="중고책 게시판으로">중고책</a>
-                            </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-4">
-                                <a href="자유 게시판으로">자유게시판</a>
-                            </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-5">
-                                <a href="자격증 게시판으로">자격증</a>
-                            </div>
-                            <div class="col-lg-2 d-none d-lg-block  order-lg-last">
-                                <div class="row">
-                                    <div class="col-6"><a href="로그인 페이지로">로그인</a></div>
-                                    <div class="col-6"><a href="회원가입 페이지로">회원가입</a></div>
-                                </div>
-                            </div>
-                            <div class="col-2 d-block d-lg-none order-last">
-                                <div class="row">
-                                    <div class="col-12">공백</div>
-                                    <div class="col-12">로그인</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <c:import url="/board/topMenu.jsp"></c:import>
 
                 <div class="row body">
 
@@ -155,10 +101,10 @@
                                                         </div>
                                                     </c:forEach>
                                                     <div class="col-12" style="text-align: right;">
-                                                <a href="스터디 관련검색 최신순으로 정리되어 있게 전부 보여주는거">
-                                                    더보기
-                                                </a>
-                                            </div>
+                                                        <a href="스터디 관련검색 최신순으로 정리되어 있게 전부 보여주는거">
+                                                            더보기
+                                                        </a>
+                                                    </div>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div class="col-12">
@@ -204,10 +150,10 @@
                                                         </div>
                                                     </c:forEach>
                                                     <div class="col-12" style="text-align: right;">
-                                                <a href="중고책  관련검색 최신순으로 정리되어 있게 전부 보여주는거">
-                                                    더보기
-                                                </a>
-                                            </div>
+                                                        <a href="중고책  관련검색 최신순으로 정리되어 있게 전부 보여주는거">
+                                                            더보기
+                                                        </a>
+                                                    </div>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div class="col-12">
@@ -254,6 +200,7 @@
                     </div>
                 </div>
                 <div class="row footer">풋터</div>
+            </div>
         </body>
 
         </html>

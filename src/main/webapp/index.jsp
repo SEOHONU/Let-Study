@@ -139,6 +139,7 @@
             </style>
 
             <script>
+            
                 function checkLogin(url) {
                     var login = '<c:out value="${loggedID}"/>';
                     if (login == "") {
@@ -147,7 +148,7 @@
                     } else {
                         location.href = url;
                     }
-                }
+                } 
             </script>
         </head>
 
