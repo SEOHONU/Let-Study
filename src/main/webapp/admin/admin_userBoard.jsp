@@ -200,11 +200,11 @@
 								<td>${i.id}</td>
 								<td>${i.name}</td>
 								<td>${i.birth_date}</td>
-								<td class="col d-none d-md-block">${i.email}</td>
+								<td class="col d-none d-md-block" style="height: 55px;">${i.email}</td>
 								<td>${i.join_date}</td>
 								<td><a
 									href="/userList_delete.adminBoard?id=${i.id}&cpage=${cpage}"><button
-											type="button" class="btn btn-outline-danger btn_del">현생으로</button></a></td>
+											type="button" class="btn btn-outline-danger btn_del">현생</button></a></td>
 
 							</tr>
 						</c:forEach>
@@ -249,41 +249,43 @@
 
 		<!-- 하단 네비 시작 -->
 
+
+
+
 		<nav aria-label="Page navigation example" align="center">
-			<ul class="pagination justify-content-center">
+			<ul class="pagination d-flex justify-content-center">
+				<c:forEach var="i" items="${navi}">
+					<c:choose>
+						<c:when test="${i eq '<<'}">
+							<li class="page-item"><a class="page-link"
+								href="/user_Board.adminBoard?cpage=${start}">${i}</a></li>
+						</c:when>
+						<c:when test="${i eq '<'}">
+							<li class="page-item"><a class="page-link"
+								href="/user_Board.adminBoard?cpage=${cpage-1}">${i}</a></li>
+						</c:when>
+						<c:when test="${i eq '>'}">
+							<li class="page-item"><a class="page-link"
+								href="/user_Board.adminBoard?cpage=${cpage+1}">${i}</a></li>
+						</c:when>
+						<c:when test="${i eq '>>'}">
+							<li class="page-item"><a class="page-link"
+								href="/user_Board.adminBoard?cpage=${end}">${i}</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link"
+								href="/user_Board.adminBoard?cpage=${i}">${i}</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</ul>
+		</nav>
 
 
 
-				<div class="col-12" align="center">
-					<c:forEach var="i" items="${navi}">
-						<c:choose>
-							<c:when test="${i eq '<<'}">
-								<a href="/freeBoard.adminBoard?cpage=${start}">${i}</a>
-							</c:when>
-							<c:when test="${i eq '<'}">
-								<a href="/freeBoard.adminBoard?cpage=${cpage-1}">${i}</a>
-							</c:when>
-							<c:when test="${i eq '>'}">
-								<a href="/freeBoard.adminBoard?cpage=${cpage+1}">${i}</a>
-							</c:when>
-							<c:when test="${i eq '>>'}">
-								<a href="/freeBoard.adminBoard?cpage=${end}">${i}</a>
-							</c:when>
-							<c:otherwise>
-								<a href="/freeBoard.adminBoard?cpage=${i}">${i}</a>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</div>
-
-
-
-				<nav>
-					<ul class="pagination">
-						<!-- JavaScript 코드로 페이지 내비게이션 생성 -->
-					</ul>
-				</nav>
-
+		<nav>
+			<ul class="pagination">
+				<!-- JavaScript 코드로 페이지 내비게이션 생성 -->
 			</ul>
 		</nav>
 	</div>
