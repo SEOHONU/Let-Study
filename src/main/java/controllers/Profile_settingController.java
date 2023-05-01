@@ -24,12 +24,12 @@ public class Profile_settingController extends HttpServlet {
 			
 		try {
 			if (cmd.equals("/select.profile_settingController")) {
-				String loginId = (String) request.getSession().getAttribute("loggedId");
+				String loginId = (String) request.getSession().getAttribute("loggedID");
 				response.sendRedirect("/profile_setting/profileForm.jsp");
 			
 			}else if (cmd.equals("/update.profile_settingController")) {
 				System.out.println("����11");
-				String loginId = (String) request.getSession().getAttribute("loggedId");
+				String loginId = (String) request.getSession().getAttribute("loggedID");
 				String nickname = request.getParameter("nickname");
 				String introduce = request.getParameter("introduceMyslef");
 				String instargram = request.getParameter("instargram");

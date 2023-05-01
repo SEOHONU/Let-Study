@@ -56,7 +56,7 @@
 
                             <div class="col-2">공백</div>
                             <div class="col-8">
-                                <div class="row bodysub">
+                                <div class="row">
 
                                     <div class="col-12" style="text-align: center;">공백</div>
 
@@ -82,6 +82,7 @@
                                         </nav>
                                     </div>
                                     <div class="col-12" style="text-align: center;">공백</div>
+
                                     <div class="col-12">스터디
                                         <div class="row bodysubstudy">
 
@@ -120,11 +121,9 @@
 
                                     <div class="col-12">중고책
                                         <div class="row bodysubstudy">
-
                                             <c:choose>
                                                 <c:when test="${sdto.size()>0}">
-                                                    <c:forEach var="second" items="${sdto}" begin="${sdto.size()-1}"
-                                                        end="${sdto.size()-5}" step="-1">
+                                                    <c:forEach var="second" items="${sdto}" begin="0" end="3">
                                                         <div class="col-6 d-none d-lg-block">
                                                             <a href="중고책 관련검색 최신">
                                                                 <div class="card mb-3" style="max-width: 540px;">
@@ -163,6 +162,8 @@
                                         </div>
                                     </div>
                                     <div class="col12" style="text-align: center;">공백</div>
+
+
                                     <div class="col-12">자유게시판
                                         <div class="row bodysubstudy">
                                             <c:choose>
@@ -177,29 +178,51 @@
                                                     </c:forEach>
                                         </div>
                                     </div>
-                                    <div class="col12" style="text-align: right;">
+                                    <div class="col-12" style="text-align: right;">
                                         <a href="자유게시판 관련검색 최신순으로 정리되어 있게 전부 보여주는거">
                                             더보기
                                         </a>
                                     </div>
                                     </c:when>
                                     <c:otherwise>
-                                        <div class="col12">
+                                        <div class="col-12">
                                             검색한 결과가 없습니다.
                                         </div>
                                     </c:otherwise>
                                     </c:choose>
-                                    <div class="col12" style="text-align: center;">공백</div>
+                                    <div class="col-12" style="text-align: center;">공백</div>
+                                    <div class="col-12" style="text-align: center;">
+                                        <div class="row">
+                                            <div class="col-7">지도</div>
+                                            <div class="col-5">찾기</div>
+                                        </div>
+                                    </div>
                                 </div>
-
                             </div>
-                            <div class="col-2">공백</div>
-                            <div class="col-12">공백</div>
                         </div>
                     </div>
+                    <div class="col-2">공백</div>
                 </div>
                 <div class="row footer">풋터</div>
             </div>
         </body>
+        <script>
+            $(window).on("load", function () {
+                $(".btn-success").click(function () {
+                    const targetForm = $(this).closest("form");
+                    var login = '<c:out value="${loggedID}"/>';
+                    const inputText = targetForm.find(".form-control");
+                    if (login != "") { //성공
+                        if (inputText.val() == "") {
+                            alert("검색어를 입력해주세요");
+                            return;
+                        }
+                        targetForm.submit();
+                    } else {
+                        alert("로그인이 필요합니다");
+                    }
+                });
+            });
+        </script>
 
         </html>
