@@ -202,7 +202,8 @@ div {
 											<div class="col-10">${j.title}</div>
 											<div class="col-12 content">${j.contents}</div>
 											<div class="col-12 writer">${j.writer}</div>
-
+											<div class="col-12">${j.write_date}</div>
+											<div class="col-12">${j.view_count}</div>
 										</div>
 									</a>
 								</div>
