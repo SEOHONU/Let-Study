@@ -73,6 +73,7 @@
 	font-weight: bold;
 	border: none;
 	background: transparent;
+	height:45px;
 }
 
 #writeDate {
@@ -318,7 +319,7 @@ height:30px;
 				<c:forEach var="i" items="${replyResult}">
 					<form action="/update.reply" method="post">
 						<div id="replyForm">
-							<div class="nickname" readonly>${i.writer}</div>
+							<div class="nickname" readonly>${i.nickname}</div>
 							<input type="text" class="reply_text" name="replyContent"
 								value="${i.contents}" readonly>
 							<div class="reply_info">
