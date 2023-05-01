@@ -79,6 +79,7 @@ public class FreeBoardController extends HttpServlet {
 				int first = (currentPage-1)/Settings.BOARD_NAVI_COUNT_PER_PAGE*Settings.BOARD_NAVI_COUNT_PER_PAGE;
 				int last = (currentPage-1)/Settings.BOARD_NAVI_COUNT_PER_PAGE*Settings.BOARD_NAVI_COUNT_PER_PAGE+Settings.BOARD_NAVI_COUNT_PER_PAGE+1;
 				List<FreeBoardDTO> list = dao.selectFreeBoard(start, end);
+				
 				List<String> pageNavi = dao.getPageNavi(dao.getRecordCount(), currentPage);
 				request.setAttribute("list", list);
 				request.setAttribute("navi", pageNavi);

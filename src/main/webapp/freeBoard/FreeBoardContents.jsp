@@ -73,6 +73,7 @@
 	font-weight: bold;
 	border: none;
 	background: transparent;
+	height:45px;
 }
 
 #writeDate {
