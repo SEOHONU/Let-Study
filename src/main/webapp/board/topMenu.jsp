@@ -64,9 +64,7 @@
         </head>
 
         <body>
-            <div class="container">
                 <div class="row navi">
-
                     <div class="col-12 top">
                         <div class="row">
                             <div class="col-8 col-lg-2 order-2 order-lg-first" id="logo">
@@ -230,8 +228,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
         </body>
 
         <script>
