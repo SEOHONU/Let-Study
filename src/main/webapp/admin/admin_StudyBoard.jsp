@@ -189,20 +189,26 @@
 
 					</thead>
 					<tbody>
-				<c:forEach var="i" items="${list}" varStatus="status">
-								<tr>
+						<c:forEach var="i" items="${list}" varStatus="status">
+							<tr>
 
-								<td>${i.seq}</td><!--시퀀스 번호-->
-								<td>${i.title}</td><!-- 제목 -->
-								<td>${i.writer}</td><!--작성자-->
-								<td class="col d-none d-md-block">${i.view_count}</td><!--  조회수 -->
-								<td>${i.write_date}</td><!--  작성일 -->
-									<td><a href="/studyboard_Delete.adminBoard?seq=${i.seq}&cpage=${cpage}"><button type="button"
-										class="btn btn-outline-danger btn_del">삭제</button></a></td>
+								<td>${i.seq}</td>
+								<!--시퀀스 번호-->
+								<td>${i.title}</td>
+								<!-- 제목 -->
+								<td>${i.writer}</td>
+								<!--작성자-->
+								<td class="col d-none d-md-block" style="height: 55px;">${i.view_count}</td>
+								<!--  조회수 -->
+								<td>${i.write_date}</td>
+								<!--  작성일 -->
+								<td><a
+									href="/studyboard_Delete.adminBoard?seq=${i.seq}&cpage=${cpage}"><button
+											type="button" class="btn btn-outline-danger btn_del">삭제</button></a></td>
 							</tr>
-							</c:forEach>
-    
-			
+						</c:forEach>
+
+
 					</tbody>
 					<tfoot>
 						<tr>
@@ -241,42 +247,32 @@
 		<!-- 하단 네비 시작 -->
 
 		<nav aria-label="Page navigation example" align="center">
-			<ul class="pagination justify-content-center">
-
-
- 
-				<div class="col-12" align="center">
-					<c:forEach var="i" items="${navi}">
-						<c:choose>
-							<c:when test="${i eq '<<'}">
-								<a href="/study_select.adminBoard?cpage=${start}">${i}</a>
-							</c:when>
-							<c:when test="${i eq '<'}">
-								<a href="/study_select.adminBoard?cpage=${cpage-1}">${i}</a>
-							</c:when>
-							<c:when test="${i eq '>'}">
-								<a href="/study_select.adminBoard?cpage=${cpage+1}">${i}</a>
-							</c:when>
-							<c:when test="${i eq '>>'}">
-								<a href="/study_select.adminBoard?cpage=${end}">${i}</a>
-							</c:when>
-							<c:otherwise>
-								<a href="/study_select.adminBoard?cpage=${i}">${i}</a>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</div>
-				
-				
-			 
-
+			<ul class="pagination d-flex justify-content-center">
+				<c:forEach var="i" items="${navi}">
+					<c:choose>
+						<c:when test="${i eq '<<'}">
+							<li class="page-item"><a class="page-link" href="/study_select.adminBoard?cpage=${start}">${i}</a></li>
+						</c:when>
+						<c:when test="${i eq '<'}">
+							<li class="page-item"><a class="page-link" href="/study_select.adminBoard?cpage=${cpage - 1}">${i}</a></li>
+						</c:when>
+						<c:when test="${i eq '>'}">
+							<li class="page-item"><a class="page-link" href="/study_select.adminBoard?cpage=${cpage + 1}">${i}</a></li>
+						</c:when>
+						<c:when test="${i eq '>>'}">
+							<li class="page-item"><a class="page-link" href="/study_select.adminBoard?cpage=${end}">${i}</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="/study_select.adminBoard?cpage=${i}">${i}</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 			</ul>
 		</nav>
-	</div>
-	<!-- 하단 네비 종료 -->
+		<!-- 하단 네비 종료 -->
 
 
-	<!-- 
+		<!-- 
 삭제 버튼 누를때 탈퇴시키겠습니까? 
 안내나오게해야함 
 
@@ -284,9 +280,5 @@
 
 
           -->
-
-
-
-
 </body>
 </html>
