@@ -171,7 +171,7 @@
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div class="col-12">
-                                                        <a href="/myInfoSelect.member"><i class="fa-solid fa-user"></i></a>
+                                                        <a href="/myPage/mypageMainForm.jsp"><i class="fa-solid fa-user"></i></a>
                                                         <!--로그인됐을때-->
                                                     </div>
                                                 </c:otherwise>
@@ -636,6 +636,18 @@
                 })
             });
 
+            
+            addEventListener("resize", function (event) {
+            	const bodySize = parseInt($("body").css("width"));
+            	if( bodySize > 768){
+            		const navisub = $(".navisub");
+            		if( navisub.css("display") == "block"){
+            			navisub.css("display","none");
+            		}
+            	}
+            });
+            
+            
         </script>
 
         </html>

@@ -42,11 +42,11 @@ public class MainDAO {
 	public List<SecondHandDTO> joongosearch(String select, String secondhand) throws Exception {
 		String joongosql = "";
 		if (select.equals("제목")) {
-			joongosql = "select * from secondHand where title like ?";
+			joongosql = "select * from secondHand where LOWER(title) like LOWER(?)";
 		} else if (select.equals("내용")) {
-			joongosql = "select * from secondHand where contents like ?";
+			joongosql = "select * from secondHand where LOWER(contents) like LOWER(?)";
 		} else if (select.equals("작성자")) {
-			joongosql = "select * from secondHand where writer like ?";
+			joongosql = "select * from secondHand where LOWER(writer) like LOWER(?)";
 		}
 		try (Connection con = this.getconnection(); PreparedStatement pstmt = con.prepareStatement(joongosql);) {
 			pstmt.setString(1, "%" + secondhand + "%");
@@ -73,11 +73,11 @@ public class MainDAO {
 	public List<StudyBoardDTO> studysearch(String select, String study) throws Exception {
 		String studysql = "";
 		if (select.equals("제목")) {
-			studysql = "select * from studyboard where title like ?";
+			studysql = "select * from studyboard where LOWER(title) like LOWER(?)";
 		} else if (select.equals("내용")) {
-			studysql = "select * from studyboard where contents like ?";
+			studysql = "select * from studyboard where LOWER(contents) like LOWER(?)";
 		} else if (select.equals("작성자")) {
-			studysql = "select * from studyboard where writer like ?";
+			studysql = "select * from studyboard where LOWER(writer) like LOWER(?)";
 		}
 		try (Connection con = this.getconnection(); PreparedStatement pstmt = con.prepareStatement(studysql);) {
 			pstmt.setString(1, "%" + study + "%");
@@ -103,11 +103,11 @@ public class MainDAO {
 	public List<FreeBoardDTO> boardsearch(String select, String free) throws Exception {
 		String boardsql = "";
 		if (select.equals("제목")) {
-			boardsql = "select * from board where board_title like ?";
+			boardsql = "select * from board where LOWER(board_title) like LOWER(?)";
 		} else if (select.equals("내용")) {
-			boardsql = "select * from board where board_contents like ?";
+			boardsql = "select * from board where LOWER(board_contents) like LOWER(?)";
 		} else if (select.equals("작성자")) {
-			boardsql = "select * from board where board_writer like ?";
+			boardsql = "select * from board where LOWER(board_writer) like LOWER(?)";
 		}
 		try (Connection con = this.getconnection(); PreparedStatement pstmt = con.prepareStatement(boardsql);) {
 			pstmt.setString(1, "%" + free + "%");
