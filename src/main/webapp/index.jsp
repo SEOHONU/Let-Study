@@ -136,10 +136,11 @@
                     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
                     border-radius: 5px;
                 }
+                
             </style>
 
             <script>
-            
+
                 function checkLogin(url) {
                     var login = '<c:out value="${loggedID}"/>';
                     if (login == "") {
@@ -148,7 +149,16 @@
                     } else {
                         location.href = url;
                     }
-                } 
+                }
+                document.addEventListener('keydown', function (event) {
+                    var login = '<c:out value="${loggedID}"/>';
+                    if (event.keyCode === 13) {
+                        if (login == "") {
+                            alert("로그인이 필요합니다.");
+                            event.preventDefault();
+                        };
+                    }
+                }, true);
             </script>
         </head>
 
@@ -779,8 +789,8 @@
                     if (navisub.css("display") == "block") {
                         navisub.css("display", "none");
                     }
-                    addsearch.css("display","block")
-                    divsearch.css("display","none")
+                    addsearch.css("display", "block")
+                    divsearch.css("display", "none")
                 }
             });
 
