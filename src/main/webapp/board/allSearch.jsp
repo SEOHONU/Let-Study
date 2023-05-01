@@ -17,13 +17,13 @@
             <script src="https://code.jquery.com/jquery-3.6.4.js"
                 integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
             <style>
-                /* * {
+                * {
                     box-sizing: border-box;
                 }
 
                 div {
                     border: 1px solid black;
-                } */
+                }
 
                 .container {
                     position: relative;
@@ -48,11 +48,12 @@
 
                 <div class="row body">
 
-                    <div class="col-12" style="height: 100px;">
-                        통합검색
+                    <div class="col-12">
+
                     </div>
                     <div class="col-12">
                         <div class="row bodysub">
+
                             <div class="col-2">공백</div>
                             <div class="col-8">
                                 <div class="row bodysub">
@@ -122,7 +123,8 @@
 
                                             <c:choose>
                                                 <c:when test="${sdto.size()>0}">
-                                                    <c:forEach var="second" items="${sdto}" begin="0" end="3">
+                                                    <c:forEach var="second" items="${sdto}" begin="${sdto.size()-1}"
+                                                        end="${sdto.size()-5}" step="-1">
                                                         <div class="col-6 d-none d-lg-block">
                                                             <a href="중고책 관련검색 최신">
                                                                 <div class="card mb-3" style="max-width: 540px;">
@@ -138,8 +140,7 @@
                                                                                 </h5>
                                                                                 <p class="card-text">${second.writer}
                                                                                 </p>
-                                                                                <p class="card-text">
-                                                                                    <small
+                                                                                <p class="card-text"><small
                                                                                         class="text-body-secondary">${second.contents}</small>
                                                                                 </p>
                                                                             </div>
@@ -150,9 +151,7 @@
                                                         </div>
                                                     </c:forEach>
                                                     <div class="col-12" style="text-align: right;">
-                                                        <a href="중고책  관련검색 최신순으로 정리되어 있게 전부 보여주는거">
-                                                            더보기
-                                                        </a>
+                                                        <a href="중고책 관련검색 최신순으로 정리되어 있게 전부 보여주는거">더보기</a>
                                                     </div>
                                                 </c:when>
                                                 <c:otherwise>
@@ -176,7 +175,6 @@
                                                         <div class="col-3"><a href="자유게시판 관련검색 최신순">${free.writer}</a>
                                                         </div>
                                                     </c:forEach>
-
                                         </div>
                                     </div>
                                     <div class="col12" style="text-align: right;">
@@ -195,6 +193,7 @@
                                 </div>
 
                             </div>
+                            <div class="col-2">공백</div>
                             <div class="col-12">공백</div>
                         </div>
                     </div>

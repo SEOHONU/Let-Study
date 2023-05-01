@@ -28,7 +28,6 @@ public class MemberController extends HttpServlet {
 				response.getWriter().append(resp);
 
 			} else if (cmd.equals("/login.member")) {
-
 				String id = request.getParameter("id");
 				String pw = request.getParameter("pw");
 				boolean result = MembersDAO.getInstance().isMember(id, pw);
