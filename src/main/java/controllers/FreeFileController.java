@@ -12,12 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import dao.FreeFileDAO;
 
 @WebServlet("*.file")
 public class FreeFileController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+	Gson g = new Gson();
 		String cmd = request.getRequestURI();
 		FreeFileDAO dao = FreeFileDAO.getInstance();
 		try {
@@ -51,11 +53,11 @@ public class FreeFileController extends HttpServlet {
 			if(result==1) {
 				System.out.println(" 파일 정상 삭제되었습니다.");
 			}
-			response.sendRedirect("/detail.freeBoard?seq="+board_seq);
+			String resp=g.toJson(result);
+			response.getWriter().append(resp);
 		}
 		}catch(Exception e) {
 			e.printStackTrace();
-			
 		}
 	}
 
