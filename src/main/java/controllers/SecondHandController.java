@@ -33,7 +33,7 @@ public class SecondHandController extends HttpServlet {
 				response.sendRedirect("/secondHand/secondHandWriteForm.jsp");
 			}
 			else if(cmd.equals("/insert.secondHand")) {
-				String writer = (String)request.getSession().getAttribute("loggedId");
+				String writer = (String)request.getSession().getAttribute("loggedID");
 				String title = request.getParameter("title");
 				String contents = request.getParameter("contents");
 				double lat = Double.parseDouble(request.getParameter("lat"));

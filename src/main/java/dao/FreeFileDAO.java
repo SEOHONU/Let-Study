@@ -27,16 +27,15 @@ public class FreeFileDAO {
 		DataSource ds = (DataSource)iCxt.lookup("java:/comp/env/jdbc/ora");
 		return ds.getConnection();
 	}
-// 게시글 입력
+// 파일 입력
 	public int insert(FreeFileDTO dto) throws Exception{
-		String sql = "insert into fr_files values(fr_file_seq.nextval,?,?,?)";
+		String sql = "insert into fr_files values(fr_file_seq.nextval,?,?,board_seq.nextval-1)";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
 			pstat.setString(1, dto.getOriName());
 			pstat.setString(2, dto.getSysName());
-			pstat.setInt(3, dto.getParent_seq());
 			int result = pstat.executeUpdate();
 			if(result==1) {
 				System.out.println("파일 업로드 성공");

@@ -16,9 +16,12 @@ public class Profile_settingController extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+	
 		
-		request.setCharacterEncoding("utf8");
-		response.setContentType("text/html; charset=utf8");
+
 		String cmd = request.getRequestURI();
 		Profile_settingDAO dao = Profile_settingDAO.getInstance();
 			
@@ -33,7 +36,9 @@ public class Profile_settingController extends HttpServlet {
 			
 				
 			}else if (cmd.equals("/update.profile_settingController")) {
+
 				String loginId = request.getParameter("id");
+
 				String nickname = request.getParameter("nickname");
 				String introduce = request.getParameter("introduceMyslef2");
 				String instargram = request.getParameter("instargram");

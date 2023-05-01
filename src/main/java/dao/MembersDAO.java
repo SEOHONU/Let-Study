@@ -87,6 +87,7 @@ public class MembersDAO {
 	         pstat.setString(8, dto.getZipcode());
 	         pstat.setString(9, dto.getAddress1());
 	         pstat.setString(10, dto.getAddress2());
+	         System.out.println(dto);
 	         int result = pstat.executeUpdate(); 
 	         con.commit();
 	         

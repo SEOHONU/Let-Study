@@ -37,6 +37,8 @@ public class Admin_BoardController extends HttpServlet {
 		try {
 			System.out.println("스터디 리스트 출력");
 			if (cmd.equals("/study_select.adminBoard")) {
+				request.setCharacterEncoding("utf8");
+				response.setContentType("text/html; charset=utf8");
 				int currentPage = Integer.parseInt(request.getParameter("cpage"));
 				System.out.println("currentPage : " + currentPage);
 				if (currentPage < 0) {
@@ -76,6 +78,8 @@ public class Admin_BoardController extends HttpServlet {
 				request.getRequestDispatcher("/admin/admin_StudyBoard.jsp").forward(request, response);
 			} else if (cmd.equals("/secondHand.adminBoard")) {
 System.out.println("중고책 리스트 출력");
+request.setCharacterEncoding("utf8");
+response.setContentType("text/html; charset=utf8");
 				int currentPage = request.getParameter("currentPage") == null ? 1
 						: Integer.parseInt(request.getParameter("currentPage"));
 				int startRecord = (currentPage * Settings.SH_BOARD_RECORD_COUNT_PER_PAGE)
@@ -92,6 +96,8 @@ System.out.println("중고책 리스트 출력");
 
 			} else if (cmd.equals("/freeBoard.adminBoard")) {
 System.out.println("자유게시판 리스트 출력");
+request.setCharacterEncoding("utf8");
+response.setContentType("text/html; charset=utf8");
 				int currentPage = request.getParameter("cpage") == null ? 1
 						: Integer.parseInt(request.getParameter("cpage"));
 				if (currentPage < 0) {
@@ -123,17 +129,19 @@ System.out.println("자유게시판 리스트 출력");
 
 			}else if(cmd.equals("/user_Board.adminBoard")) {
 				System.out.println("될까?");
+				request.setCharacterEncoding("utf8");
+				response.setContentType("text/html; charset=utf8");
 				int currentPage = request.getParameter("cpage") == null ? 1 : Integer.parseInt(request.getParameter("cpage"));
 				if(currentPage < 0) {
 					currentPage = 1;
-				}else if(currentPage > (int)Math.ceil(dao.getRecordCount()/(double)Settings.BOARD_RECORD_COUNT_PER_PAGE)) {
-					currentPage = (int)Math.ceil(dao.getRecordCount()/(double)Settings.BOARD_RECORD_COUNT_PER_PAGE);
+				}else if(currentPage > (int)Math.ceil(dao.getRecordCount_user()/(double)Settings.BOARD_RECORD_COUNT_PER_PAGE)) {
+					currentPage = (int)Math.ceil(dao.getRecordCount_user()/(double)Settings.BOARD_RECORD_COUNT_PER_PAGE);
 				}
 				int start = currentPage * Settings.BOARD_RECORD_COUNT_PER_PAGE - (Settings.BOARD_RECORD_COUNT_PER_PAGE-1);
 				int end = currentPage * Settings.BOARD_RECORD_COUNT_PER_PAGE;
 				System.out.println(start+" : "+end);
 				List<MembersDTO> result = dao.user_list(start,end);
-				List<String> pageNavi = dao.getPageNavi(dao.getRecordCount(), currentPage);
+				List<String> pageNavi = dao.getPageNavi(dao.getRecordCount_user(), currentPage);
 				request.setAttribute("cpage", currentPage);
 				request.setAttribute("userList", result);
 				request.setAttribute("pageNavi", pageNavi);
@@ -141,18 +149,24 @@ System.out.println("자유게시판 리스트 출력");
 				System.out.println(result);
 				request.getRequestDispatcher("/admin/admin_userBoard.jsp").forward(request, response);
 			}else if(cmd.equals("/freeboard_Delete.adminBoard")) {
+				request.setCharacterEncoding("utf8");
+				response.setContentType("text/html; charset=utf8");
 				int currentPage = Integer.parseInt(request.getParameter("cpage"));
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				int result = frdao.deleteBySeq(seq);
 				System.out.println("삭제됨");
 				response.sendRedirect("/freeBoard.adminBoard?cpage="+currentPage);
 			}else if(cmd.equals("/studyboard_Delete.adminBoard")) {
+				request.setCharacterEncoding("utf8");
+				response.setContentType("text/html; charset=utf8");
 				int currentPage = Integer.parseInt(request.getParameter("cpage"));
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				sbdao.deletestudyboard(seq);
 				response.sendRedirect("/study_select.adminBoard?cpage="+currentPage);
 				
 			}else if(cmd.equals("/secondHand_Delete.adminBoard")) {
+				request.setCharacterEncoding("utf8");
+				response.setContentType("text/html; charset=utf8");
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				System.out.println("중고책 : " +seq);
 				int currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -160,6 +174,8 @@ System.out.println("자유게시판 리스트 출력");
 				int result = shDAO.deleteContents(seq);
 				response.sendRedirect("/secondHand.adminBoard?currentPage="+currentPage);
 			}else if(cmd.equals("/userList_delete.adminBoard")) {
+				request.setCharacterEncoding("utf8");
+				response.setContentType("text/html; charset=utf8");
 				System.out.println("현생으로 ");
 				String id = (String) request.getParameter("id");
 				mbdao.memberOut(id);
