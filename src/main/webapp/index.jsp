@@ -18,13 +18,13 @@
                 integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
             <script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
             <style>
-                /* * {
+                * {
                     box-sizing: border-box;
                 }
 
                 div {
                     border: 1px solid black;
-                } */
+                }
 
                 .container {
                     position: relative;
@@ -384,6 +384,8 @@
                     <div class="col-lg-8 d-none d-lg-block"
                         style="text-align: center; background-color: rgb(30, 60, 62);">
 
+
+
                         <form class="container-fluid" id="total_search" action="/allsearch.maincontroller">
                             <div class="input-group" style="margin-top: 10px; margin-bottom: 10px;">
                                 <select name="select">
@@ -398,9 +400,7 @@
                                     style="z-index: 0; background-color: rgb(60, 117, 121);">검색</button>
                             </div>
                         </form>
-                        
-                        
-                       
+
 
 
                     </div>
@@ -421,7 +421,9 @@
                                             <div class="col-12 cir">
                                                 <a href="기술사 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
+                                                        <div class="circle"
+                                                            style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
+                                                        </div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -435,7 +437,9 @@
                                             <div class="col-12 cir">
                                                 <a href="기능장 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
+                                                        <div class="circle"
+                                                            style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
+                                                        </div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -449,7 +453,9 @@
                                             <div class="col-12 cir">
                                                 <a href="기사 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
+                                                        <div class="circle"
+                                                            style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
+                                                        </div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -463,7 +469,9 @@
                                             <div class="col-12 cir">
                                                 <a href="산업기사 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
+                                                        <div class="circle"
+                                                            style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
+                                                        </div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -477,7 +485,9 @@
                                             <div class="col-12 cir">
                                                 <a href="기능사 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
+                                                        <div class="circle"
+                                                            style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
+                                                        </div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -491,7 +501,9 @@
                                             <div class="col-12 cir">
                                                 <a href="서비스 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
+                                                        <div class="circle"
+                                                            style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
+                                                        </div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -505,7 +517,9 @@
                                             <div class="col-12 cir">
                                                 <a href="국가기술자격 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
+                                                        <div class="circle"
+                                                            style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
+                                                        </div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -519,7 +533,9 @@
                                             <div class="col-12 cir">
                                                 <a href="국가전문자격 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
+                                                        <div class="circle"
+                                                            style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
+                                                        </div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -533,7 +549,9 @@
                                             <div class="col-12 cir">
                                                 <a href="더보기 관련">
                                                     <div class="circlesub">
-                                                        <div class="circle" style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;"></div>
+                                                        <div class="circle"
+                                                            style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
+                                                        </div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -611,12 +629,13 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- 풋터 -->
-                        <div class="row">
-                            <div class="col-12 footer">풋터</div>
-                        </div>
                     </div>
+                    <!-- 풋터 -->
+                    <div class="row">
+                        <div class="col-12 footer">풋터</div>
+                    </div>
+                </div>
+            </div>
         </body>
         <script>
             var slide = $('.slide').width();
@@ -683,9 +702,9 @@
                         let ppage = JSON.parse(resp.page);
                         var page = sdto[a].seq;
                         if (a >= sdto.length - 2) {
-                            var textfront1 = $('<div class="col-12 col-sm-6"></div>');
+                            var textfront1 = $('<div class="col-12 col-xl-6"></div>');
                         } else if (a >= sdto.length - 4) {
-                            var textfront1 = $('<div class="col-6 d-none d-sm-block"></div>');
+                            var textfront1 = $('<div class="col-6 d-none d-xl-block"></div>');
                         }
 
                         // onclick="javascript:checkLogin('/selectBound.secondHand
@@ -755,9 +774,13 @@
                 const bodySize = parseInt($("body").css("width"));
                 if (bodySize > 992) {
                     const navisub = $(".navisub");
+                    const divsearch = $("#subsearchback")
+                    const addsearch = $("#subsearch")
                     if (navisub.css("display") == "block") {
                         navisub.css("display", "none");
                     }
+                    addsearch.css("display","block")
+                    divsearch.css("display","none")
                 }
             });
 
