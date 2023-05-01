@@ -129,7 +129,7 @@
 	<!-- 상단 네비게이션 시작 -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light col-12">
 		<div class="container">
-			<a class="navbar-brand" href="/admin/admin_mainboard.admin_main">메인으로</a>
+			<a class="navbar-brand" href="/admin_mainboard.admin_main">메인으로</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"
