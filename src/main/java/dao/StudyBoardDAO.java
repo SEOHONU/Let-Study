@@ -62,6 +62,7 @@ public class StudyBoardDAO {
 		}
 	}
 	
+	
 	public int getRecordCount() throws Exception{
 		String sql = "select count(*) from studyboard";
 		try(
@@ -130,6 +131,7 @@ public class StudyBoardDAO {
 		return list;
 
 	}
+
 	public StudyBoardDTO selectdetailstudyboard(int seq1) throws Exception{
 		String sql = "select * from studyboard where seq = ?";
 		try(

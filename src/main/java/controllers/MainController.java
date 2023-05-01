@@ -38,6 +38,7 @@ public class MainController extends HttpServlet {
 			request.setAttribute("sdto", sdto);
 			request.setAttribute("stdto", stdto);
 			request.setAttribute("fdto", fdto);
+			request.setAttribute("title", title);
 			request.getRequestDispatcher("/board/allSearch.jsp").forward(request, response);
 		}else if (cmd.equals("/mainjoongolist.maincontroller")) {
 			List<SecondHandDTO> dto = dao.mainjoongo();
@@ -50,11 +51,6 @@ public class MainController extends HttpServlet {
 			resp.addProperty("page", page);
 			response.getWriter().append(resp.toString());
 			
-		} else if (cmd.equals("/joongo.maincontroller")) {
-
-		} else if (cmd.equals("/board.maincontroller")) {
-
-		} else if (cmd.equals("/licence.maincontroller")) {
 		}
 		}catch(Exception e) {
 			e.printStackTrace();
