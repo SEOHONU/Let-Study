@@ -11,8 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import dto.FreeBoardAndMemberDTO;
 import dto.FreeBoardDTO;
-import dto.StudyBoardDTO;
 import statics.Settings;
 
 
@@ -72,7 +72,39 @@ public class FreeBoardDAO {
 			}
 		}
 	}
-
+	
+	
+//	FreeBoardDTO와 MembersDTO 조인 통해서 nickname 가져오기
+	public List<FreeBoardAndMemberDTO> selectFreeBoardList(int start, int end) throws Exception{
+		 String sql = "select * from(select b.board_seq, b.board_title, b.board_contents, b.board_writer, m.nickname, b.board_view_count, b.board_write_date, rank() over(order by b.board_seq desc) as rank from free_board b left join members m on b.board_writer = m.id) where rank between ? and ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, start);
+			pstat.setInt(2, end);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				List<FreeBoardAndMemberDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					int seq = rs.getInt("board_seq");
+					String title = rs.getString("board_title");
+					String contents = rs.getString("board_contents");
+					String writer = rs.getString("board_writer");
+					String nickname = rs.getString("nickname");
+					int view_count = rs.getInt("board_view_count");
+					Timestamp write_date = rs.getTimestamp("board_write_date");
+					list.add(new FreeBoardAndMemberDTO(seq,title,contents,writer,nickname, view_count,write_date));
+				}
+				return list;
+			}
+		}
+	}
+	
+	
+	
+	
 
 	public String getNicknameBySeq(int seq) throws Exception{
 		String sql = "SELECT m.nickname FROM free_board b INNER JOIN members m ON b.board_writer = m.id where b.board_seq =?";
