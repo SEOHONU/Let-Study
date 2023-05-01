@@ -212,4 +212,17 @@ public class StudyBoardDAO {
 		}
 	}
 	
+	public int updateViewCount(int view_count,int seq) throws Exception{
+		String sql = "update studyboard set view_count = ? where seq = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, view_count);
+			pstat.setInt(2, seq);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
 }
