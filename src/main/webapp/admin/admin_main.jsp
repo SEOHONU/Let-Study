@@ -51,6 +51,7 @@
 	margin-bottom: 10px;
 	position: relative;
 	bottom: 8px;
+	background-color: white; 
 }
 
 .dashboard {
@@ -60,16 +61,20 @@
 .freeboard_start {
 	margin-top: 20px;
 }
+.header_topLine{
+background-color: #1e3c3e;
+}
+
 </style>
 </head>
 
 <body>
 	<div class="container">
-		<div class="row header">
+		<div class="row header top_banner">
 			<!-- justify-content-center -->
 			<!-- 페이지 최 상단 관리자페이지 이름과 수정하기/로그아웃 버튼 시작 -->
 			<div class="col header_topLine col-lg-12">
-				관리자 페이지입니다.
+				<img alt="" src="">
 				<!-- <button type="button" class="btn btn-outline-dark btn_header">수정하기</button> -->
 				<form action="/admin_logout.admin"method="post">
 					<button type="submit" class="btn btn-outline-dark btn_header">로그아웃</button>
@@ -122,14 +127,14 @@
 
 				<h1>대시보드</h1>
 				<div class="row">
-					<div class="col-md-4 col-md-push-4 dashboard">
-						<img src="/icon3.jpg" alt="" class="w-75 p-3">
+					<div class="col-md-4 col-md-push-4 dashboard1">
+						<img src="https://66.media.tumblr.com/56ebae6954fcd3b0b9b0d0b9f91e228e/e7e3f065f45e8fca-59/s540x810/01926a2c92531eb4fd5ee76a31db39672bf5000a.png" alt="" class="w-100 p-3">
 					</div>
-					<div class="col-md-4 col-md-push-4 dashboard">
-						<img src="/icon3.jpg" alt="" class="w-75 p-3">
+					<div class="col-md-4 col-md-push-4 dashboard2">
+						<img src="https://mblogthumb-phinf.pstatic.net/MjAyMTA2MThfMTg2/MDAxNjIzOTg3OTg5NDMy.9DaTvxBwdMlK9sFnnfQhAdYP-gBw9Vl6gRVf0rrm3RAg.TKgjC_ELaXd549a9kzAqRqfVj8amZAhteC48YvI_uW4g.JPEG.kokafilms/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C_(1).jpg?type=w800" alt="" class="w-100 p-3">
 					</div>
-					<div class="col-md-4 col-md-push-4 dashboard">
-						<img src="/icon3.jpg" alt="" class="w-75 p-3">
+					<div class="col-md-4 col-md-push-4 dashboard3">
+						<img src="https://coinpan.com/files/attach/images/198/970/234/197/1dce05efecab9ed731d4666efdd7da2a.jpg" alt="" class="w-100 p-3">
 					</div>
 				</div>
 			</div>
@@ -157,7 +162,7 @@
 									<tr>
 										<td>${i.seq}</td>
 										<td>${i.writer}</td>
-										<td>${i.title}</td>
+										<td><a href="/detail.freeBoard?seq=${i.seq}">${i.title}</a></td>
 										<td>${i.view_count}</td>
 										<td>${i.write_date}</td>
 									</tr>
@@ -189,7 +194,7 @@
 
 										<td>${i.seq}</td>
 										<td>${i.writer}</td>
-										<td>${i.title}</td>
+										<td><a href="inner.studyboard?seq=${i.seq}&cpage=1">${i.writer}</a></td>
 										<td>${i.view_count}</td>
 										<td>${i.write_date}</td>
 										
@@ -221,7 +226,7 @@
 
 										<td>${i.seq}</td>
 										<td>${i.writer}</td>
-										<td>${i.title}</td>
+										<td><a href="secondHandBoardContents.secondHand?seq=${i.seq}&currentPage=1">${i.title}</a></td>
 										<td>${i.view_count}</td>
 										<td>${i.write_date}</td>
 										
