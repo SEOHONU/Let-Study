@@ -33,7 +33,7 @@ public class FreeBoardDAO {
 		return ds.getConnection();
 
 	}
-	
+
 	public int getRecordCount() throws Exception{
 		String sql = "select count(*) from board";
 		try(
@@ -46,7 +46,7 @@ public class FreeBoardDAO {
 
 		}
 	}
-	
+
 	public List<FreeBoardDTO> selectFreeBoard(int start, int end) throws Exception{
 		String sql = "select * from (select board_seq,board_title,board_contents,board_writer,board_view_count,board_write_date,rank() over(order by board_seq desc) rank from board) where rank between ? and ?";
 		try(
@@ -72,7 +72,24 @@ public class FreeBoardDAO {
 			}
 		}
 	}
-	
+
+
+	public String getNicknameBySeq(int seq) throws Exception{
+		String sql = "SELECT m.nickname FROM board b INNER JOIN members m ON b.board_writer = m.id where b.board_seq =?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, seq);
+			pstat.executeUpdate();
+			try(ResultSet rs = pstat.executeQuery();){
+				rs.next();
+				String result = rs.getString("nickname");
+				return result;
+			}
+		}
+	}
+
 	public List<String> getPageNavi(int recordCount, int currentPage) throws Exception{
 		int recordTotalCount = recordCount;
 		int recordCountPerPage = Settings.BOARD_RECORD_COUNT_PER_PAGE;
@@ -177,7 +194,7 @@ public class FreeBoardDAO {
 		{pstat.setInt(1, seq);
 		pstat.executeUpdate();
 		try(ResultSet rs = pstat.executeQuery();
-			){
+				){
 			rs.next();
 			int seq1 = rs.getInt("board_seq");
 			String title = rs.getString("board_title");
@@ -188,16 +205,16 @@ public class FreeBoardDAO {
 			FreeBoardDTO result = new FreeBoardDTO(seq1,title,content,writer,view_count,write_Date);
 
 			return result;
-			}
+		}
 		}
 	}
-	
+
 	public int update(int seq,String title, String content) throws Exception{
 		String sql = "update board set board_title=?, board_contents=?, board_write_date =sysdate where board_seq=?";
 		try(
-		Connection con = this.getConnection();
-		PreparedStatement pstat = con.prepareStatement(sql);
-		){
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
 			pstat.setString(1, title);
 			pstat.setString(2, content);
 			pstat.setInt(3,seq);
@@ -205,7 +222,7 @@ public class FreeBoardDAO {
 			return result;
 		}
 	}
-	
+
 	public int deleteBySeq(int seq) throws Exception{
 		String sql = "delete from board where board_seq =?";
 
@@ -218,7 +235,7 @@ public class FreeBoardDAO {
 			return result;
 		}
 	}
-	
+
 	public int freeBoardViewUp (int seq) throws Exception{
 		String sql = "update board set board_view_count = board_view_count + 1 where board_seq = ?";
 		try(

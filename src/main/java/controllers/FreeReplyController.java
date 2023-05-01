@@ -17,10 +17,12 @@ public class FreeReplyController extends HttpServlet {
 			request.setCharacterEncoding("utf8");
 			response.setContentType("text/html; charset=utf8");
 			FreeReplyDAO dao = FreeReplyDAO.getInstance();
-
+			String writer = (String)request.getSession().getAttribute("loggedID");
+			String nickname = (String)request.getSession().getAttribute("loggedNickname");
+			
+			
 			try {
 				if(cmd.equals("/insert.reply")){
-					String writer = "아이디";
 					request.setAttribute("writer", writer);
 					
 					
@@ -34,6 +36,7 @@ public class FreeReplyController extends HttpServlet {
 					int board_seq = Integer.parseInt(request.getParameter("seq"));
 					int reply_seq = Integer.parseInt(request.getParameter("replySeq"));
 					String reply_content = (String)request.getParameter("replyContent");
+					System.out.println("게시글: "+ board_seq + "댓글 : "+reply_seq + "내용:"+reply_content);
 					dao.updateReply(reply_content, reply_seq);
 					
 					response.sendRedirect("/detail.freeBoard?seq="+board_seq);
