@@ -11,8 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import dto.FreeBoardAndMemberDTO;
 import dto.FreeBoardDTO;
-import dto.StudyBoardDTO;
 import statics.Settings;
 
 
@@ -33,7 +33,7 @@ public class FreeBoardDAO {
 		return ds.getConnection();
 
 	}
-	
+
 	public int getRecordCount() throws Exception{
 		String sql = "select count(*) from free_board";
 		try(
@@ -46,7 +46,7 @@ public class FreeBoardDAO {
 
 		}
 	}
-	
+
 	public List<FreeBoardDTO> selectFreeBoard(int start, int end) throws Exception{
 		 String sql = "select * from (select board_seq,board_title,board_contents,board_writer,board_view_count,board_write_date,rank() over(order by board_seq desc) rank from free_board) where rank between ? and ?";
 		try(
@@ -73,6 +73,55 @@ public class FreeBoardDAO {
 		}
 	}
 	
+	
+//	FreeBoardDTO와 MembersDTO 조인 통해서 nickname 가져오기
+	public List<FreeBoardAndMemberDTO> selectFreeBoardList(int start, int end) throws Exception{
+		 String sql = "select * from(select b.board_seq, b.board_title, b.board_contents, b.board_writer, m.nickname, b.board_view_count, b.board_write_date, rank() over(order by b.board_seq desc) as rank from free_board b left join members m on b.board_writer = m.id) where rank between ? and ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, start);
+			pstat.setInt(2, end);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				List<FreeBoardAndMemberDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					int seq = rs.getInt("board_seq");
+					String title = rs.getString("board_title");
+					String contents = rs.getString("board_contents");
+					String writer = rs.getString("board_writer");
+					String nickname = rs.getString("nickname");
+					int view_count = rs.getInt("board_view_count");
+					Timestamp write_date = rs.getTimestamp("board_write_date");
+					list.add(new FreeBoardAndMemberDTO(seq,title,contents,writer,nickname, view_count,write_date));
+				}
+				return list;
+			}
+		}
+	}
+	
+	
+	
+	
+
+	public String getNicknameBySeq(int seq) throws Exception{
+		String sql = "SELECT m.nickname FROM free_board b INNER JOIN members m ON b.board_writer = m.id where b.board_seq =?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, seq);
+			pstat.executeUpdate();
+			try(ResultSet rs = pstat.executeQuery();){
+				rs.next();
+				String result = rs.getString("nickname");
+				return result;
+			}
+		}
+	}
+
 	public List<String> getPageNavi(int recordCount, int currentPage) throws Exception{
 		int recordTotalCount = recordCount;
 		int recordCountPerPage = Settings.BOARD_RECORD_COUNT_PER_PAGE;
@@ -177,7 +226,7 @@ public class FreeBoardDAO {
 		{pstat.setInt(1, seq);
 		pstat.executeUpdate();
 		try(ResultSet rs = pstat.executeQuery();
-			){
+				){
 			rs.next();
 			int seq1 = rs.getInt("board_seq");
 			String title = rs.getString("board_title");
@@ -188,16 +237,16 @@ public class FreeBoardDAO {
 			FreeBoardDTO result = new FreeBoardDTO(seq1,title,content,writer,view_count,write_Date);
 
 			return result;
-			}
+		}
 		}
 	}
-	
+
 	public int update(int seq,String title, String content) throws Exception{
 		String sql = "update free_board set board_title=?, board_contents=?, board_write_date =sysdate where board_seq=?";
 		try(
-		Connection con = this.getConnection();
-		PreparedStatement pstat = con.prepareStatement(sql);
-		){
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
 			pstat.setString(1, title);
 			pstat.setString(2, content);
 			pstat.setInt(3,seq);
@@ -205,7 +254,7 @@ public class FreeBoardDAO {
 			return result;
 		}
 	}
-	
+
 	public int deleteBySeq(int seq) throws Exception{
 		String sql = "delete from free_board where board_seq =?";
 
@@ -218,7 +267,7 @@ public class FreeBoardDAO {
 			return result;
 		}
 	}
-	
+
 	public int freeBoardViewUp (int seq) throws Exception{
 		String sql = "update free_board set board_view_count = board_view_count + 1 where board_seq = ?";
 		try(

@@ -62,6 +62,7 @@ public class StudyBoardController extends HttpServlet {
 				List<StudyBoardMembersDTO> cksbmlist = sbmdao.selectapplycheck(seq);
 				StudyReplyDAO rdao = StudyReplyDAO.getInstance();
 				List<StudyReplyDTO> list = rdao.selectreply(seq);
+				dao.updateViewCount(dto.getView_count()+1, seq);
 				request.setAttribute("sbmlist", sbmlist);
 				request.setAttribute("cksbmlist", cksbmlist);
 				request.setAttribute("replylist", list);

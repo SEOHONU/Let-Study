@@ -129,7 +129,7 @@
 	<!-- 상단 네비게이션 시작 -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light col-12">
 		<div class="container">
-			<a class="navbar-brand" href="/admin/admin_mainboard.admin_main">메인으로</a>
+			<a class="navbar-brand" href="/admin_mainboard.admin_main">메인으로</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"
@@ -149,7 +149,7 @@
 					<li class="nav-item"><a class="nav-link"
 						href="/secondHand.adminBoard?cpage=1">중고책게시판 관리</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/admin_userBoard.jsp">회원관리</a></li>
+						href="/user_Board.adminBoard?cpage=1">회원관리</a></li>
 					<!--<li class="nav-item"><a class="nav-link disabled" href="#"
               tabindex="-1" aria-disabled="true">배너관리</a></li>-->
 
@@ -198,13 +198,13 @@
 								<tr>
 									<td>no : ${i.seq}</td>
 									<td>${i.writer}</td>
-									<td>${i.title}</td>
-									<td class="col d-none d-md-block">${i.view_count}</td>
+									<td><a href="secondHandBoardContents.secondHand?seq=${i.seq}&currentPage=1">${i.title}</a></td>
+									<td class="col d-none d-md-block" style="height: 55px;">${i.view_count}</td>
 									<td>${i.detailDate}</td>
 									<td><a
-										href="/secondHand_Delete.adminBoard?seq=${i.seq}&currentPage=${currentPage}"><button type="button"
-									class="btn btn-outline-danger btn_del">삭제</button></a></td>
-								
+										href="/secondHand_Delete.adminBoard?seq=${i.seq}&currentPage=${currentPage}"><button
+												type="button" class="btn btn-outline-danger btn_del">삭제</button></a></td>
+
 								</tr>
 							</div>
 						</c:forEach>
@@ -247,41 +247,40 @@
 
 		<!-- 하단 네비 시작 -->
 
-		<nav aria-label="Page navigation example" align="center">
-			<ul class="pagination justify-content-center">
+			
+				<nav aria-label="Page navigation example"align="center">
+					<ul class="pagination d-flex justify-content-center">
+						<c:forEach var="i" items="${navi}">
+							<c:choose>
+								<c:when test="${i eq '<<'}">
+									<li class="page-item"><a class="page-link"
+										href="/secondHand.adminBoard?cpage=${start}">${i}</a></li>
+								</c:when>
+								<c:when test="${i eq '<'}">
+									<li class="page-item"><a class="page-link"
+										href="/secondHand.adminBoard?cpage=${cpage-1}">${i}</a></li>
+								</c:when>
+								<c:when test="${i eq '>'}">
+									<li class="page-item"><a class="page-link"
+										href="/secondHand.adminBoard?cpage=${cpage+1}">${i}</a></li>
+								</c:when>
+								<c:when test="${i eq '>>'}">
+									<li class="page-item"><a class="page-link"
+										href="/secondHand.adminBoard?cpage=${end}">${i}</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link"
+										href="/secondHand.adminBoard?cpage=${i}">${i}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</ul>
+				</nav>
+
+		<!-- 하단 네비 종료 -->
 
 
-
-<div class="col-12" align="center">
-					<c:forEach var="i" items="${navi}">
-						<c:choose>
-							<c:when test="${i eq '<<'}">
-								<a href="/study_select.adminBoard?cpage=${start}">${i}</a>
-							</c:when>
-							<c:when test="${i eq '<'}">
-								<a href="/study_select.adminBoard?cpage=${cpage-1}">${i}</a>
-							</c:when>
-							<c:when test="${i eq '>'}">
-								<a href="/study_select.adminBoard?cpage=${cpage+1}">${i}</a>
-							</c:when>
-							<c:when test="${i eq '>>'}">
-								<a href="/study_select.adminBoard?cpage=${end}">${i}</a>
-							</c:when>
-							<c:otherwise>
-								<a href="/study_select.adminBoard?cpage=${i}">${i}</a>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</div>
-
-
-			</ul>
-		</nav>
-	</div>
-	<!-- 하단 네비 종료 -->
-
-
-	<!-- 
+		<!-- 
 삭제 버튼 누를때 탈퇴시키겠습니까? 
 안내나오게해야함 
 
@@ -289,9 +288,5 @@
 
 
           -->
-
-
-
-
 </body>
 </html>

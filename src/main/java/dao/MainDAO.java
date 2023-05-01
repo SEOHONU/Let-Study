@@ -103,11 +103,11 @@ public class MainDAO {
 	public List<FreeBoardDTO> boardsearch(String select, String free) throws Exception {
 		String boardsql = "";
 		if (select.equals("제목")) {
-			boardsql = "select * from board where LOWER(board_title) like LOWER(?)";
+			boardsql = "select * from free_board where LOWER(board_title) like LOWER(?)";
 		} else if (select.equals("내용")) {
-			boardsql = "select * from board where LOWER(board_contents) like LOWER(?)";
+			boardsql = "select * from free_board where LOWER(board_contents) like LOWER(?)";
 		} else if (select.equals("작성자")) {
-			boardsql = "select * from board where LOWER(board_writer) like LOWER(?)";
+			boardsql = "select * from free_board where LOWER(board_writer) like LOWER(?)";
 		}
 		try (Connection con = this.getconnection(); PreparedStatement pstmt = con.prepareStatement(boardsql);) {
 			pstmt.setString(1, "%" + free + "%");
