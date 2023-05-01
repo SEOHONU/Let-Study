@@ -35,7 +35,7 @@ public class Admin_DAO {
 	}
 
 	public boolean isAdmin(String admin_id, String admin_pw) throws SQLException, Exception {
-		String sql = "select * from admin where admin_id=? and admin_pw=? and admin_grade_code='123'";
+		String sql = "select * from admin where admin_id=? and admin_pw=?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, admin_id);
 			pstat.setString(2, admin_pw);
@@ -130,6 +130,17 @@ public class Admin_DAO {
 			return rs.getInt(1);
 
 		}
+	}public int getRecordCount_user() throws Exception{
+		String sql = "select count(*) from members";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();
+				){
+			rs.next();
+			return rs.getInt(1);
+
+		}
 	}
 	public List<String> getPageNavi(int recordCount, int currentPage) throws Exception{
 		int recordTotalCount = recordCount;
@@ -187,7 +198,7 @@ public class Admin_DAO {
 
 	}
 	public List<MembersDTO> user_list(int start, int end) throws Exception {
-		String sql = "select * from (SELECT id,pw,name,birth_date,nickname,contact,email,zipcode,address1,address2,join_date,grade_code,rank() over(order by id desc) rank from members) where rank between ? and ?";
+		String sql = "select * from (SELECT id,pw,name,birth_date,nickname,contact,email,zipcode,address1,address2,join_date,rank() over(order by id desc) rank from members) where rank between ? and ?";
 //		SQL바꿔줘야함
 		
 		try(

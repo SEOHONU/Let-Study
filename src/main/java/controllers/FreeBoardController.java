@@ -13,13 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import dao.FreeFileDAO;
 import dao.FreeBoardDAO;
+import dao.FreeFileDAO;
 import dao.FreeReplyDAO;
-import dto.FreeFileDTO;
 import dto.FreeBoardDTO;
+import dto.FreeFileDTO;
 import dto.FreeReplyDTO;
-import dto.StudyBoardDTO;
 import statics.Settings;
 
 @WebServlet("*.freeBoard")

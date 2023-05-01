@@ -149,7 +149,7 @@
 					<li class="nav-item"><a class="nav-link"
 						href="/secondHand.adminBoard?cpage=1">중고책게시판 관리</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/admin/admin_userBoard.jsp">회원관리</a></li>
+						href="/user_Board.adminBoard?cpage=1">회원관리</a></li>
 
 					<!-- 배너관리는 추후 -->
 
@@ -196,7 +196,7 @@
 								<!--시퀀스 번호-->
 								<td>${i.title}</td>
 								<!-- 제목 -->
-								<td>${i.writer}</td>
+								<td><a href="inner.studyboard?seq=${i.seq}&cpage=1">${i.writer}</a></td>
 								<!--작성자-->
 								<td class="col d-none d-md-block" style="height: 55px;">${i.view_count}</td>
 								<!--  조회수 -->
