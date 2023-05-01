@@ -1,6 +1,7 @@
 package dto;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class FreeBoardAndMemberDTO {
 	private int seq;
@@ -67,6 +68,29 @@ public class FreeBoardAndMemberDTO {
 		this.nickname = nickname;
 		this.view_count = view_count;
 		this.write_date = write_date;
+	}
+	
+	public String getFormedDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
+		return sdf.format(this.write_date.getTime());
+	}
+
+	public String getDetailDate() {
+		long current_time = System.currentTimeMillis();
+		long write_time = this.write_date.getTime();
+		long time_gap = current_time - write_time;
+
+		if(time_gap<60000) {
+			return "1분 이내" ;
+		}else if(time_gap < 300000) {
+			return "5분 이내";
+		}else if(time_gap<3600000) {
+			return "1시간 이내";
+		}else if(time_gap <86400000) {
+			return "오늘";
+		}else {
+			return getFormedDate();
+		}
 	}
 	
 }
