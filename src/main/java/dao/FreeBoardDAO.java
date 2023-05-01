@@ -35,7 +35,7 @@ public class FreeBoardDAO {
 	}
 	
 	public int getRecordCount() throws Exception{
-		String sql = "select count(*) from board";
+		String sql = "select count(*) from free_board";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -48,7 +48,7 @@ public class FreeBoardDAO {
 	}
 	
 	public List<FreeBoardDTO> selectFreeBoard(int start, int end) throws Exception{
-		 String sql = "select * from (select board_seq,board_title,board_contents,board_writer,board_view_count,board_write_date,rank() over(order by board_seq desc) rank from board) where rank between ? and ?";
+		 String sql = "select * from (select board_seq,board_title,board_contents,board_writer,board_view_count,board_write_date,rank() over(order by board_seq desc) rank from free_board) where rank between ? and ?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -130,7 +130,7 @@ public class FreeBoardDAO {
 	}
 
 	public int insert(String writer, String title, String content) throws Exception{
-		String sql = "insert into board values(board_seq.nextval, ?,?,?,?,sysdate)";
+		String sql = "insert into free_board values(board_seq.nextval, ?,?,?,?,sysdate)";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -146,7 +146,7 @@ public class FreeBoardDAO {
 		}
 	}
 	public List<FreeBoardDTO> selectList() throws Exception{
-		String sql = "select * from board order by board_seq desc";
+		String sql = "select * from free_board order by board_seq desc";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -170,7 +170,7 @@ public class FreeBoardDAO {
 	}
 
 	public FreeBoardDTO selectDetail(int seq) throws Exception{
-		String sql = "select * from board where board_seq=?";
+		String sql = "select * from free_board where board_seq=?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);)
@@ -193,7 +193,7 @@ public class FreeBoardDAO {
 	}
 	
 	public int update(int seq,String title, String content) throws Exception{
-		String sql = "update board set board_title=?, board_contents=?, board_write_date =sysdate where board_seq=?";
+		String sql = "update free_board set board_title=?, board_contents=?, board_write_date =sysdate where board_seq=?";
 		try(
 		Connection con = this.getConnection();
 		PreparedStatement pstat = con.prepareStatement(sql);
@@ -207,7 +207,7 @@ public class FreeBoardDAO {
 	}
 	
 	public int deleteBySeq(int seq) throws Exception{
-		String sql = "delete from board where board_seq =?";
+		String sql = "delete from free_board where board_seq =?";
 
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
@@ -220,7 +220,7 @@ public class FreeBoardDAO {
 	}
 	
 	public int freeBoardViewUp (int seq) throws Exception{
-		String sql = "update board set board_view_count = board_view_count + 1 where board_seq = ?";
+		String sql = "update free_board set board_view_count = board_view_count + 1 where board_seq = ?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -233,22 +233,3 @@ public class FreeBoardDAO {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
