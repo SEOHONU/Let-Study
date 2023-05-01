@@ -26,7 +26,7 @@
 <style>
 * {
 	box-sizing: border-box;
-	border: 1px solid grey;
+	/* border: 1px solid grey; */
 }
 
 .header {
@@ -46,22 +46,154 @@
 
 .reply_text {
 	height: 50px;
+	border: none;
+	background-color: transparent;
 }
 
 .reply_info {
 	font-size: 13px;
+	color : grey;
 }
 
-.nonBorderBtn {
+.noBorderBtn {
 	background-color: transparent;
-	border: none;
 	position: relative;
 	left: 10px;
+	color : grey;
+	border : none;
 }
 
 #margin10 {
 	height: 10px;
 }
+
+#titleInput {
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+	border: none;
+	background: transparent;
+}
+
+#writeDate {
+	font-size: 12px;
+	color: grey;
+}
+
+#replyContent {
+	width: 100%;
+	height: 80px;
+	border: none;
+	background-color: transparent;
+	padding-left:10px;
+}
+
+.ReplyInputCol {
+	padding: 0px;
+	border: 0.5px solid grey;
+	border-radius : 10px;
+	background-color : #F2F2F2;
+	border:none;
+}
+
+#replyInsert {
+	float: right;
+	position : relative;
+	
+	
+}
+
+.reply_area {
+	padding: 0px;
+}
+
+.reply_text {
+	width: 100%;
+}
+
+.headInfoCol {
+	height: 30px;
+	padding:0px;
+}
+
+#content {
+	border: none;
+	padding:5px;
+	
+}
+
+#btnsBoardCol {
+	padding: 0px;
+}
+
+#btnsBoardCol input{
+	background-color : transparent;
+	float: right;
+	position:relative;
+	border : 0.5px solid #F2F2F2;
+	font-size: 12px;
+	color : grey;
+	padding:5px;
+	padding-left: 10px;
+	padding-right: 10px;
+} 
+
+#replyForm {
+	border: 0.5px solid #D6D6D6;
+	border-radius: 10px;
+}
+
+.nickname{
+	padding-left:10px;
+	padding-top : 10px;
+	color : grey;
+	font-size:14px;
+}
+
+.reply_text{
+	padding-left:10px;
+}
+
+.reply_info{
+	padding-left:10px;
+	height:30px;
+}
+
+.replyInsertBtn{
+border : none;
+background-color : green;
+font-size : 15px;
+color : white;
+width: 60px;
+height:30px;
+border-radius:10px;
+margin-bottom:10px;
+margin-right:10px;
+}
+
+#nick_name{
+padding: 10px;
+padding-bottom : 0px;
+}
+
+#file-upload-button{
+border : none;
+background-color : green;
+font-size : 15px;
+color : white;
+width: 60px;
+height:30px;
+border-radius:10px;
+margin-bottom:10px;
+margin-right:10px;
+}
+
+.fileCol{
+padding:0px;
+height:30px;
+}
+
+
 </style>
 
 </head>
@@ -115,102 +247,119 @@
 		<!-- 바디 -->
 
 		<div class="row">
-			<div class="col margin">여백</div>
+			<div class="col margin"></div>
 		</div>
-		<form action="/update.freeBoard" method="post" id="updateFreeBoard" enctype="multipart/form-data" >
+		<form action="/update.freeBoard" method="post" id="updateFreeBoard"
+			enctype="multipart/form-data">
 			<div class="row rowTitle">
 				<div class="col colTitle">
-					<input type="hidden" value="${list.seq}" name="seq"> <input
-						type="text" placeholder="제목을 입력해주세요" id="titleInput" name="title"
-						value="${list.title}" readonly>
+					<input type="hidden" value="${list.seq}" name="seq" id="board_seq">
+					<h3>
+						<input type="text" placeholder="제목을 입력해주세요" id="titleInput"
+							name="title" value="${list.title}" readonly>
+					</h3>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col">
-					<div>${list.writer}</div>
-					<div>${list.formedDate}</div>
+				<div class="col headInfoCol">
+					<span>${nickname}</span> <span id="writeDate">${list.formedDate}</span>
 				</div>
+				<hr style="width: 100%;">
 			</div>
 			<!--파일 첨부 출력 -->
 			<c:choose>
 				<c:when test="${fileResult!=null}">
-					<div class="row">
-						<div class="col">
+					<div class="row fileRow">
+						<div class="col fileCol">
+						<span>첨부파일 : </span>
 							<a
-								href="/download.file?sysName=${fileResult.sysName}&oriName=${fileResult.oriName}">${fileResult.oriName}</a>
-							<a
-								href="/delete.file?file_seq=${fileResult.seq}&board_seq=${list.seq}"><input
-								type="button" class="nonBorderBtn">x</a>
+								href="/download.file?sysName=${fileResult.sysName}&oriName=${fileResult.oriName} id="fileList">${fileResult.oriName}</a>
+							<input type="button" class="noBorderBtn fileDel" value="x"
+								style="display: none"> <input type="hidden"
+								name="file_seq" id="file_seq" value="${fileResult.seq}">
 						</div>
+						<hr style="width: 100%;">
 					</div>
 				</c:when>
 			</c:choose>
 			<div class="row fileRow">
-				<div class="col fileCol">
-					<input type="file" name="file" id="file" dir="rtl" style="display:none">
-				</div>
+					<input type="file" name="file" id="file" dir="rtl"
+						style="display: none">
 			</div>
 			<!-- 게시글 출력 -->
 			<div class="row">
 				<div contenteditable="false" id="content" placeholder="내용을 입력해주세요"
 					style="height: 500px">${list.content}</div>
 				<input type="hidden" name="realContent" id="realContent">
+						<hr style="width: 100%; margin-bottom:5px;">
 			</div>
 
 			<!-- 수정, 삭제하기 버튼 -->
-			<%-- 	<c:choose>
-		<c:when test="${sessionScope.loginID eq list.writer}"> --%>
+
 			<div class="row btnsBoardRow">
 				<div class="col btnsBoardCol" id="btnsBoardCol">
 					<a href="/contentList.freeBoard"> <input type="button"
-						value="돌아가기"></a> <input type="button" value="수정"
-						id="updateBtn"> <a href="delete.freeBoard?seq=${list.seq}">
-						<input type="button" value="삭제">
-					</a>
+						value="돌아가기"></a>
+					<c:choose>
+						<c:when test="${sessionScope.loggedID eq list.writer}">
+							<input type="button" value="수정" id="updateBtn">
+							<a href="delete.freeBoard?seq=${list.seq}"> <input
+								type="button" value="삭제">
+							</a>
+						</c:when>
+					</c:choose>
 				</div>
 			</div>
-			<%-- 	</c:when>
-		</c:choose> --%>
 			<div id="margin10"></div>
 		</form>
 		<!-- 댓글출력 -->
-		<form action="/update.reply"  method="post" >
-			<div class="row">
-				<div class="col reply_area">
-					<div class="reply_area">
-						<c:forEach var="i" items="${replyResult}">
+		<div class="row">
+			<div class="col reply_area">
+				<c:forEach var="i" items="${replyResult}">
+					<form action="/update.reply" method="post">
+						<div id="replyForm">
 							<div class="nickname" readonly>${i.writer}</div>
 							<input type="text" class="reply_text" name="replyContent"
 								value="${i.contents}" readonly>
 							<div class="reply_info">
-								<span class="reply_date" readonly>${i.write_date}</span> <input
-									type="button" class="nonBorderBtn replyUpdate" value="댓글수정">
-								<a href="/delete.reply?seq=${list.seq}&replySeq=${i.seq}"> <input
-									type="button" class="nonBorderBtn" value="댓글삭제"></a> <input
-									type="submit" class="nonBorderBtn" value="수정완료"
+								<span class="reply_date" readonly>${i.write_date}</span>
+
+								<c:choose>
+									<c:when test="${sessionScope.loggedID eq i.writer}">
+										<input type="button" class="noBorderBtn replyUpdate"
+											value="댓글수정">
+										<a href="/delete.reply?seq=${list.seq}&replySeq=${i.seq}">
+											<input type="button" class="noBorderBtn" value="댓글삭제">
+										</a>
+									</c:when>
+								</c:choose>
+
+								<input type="submit" class="noBorderBtn" value="수정완료"
 									style="display: none"> <input type="hidden"
 									value="${i.seq}" name="replySeq"> <input type="hidden"
 									value="${list.seq}" name="seq">
-								<div id="margin10"></div>
 							</div>
-						</c:forEach>
-					</div>
-				</div>
+						</div>
+						<div id="margin10"></div>
+					</form>
+					<div id="margin10"></div>
+				</c:forEach>
 			</div>
-		</form>
+		</div>
 		<!-- 댓글입력 -->
-		<div class="row rowReplyInput">
+		<div class="row ReplyInputRow">
 
-			<div class="col colReplyInput">
-				<div id="nick_name">${list.writer}</div>
+			<div class="col ReplyInputCol">
+				<div id="nick_name">${sessionScope.loggedNickname}</div>
 				<input type="text" name="replyContent" id="replyContent"
-					placeholder="댓글을 입력해주세요"> <input type=button value="등록"
+					placeholder="댓글을 입력해주세요"> <input type=button class="replyInsertBtn" value="등록"
 					id="replyInsert">
 			</div>
 
 		</div>
+		<div class="col-12" id="footer">푸터입니다.</div>
 	</div>
-
+	</div>
 
 	<script>
 		/* 댓글 입력 */
@@ -228,9 +377,35 @@
 			let updateComplete = $("<button>");
 			updateComplete.text("수정완료");
 			updateComplete.attr("type", "submit");
+			updateComplete.css({
+				'background-color': 'transparent',
+				'border': 'none',
+				'position': 'relative',
+				'color' : 'grey',
+				'font-size': '13px',
+				'border' : '0.5px solid #F2F2F2',
+					'padding':'5px',
+			'padding-left': '10px',
+			'padding-right': '10px'
+				});
+			
 
 			$("#btnsBoardCol").append(updateComplete);
+			 $("#file").css({
+				'background-color': 'transparent',
+				'position': 'relative',
+				'color' : 'grey',
+				'font-size': '13px',
+				'border' : '0.5px solid #F2F2F2',
+				'width' : '100%',
+				'height' : '40px',
+				'padding' : '5px'
+		
+			}); 
 			$("#file").css("display", "block");
+	/* 		$('#file-upload-button').show(); */
+
+			$(".fileDel").css("display", "inline-block");
 		})
 
 		$("#updateFreeBoard").on("submit", function() {
@@ -243,6 +418,23 @@
 			$(this).hide();
 			$(this).next().css("display", "none");
 			$(this).next().next().css("display", "inline-block");
+			
+		})
+
+		/* 파일 삭제  */
+		$(".fileDel").on("click", function() {
+			var $target = $(event.target);
+			$.ajax({
+				url : "/delete.file",
+				dataType : "json",
+				type : "post",
+				data : {
+					file_seq : $("#file_seq").val(),
+					board_seq : $("#board_seq").val()
+				}
+			}).done(function(resp) {
+				$target.parent("div").remove();
+			});
 		})
 	</script>
 </body>

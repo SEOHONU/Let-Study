@@ -13,48 +13,47 @@ import dto.MembersDTO;
 
 @WebServlet("*.member")
 public class MemberController extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String cmd = request.getRequestURI(); 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String cmd = request.getRequestURI();
 		Gson g = new Gson();
 		MembersDAO dao = MembersDAO.getInstance();
 
 		try {
-			if(cmd.equals("/idCheck.member")) {
+			if (cmd.equals("/idCheck.member")) {
 
-				String id = request.getParameter("id"); 
+				String id = request.getParameter("id");
 				boolean result = dao.isIdExist(id);
-				String resp = g.toJson(result); 
-				response.getWriter().append(resp); 
+				String resp = g.toJson(result);
+				response.getWriter().append(resp);
 
+			} else if (cmd.equals("/login.member")) {
 
-
-			}else if(cmd.equals("/login.member")) {
-
-				String id = request.getParameter("id"); 
-				String pw = request.getParameter("pw"); 
-				boolean result = MembersDAO.getInstance().isMember(id, pw); 
-				if(result) {
-					request.getSession().setAttribute("loggedID", id); 
-					String nickname = MembersDAO.getInstance().getNickname(id); 
-					request.getSession().setAttribute("nickname", nickname); 
+				String id = request.getParameter("id");
+				String pw = request.getParameter("pw");
+				boolean result = MembersDAO.getInstance().isMember(id, pw);
+				if (result) {
+					request.getSession().setAttribute("loggedID", id);
+					String nickname = MembersDAO.getInstance().getNickname(id);
+					request.getSession().setAttribute("nickname", nickname);
 				}
-				// 닉네임 세션에 가져옴 
-				response.sendRedirect("/");
-				//         로그인 성공하면 들어갈 페이지 입력해야함 
-			}else if(cmd.equals("/joinMember.member")) {
-
-				String id = request.getParameter("id"); 
-				String pw = request.getParameter("pw"); 
-				String name = request.getParameter("name"); 
-				//         생년월일 값 받아야함 
-				String birthYear = request.getParameter("birthYear"); 
-				String birthMonth = request.getParameter("birthMonth"); 
-				String birthDay = request.getParameter("birthDay"); 
-				//생년월일 값 받음 
+				// 닉네임 세션에 가져옴
+				response.sendRedirect("index.jsp");
+				// 로그인 성공하면 들어갈 페이지 입력해야함
+			} else if (cmd.equals("/joinMember.member")) {
+				String id = request.getParameter("id");
+				System.out.println(id);
+				String pw = request.getParameter("pw");
+				String name = request.getParameter("name");
+				// 생년월일 값 받아야함
+				String birthYear = request.getParameter("birthYear");
+				String birthMonth = request.getParameter("birthMonth");
+				String birthDay = request.getParameter("birthDay");
+				// 생년월일 값 받음
 				String nickname = request.getParameter("nickname");
-				String contact = request.getParameter("contact"); 
-				String email = request.getParameter("email"); 
-				String zipcode = request.getParameter("zipcode"); 
+				String contact = request.getParameter("contact");
+				String email = request.getParameter("email");
+				String zipcode = request.getParameter("zipcode");
 				String roadAddress = request.getParameter("roadAddress");
 				String detailAddress = request.getParameter("detailAddress"); 
 
@@ -73,7 +72,7 @@ public class MemberController extends HttpServlet {
 				request.setAttribute("myInfo", dto);
 				request.getRequestDispatcher("/member/memberInfo.jsp").forward(request, response);
 
-				// update 회원정보수정 
+				// update 회원정보수정
 			} else if (cmd.equals("/update.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
 				String pw = request.getParameter("pw");
@@ -85,7 +84,8 @@ public class MemberController extends HttpServlet {
 				String zipcode = request.getParameter("zipcode");
 				String roadAddress = request.getParameter("roadAddress");
 				String detailAddress = request.getParameter("detailAddress");
-				MembersDTO dto = new MembersDTO(id, pw, name, birth_date, nickname, contact, email, zipcode, roadAddress, detailAddress, null);
+				MembersDTO dto = new MembersDTO(id, pw, name, birth_date, nickname, contact, email, zipcode,
+						roadAddress, detailAddress, null);
 				dao.update(dto);
 				response.sendRedirect("/myPage/mypageMainForm.jsp");
 				// delete 회원탈퇴
@@ -93,10 +93,10 @@ public class MemberController extends HttpServlet {
 				String id = (String) request.getSession().getAttribute("loggedID");
 				dao.memberOut(id);
 				response.sendRedirect("/index.jsp");
-			} 
-		}catch (Exception e) {
-			e.printStackTrace(); 
-			response.sendRedirect("/error.jsp"); 
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.sendRedirect("/error.jsp");
 		}
 	}
 
