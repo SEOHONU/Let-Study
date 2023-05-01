@@ -194,9 +194,9 @@
 
 								<td>${i.seq}</td>
 								<!--시퀀스 번호-->
-								<td>${i.title}</td>
+								<td>${i.writer}</td>
 								<!-- 제목 -->
-								<td><a href="inner.studyboard?seq=${i.seq}&cpage=1">${i.writer}</a></td>
+								<td><a href="inner.studyboard?seq=${i.seq}&cpage=1">${i.contents}</a></td>
 								<!--작성자-->
 								<td class="col d-none d-md-block" style="height: 55px;">${i.view_count}</td>
 								<!--  조회수 -->

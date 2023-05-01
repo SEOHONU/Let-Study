@@ -194,7 +194,7 @@ background-color: #1e3c3e;
 
 										<td>${i.seq}</td>
 										<td>${i.writer}</td>
-										<td><a href="inner.studyboard?seq=${i.seq}&cpage=1">${i.writer}</a></td>
+										<td><a href="inner.studyboard?seq=${i.seq}&cpage=1">${i.contents}</a></td>
 										<td>${i.view_count}</td>
 										<td>${i.write_date}</td>
 										
