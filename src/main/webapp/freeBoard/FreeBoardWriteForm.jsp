@@ -165,7 +165,6 @@ input[type=file]::file-selector-button {
 
 		</div>
 		<form action="/write.freeBoard" method="post" enctype="multipart/form-data" id="insertForm">
-			<input type="hidden" name="writer" value="아이디">
 			<div class="row titleRow">
 				<div class="col titleCol ">
 					<div id="title">

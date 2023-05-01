@@ -82,7 +82,7 @@ public class FreeReplyDAO {
 		pstat.setInt(2, reply_seq);
 		pstat.executeUpdate();
 		con.commit();
-		System.out.println("업데이트 완료");
+		System.out.println("댓글 업데이트 완료");
 	}
 }
 	

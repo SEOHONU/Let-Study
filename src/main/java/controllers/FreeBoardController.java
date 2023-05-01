@@ -13,13 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import dao.FreeFileDAO;
 import dao.FreeBoardDAO;
+import dao.FreeFileDAO;
 import dao.FreeReplyDAO;
-import dto.FreeFileDTO;
 import dto.FreeBoardDTO;
+import dto.FreeFileDTO;
 import dto.FreeReplyDTO;
-import dto.StudyBoardDTO;
 import statics.Settings;
 
 @WebServlet("*.freeBoard")
@@ -32,6 +31,8 @@ public class FreeBoardController extends HttpServlet {
 		String cmd=request.getRequestURI();
 
 		FreeBoardDAO dao = FreeBoardDAO.getInstance();
+		String writer = (String)request.getSession().getAttribute("loggedID");
+		String nickname = (String)request.getSession().getAttribute("loggedNickname");
 		try {
 			//자유게시판 글쓰기
 			if(cmd.equals("/write.freeBoard")) {
@@ -45,11 +46,9 @@ public class FreeBoardController extends HttpServlet {
 				}
 				
 				MultipartRequest multi = new MultipartRequest(request,realPath,1024*1024*10,"utf8",new DefaultFileRenamePolicy());				
-				
-				String writer = multi.getParameter("writer");
 				String title = multi.getParameter("title");
 				String content= multi.getParameter("realContent");			
-				
+				System.out.println(writer);
 				int result = dao.insert(writer, title, content);
 
 				String oriName = multi.getOriginalFileName("file");
@@ -79,9 +78,8 @@ public class FreeBoardController extends HttpServlet {
 				int end = currentPage * Settings.BOARD_RECORD_COUNT_PER_PAGE;
 				int first = (currentPage-1)/Settings.BOARD_NAVI_COUNT_PER_PAGE*Settings.BOARD_NAVI_COUNT_PER_PAGE;
 				int last = (currentPage-1)/Settings.BOARD_NAVI_COUNT_PER_PAGE*Settings.BOARD_NAVI_COUNT_PER_PAGE+Settings.BOARD_NAVI_COUNT_PER_PAGE+1;
-				System.out.println(start+"/"+end);
-				System.out.println(currentPage);
 				List<FreeBoardDTO> list = dao.selectFreeBoard(start, end);
+				
 				List<String> pageNavi = dao.getPageNavi(dao.getRecordCount(), currentPage);
 				request.setAttribute("list", list);
 				request.setAttribute("navi", pageNavi);
@@ -101,11 +99,16 @@ public class FreeBoardController extends HttpServlet {
 				
 				// 게시글 시퀀스 받아오기
 				int seq = Integer.parseInt(request.getParameter("seq"));
+				System.out.println("게시글 시퀀스 : "+seq);
 				// 게시글 조회수
 				dao.freeBoardViewUp(seq);
 				// 게시글 출력
 				FreeBoardDTO list = dao.selectDetail(seq);
 				request.setAttribute("list", list);
+				//닉네임 출력
+				String nick = dao.getNicknameBySeq(seq);
+				System.out.println(nick);
+				request.setAttribute("nickname", nick);
 				// 파일 출력
 				FreeFileDAO daoF = FreeFileDAO.getInstance();
 				
