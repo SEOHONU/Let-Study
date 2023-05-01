@@ -33,30 +33,6 @@ public class FreeReplyDAO {
 
 	}
 	
-//	public ArrayList<FreeReplyDTO> selectReply(int p_seq) throws Exception{
-//
-//		String sql = "select * from fr_reply where board_seq = ? order by reply_seq asc";
-//		try(
-//				Connection con = this.getConnection();
-//				PreparedStatement pstat = con.prepareStatement(sql);
-//				){
-//			pstat.setInt(1, p_seq);
-//			pstat.executeUpdate();
-//
-//			try(ResultSet rs = pstat.executeQuery();){ // 수정!!!
-//				ArrayList<FreeReplyDTO> dto = new ArrayList<>();
-//				while(rs.next()) {
-//					int seq = rs.getInt("reply_seq");
-//					String writer = rs.getString("reply_writer");
-//					String contents = rs.getString("reply_contents");
-//					Timestamp write_date = rs.getTimestamp("REPLY_WRITE_DATE");
-//					int board_seq = rs.getInt("board_seq");
-//					dto.add(new FreeReplyDTO(seq, writer, contents, write_date, board_seq));
-//				}
-//				return dto;
-//			}
-//		}
-//	}
 	
 	public ArrayList<ReplyAndMemberDTO> selectReply(int board_seq)throws Exception{
 		String sql = "select * from(select r.reply_seq, r.reply_writer, m.nickname, r.reply_contents, r.reply_write_date,r.board_seq from fr_reply r left join members m on r.reply_writer = m.id where board_seq=?)order by reply_seq asc";

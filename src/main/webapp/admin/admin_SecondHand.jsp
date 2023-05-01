@@ -129,7 +129,7 @@
 	<!-- 상단 네비게이션 시작 -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light col-12">
 		<div class="container">
-			<a class="navbar-brand" href="/admin/admin_mainboard.admin_main">메인으로</a>
+			<a class="navbar-brand" href="/admin_mainboard.admin_main">메인으로</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"
@@ -149,7 +149,7 @@
 					<li class="nav-item"><a class="nav-link"
 						href="/secondHand.adminBoard?cpage=1">중고책게시판 관리</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/admin_userBoard.jsp">회원관리</a></li>
+						href="/user_Board.adminBoard?cpage=1">회원관리</a></li>
 					<!--<li class="nav-item"><a class="nav-link disabled" href="#"
               tabindex="-1" aria-disabled="true">배너관리</a></li>-->
 
@@ -198,7 +198,7 @@
 								<tr>
 									<td>no : ${i.seq}</td>
 									<td>${i.writer}</td>
-									<td>${i.title}</td>
+									<td><a href="secondHandBoardContents.secondHand?seq=${i.seq}&currentPage=1">${i.title}</a></td>
 									<td class="col d-none d-md-block" style="height: 55px;">${i.view_count}</td>
 									<td>${i.detailDate}</td>
 									<td><a
