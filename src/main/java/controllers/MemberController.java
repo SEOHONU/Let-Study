@@ -39,7 +39,7 @@ public class MemberController extends HttpServlet {
 					request.getSession().setAttribute("nickname", nickname); 
 				}
 				// 닉네임 세션에 가져옴 
-				response.sendRedirect("/");
+				response.sendRedirect("/index.jsp");
 				//         로그인 성공하면 들어갈 페이지 입력해야함 
 			}else if(cmd.equals("/joinMember.member")) {
 
@@ -63,7 +63,7 @@ public class MemberController extends HttpServlet {
 						(id, pw, name, birthYear+""+birthMonth+""+birthDay, nickname, contact, email, zipcode, roadAddress, detailAddress, null);
 				int result = dao.insertAll(dto); 
 				// 회원가입하면 나타날 페이지 써야함 
-				response.sendRedirect(""); 
+				response.sendRedirect("/"); 
 			}else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
@@ -98,7 +98,7 @@ public class MemberController extends HttpServlet {
 			} 
 		}catch (Exception e) {
 			e.printStackTrace(); 
-			response.sendRedirect("/error.jsp"); 
+			//response.sendRedirect("/error.jsp"); 
 		}
 	}
 
