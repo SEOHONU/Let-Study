@@ -15,8 +15,10 @@ public class Profile_settingController extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf8");
-
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
 		String cmd = request.getRequestURI();
 		Profile_settingDAO dao = Profile_settingDAO.getInstance();
 			
@@ -26,7 +28,7 @@ public class Profile_settingController extends HttpServlet {
 				response.sendRedirect("/profile_setting/profileForm.jsp");
 			
 			}else if (cmd.equals("/update.profile_settingController")) {
-				System.out.println("¿©±â11");
+				System.out.println("ï¿½ï¿½ï¿½ï¿½11");
 				String loginId = (String) request.getSession().getAttribute("loggedId");
 				String nickname = request.getParameter("nickname");
 				String introduce = request.getParameter("introduceMyslef");
