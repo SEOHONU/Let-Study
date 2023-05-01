@@ -15,6 +15,9 @@ import dto.MembersDTO;
 public class MemberController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		String cmd = request.getRequestURI();
 		Gson g = new Gson();
 		MembersDAO dao = MembersDAO.getInstance();
@@ -41,7 +44,6 @@ public class MemberController extends HttpServlet {
 				response.sendRedirect("index.jsp");
 				// 로그인 성공하면 들어갈 페이지 입력해야함
 			} else if (cmd.equals("/joinMember.member")) {
-
 				String id = request.getParameter("id");
 				System.out.println(id);
 				String pw = request.getParameter("pw");
@@ -56,15 +58,15 @@ public class MemberController extends HttpServlet {
 				String email = request.getParameter("email");
 				String zipcode = request.getParameter("zipcode");
 				String roadAddress = request.getParameter("roadAddress");
-				String detailAddress = request.getParameter("detailAddress");
-				System.out.println(id);
-				// 회원가입일자 받는 법 몰라서 null로 받음
-				MembersDTO dto = new MembersDTO(id, pw, name, birthYear + "" + birthMonth + "" + birthDay, nickname,
-						contact, email, zipcode, roadAddress, detailAddress, null);
-				int result = dao.insertAll(dto);
-				// 회원가입하면 나타날 페이지 써야함
-				response.sendRedirect("index.jsp");
-			} else if (cmd.equals("/logout.member")) {
+				String detailAddress = request.getParameter("detailAddress"); 
+
+				// 회원가입일자 받는 법 몰라서 null로 받음 
+				MembersDTO dto = new MembersDTO
+						(id, pw, name, birthYear+""+birthMonth+""+birthDay, nickname, contact, email, zipcode, roadAddress, detailAddress, null);
+				int result = dao.insertAll(dto); 
+				// 회원가입하면 나타날 페이지 써야함 
+				response.sendRedirect("/"); 
+			}else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
 			} else if (cmd.equals("/myInfoSelect.member")) {
