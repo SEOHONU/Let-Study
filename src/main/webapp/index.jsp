@@ -210,7 +210,7 @@
                                         </c:when>
                                         <c:otherwise>
                                             <div class="col-6 profile">
-                                                <a href="/myInfoSelect.member"><i class="fa-solid fa-user"></i></a>
+                                                <a href="/myPage/mypageMainForm.jsp"><i class="fa-solid fa-user"></i></a>
                                                 <!--로그인됐을때-->
                                             </div>
                                             <div class="col-6 logout">
