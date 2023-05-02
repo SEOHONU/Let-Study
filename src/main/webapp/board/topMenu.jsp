@@ -63,7 +63,6 @@
 
                 #logo {
                     z-index: 2;
-                    padding: 0px;
                 }
 
 
@@ -102,7 +101,6 @@
 
         <body>
             <%-- <c:import url=""></c:import> --%>
-            <div class="container">
                 <div class="row navi">
 
                     <div class="col-12 top">
@@ -271,7 +269,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
         </body>
 

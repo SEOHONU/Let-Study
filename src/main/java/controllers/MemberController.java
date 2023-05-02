@@ -76,7 +76,6 @@ public class MemberController extends HttpServlet {
 				// 회원가입하면 나타날 페이지 일단 메인페이지로 씀 
 				response.sendRedirect("/index.jsp"); 
 				// 회원가입하면 나타날 페이지 써야함 
-				response.sendRedirect("/"); 
 			}else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");

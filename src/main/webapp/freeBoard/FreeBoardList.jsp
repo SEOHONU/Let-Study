@@ -148,57 +148,7 @@
         <body>
             <div class="container">
                 <!-- 헤더 네비 -->
-                <div class="row navi">
-                    <div class="col-12">
-                        <div class="row">
-
-                            <div class="col-6 col-lg-2 order-2 order-lg-first">
-                                logo
-                            </div>
-                            <div class="col-lg-4 d-none d-lg-block order-lg-1">
-                                여백
-                            </div>
-                            <div class="col-4 d-block d-lg-none order-1">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                네비햄버거
-                                            </div>
-                                            <div class="col-12">회원가입</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <div class="col-12 subsearch">검색</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-2">
-                                <button type="button" class="btn btn-primary btn-lg">hi</button>
-                            </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-3">
-                                <button type="button" class="btn btn-primary btn-lg">hi</button>
-                            </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-4">
-                                <button type="button" class="btn btn-primary btn-lg">hi</button>
-                            </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-5">
-                                <button type="button" class="btn btn-primary btn-lg">hi</button>
-                            </div>
-                            <div class="col-lg-2 d-none d-lg-block  order-lg-last">
-                                ㅎㅇ
-                            </div>
-                            <div class="col-2 d-block d-lg-none order-last">
-                                <div class="row">
-                                    <div class="col-12">공백</div>
-                                    <div class="col-12">로그인</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <c:import url="/board/topMenu.jsp"></c:import>
 
                 <!-- 바디 -->
 
