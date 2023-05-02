@@ -30,14 +30,11 @@ public class Profile_settingDAO {
 		return ds.getConnection();
 	}
 
-	
-
-	public Profile_settingDTO select(String id) throws Exception{
-		String sql = "select from profile where profile_id=?";
-		try (Connection con = this.getConnection(); 
-				PreparedStatement pstat = con.prepareStatement(sql);) {
+	public Profile_settingDTO select(String id) throws Exception {
+		String sql = "select * from profile where profile_id=?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, id);
-			try(ResultSet rs = pstat.executeQuery();){
+			try (ResultSet rs = pstat.executeQuery();) {
 				rs.next();
 				String nickname = rs.getString("profile_nickname");
 				String introduce = rs.getString("profile_introduce");
@@ -45,32 +42,30 @@ public class Profile_settingDAO {
 				String facebook = rs.getString("profile_facebook");
 				String url = rs.getString("profile_url");
 
-				Profile_settingDTO dto = new Profile_settingDTO(null,nickname,introduce,instargram,facebook,url);
+				Profile_settingDTO dto = new Profile_settingDTO(id, nickname, introduce, instargram, facebook, url);
 
 				return dto;
-
 			}
 		}
 	}
 
-	public Profile_settingDTO update(Profile_settingDTO dto)throws Exception{
-		String sql = "update profile set profile_nickname=?,profile_introduce=?,profile_instargram=?,profile_facebook=?,profile_url=? where id=?";
-		try (Connection con = this.getConnection(); 
-			PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setString(1,dto.getProfile_nickname());
-			pstat.setString(2,dto.getProfile_introduce());
-			pstat.setString(3,dto.getProfile_instargram());
-			pstat.setString(4,dto.getProfile_facebook());
-			pstat.setString(5,dto.getProfile_url());
+	public int update(Profile_settingDTO dto) throws Exception {
+		String sql = "update profile set profile_nickname=?,profile_introduce=?,profile_instargram=?,profile_facebook=?,profile_url=? where profile_id=?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, dto.getProfile_nickname());
+			pstat.setString(2, dto.getProfile_introduce());
+			pstat.setString(3, dto.getProfile_instargram());
+			pstat.setString(4, dto.getProfile_facebook());
+			pstat.setString(5, dto.getProfile_url());
 			pstat.setString(6, dto.getProfile_id());
-			
-			Profile_settingDTO ps_dto = new Profile_settingDTO(dto.getProfile_nickname(),dto.getProfile_introduce(),dto.getProfile_instargram(),dto.getProfile_facebook(),dto.getProfile_url(),dto.getProfile_id());
-			pstat.executeUpdate();
+
+			int result = pstat.executeUpdate();
 			con.commit();
-			return ps_dto;
-			
+			return result;
 		}
-
-
 	}
+
+	
+
+	
 }
