@@ -78,7 +78,6 @@ pageEncoding="UTF-8"%>
                             <c:if test="${dto.writer == loggedID}">
                                 <input type="button" value="수정하기" id="modify">
                                 <input type="button" value="삭제하기" onclick="confirmDel()">
-                                <input type="button" value="판매완료" onclick="confirmSell()">
                             </c:if> <input type="button"
                                 onclick="location.href='/selectBound.secondHand?currentPage=${currentPage}'"
                                 value="돌아가기">
@@ -276,16 +275,12 @@ pageEncoding="UTF-8"%>
                 location.href = "/deleteContents.secondHand?seq=${dto.seq}&currentPage=${currentPage}";
             }
         }
-        function confirmSell() {
-            if (confirm("${dto.title} 판매완료 처리 하시겠습니까?")); {
-                alert("판매완료 처리 되었습니다");
-            }
-        }
         $(".delCom").on("click", function () {
             let seq = $(this).attr("seq");
             if (confirm("댓글을 삭제하시겠습니까?")) {
                 alert("삭제 완료되었습니다.");
-                location.href = "/deleteComments.shComments?com_seq=" + seq + "&currentPage=${currentPage}&board_seq=${dto.seq}";
+                location.href = "/deleteComments.shComments?com_seq=" + seq +
+                		"&currentPage=${currentPage}&board_seq=${dto.seq}";
             }
         });
         $(".modCom").on("click", function () {
