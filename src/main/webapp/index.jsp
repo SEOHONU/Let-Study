@@ -171,7 +171,7 @@
 
         <body>
 
-            <div class="container-fluid">
+            <div class="container">
 
                 <!-- 헤더 네비 -->
                 <div class="row navi">
