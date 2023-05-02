@@ -43,7 +43,9 @@
 				<div class="row">
 					<div class="col-4 col-lg-2 order-2 order-lg-first">logo</div>
 					<div class="col-lg-4 d-none d-lg-block order-lg-1">
+						<a href="/index.jsp">index로</a>
 						<a href="/selectBound.secondHand?currentPage=1">1페이지로</a>
+						<a href="/secondHand/secondHandClusterer.jsp?currentPage=${currentPage}">클러스터러</a>
 					</div>
 					<div class="col-4 d-block d-lg-none order-1">햄버거</div>
 					<div class="col-lg-1 d-none d-lg-block order-lg-2">menu1</div>

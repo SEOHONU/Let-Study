@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import commons.EncryptionUtils;
-import dao.Sh_CommentsDAO;
 import dao.SecondHandDAO;
-import dto.Sh_CommentsDTO;
+import dao.Sh_CommentsDAO;
 import dto.SecondHandDTO;
+import dto.Sh_CommentsDTO;
 import statics.Settings;
 
 @WebServlet("*.secondHand")
@@ -38,7 +40,6 @@ public class SecondHandController extends HttpServlet {
 				String contents = request.getParameter("contents");
 				double lat = Double.parseDouble(request.getParameter("lat"));
 				double lng = Double.parseDouble(request.getParameter("lng"));
-				writer = EncryptionUtils.AntiXSS(writer);
 				title = EncryptionUtils.AntiXSS(title);
 				contents = EncryptionUtils.AntiXSS(contents);
 				SecondHandDTO dto = new SecondHandDTO();
@@ -84,8 +85,7 @@ public class SecondHandController extends HttpServlet {
 				request.getRequestDispatcher("/secondHand/secondHandList.jsp").forward(request, response);
 			}
 			else if(cmd.equals("/secondHandBoardContents.secondHand")) {
-				int currentPage = request.getParameter("cpage") == null ? 1 
-						: Integer.parseInt(request.getParameter("cpage"));
+				int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 				int targetSeq = Integer.parseInt(request.getParameter("seq"));
 				shDAO.secondHandBoardViewUp(targetSeq);
 				SecondHandDTO dto = shDAO.selectContents(targetSeq);
@@ -102,8 +102,7 @@ public class SecondHandController extends HttpServlet {
 				response.sendRedirect("/selectBound.secondHand?currentPage="+currentPage);
 			}
 			else if(cmd.equals("/modifyContents.secondHand")) {
-				int currentPage = request.getParameter("cpage") == null ? 1 
-						: Integer.parseInt(request.getParameter("cpage"));
+				int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				String title = request.getParameter("title");
 				String contents = request.getParameter("contents");
@@ -115,6 +114,12 @@ public class SecondHandController extends HttpServlet {
 						null, null, 0, lat, lng);
 				int result = shDAO.modifyContents(dto);
 				response.sendRedirect("/secondHandBoardContents.secondHand?seq="+seq+"&currentPage="+currentPage);
+			}
+			else if(cmd.equals("/showClusterer.secondHand")) {
+				Gson gson = new Gson();
+				List<SecondHandDTO> list = shDAO.getAllLatLng();
+				String gList = gson.toJson(list);
+				response.getWriter().append(gList);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

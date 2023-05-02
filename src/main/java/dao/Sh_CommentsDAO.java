@@ -80,7 +80,7 @@ public class Sh_CommentsDAO {
 		}
 	}
 	public int deleteComments(int com_seq) throws Exception{
-		String sql = "delete from sh_comments where sh_com_seq = ?";
+		String sql = "delete from sh_comments where com_seq = ?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
