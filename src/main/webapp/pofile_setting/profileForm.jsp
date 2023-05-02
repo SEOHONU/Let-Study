@@ -129,8 +129,8 @@ div {
 						자기소개
 						<div id="introduce1">
 							<textarea name="introduceMyslef1" id="introduceMyslef1"
-								value="${select.profile_introduce}" readonly></textarea>
-								
+								value="${update.profile_introduce}" readonly></textarea>
+							
 							<br>
 						</div>
 

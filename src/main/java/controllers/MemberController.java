@@ -31,9 +31,6 @@ public class MemberController extends HttpServlet {
 				String resp = g.toJson(result);
 				response.getWriter().append(resp);
 
-			} else if (cmd.equals("/login.member")) {
-
-
 			}else if(cmd.equals("/login.member")) {
 
 				String id = request.getParameter("id"); 
@@ -42,13 +39,12 @@ public class MemberController extends HttpServlet {
 				if(result) {
 					request.getSession().setAttribute("loggedID", id); 
 					String nickname = MembersDAO.getInstance().getNickname(id); 
-					request.getSession().setAttribute("loggedNickname", nickname); 
+					request.getSession().setAttribute("loggedNickname", nickname); // 닉네임 세션에 가져옴
 				}
-				// 닉네임 세션에 가져옴 
 				response.sendRedirect("/index.jsp");
-				//         로그인 성공하면 들어갈 페이지 입력해야함 
+				
+				
 			}else if(cmd.equals("/joinMember.member")) {
-
 				String id = request.getParameter("id"); 
 				String pw = request.getParameter("pw"); 
 				String name = request.getParameter("name"); 

@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
-<script src = "https://code.jquery.com/jquery-3.6.4.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 <!-- CSS only -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -133,48 +133,61 @@ div {
 				<div class="col-12">
 					<font size="5px"><b> 마이페이지</b></font>
 				</div>
-			</div>
-
-			<div class="row body">
+		<div class="row body">
 				<div class="col-3">
 					<div class="row">
 						<div class="col-12 circle">
 							<div id="profilecircle"></div>
 							<div class="nickname" align="center">
-								<b>Nickname</b>
+								<b>${sessionScope.loggedNickname}</b>
 							</div>
-							<div class="greetings" align="center">Greetings</div>
+							<div class="greetings" align="center">${update.profile_introduce}</div>
 							<div id="circles">
 								<div id="message">
-									<a href="https://www.naver.com/"> <i
-										class="fa-regular fa-envelope" id="pictogram"></i>
-									</a>
+									<a href=""><i class="fa-regular fa-envelope" id="pictogram"></i></a>
 								</div>
 								<div id="profileSetting">
-									<a href="/pofile_setting/profile_print.jsp"><i
-										class="fa-solid fa-gear"></i> </a>
+								
+									<a href="/select.profile_settingController">
+									<i class="fa-solid fa-gear"></i></a>
 								</div>
 							</div>
 						</div>
 
-
 						<div class="col-12">
-						<div class="myBoard"><button><i class="fa-solid fa-address-book"></i> 내 게시판</button></div>
-                            <hr>
-                            <div class="salesList"><button><i class="fa-solid fa-cart-shopping"></i> 판매&구매 내역</button></div>
-                            <hr>
-                            <div class="interestingMeeting"><button><i class="fa-solid fa-heart"></i> 관심 모임</button></div>
-                            <hr>
-                            <div class="myInfo"><button><i class="fa-solid fa-gear"></i> 내 정보 관리</button></div>
-                            <hr>
+							<div class="myBoard">
+								<a href="/mypageboard.mypageboardController">
+									<button type="button" id="myboardBtn">
+										<i class="fa-solid fa-address-book"></i> 내 게시판
+									</button>
+								</a>
+							</div>
+							<hr>
+							<div class="interestingMeeting">
+							<a href="/">
+								<button type="button">
+									<i class="fa-solid fa-heart"></i> 관심 모임
+								</button>
+								</a>
+							</div>
+							<hr>
+							<div class="myInfo">
+								<a href="/myInfoSelect.member">
+									<button type="button">
+										<i class="fa-solid fa-gear"></i> 내 정보 관리
+									</button>
+								</a>
+							</div>
+							<hr>
 
 						</div>
 					</div>
 				</div>
 				<div class="col-9">
 					<div class="row">
-						<div class="">
-							<strong>스터디 게시판</strong>
+						<input type="hidden" name="id" value="${loggedID}">
+						<strong>스터디 게시판</strong>
+						<div class="study">
 							<table
 								summary="This table shows how to create responsive tables using Datatables' extended functionality"
 								class="table table-bordered table-hover dt-responsive">
@@ -182,91 +195,61 @@ div {
 									<tr>
 										<th class="col col-lg-1 col-sm-2">no.</th>
 										<th class="col col-lg-9 col-sm-8">상품명</th>
-										<th>버튼</th>
 									</tr>
 								</thead>
-								<c:forEach var="i" items="${boardList}" varStatus="status">
-									<!-- 만약 자유게시판에 글이 하나도 없다면 자유게시판에 작성한 글 없다는 정보 올려주기 -->
-									<c:if test="${status.index < 5}">
-										<tr>
-											<td>${i.seq}</td>
-											<!--시퀀스 번호-->
-											<td>${i.writer}</td>
-											<td><button type="button"
-													class="btn btn-outline-danger btn_del">삭제</button></td>
-										</tr>
-									</c:if>
+								<c:forEach var="s" items="${studyboard}">
+									<tr>
+										<td>${s.seq}</td>
+										<td><a href="/inner.studyboard?seq=${s.seq}&cpage=1">${s.title}</a></td>
+									</tr>
 								</c:forEach>
 							</table>
-
-							<div id="licenseBox"></div>
 						</div>
-						<div class="">
-							<strong>중고 거래 게시판</strong>
-							<div id="licenseBox">
-								<div class="navi" align="center">
-									<ul>
-										<li><button id="sales">판매중</button></li>
-										<li><button id="purchaseDetail">구매내역</button></li>
-										<li><button id="interstingList">관심목록</button></li>
-									</ul>
-									<hr>
-									<table
-										summary="This table shows how to create responsive tables using Datatables' extended functionality"
-										class="table table-bordered table-hover dt-responsive">
-										<thead>
-											<tr>
-												<th class="col col-lg-1 col-sm-2">no.</th>
-												<th class="col col-lg-9 col-sm-8">상품명</th>
-												<th>버튼</th>
-											</tr>
-										</thead>
-										<c:forEach var="i" items="${boardList}" varStatus="status">
-											<!-- 만약 자유게시판에 글이 하나도 없다면 자유게시판에 작성한 글 없다는 정보 올려주기 -->
-											<c:if test="${status.index < 5}">
-												<tr>
-													<td>${i.seq}</td>
-													<!--시퀀스 번호-->
-													<td>${i.writer}</td>
-													<td><button type="button"
-															class="btn btn-outline-danger btn_del">삭제</button></td>
-												</tr>
-											</c:if>
-										</c:forEach>
-									</table>
-								</div>
+						
+						<strong>중고 거래 게시판</strong>
+						<div id="secondhand">
+							
 
-							</div>
-						</div>
-						<div class="">
-							<strong>자유게시판</strong>
-							<div id="myGrade">
 								<table
 									summary="This table shows how to create responsive tables using Datatables' extended functionality"
 									class="table table-bordered table-hover dt-responsive">
 									<thead>
 										<tr>
 											<th class="col col-lg-1 col-sm-2">no.</th>
-											<th class="col col-lg-9 col-sm-8">제목</th>
-											<th>버튼</th>
+											<th class="col col-lg-9 col-sm-8">상품명</th>
 										</tr>
 									</thead>
-									<c:forEach var="i" items="${boardList}" varStatus="status">
-										<!-- 만약 자유게시판에 글이 하나도 없다면 자유게시판에 작성한 글 없다는 정보 올려주기 -->
-										<c:if test="${status.index < 5}">
-											<tr>
-												<td>${i.seq}</td>
-												<!--시퀀스 번호-->
-												<td>${i.writer}</td>
-												<!--가입일-->
-												<td><button type="button"
-														class="btn btn-outline-danger btn_del">삭제</button></td>
-											</tr>
-										</c:if>
+									<c:forEach var="sh" items="${secondhandboard}">
+										<tr>
+											<td>${sh.seq}</td>
+											<td><a href="/secondHandBoardContents.secondHand?seq=${sh.seq}&currentPage=1">${sh.title}</a>
+										</tr>
 									</c:forEach>
 								</table>
+						</div>
 
-							</div>
+						<strong>자유게시판</strong>
+						<div id="free">
+							<table
+								summary="This table shows how to create responsive tables using Datatables' extended functionality"
+								class="table table-bordered table-hover dt-responsive">
+								<thead>
+									<tr>
+										<th class="col col-lg-1 col-sm-2">no.</th>
+										<th class="col col-lg-9 col-sm-10">제목</th>
+									</tr>
+								</thead>
+								<c:forEach var="f" items="${freeboard}">
+
+									<tr>
+										<td>${f.seq}</td>
+										<td><a href="/detail.freeBoard?seq=${f.seq}">${f.title}</a></td>
+									
+									</tr>
+
+								</c:forEach>
+							</table>
+
 						</div>
 					</div>
 				</div>
@@ -277,6 +260,8 @@ div {
 			</div>
 		</div>
 	</form>
+
+
 
 </body>
 

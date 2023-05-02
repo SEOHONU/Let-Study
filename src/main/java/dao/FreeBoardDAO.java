@@ -281,4 +281,23 @@ public class FreeBoardDAO {
 
 		}
 	}
+	
+	//마이페이지 내게시글만 뽑아오기
+	public List<FreeBoardDTO> myfreeboard(String id) throws Exception{
+		String sql = "select board_seq, board_title from free_board where board_writer=?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, id);
+			try(ResultSet rs = pstat.executeQuery();){
+
+				List<FreeBoardDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					int seq = rs.getInt("board_seq");
+					String title = rs.getString("board_title");
+					list.add(new FreeBoardDTO(seq,title,null,null,0,null));
+				}
+				return list;
+			}
+		}
+	}
 }
