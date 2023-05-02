@@ -179,7 +179,7 @@ response.setContentType("text/html; charset=utf8");
 				
 				
 				System.out.println("중고책 : " +seq);
-				int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+				int currentPage = request.getParameter("currentPage")== null ? 1 : Integer.parseInt(request.getParameter("seq"));
 				System.out.println("중고책 : " +currentPage);
 				int result = shDAO.deleteContents(seq);
 				response.sendRedirect("/secondHand.adminBoard?currentPage="+currentPage);
