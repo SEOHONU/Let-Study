@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import dao.Admin_DAO;
 import dao.FreeBoardDAO;
@@ -18,11 +17,11 @@ import dao.MainDAO;
 import dao.MembersDAO;
 import dao.SecondHandDAO;
 import dao.StudyBoardDAO;
+import dto.FreeBoardAndMemberDTO;
 import dto.FreeBoardDTO;
 import dto.MembersDTO;
 import dto.SecondHandDTO;
 import dto.StudyBoardDTO;
-import oracle.net.aso.g;
 import statics.Settings;
 
 @WebServlet("*.adminBoard")
@@ -122,10 +121,8 @@ response.setContentType("text/html; charset=utf8");
 						+ Settings.BOARD_NAVI_COUNT_PER_PAGE + 1;
 				System.out.println(start + "/" + end);
 				System.out.println(currentPage);
-				List<FreeBoardDTO> list = frdao.selectFreeBoard(start, end);
+				List<FreeBoardAndMemberDTO> list = frdao.selectFreeBoardList(start, end);
 				List<String> pageNavi = frdao.getPageNavi(frdao.getRecordCount(), currentPage);
-//				List<FreeBoardDTO> result = dao.selectList();
-//				request.setAttribute("boardList", result);
 				request.setAttribute("list", list);
 				request.setAttribute("navi", pageNavi);
 				request.setAttribute("cpage", currentPage);
