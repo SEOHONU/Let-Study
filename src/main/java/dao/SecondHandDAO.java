@@ -287,4 +287,23 @@ public class SecondHandDAO {
 			return result;
 		}
 	}
+	public List<SecondHandDTO> getAllLatLng() throws Exception{
+		String sql = "select lat, lng from secondHand";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();
+				){
+			List<SecondHandDTO> list = new ArrayList<>();
+			while(rs.next()) {
+				double lat = rs.getDouble(1);
+				double lng = rs.getDouble(2);
+				SecondHandDTO dto = new SecondHandDTO();
+				dto.setLat(lat);
+				dto.setLng(lng);
+				list.add(dto);
+			}
+			return list;
+		}
+	}
 }

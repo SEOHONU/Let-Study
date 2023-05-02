@@ -9,6 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import commons.EncryptionUtils;
 import dto.MembersDTO;
 
 public class MembersDAO {
@@ -37,7 +38,7 @@ public class MembersDAO {
 	      try (Connection con = this.getConnection(); 
 	            PreparedStatement pstat = con.prepareStatement(sql);) {
 	         pstat.setString(1, id);
-	         pstat.setString(2, pw);
+	         pstat.setString(2, EncryptionUtils.sha512(pw));
 	         try (ResultSet rs = pstat.executeQuery();) {
 	            boolean result = rs.next();
 	            return result;
@@ -78,7 +79,7 @@ public class MembersDAO {
 	      try(Connection con = this.getConnection(); 
 	            PreparedStatement pstat = con.prepareStatement(sql);) {
 	         pstat.setString(1, dto.getId());
-	         pstat.setString(2, dto.getPw());
+	         pstat.setString(2, EncryptionUtils.sha512(dto.getPw()));
 	         pstat.setString(3, dto.getName());
 	         pstat.setString(4, dto.getBirth_date());
 	         pstat.setString(5, dto.getNickname());
@@ -90,10 +91,21 @@ public class MembersDAO {
 	         System.out.println(dto);
 	         int result = pstat.executeUpdate(); 
 	         con.commit();
-	         System.out.println("222");
+	         
 	         return result;
 	      }
 	   }
+	   
+		public int insertProfile(String id, String nickname) throws Exception {
+			 String sql = "insert into profile values (?,?,null,null,null,null)";
+			   try(Connection con = this.getConnection(); 
+					   PreparedStatement pstat = con.prepareStatement(sql);) {
+				   pstat.setString(1, id);
+				   pstat.setString(2, nickname);
+				   int result = pstat.executeUpdate();
+				   return result;
+		}
+		}
 
 
 	   public MembersDTO myInfoSelect(String id) throws Exception {
@@ -102,7 +114,6 @@ public class MembersDAO {
 	         pstat.setString(1, id);
 	         try (ResultSet rs = pstat.executeQuery();) {
 	            rs.next();
-	            String myid = rs.getString("id");
 	            String name = rs.getString("name");
 	            String birth_date = rs.getString("birth_date");
 	            String nickname = rs.getString("nickname");
@@ -113,7 +124,7 @@ public class MembersDAO {
 	            String address2 = rs.getString("address2");
 
 	            Timestamp join_date = rs.getTimestamp("join_date");
-	            MembersDTO dto = new MembersDTO(myid, null, name, birth_date, nickname, contact, email, zipcode,
+	            MembersDTO dto = new MembersDTO(id, null, name, birth_date, nickname, contact, email, zipcode,
 	                  address1, address2, join_date);
 	            return dto;
 	         }
@@ -151,4 +162,7 @@ public class MembersDAO {
 	         con.commit();
 	      }
 	   }
+
+
+
 }

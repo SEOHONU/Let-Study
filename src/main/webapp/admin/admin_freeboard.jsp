@@ -94,8 +94,7 @@
 }
 
 .input-group {
-	position: relative;
-	left: 20%;
+	
 	margin-bottom: 20px;
 }
 
@@ -230,21 +229,28 @@
 	<!-- 회원 정보 출력 종료  -->
 
 	<!-- 회원검색폼 시작-->
-	<div class="container">
-		<div class="input-group" style="width: 60%;">
-			<input type="text" class="form-control"
-				aria-label="Text input with dropdown button">
-			<button class="btn btn-outline-secondary dropdown-toggle"
-				style="width: 110px;" type="button" data-bs-toggle="dropdown"
-				aria-expanded="false">찾기</button>
-			<ul class="dropdown-menu dropdown-menu-end">
-				<li><a class="dropdown-item" href="#">회원이름</a></li>
-				<li><a class="dropdown-item" href="#">회원닉네임</a></li>
-				<!-- <li><a class="dropdown-item" href="#">가입일순</a></li> -->
-				<li><hr class="dropdown-divider"></li>
-				<!-- <li><a class="dropdown-item" href="#">Separated link</a></li> -->
-			</ul>
-		</div>
+ <div class="col-lg-12" style="text-align: center;">
+
+            <nav class="navbar navbar-light bg-light ">
+                <form class="container d-flex justify-content-center w-75 p-3" action="/allsearch.adminBoard">
+                    <div class="input-group">
+                        <select name="select">
+                            <option value="제목">제목</option>
+                            <option value="내용">내용</option>
+                            <option value="작성자">작성자</option>
+                        </select>
+                        &nbsp;
+                        <input type="text" class="form-control"id="input_tag" aria-label="Sizing example input"
+                         aria-describedby="inputGroup-sizing-default"placeholder="통합검색창" name="title"
+                          value="${title}">
+                   
+                        &nbsp;
+                        <button type="submit" class="btn btn-success"
+                            style="z-index: 0;">검색</button>
+                    </div>
+                </form>
+            </nav>
+        </div>
 		<!-- 회원검색폼 종료-->
 
 		<!-- 하단 네비 시작 -->
@@ -275,11 +281,7 @@
 
 
 
-				<nav>
-					<ul class="pagination">
-						<!-- JavaScript 코드로 페이지 내비게이션 생성 -->
-					</ul>
-				</nav>
+			
 
 	</div>
 	<!-- 하단 네비 종료 -->
