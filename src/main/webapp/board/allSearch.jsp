@@ -16,6 +16,9 @@
                 crossorigin="anonymous"></script>
             <script src="https://code.jquery.com/jquery-3.6.4.js"
                 integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+            <script type="text/javascript"
+                src="//dapi.kakao.com/v2/maps/sdk.js?appkey=06950442fcd14966ee4bef261d2ee0dd&libraries=services,clusterer,drawing"></script>
             <style>
                 * {
                     box-sizing: border-box;
@@ -62,14 +65,13 @@
                     top: 0;
                     left: 0;
                     bottom: 0;
-                    width: 250px;
-                    margin: 10px 0 30px 10px;
-                    padding: 5px;
+                    width: 100%;
+                    margin: 0px;
+                    padding: 0px;
                     overflow-y: auto;
                     background: rgba(255, 255, 255, 0.7);
                     z-index: 1;
                     font-size: 12px;
-                    border-radius: 10px;
                 }
 
                 .bg_white {
@@ -130,7 +132,8 @@
 
                 #placesList .info .jibun {
                     padding-left: 26px;
-                    background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;
+                    background:
+                        url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;
                 }
 
                 #placesList .info .tel {
@@ -143,7 +146,8 @@
                     width: 36px;
                     height: 37px;
                     margin: 10px 0 0 10px;
-                    background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;
+                    background:
+                        url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;
                 }
 
                 #placesList .item .marker_1 {
@@ -231,12 +235,9 @@
 
             <div class="container">
                 <c:import url="/board/topMenu.jsp"></c:import>
-
                 <div class="row body">
 
-                    <div class="col-12">
-
-                    </div>
+                    <div class="col-12"></div>
                     <div class="col-12">
                         <div class="row bodysub">
 
@@ -255,11 +256,9 @@
                                                         <option value="제목">제목</option>
                                                         <option value="내용">내용</option>
                                                         <option value="작성자">작성자</option>
-                                                    </select>
-                                                    &nbsp;
-                                                    <input type="text" class="form-control" placeholder="통합검색창"
-                                                        aria-label="Username" aria-describedby="basic-addon1"
-                                                        name="title" value="${title}">
+                                                    </select> &nbsp; <input type="text" class="form-control"
+                                                        placeholder="통합검색창" aria-label="Username"
+                                                        aria-describedby="basic-addon1" name="title" value="${title}">
                                                     &nbsp;
                                                     <button type="submit" class="btn btn-success"
                                                         style="z-index: 0;">검색</button>
@@ -269,35 +268,33 @@
                                     </div>
                                     <div class="col-12" style="text-align: center;">공백</div>
 
-                                    <div class="col-12">스터디
+                                    <div class="col-12">
+                                        스터디
                                         <div class="row bodysubstudy">
 
                                             <c:choose>
                                                 <c:when test="${stdto.size()>0}">
                                                     <c:forEach var="study" items="${stdto}" begin="0" end="3">
                                                         <div class="col-3">
-                                                            <a href="스터디 관련검색 최신">
+                                                            <a href="/inner.studyboard?seq=${study.seq}&cpage=${cpage}">
                                                                 <div class="card">
                                                                     <img src="..." class="card-img-top" alt="...">
                                                                     <div class="card-body" style="text-align: center;">
                                                                         <h5 class="card-title">${study.title}</h5>
                                                                         <p class="card-text">${study.contents}</p>
-                                                                        <a href="#" class="btn btn-primary">참여하기</a>
+                                                                        <a href="/inner.studyboard?seq=${study.seq}&cpage=${cpage}"
+                                                                            class="btn btn-primary">참여하기</a>
                                                                     </div>
                                                                 </div>
                                                             </a>
                                                         </div>
                                                     </c:forEach>
                                                     <div class="col-12" style="text-align: right;">
-                                                        <a href="스터디 관련검색 최신순으로 정리되어 있게 전부 보여주는거">
-                                                            더보기
-                                                        </a>
+                                                        <a href="스터디 관련검색 최신순으로 정리되어 있게 전부 보여주는거"> 더보기 </a>
                                                     </div>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <div class="col-12">
-                                                        검색한 결과가 없습니다.
-                                                    </div>
+                                                    <div class="col-12">검색한 결과가 없습니다.</div>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
@@ -305,13 +302,15 @@
                                     <div class="col12" style="text-align: center;">공백</div>
 
 
-                                    <div class="col-12">중고책
+                                    <div class="col-12">
+                                        중고책
                                         <div class="row bodysubstudy">
                                             <c:choose>
                                                 <c:when test="${sdto.size()>0}">
                                                     <c:forEach var="second" items="${sdto}" begin="0" end="3">
                                                         <div class="col-6 d-none d-lg-block">
-                                                            <a href="중고책 관련검색 최신">
+                                                            <a
+                                                                href="/secondHandBoardContents.secondHand?seq=${second.seq}&currentPage=${cpage}">
                                                                 <div class="card mb-3" style="max-width: 540px;">
                                                                     <div class="row g-0">
                                                                         <div class="col-md-4">
@@ -325,7 +324,8 @@
                                                                                 </h5>
                                                                                 <p class="card-text">${second.writer}
                                                                                 </p>
-                                                                                <p class="card-text"><small
+                                                                                <p class="card-text">
+                                                                                    <small
                                                                                         class="text-body-secondary">${second.contents}</small>
                                                                                 </p>
                                                                             </div>
@@ -340,9 +340,7 @@
                                                     </div>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <div class="col-12">
-                                                        검색한 결과가 없습니다.
-                                                    </div>
+                                                    <div class="col-12">검색한 결과가 없습니다.</div>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
@@ -350,61 +348,64 @@
                                     <div class="col12" style="text-align: center;">공백</div>
 
 
-                                    <div class="col-12">자유게시판
+                                    <div class="col-12">
+                                        자유게시판
                                         <div class="row bodysubstudy">
                                             <c:choose>
                                                 <c:when test="${fdto.size()>0}">
                                                     <div class="col-9">제목</div>
                                                     <div class="col-3">작성자</div>
                                                     <c:forEach var="free" items="${fdto}" begin="0" end="5">
-                                                        <div class="col-9"><a href="자유게시판 관련검색 최신순">${free.title}</a>
+                                                        <div class="col-9">
+                                                            <a
+                                                                href="/detail.freeBoard?seq=${free.seq}">${free.title}</a>
                                                         </div>
-                                                        <div class="col-3"><a href="자유게시판 관련검색 최신순">${free.writer}</a>
+                                                        <div class="col-3">
+                                                            <a
+                                                                href="/detail.freeBoard?seq=${free.seq}">${free.writer}</a>
                                                         </div>
                                                     </c:forEach>
                                         </div>
                                     </div>
                                     <div class="col-12" style="text-align: right;">
-                                        <a href="자유게시판 관련검색 최신순으로 정리되어 있게 전부 보여주는거">
-                                            더보기
-                                        </a>
+                                        <a href="자유게시판 관련검색 최신순으로 정리되어 있게 전부 보여주는거"> 더보기 </a>
                                     </div>
                                     </c:when>
                                     <c:otherwise>
-                                        <div class="col-12">
-                                            검색한 결과가 없습니다.
-                                        </div>
+                                        <div class="col-12">검색한 결과가 없습니다.</div>
                                     </c:otherwise>
                                     </c:choose>
                                     <div class="col-12" style="text-align: center;">공백</div>
-                                    <div class="col-12" style="text-align: center;">
-                                        <div class="row map_wrap">
-
-                                            <div class="col-7" id="map"
-                                                style="width:70%;height:100%;position:relative;overflow:hidden;"></div>
-
-                                            <div id="menu_wrap" class="col-5 bg_white">
-                                                <div class="option">
-                                                    <div>
-                                                        <form onsubmit="searchPlaces(); return false;">
-                                                            키워드 : <input type="text" value="스터디카페" id="keyword"
-                                                                size="15">
-                                                            <button type="submit">검색하기</button>
-                                                        </form>
-                                                    </div>
+                                    <div class="col-12" style="text-align: center; padding: 0px">
+                                        <div class="row map_wrap" style="margin: 0px;">
+                                            <div class="col-7" style="padding: 0px;">
+                                                <div id="map"
+                                                    style="width: 100%; height: 100%; position: relative; overflow: hidden;">
                                                 </div>
-                                                <hr>
-                                                <ul id="placesList"></ul>
-                                                <div id="pagination"></div>
+                                            </div>
+
+                                            <div class="col-5 placelist" style="position: relative;">
+                                                <div id="menu_wrap" class="bg_white">
+                                                    <div class="option">
+                                                        <div>
+                                                            <form onsubmit="searchPlaces(); return false;">
+                                                                <input type="hidden" value="${title}스터디카페" id="keyword"
+                                                                    size="15" readonly>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <ul id="placesList"></ul>
+                                                    <div id="pagination"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-2">공백</div>
+
                         </div>
                     </div>
-
+                    <div class="col-2">공백</div>
                 </div>
                 <div class="row footer">풋터</div>
             </div>
@@ -437,7 +438,8 @@
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                 mapOption = {
                     center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-                    level: 3 // 지도의 확대 레벨
+                    level: 3
+                    // 지도의 확대 레벨
                 };
 
             // 지도를 생성합니다    
@@ -447,7 +449,9 @@
             var ps = new kakao.maps.services.Places();
 
             // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
-            var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+            var infowindow = new kakao.maps.InfoWindow({
+                zIndex: 1
+            });
 
             // 키워드로 장소를 검색합니다
             searchPlaces();
@@ -479,13 +483,11 @@
 
                 } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 
-                    alert('검색 결과가 존재하지 않습니다.');
-                    return;
+                    $(".placelist").html('검색 결과가 존재하지 않습니다.');
 
                 } else if (status === kakao.maps.services.Status.ERROR) {
 
                     alert('검색 결과 중 오류가 발생했습니다.');
-                    return;
 
                 }
             }
@@ -493,11 +495,9 @@
             // 검색 결과 목록과 마커를 표출하는 함수입니다
             function displayPlaces(places) {
 
-                var listEl = document.getElementById('placesList'),
-                    menuEl = document.getElementById('menu_wrap'),
-                    fragment = document.createDocumentFragment(),
-                    bounds = new kakao.maps.LatLngBounds(),
-                    listStr = '';
+                var listEl = document.getElementById('placesList'), menuEl = document
+                    .getElementById('menu_wrap'), fragment = document
+                        .createDocumentFragment(), bounds = new kakao.maps.LatLngBounds(), listStr = '';
 
                 // 검색 결과 목록에 추가된 항목들을 제거합니다
                 removeAllChildNods(listEl);
@@ -508,9 +508,8 @@
                 for (var i = 0; i < places.length; i++) {
 
                     // 마커를 생성하고 지도에 표시합니다
-                    var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
-                        marker = addMarker(placePosition, i),
-                        itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+                    var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x), marker = addMarker(
+                        placePosition, i), itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
 
                     // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
                     // LatLngBounds 객체에 좌표를 추가합니다
@@ -551,20 +550,22 @@
             // 검색결과 항목을 Element로 반환하는 함수입니다
             function getListItem(index, places) {
 
-                var el = document.createElement('li'),
-                    itemStr = '<span class="markerbg marker_' + (index + 1) + '"></span>' +
-                        '<div class="info">' +
-                        '   <h5>' + places.place_name + '</h5>';
+                var el = document.createElement('li'), itemStr = '<span class="markerbg marker_'
+                    + (index + 1)
+                    + '"></span>'
+                    + '<div class="info">'
+                    + '   <h5>'
+                    + places.place_name + '</h5>';
 
                 if (places.road_address_name) {
-                    itemStr += '    <span>' + places.road_address_name + '</span>' +
-                        '   <span class="jibun gray">' + places.address_name + '</span>';
+                    itemStr += '    <span>' + places.road_address_name + '</span>'
+                        + '   <span class="jibun gray">' + places.address_name
+                        + '</span>';
                 } else {
                     itemStr += '    <span>' + places.address_name + '</span>';
                 }
 
-                itemStr += '  <span class="tel">' + places.phone + '</span>' +
-                    '</div>';
+                itemStr += '  <span class="tel">' + places.phone + '</span>' + '</div>';
 
                 el.innerHTML = itemStr;
                 el.className = 'item';
@@ -575,20 +576,20 @@
             // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
             function addMarker(position, idx, title) {
                 var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
-                    imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
+                    imageSize = new kakao.maps.Size(36, 37), // 마커 이미지의 크기
                     imgOptions = {
                         spriteSize: new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
                         spriteOrigin: new kakao.maps.Point(0, (idx * 46) + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-                        offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-                    },
-                    markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
-                    marker = new kakao.maps.Marker({
-                        position: position, // 마커의 위치
-                        image: markerImage
-                    });
+                        offset: new kakao.maps.Point(13, 37)
+                        // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+                    }, markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize,
+                        imgOptions), marker = new kakao.maps.Marker({
+                            position: position, // 마커의 위치
+                            image: markerImage
+                        });
 
                 marker.setMap(map); // 지도 위에 마커를 표출합니다
-                markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+                markers.push(marker); // 배열에 생성된 마커를 추가합니다
 
                 return marker;
             }
@@ -603,9 +604,8 @@
 
             // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
             function displayPagination(pagination) {
-                var paginationEl = document.getElementById('pagination'),
-                    fragment = document.createDocumentFragment(),
-                    i;
+                var paginationEl = document.getElementById('pagination'), fragment = document
+                    .createDocumentFragment(), i;
 
                 // 기존에 추가된 페이지번호를 삭제합니다
                 while (paginationEl.hasChildNodes()) {
