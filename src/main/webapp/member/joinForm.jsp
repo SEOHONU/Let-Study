@@ -220,6 +220,8 @@ h2 {
 			idValIdFlag = false;
 		});
 		// 아이디 중복체크 ajax 
+		// 아이디 지웠을 때 사용가능한 아이디창 안나오게 하기 
+		
 		$("#id").focusout(function() {
 
 			let id = $("#id").val();
