@@ -17,10 +17,10 @@ pageEncoding="UTF-8"%>
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e7252ffaa17ffd29198c0279af09c9f9&libraries=services"></script>
     <style>
-        * {
+        /* * {
             box-sizing: border-box;
             border: 1px solid black;
-        }
+        } */
 
         table {
             width: 100%;

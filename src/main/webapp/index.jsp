@@ -18,7 +18,7 @@
                 integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
             <script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
             <style>
-                /* * {
+                /*  * {
                     box-sizing: border-box;
                 }
 
@@ -41,11 +41,6 @@
                 #baner {
                     padding: 0px;
                     position: relative;
-                    border: 1px solid #ddd;
-                    border-radius: 10px;
-                    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
-                    background-color: #fff;
-                    margin: 10px;
                 }
 
                 .cir {
@@ -84,7 +79,6 @@
                     border: 1px solid #ddd;
                     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
                     border-radius: 5px;
-                    margin: 5px;
                     background-color: rgb(189, 189, 189);
                 }
 
@@ -99,8 +93,21 @@
                     z-index: 1;
                 }
 
+                .loggedid {
+                    text-align: right;
+                }
+
+                .profile {
+                    text-align: center;
+                }
+
+                .logout {
+                    text-align: center;
+                }
+
                 #logo {
                     z-index: 2;
+                    padding: 0px;
                 }
 
                 .carousel-control-prev,
@@ -118,6 +125,7 @@
 
                 #subsearchback {
                     display: none;
+                    text-align: center;
                 }
 
                 .naviname {
@@ -139,7 +147,7 @@
             </style>
 
             <script>
-            
+
                 function checkLogin(url) {
                     var login = '<c:out value="${loggedID}"/>';
                     if (login == "") {
@@ -148,20 +156,29 @@
                     } else {
                         location.href = url;
                     }
-                } 
+                }
+                document.addEventListener('keydown', function (event) {
+                    var login = '<c:out value="${loggedID}"/>';
+                    if (event.keyCode === 13) {
+                        if (login == "") {
+                            alert("로그인이 필요합니다.");
+                            event.preventDefault();
+                        };
+                    }
+                }, true);
             </script>
         </head>
 
         <body>
 
-            <div class="container">
+            <div class="container-fluid">
 
                 <!-- 헤더 네비 -->
                 <div class="row navi">
 
                     <div class="col-12 top">
                         <div class="row">
-                            <div class="col-8 col-lg-2 order-2 order-lg-first" id="logo">
+                            <div class="col-6 col-lg-2 order-2 order-lg-first" id="logo">
                                 <div class="row">
                                     <div class="col-12">
                                         <a href="/index.jsp">logo</a>
@@ -200,7 +217,7 @@
                             </div>
 
                             <div class="col-lg-4 d-none d-lg-block order-lg-1">여백</div>
-                            <div class="col-2 d-block d-lg-none order-1">
+                            <div class="col-3 d-block d-lg-none order-1">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="row">
@@ -302,7 +319,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-2 d-block d-lg-none order-last">
+                            <div class="col-3 d-block d-lg-none order-last">
                                 <div class="row">
 
                                     <c:choose>
@@ -314,7 +331,7 @@
                                             </div>
                                         </c:when>
                                         <c:otherwise>
-                                            <div class="col-12">${sessionScope.loggedID}회원</div>
+                                            <div class="col-12 loggedid">${sessionScope.loggedID}회원</div>
                                             <div class="col-12" style="text-align: right;">
                                                 <a href="/logout.member"><i
                                                         class="fa-solid fa-right-from-bracket"></i></a>
@@ -342,15 +359,18 @@
                             <div class="carousel-inner">
                                 <a href="인기 있는 스터디">
                                     <div class="carousel-item active" data-bs-interval="5000">
-                                        <img src="/image/다운로드.jpg" class="d-block  slide" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
+                                        <img src="/image/다운로드.jpg" class="w-100 d-block slide" alt="..."
+                                            style="opacity: 0.6;object-fit: cover;object-position: center -175px;height: 659px;">
+                                        <div class="carousel-caption d-none d-md-block"
+                                            style="color:white; background-color:#00000080;">
                                             <h5>인기있는 스터디</h5>
                                             <p>좋아요를 많이 받은 호스트의 스터디</p>
                                         </div>
                                     </div>
                                 </a> <a href="등급 정보">
                                     <div class="carousel-item" data-bs-interval="5000">
-                                        <img src="/image/다운로드.jpg" class="d-block  slide" alt="...">
+                                        <img src="/image/다운로드.jpg" class="w-100 d-block  slide" alt="..."
+                                            style="opacity: 0.6;object-fit: cover;object-position: center -175px;height: 659px;">
                                         <div class="carousel-caption d-none d-md-block">
                                             <h5>등급별로 혜택을 누려보세요</h5>
                                             <p>등급별 혜택 종류</p>
@@ -358,7 +378,8 @@
                                     </div>
                                 </a> <a href="임박 시험 날짜">
                                     <div class="carousel-item" data-bs-interval="5000">
-                                        <img src="/image/다운로드.jpg" class="d-block  slide" alt="...">
+                                        <img src="/image/다운로드.jpg" class="w-100 d-block  slide" alt="..."
+                                            style="opacity: 0.6;object-fit: cover;object-position: center -175px;height: 659px;">
                                         <div class="carousel-caption d-none d-md-block">
                                             <h5>날짜가 임박한 시험</h5>
                                             <p>시험일자가 임박한 시험을 보여드립니다.</p>
@@ -578,13 +599,13 @@
                                             </div>
                                             <div class="col-12">
                                                 <div class="row">
-                                                    <div class="col-1 col-xl-2">여백</div>
+                                                    <div class="col-1 col-xl-2" style="padding:0px;">여백</div>
                                                     <div class="col-10 col-xl-8">
                                                         <div class="row" id="joong">
 
                                                         </div>
                                                     </div>
-                                                    <div class="col-1 col-xl-2">여백</div>
+                                                    <div class="col-1 col-xl-2" style="padding:0px;">여백</div>
                                                 </div>
                                             </div>
 
@@ -688,9 +709,9 @@
             })
 
 
-            $("#study").on("cilck", function () {
-                location.href = "/select.studyboard"
-            })
+            // $("#study").on("cilck", function () {
+            //     location.href = "/select.studyboard"
+            // })
 
             $(window).on("load", function () {
                 $.ajax({
@@ -779,8 +800,8 @@
                     if (navisub.css("display") == "block") {
                         navisub.css("display", "none");
                     }
-                    addsearch.css("display","block")
-                    divsearch.css("display","none")
+                    addsearch.css("display", "block")
+                    divsearch.css("display", "none")
                 }
             });
 
