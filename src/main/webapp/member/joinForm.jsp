@@ -9,19 +9,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원가입 폼</title>
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-	crossorigin="anonymous">
+	crossorigin="anonymous" />
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
 	crossorigin="anonymous"></script>
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
-	rel="stylesheet">
+	rel="stylesheet" />
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -84,7 +84,7 @@ h2 {
 				<div class="col-6">
 					<label for="idInput">아이디*</label> <input type="text"
 						class="form-control" id="id" name="id" placeholder="아이디 입력(6~20자)"
-						required>
+						maxlength = "20" required>
 					<div id="idFeedback"></div>
 				</div>
 				<div class="col-3"></div>
@@ -94,7 +94,7 @@ h2 {
 				<div class="col-6">
 					<label for="pwInput">비밀번호*</label> <input type="password"
 						class="form-control" id="pw" name="pw"
-						placeholder="비밀번호 입력 (문자, 숫자, 특수문자 포함 8~20자)" required>
+						placeholder="비밀번호 입력 (문자, 숫자, 특수문자 포함 8~20자)" maxlength="20" required>
 				</div>
 				<div class="col-3"></div>
 			</div>
@@ -103,7 +103,7 @@ h2 {
 				<div class="col-6">
 					<label for="pwCheckInput">비밀번호 확인*</label> <input type="password"
 						class="form-control" id="pwCheck" name="pwCheck"
-						placeholder="비밀번호 재입력" required>
+						placeholder="비밀번호 재입력" maxlength="20" required>
 					<div id="pwFeedback"></div>
 				</div>
 				<div class="col-3"></div>
@@ -113,7 +113,7 @@ h2 {
 				<div class="col-6">
 					<label for="nameInput">이름*</label> <input type="name"
 						class="form-control" id="name" name="name"
-						placeholder="이름을 입력해주세요." required>
+						placeholder="이름을 입력해주세요." maxlength="5" required>
 				</div>
 				<div class="col-3"></div>
 			</div>
@@ -131,15 +131,15 @@ h2 {
 					<label for="#" style="color: transparent;">.</label> <select
 						class="form-control" name="birthMonth" required>
 						<option selected>월</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
 						<option value="10">10</option>
 						<option value="11">11</option>
 						<option value="12">12</option>
@@ -157,9 +157,9 @@ h2 {
 			<div class="row form-group">
 				<div class="col-3"></div>
 				<div class="col-6">
-					<label for="nicknameInput">닉네임</label> <input type="text"
+					<label for="nicknameInput">닉네임*</label> <input type="text"
 						class="form-control" id="nickname" name="nickname"
-						placeholder="2~10글자">
+						placeholder="2~10글자" maxlength="10" required>
 				</div>
 				<div class="col-3"></div>
 			</div>
@@ -183,8 +183,8 @@ h2 {
 			<div class="row form-group">
 				<div class="col-3"></div>
 				<div class="col-6">
-					<label for="zipcodeInput">우편번호</label> 
-					<input type="text" class="form-control" id="zipcode" name="zipcode" readonly>
+					<label for="zipcodeInput">우편번호</label> <input type="text"
+						class="form-control" id="zipcode" name="zipcode" readonly>
 					<input type="button" onclick="sample4_execDaumPostcode()"
 						value="우편번호 찾기" id="searchZipcode">
 				</div>
@@ -193,8 +193,8 @@ h2 {
 			<div class="row form-group">
 				<div class="col-3"></div>
 				<div class="col-6">
-					<label for="roadAddressInput">도로명주소</label> 
-					<input type="text" class="form-control" id="roadAddress" name="roadAddress">
+					<label for="roadAddressInput">도로명주소</label> <input type="text"
+						class="form-control" id="roadAddress" name="roadAddress">
 				</div>
 				<div class="col-3"></div>
 			</div>
@@ -214,6 +214,12 @@ h2 {
 	</form>
 
 	<script>
+		var idValidFlag = false;
+
+		$("#id").on("keyup", function() {
+			idValIdFlag = false;
+		});
+		// 아이디 중복체크 ajax 
 		$("#id").focusout(function() {
 
 			let id = $("#id").val();
@@ -237,6 +243,7 @@ h2 {
 						$("#idFeedback").css({
 							color : "blue"
 						});
+						idValIdFlag = true;
 					}
 				},
 				error : function(xhr, status, error) {
@@ -245,38 +252,43 @@ h2 {
 					console.log(error);
 				}
 
-			})
-		})
-
-		$("#id").on("keyup", function() {
-			idValIdFlag = false;
+			});
 		});
 
-		$("#pw").on("keyup", function() {
-			if ($("#pw").val() == $("#pwCheck").val()) {
-				$("#pwFeedback").html("비밀번호가 일치합니다.").css({
-					color : "#fd1d1d"
-				});
-			} else {
-				$("#pwFeedback").html("비밀번호가 일치하지 않습니다.").css({
-					color : "#fd1d1d"
-				});
-			}
-		});
+		// 비밀번호가 일치하는지 검사
+		// 둘 다 입력된 경우에만 비교하여 일치 여부를 확인 
+		$(document).ready(function() {
+			// html문서가 모두 로드되면 실행 
+			$("#pwCheck").on("keyup", function() {
+				var pw = $("#pw").val();
+				var pwCheck = $("#pwCheck").val();
+				console.log(pw, pwCheck);
 
-		$("#pwCheck").on("keyup", function() {
-			if ($("#pwCheck").val() == $("#pwCheck").val()) {
-				$("#pwFeedback").html("비밀번호가 일치합니다.").css({
-					color : "#fd1d1d"
-				});
-			} else {
-				$("#pwFeedback").html("비밀번호가 일치하지 않습니다.").css({
-					color : "#fd1d1d"
-				});
-			}
-		});
+				// 두 필드 모두 값이 입력되었을 때 
+				// 둘 다 값이 존재할 때 조건을 만족 
+				if (pw && pwCheck) {
+					// 비밀번호 일치 여부 확인
+					if (pw == pwCheck) {
+						$("#pwFeedback").html("비밀번호가 일치합니다.").css({
+							color : "blue"
+						});
+					} else {
+						$("#pwFeedback").html("비밀번호가 일치하지 않습니다.").css({
+							color : "#fd1d1d"
+						});
+					}
 
-		let regexId = /^[a-z]+[a-z0-9]{6,20}$/;
+				} else {
+					// 두 필드 중 하나라도 값이 입력되지 않았을 때
+					$("#pwFeedback").html("").css({
+						color : "#fd1d1d"
+					});
+				}
+			});
+		});
+		// 유효성 검사를 위한 정규식 
+
+		let regexId = /^[a-z]+[a-z0-9]{5,19}$/;
 		let regexPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
 		let regexName = /^[가-힣]{2,5}$/;
 		let regexBirthYear = /^[12][0-9]{3}$/;
@@ -285,14 +297,6 @@ h2 {
 		let regexContact = /^(01[016789])([1-9]\d{2,3})\d{4}$/;
 		let regexEmail = /[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+/;
 
-	      $("#idCheck").on("click", function () {
-	          let id = $("id").val();
-	          let resultId = regexId.test(idInput);
-	          if (!resultId) {
-	            alert("아이디 양식이 다릅니다.");
-	            return false;
-	          } 
-	          
 		let joinMember = document.getElementById("joinMember");
 		// onsubmit 이벤트는 버튼에 주는게 아니라 form태그에 준다
 
@@ -315,39 +319,39 @@ h2 {
 			let resultEmail = regexEmail.test(email);
 
 			if (!resultId) {
-				alert("아이디 양식이 다릅니다.");
+				alert("아이디는 6~20자 영소문자와 숫자를 사용하세요.");
 				return false;
 			}
 			if (!resultPw) {
-				alert("비밀번호 양식이 다릅니다.");
+				alert("비밀번호는 8~20자 영문 대 소문자, 숫자, 특수문자를 사용하세요. ");
 				return false;
 			}
 			if (!resultName) {
-				alert("이름 양식이 다릅니다.");
+				alert("이름은 2~5자 한글을 사용하세요.");
 				return false;
 			}
 
 			if (!resultBirthYear) {
-				alert("태어난 년도 4자리를 입력해주세요");
+				alert("태어난 년도 4자리를 정확하게 입력해주세요");
 				return false;
 			}
-			
-			if(!resultBirthDay) {
-				alert("태어난 생일 일자의 숫자 두자리로 입력해주세요");
-				return false; 
+
+			if (!resultBirthDay) {
+				alert("생년월일을 다시 확인해주세요.");
+				return false;
 			}
 
 			if (!reusultNickname) {
-				alert("닉네임 양식이 다릅니다");
+				alert("닉네임은 2~10자의 영문, 소문자, 대문자만 사용 가능합니다.");
 				return false;
 			}
 			if (!resultContact) {
-				alert("연락처 양식이 다릅니다. ");
+				alert("휴대전화번호를 다시 확인해주세요.");
 				return false;
 			}
 
 			if (!resultEmail) {
-				alert("이메일 양식이 다릅니다.");
+				alert("이메일 양식을 확인해주세요.");
 				return false;
 			}
 		};
@@ -356,11 +360,11 @@ h2 {
 			new daum.Postcode(
 					{
 						oncomplete : function(data) {
-							document.getElementById("zipcodeInput").value = data.zonecode;
+							document.getElementById("zipcode").value = data.zonecode;
 							document.getElementById("roadAddress").value = data.address;
 						},
 					}).open();
 		};
-    </script>
+	</script>
 </body>
 </html>
