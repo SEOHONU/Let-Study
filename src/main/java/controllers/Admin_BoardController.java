@@ -158,7 +158,7 @@ response.setContentType("text/html; charset=utf8");
 			}else if(cmd.equals("/freeboard_Delete.adminBoard")) {
 				request.setCharacterEncoding("utf8");
 				response.setContentType("text/html; charset=utf8");
-				int currentPage = Integer.parseInt(request.getParameter("cpage"));
+				int currentPage = request.getParameter("seq") == null ? 1 : Integer.parseInt(request.getParameter("seq"));
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				int result = frdao.deleteBySeq(seq);
 				System.out.println("삭제됨");
@@ -166,7 +166,7 @@ response.setContentType("text/html; charset=utf8");
 			}else if(cmd.equals("/studyboard_Delete.adminBoard")) {
 				request.setCharacterEncoding("utf8");
 				response.setContentType("text/html; charset=utf8");
-				int currentPage = Integer.parseInt(request.getParameter("cpage"));
+				int currentPage = request.getParameter("seq") == null ? 1 : Integer.parseInt(request.getParameter("seq"));
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				sbdao.deletestudyboard(seq);
 				response.sendRedirect("/study_select.adminBoard?cpage="+currentPage);
@@ -174,7 +174,10 @@ response.setContentType("text/html; charset=utf8");
 			}else if(cmd.equals("/secondHand_Delete.adminBoard")) {
 				request.setCharacterEncoding("utf8");
 				response.setContentType("text/html; charset=utf8");
-				int seq = Integer.parseInt(request.getParameter("seq"));
+				int seq = request.getParameter("seq") == null ? 1 : Integer.parseInt(request.getParameter("seq"));
+				
+				
+				
 				System.out.println("중고책 : " +seq);
 				int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 				System.out.println("중고책 : " +currentPage);

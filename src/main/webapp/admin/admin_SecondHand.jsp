@@ -230,7 +230,7 @@
 	 <div class="col-lg-12" style="text-align: center;">
 
             <nav class="navbar navbar-light bg-light ">
-                <form class="container d-flex justify-content-center w-75 p-3" action="/allsearch.adminBoard">
+                <form class="container d-flex justify-content-center w-75 p-3" action="/allsearch.adminBoard?cpage=1">
                     <div class="input-group">
                         <select name="select">
                             <option value="제목">제목</option>
