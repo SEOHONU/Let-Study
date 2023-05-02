@@ -9,6 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import commons.EncryptionUtils;
 import dto.MembersDTO;
 
 public class MembersDAO {
@@ -37,7 +38,7 @@ public class MembersDAO {
 	      try (Connection con = this.getConnection(); 
 	            PreparedStatement pstat = con.prepareStatement(sql);) {
 	         pstat.setString(1, id);
-	         pstat.setString(2, pw);
+	         pstat.setString(2, EncryptionUtils.sha512(pw));
 	         try (ResultSet rs = pstat.executeQuery();) {
 	            boolean result = rs.next();
 	            return result;
@@ -78,7 +79,7 @@ public class MembersDAO {
 	      try(Connection con = this.getConnection(); 
 	            PreparedStatement pstat = con.prepareStatement(sql);) {
 	         pstat.setString(1, dto.getId());
-	         pstat.setString(2, dto.getPw());
+	         pstat.setString(2, EncryptionUtils.sha512(dto.getPw()));
 	         pstat.setString(3, dto.getName());
 	         pstat.setString(4, dto.getBirth_date());
 	         pstat.setString(5, dto.getNickname());
