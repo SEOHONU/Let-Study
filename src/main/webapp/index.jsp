@@ -18,13 +18,13 @@
                 integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
             <script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
             <style>
-                /*  * {
+                 * {
                     box-sizing: border-box;
                 }
 
                 div {
                     border: 1px solid black;
-                } */
+                }
 
                 .container {
                     position: relative;
@@ -107,7 +107,6 @@
 
                 #logo {
                     z-index: 2;
-                    padding: 0px;
                 }
 
                 .carousel-control-prev,
@@ -171,7 +170,7 @@
 
         <body>
 
-            <div class="container-fluid">
+            <div class="container">
 
                 <!-- 헤더 네비 -->
                 <div class="row navi">
@@ -203,7 +202,7 @@
                                                     </select> <input type="text" class="form-control"
                                                         placeholder="통합검색창" aria-label="Username"
                                                         aria-describedby="basic-addon1"
-                                                        style="width: 40%; padding: 0; display: inline;" name="title">
+                                                        style="width: 30%; padding: 0; display: inline;" name="title">
                                                     <button type="button" class="btn btn-success"
                                                         style="z-index: 0; background-color: rgb(60, 117, 121); padding: 0;">검색</button>
                                                 </form>
