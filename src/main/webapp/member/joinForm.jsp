@@ -292,7 +292,7 @@ h2 {
 		let regexPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
 		let regexName = /^[가-힣]{2,5}$/;
 		let regexBirthYear = /^[12][0-9]{3}$/;
-		let regexBirthDay = /^[0-9]{2}$/;
+		/* let regexBirthDay = /^[0-9]{2}$/; */
 		let regexNickname = /^[a-zA-Z0-9가-힣]{2,10}$/;
 		let regexContact = /^(01[016789])([1-9]\d{2,3})\d{4}$/;
 		let regexEmail = /[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+/;
@@ -336,10 +336,10 @@ h2 {
 				return false;
 			}
 
-			if (!resultBirthDay) {
+			/* if (!resultBirthDay) {
 				alert("생년월일을 다시 확인해주세요.");
 				return false;
-			}
+			} */
 
 			if (!reusultNickname) {
 				alert("닉네임은 2~10자의 영문, 소문자, 대문자만 사용 가능합니다.");

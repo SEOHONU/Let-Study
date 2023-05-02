@@ -55,6 +55,11 @@ public class MemberController extends HttpServlet {
 				String birthYear = request.getParameter("birthYear");
 				String birthMonth = request.getParameter("birthMonth");
 				String birthDay = request.getParameter("birthDay");
+				int birthDayint= Integer.parseInt(birthDay);
+				if(birthDayint<10 && birthDayint>0) {
+					birthDay = "0" + birthDayint;
+				}
+				System.out.println(birthYear+""+birthMonth+""+birthDay);
 				// 생년월일 값 받음
 				String nickname = request.getParameter("nickname");
 				String contact = request.getParameter("contact");
@@ -71,7 +76,6 @@ public class MemberController extends HttpServlet {
 				// 회원가입하면 나타날 페이지 일단 메인페이지로 씀 
 				response.sendRedirect("/index.jsp"); 
 				// 회원가입하면 나타날 페이지 써야함 
-				response.sendRedirect("/"); 
 			}else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
