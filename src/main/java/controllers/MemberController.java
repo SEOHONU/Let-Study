@@ -35,18 +35,22 @@ public class MemberController extends HttpServlet {
 
 			} else if (cmd.equals("/login.member")) {
 
-				String id = request.getParameter("id");
-				String pw = request.getParameter("pw");
-				boolean result = MembersDAO.getInstance().isMember(id, pw);
-				if (result) {
-					request.getSession().setAttribute("loggedID", id);
-					String nickname = MembersDAO.getInstance().getNickname(id);
-					request.getSession().setAttribute("nickname", nickname);
+				String id = request.getParameter("id"); 
+				String pw = request.getParameter("pw"); 
+				boolean result = MembersDAO.getInstance().isMember(id, pw); 
+				if(result) {
+					request.getSession().setAttribute("loggedID", id); 
+					System.out.println(result);
+					// 닉네임 세션에 가져옴 
+					String nickname = MembersDAO.getInstance().getNickname(id); 
+					request.getSession().setAttribute("nickname", nickname); 
+					response.sendRedirect("/index.jsp");
+				// 로그인 실패시 아이디 및 비번 확인 문구 ajax 전송 
+				}else {
+					String resp = g.toJson(result);
+					System.out.println(result);
+					response.getWriter().append(resp); 
 				}
-				// 닉네임 세션에 가져옴 
-				response.sendRedirect("/index.jsp");
-				//         로그인 성공하면 들어갈 페이지 입력해야함 -> 메인페이지로 
-
 			} else if (cmd.equals("/joinMember.member")) {
 				String id = request.getParameter("id");
 				System.out.println(id);

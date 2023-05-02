@@ -42,15 +42,19 @@
 	margin-bottom: 20px;
 }
 
+.rememberIdWrap {
+	display: block;
+}
+
 .checkBox {
 	/* margin-bottom: 10px; */
-	display: inline-block;
+	display: block;
 	float: left;
 	margin-left: 3px;
 }
 
 .findIdPw {
-	display: inline-block;
+	display: block;
 	float: right;
 }
 
@@ -59,6 +63,11 @@
 	display: block;
 	width: 100%;
 	margin-top: 15px;
+}
+
+#errorMessage {
+	margin-top: 10px;
+	display: block;
 }
 
 #btnLogin {
@@ -78,19 +87,23 @@ a {
 				<h2>로그인</h2>
 				<div class="form-group">
 					<input type="text" class="form-control" id="id" name="id"
-						placeholder="아이디" />
+						maxlength="20" placeholder="아이디" />
 				</div>
 				<div class="form-group">
 					<input type="password" class="form-control" id="pw" name="pw"
-						placeholder="비밀번호" />
+						maxlength="20" placeholder="비밀번호" />
 				</div>
-				<div class="checkBox">
-					<label><input type="checkbox" name="rememberId" value="1" />
-						아이디 기억하기</label>
+				<div class="rememberIdWrap">
+					<div class="checkBox">
+						<label><input type="checkbox" name="rememberId" value="1" />
+							아이디 기억하기</label>
+					</div>
+					<div class="findIdPw">
+						<a href="#">아이디/비밀번호 찾기</a>
+					</div>
 				</div>
-				<div class="findIdPw">
-					<a href="#">아이디/비밀번호 찾기</a>
-				</div>
+				<br>
+				<div class="errorMessage" id="errorMessage"></div>
 
 				<div class="btn">
 					<button type="submit" class="btn btn-primary" id="btnLogin">로그인</button>
@@ -101,10 +114,48 @@ a {
 	</form>
 
 	<script>
-		//로그인 성공시 추가해야됨 
+
 		$("#btnJoin").on("click", function() {
 			location.href = "/member/joinForm.jsp";
 		})
+
+		// 로그인 실패시
+		// 아이디 또는 비밀번호를 잘못 입력했습니다.
+
+		$("#btnLogin").on("click", function() {
+			let id = $("#id").val();
+			let pw = $("#pw").val();
+
+			$.ajax({
+				url : "/login.member",
+				type : "post",
+				dataType : "json",
+				data : {
+					id : id,
+					pw : pw
+				},
+				success : function(resp) {
+					//로그인이 실패한 경우 
+					if (!resp) {
+						console.log(resp);
+						$("#errorMessage").html("아이디 또는 비밀번호를 잘못 입력했습니다.");
+						$("#errorMessage").css({
+							color : "red"
+						});
+						//로그인 폼 초기화 
+						$("#id").val("");
+						$("#pw").val("");
+					}
+				},
+				error : function(xhr, status, error) {
+					console.log(xhr);
+					console.log(status);
+					console.log(error);
+				}
+
+			});
+
+		});
 	</script>
 </body>
 </html>
