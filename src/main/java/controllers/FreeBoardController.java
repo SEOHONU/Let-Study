@@ -2,6 +2,11 @@ package controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,6 +25,7 @@ import dto.FreeBoardAndMemberDTO;
 import dto.FreeBoardDTO;
 import dto.FreeFileDTO;
 import dto.ReplyAndMemberDTO;
+import dto.SecondHandDTO;
 import statics.Settings;
 
 @WebServlet("*.freeBoard")
@@ -68,7 +74,6 @@ public class FreeBoardController extends HttpServlet {
 				
 			// 자유게시판 목록 리스트 보기			
 			}else if(cmd.equals("/contentList.freeBoard")) {
-				
 				int currentPage = request.getParameter("cpage") == null ? 1 : Integer.parseInt(request.getParameter("cpage"));
 				if(currentPage < 0) {
 					currentPage = 1;
@@ -80,7 +85,6 @@ public class FreeBoardController extends HttpServlet {
 				int first = (currentPage-1)/Settings.BOARD_NAVI_COUNT_PER_PAGE*Settings.BOARD_NAVI_COUNT_PER_PAGE;
 				int last = (currentPage-1)/Settings.BOARD_NAVI_COUNT_PER_PAGE*Settings.BOARD_NAVI_COUNT_PER_PAGE+Settings.BOARD_NAVI_COUNT_PER_PAGE+1;
 				List<FreeBoardAndMemberDTO> list = dao.selectFreeBoardList(start, end);
-				
 				List<String> pageNavi = dao.getPageNavi(dao.getRecordCount(), currentPage);
 				request.setAttribute("list", list);
 				request.setAttribute("navi", pageNavi);
@@ -88,15 +92,9 @@ public class FreeBoardController extends HttpServlet {
 				request.setAttribute("start", first);
 				request.setAttribute("end", last);
 				request.getRequestDispatcher("/freeBoard/FreeBoardList.jsp").forward(request, response);
-				
-			
 			}
 			// 게시글 디테일 뷰
 			else if(cmd.equals("/detail.freeBoard")) {
-			
-				//닉네임가져오기!!!!!!!!!!!!!!!!!!!!!!마이페이지에서 넘겨줘야하나?
-//				String nick_name = (String)request.getSession().getAttribute("nickname");
-//				request.setAttribute("nick_name", nick_name);
 				
 				// 게시글 시퀀스 받아오기
 				int seq = Integer.parseInt(request.getParameter("seq"));
@@ -106,7 +104,7 @@ public class FreeBoardController extends HttpServlet {
 				// 게시글 출력
 				FreeBoardDTO list = dao.selectDetail(seq);
 				request.setAttribute("list", list);
-				//닉네임 출력
+				// 닉네임 출력
 				String nick = dao.getNicknameBySeq(seq);
 				System.out.println(nick);
 				request.setAttribute("nickname", nick);
@@ -122,7 +120,8 @@ public class FreeBoardController extends HttpServlet {
 				List<ReplyAndMemberDTO> replyResult = daoRP.selectReply(seq);
 				request.setAttribute("replyResult", replyResult);
 				request.getRequestDispatcher("/freeBoard/FreeBoardContents.jsp").forward(request, response);
-			// 게시글 업데이트
+				
+				// 게시글 업데이트
 			}else if(cmd.equals("/update.freeBoard")) {
 				String realPath = request.getServletContext().getRealPath("freeBoardUpload");
 				System.out.println("다운로드 파일 경로 : " + realPath);
@@ -157,10 +156,29 @@ public class FreeBoardController extends HttpServlet {
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				int result = dao.deleteBySeq(seq);
 				response.sendRedirect("/contentList.freeBoard");
-			}
-			
-					
-
+			// 자유게시판 검색	
+			}else if(cmd.equals("/searchByOption.freeBoard")) {
+				int currentPage = request.getParameter("cpage") == null ? 1 : Integer.parseInt(request.getParameter("cpage"));
+				if(currentPage < 0) {
+					currentPage = 1;
+				}else if(currentPage > (int)Math.ceil(dao.getRecordCount()/(double)Settings.BOARD_RECORD_COUNT_PER_PAGE)) {
+					currentPage = (int)Math.ceil(dao.getRecordCount()/(double)Settings.BOARD_RECORD_COUNT_PER_PAGE);
+				}
+				int start = currentPage * Settings.BOARD_RECORD_COUNT_PER_PAGE - (Settings.BOARD_RECORD_COUNT_PER_PAGE-1);
+				int end = currentPage * Settings.BOARD_RECORD_COUNT_PER_PAGE;
+				String optionValue = (String)request.getParameter("optionValue");
+				String searchValue = (String)request.getParameter("searchValue");
+				int first = (currentPage-1)/Settings.BOARD_NAVI_COUNT_PER_PAGE*Settings.BOARD_NAVI_COUNT_PER_PAGE;
+				int last = (currentPage-1)/Settings.BOARD_NAVI_COUNT_PER_PAGE*Settings.BOARD_NAVI_COUNT_PER_PAGE+Settings.BOARD_NAVI_COUNT_PER_PAGE+1;
+				List<FreeBoardAndMemberDTO> list = dao.freeBoardSearch(optionValue, searchValue, start, end);
+				List<String> pageNavi = dao.getPageNavi(dao.getRecordCount(), currentPage);
+				request.setAttribute("list", list);
+				request.setAttribute("navi", pageNavi);
+				request.setAttribute("cpage", currentPage);
+				request.setAttribute("start", first);
+				request.setAttribute("end", last);
+				request.getRequestDispatcher("/freeBoard/FreeBoardList.jsp").forward(request, response);
+				}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

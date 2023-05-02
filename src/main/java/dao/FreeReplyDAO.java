@@ -33,7 +33,7 @@ public class FreeReplyDAO {
 
 	}
 	
-	
+	// replyDTO와 MemberDTO 조인해서 nickname가져오기
 	public ArrayList<ReplyAndMemberDTO> selectReply(int board_seq)throws Exception{
 		String sql = "select * from(select r.reply_seq, r.reply_writer, m.nickname, r.reply_contents, r.reply_write_date,r.board_seq from fr_reply r left join members m on r.reply_writer = m.id where board_seq=?)order by reply_seq asc";
 		try(
@@ -56,10 +56,6 @@ public class FreeReplyDAO {
 				return dto;
 			}
 		}
-		
-		
-		
-		
 	}
 	
 	
