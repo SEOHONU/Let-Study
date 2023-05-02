@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import dao.Admin_DAO;
 import dao.FreeBoardDAO;
+import dao.MainDAO;
 import dao.MembersDAO;
 import dao.SecondHandDAO;
 import dao.StudyBoardDAO;
@@ -18,6 +22,7 @@ import dto.FreeBoardDTO;
 import dto.MembersDTO;
 import dto.SecondHandDTO;
 import dto.StudyBoardDTO;
+import oracle.net.aso.g;
 import statics.Settings;
 
 @WebServlet("*.adminBoard")
@@ -34,6 +39,8 @@ public class Admin_BoardController extends HttpServlet {
 		StudyBoardDAO sbdao = StudyBoardDAO.getInstance();
 		FreeBoardDAO frdao = FreeBoardDAO.getInstance();
 		MembersDAO mbdao = MembersDAO.getInstance();
+		MainDAO mndao = MainDAO.getInstance();
+		Gson g = new Gson();
 		try {
 			System.out.println("스터디 리스트 출력");
 			if (cmd.equals("/study_select.adminBoard")) {
@@ -180,11 +187,29 @@ response.setContentType("text/html; charset=utf8");
 				String id = (String) request.getParameter("id");
 				mbdao.memberOut(id);
 				response.sendRedirect("/user_Board.adminBoard");
-			} 
+			} else if (cmd.equals("/allsearch.adminBoard")) {
+				System.out.println("통합검색 스타또");
+				String select = request.getParameter("select");
+				String title = request.getParameter("title");
 				
-			
-			
-			
+				
+				List<SecondHandDTO> sdto = mndao.joongosearch(select, title);
+				System.out.println("중고");
+				List<StudyBoardDTO> stdto = mndao.studysearch(select, title);
+				System.out.println("스터디");
+				
+				List<FreeBoardDTO> fdto = mndao.boardsearch(select, title);
+				System.out.println("자유");
+				request.setAttribute("sdto", sdto);
+				System.out.println(sdto);
+				request.setAttribute("stdto", stdto);
+				System.out.println(stdto);
+				request.setAttribute("fdto", fdto);
+				System.out.println(fdto);
+				request.setAttribute("title", title);
+				System.out.println(title);
+				request.getRequestDispatcher("/admin/admin_searchpage.jsp").forward(request, response);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

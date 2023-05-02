@@ -93,10 +93,7 @@
 	font-size: 16px;
 }
 
-.input-group {
-	
-	margin-bottom: 20px;
-}
+
 
 .th_nul {
 	width: 10px;
@@ -107,6 +104,10 @@
 	margin-bottom: 10px;
 	position: relative;
 	bottom: 8px;
+}
+.search_tag{
+position: relative;
+right:19%;
 }
 </style>
 
@@ -168,11 +169,7 @@
 				<table
 					summary="This table shows how to create responsive tables using Datatables' extended functionality"
 					class="table table-bordered table-hover dt-responsive">
-					<caption class="text-center">
-						An example of a responsive table based on <a
-							href="https://datatables.net/extensions/responsive/"
-							target="_blank">DataTables</a>:
-					</caption>
+					
 					<thead>
 						<tr>
 							<th class="col col-md-1">no.</th>
@@ -188,7 +185,7 @@
 
 					</thead>
 					<tbody>
-						<c:forEach var="i" items="${list}" varStatus="status">
+						<c:forEach var="i" items="${stdto}" varStatus="status">
 							<tr>
 
 								<td>${i.seq}</td>
@@ -209,24 +206,121 @@
 
 
 					</tbody>
-					<tfoot>
-						<tr>
-							<td colspan="5" class="text-center">Data retrieved from <a
-								href="http://www.infoplease.com/ipa/A0855611.html"
-								target="_blank">infoplease</a> and <a
-								href="http://www.worldometers.info/world-population/population-by-country/"
-								target="_blank">worldometers</a>
-							</td>
-						</tr>
-					</tfoot>
+				
 				</table>
 			</div>
 		</div>
 	</div>
+
+<!-- 스터디 종료 -->
+<!-- 중고책 시작 -->
+<div class="container font_1">
+    <div class="row">
+        <h1>중고책파는게시판</h1>
+        <div class="col">
+            <table
+                summary="This table shows how to create responsive tables using Datatables' extended functionality"
+                class="table table-bordered table-hover dt-responsive">
+               
+                <thead>
+                    <tr>
+                        <th class="col col-md-1">no.</th>
+                        <th class="col col-md-2">작성자</th>
+                        <th class="col col-md-2">제목</th>
+                        <th class="col d-none d-md-block">조회수</th>
+                        <th class="col col-md-2">작성일</th>
+                        <th>버튼</th>
+                        <!-- <th class="col col-md-1 th_nul"></th> -->
+                    </tr>
+
+
+
+                    <!-- 추후 이렇게 수정할거임 -->
+
+                </thead>
+                <tbody>
+                    <c:forEach var="i" items="${sdto}">
+                        <div class="col-4 col-lg-2">
+                            <tr>
+                                <td>no : ${i.seq}</td>
+                                <td>${i.writer}</td>
+                                <td><a href="secondHandBoardContents.secondHand?seq=${i.seq}&currentPage=1">${i.title}</a></td>
+                                <td class="col d-none d-md-block" style="height: 55px;">${i.view_count}</td>
+                                <td>${i.detailDate}</td>
+                                <td><a
+                                    href="/secondHand_Delete.adminBoard?seq=${i.seq}&currentPage=${currentPage}"><button
+                                            type="button" class="btn btn-outline-danger btn_del">삭제</button></a></td>
+
+                            </tr>
+                        </div>
+                    </c:forEach>
+
+
+                </tbody>
+               
+            </table>
+        </div>
+    </div>
+</div>
+<!-- 중고책 종료 -->
+<!-- 자유시작 -->
+<div class="container font_1">
+    <div class="row">
+        <h1>왁자지껄 자유게시판</h1>
+        <div class="col">
+            <table
+                summary="This table shows how to create responsive tables using Datatables' extended functionality"
+                class="table table-bordered table-hover dt-responsive">
+                
+                <thead>
+                    <tr>
+                        <th class="col col-md-1">no.</th>
+                        <th class="col col-md-2">작성자</th>
+                        <th class="col col-md-2">제목</th>
+                        <th class="col d-none d-md-block">조회수</th>
+                        <th class="col col-md-2">작성일</th>
+                        <th>버튼</th>
+                        <!-- <th class="col col-md-1 th_nul"></th> -->
+                    </tr>
+
+
+
+                    <!-- 추후 이렇게 수정할거임 -->
+
+                </thead>
+                <tbody>
+                    <c:forEach var="i" items="${fdto}">
+                        <tr>
+                            <td>${i.seq}</td>
+                            <td>${i.writer}</td>
+                            <td><a href="/detail.freeBoard?seq=${i.seq}">${i.title}</a></td>
+                            <td class="col d-none d-md-block" style="height: 55px;">${i.view_count}</td>
+                            <td>${i.write_date}</td>
+                            <td><a
+                                href="/freeboard_Delete.adminBoard?seq=${i.seq}&cpage=${cpage}"><button
+                                        type="button" class="btn btn-outline-danger btn_del">삭제</button></a></td>
+
+                        </tr>
+                    </c:forEach>
+
+
+
+
+                </tbody>
+               
+            </table>
+        </div>
+    </div>
+</div>
+                    <!-- 자유게시판 종료 -->
+<!-- 유저시작 -->
+
+
+
 	<!-- 회원 정보 출력 종료  -->
 
 	<!-- 회원검색폼 시작-->
-	 <div class="col-lg-12" style="text-align: center;">
+        <div class="col-lg-12" style="text-align: center;">
 
             <nav class="navbar navbar-light bg-light ">
                 <form class="container d-flex justify-content-center w-75 p-3" action="/allsearch.adminBoard">
@@ -237,6 +331,8 @@
                             <option value="작성자">작성자</option>
                         </select>
                         &nbsp;
+                       
+                       
                         <input type="text" class="form-control"id="input_tag" aria-label="Sizing example input"
                          aria-describedby="inputGroup-sizing-default"placeholder="통합검색창" name="title"
                           value="${title}">
@@ -287,4 +383,4 @@
 
           -->
 </body>
-</html>
+</html>v
