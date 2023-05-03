@@ -112,7 +112,7 @@ public class MemberController extends HttpServlet {
 			} else if (cmd.equals("/memberOut.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
 				dao.memberOut(id);
-				response.sendRedirect("/index.jsp");
+				response.sendRedirect("/logout.member");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
