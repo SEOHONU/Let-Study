@@ -37,7 +37,7 @@ public class Admin_login_Controller extends HttpServlet {
 				boolean result  = Admin_DAO.getInstance().isAdmin(id, pw);
 				
 				Admin_DAO dao = new Admin_DAO();
-				System.out.println(result);
+				System.out.println("2321321321"+result);
 				if(result) {
 					request.getSession().setAttribute("admin_id", id);
 					request.setAttribute("list", result);

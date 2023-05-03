@@ -40,6 +40,7 @@ public class Admin_DAO {
 			pstat.setString(1, admin_id);
 			pstat.setString(2, admin_pw);
 			try (ResultSet rs = pstat.executeQuery();) {
+			
 				return rs.next();
 			}
 		}

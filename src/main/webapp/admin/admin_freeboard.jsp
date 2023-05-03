@@ -199,6 +199,7 @@
 								<td>${i.seq}</td>
 								<td>${i.writer}</td>
 								<td><a href="/detail.freeBoard?seq=${i.seq}">${i.title}</a></td>
+								
 								<td class="col d-none d-md-block" style="height: 55px;">${i.view_count}</td>
 								<td>${i.write_date}</td>
 								<td><a
