@@ -205,7 +205,7 @@
                                                         aria-describedby="basic-addon1"
                                                         style="width: 30%; padding: 0; display: inline;" name="title">
                                                     <button type="button" class="btn btn-success"
-                                                        style="z-index: 0; background-color: rgb(60, 117, 121); padding: 0;">검색</button>
+                                                        style="z-index: 0; background-color: rgb(60, 117, 121); padding: 0; border:0px;">검색</button>
                                                 </form>
 
 
@@ -418,7 +418,7 @@
                                     aria-describedby="basic-addon1" name="title" /> &nbsp;
 
                                 <button type="button" class="btn btn-success"
-                                    style="z-index: 0; background-color: rgb(60, 117, 121);">검색</button>
+                                    style="z-index: 0; background-color: rgb(60, 117, 121); border:0px;">검색</button>
                             </div>
                         </form>
 
@@ -741,9 +741,9 @@
                         // var textfront2 = $('<a href="/secondHandBoardContents.secondHand?seq=' + page + '&currentPage=' + ppage + '"></a>')
                         var textfront3 = $('<div class="card mb-3" style = "max-width: 540px;"> </div>')
                         var textfront4 = $('<div class="row g-0 jc"></div>')
-                        var textfront5 = $('<div class="col-md-4"></div>')
-                        var textfront6 = $('<img src="..." class="img-fluid rounded-start" alt="...">')
-                        var textfront7 = $('<div class="col-md-8"></div>')
+                        var textfront5 = $('<div class="col-md-5 myDiv"></div>')
+                        var textfront6 = $('<img src="/image/다운로드.jpg" class="img-fluid rounded-start" alt="...">')
+                        var textfront7 = $('<div class="col-md-7"></div>')
                         var textfront8 = $('<div class="card-body"></div>')
                         var subtitle = $('<h5 class="card-title" id="subtitle"></h5>')
                         var textmiddle1 = $('<p class="card-text"></p>')
@@ -765,6 +765,10 @@
                         textmiddle2.append(subwriter);
                         subtitle.append(title);
                         subwriter.append(writer);
+                        
+                        var myDiv = textfront5[0];
+                        var height = myDiv.offsetHeight;
+                        myDiv.style.lineHeight = height + 'px';
                     }
                 });
 
@@ -825,6 +829,9 @@
                 }else if(bodySize < 768){
                 	$(".slide").css("object-position", "center -80px");
                 }
+                var myDiv = document.querySelector('.myDiv');
+                var height = myDiv.offsetHeight;
+                myDiv.style.lineHeight = height + 'px';
             });
 
 

@@ -308,7 +308,7 @@
 												&nbsp;
 
 												<button type="submit" class="btn btn-success"
-													style="z-index: 0; background-color: rgb(60, 117, 121);">검색</button>
+													style="z-index: 0; background-color: rgb(60, 117, 121); border:0px;">검색</button>
 											</div>
 										</form>
 									</div>
@@ -324,12 +324,12 @@
 														<div class="col-3">
 															<a href="/inner.studyboard?seq=${study.seq}&cpage=${cpage}">
 																<div class="card">
-																	<img src="..." class="card-img-top" alt="...">
+																	<img src="/image/다운로드.jpg" class="card-img-top" alt="...">
 																	<div class="card-body" style="text-align: center;">
 																		<h5 class="card-title">${study.title}</h5>
 																		<p class="card-text">${study.contents}</p>
 																		<a href="/inner.studyboard?seq=${study.seq}&cpage=${cpage}"
-																			class="btn btn-primary">참여하기</a>
+																			class="btn btn-primary" style="padding:0px; font-size:small; background-color:black; border:0px">참여</a>
 																	</div>
 																</div>
 															</a>
@@ -359,8 +359,8 @@
 																href="/secondHandBoardContents.secondHand?seq=${second.seq}&currentPage=${cpage}">
 																<div class="card mb-3" style="max-width: 540px;">
 																	<div class="row g-0">
-																		<div class="col-md-4">
-																			<img src="..."
+																		<div class="col-md-4" style="line-height:128px">
+																			<img src="/image/다운로드.jpg"
 																				class="img-fluid rounded-start"
 																				alt="...">
 																		</div>

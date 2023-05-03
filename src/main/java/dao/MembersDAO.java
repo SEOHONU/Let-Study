@@ -122,7 +122,6 @@ public class MembersDAO {
 	            String zipcode = rs.getString("zipcode");
 	            String address1 = rs.getString("address1");
 	            String address2 = rs.getString("address2");
-
 	            Timestamp join_date = rs.getTimestamp("join_date");
 	            MembersDTO dto = new MembersDTO(id, null, name, birth_date, nickname, contact, email, zipcode,
 	                  address1, address2, join_date);
