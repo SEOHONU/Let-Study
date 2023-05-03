@@ -30,7 +30,7 @@
                 }
 
                 .top {
-                    background-color: #3c757970;
+                    background-color: #3c757980;
                     border: 1px solid #ddd;
                     border-radius: 5px;
                     margin: 1px;
@@ -45,7 +45,6 @@
                 .navi {
                     position: sticky;
                     top: 0;
-                    background-color: white;
                     z-index: 1;
                 }
 

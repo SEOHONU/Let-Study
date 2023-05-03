@@ -18,20 +18,20 @@
                 integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
             <script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
             <style>
-                 * {
+                /*  * {
                     box-sizing: border-box;
                 }
 
                 div {
                     border: 1px solid black;
-                }
+                } */
 
                 .container {
                     position: relative;
                 }
 
                 .top {
-                    background-color: #3c757970;
+                    background-color: #3c757980;
                     border: 1px solid #ddd;
                     border-radius: 5px;
                     margin: 1px;
@@ -89,7 +89,6 @@
                 .navi {
                     position: fixed;
                     top: 0;
-                    background-color: white;
                     z-index: 1;
                 }
 
@@ -358,30 +357,30 @@
                             <div class="carousel-inner">
                                 <a href="인기 있는 스터디">
                                     <div class="carousel-item active" data-bs-interval="5000">
-                                        <img src="/image/다운로드.jpg" class="w-100 d-block slide" alt="..."
-                                            style="opacity: 0.6;object-fit: cover;object-position: center -175px;height: 659px;">
+                                        <img src="/image/study.jpg" class="w-100 d-block slide" alt="..."
+                                            style="opacity: 0.6;object-fit: cover;object-position: center -256px;;">
                                         <div class="carousel-caption d-none d-md-block"
                                             style="color:white; background-color:#00000080;">
                                             <h5>인기있는 스터디</h5>
-                                            <p>좋아요를 많이 받은 호스트의 스터디</p>
+                                            <p>좋아요를 많이 받은 호스트의 스터디를 확인하세요.</p>
                                         </div>
                                     </div>
                                 </a> <a href="등급 정보">
                                     <div class="carousel-item" data-bs-interval="5000">
-                                        <img src="/image/다운로드.jpg" class="w-100 d-block  slide" alt="..."
-                                            style="opacity: 0.6;object-fit: cover;object-position: center -175px;height: 659px;">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <h5>등급별로 혜택을 누려보세요</h5>
-                                            <p>등급별 혜택 종류</p>
+                                        <img src="/image/booktrade.jpg" class="w-100 d-block  slide" alt="..."
+                                            style="opacity: 0.6;object-fit: cover;object-position: center -391px;">
+                                        <div class="carousel-caption d-none d-md-block"style="color:white; background-color:#00000080;">
+                                            <h5>저렴한 책 구매</h5>
+                                            <p>중고거래로 저렴하게 책을 구매하세요.</p>
                                         </div>
                                     </div>
                                 </a> <a href="임박 시험 날짜">
                                     <div class="carousel-item" data-bs-interval="5000">
-                                        <img src="/image/다운로드.jpg" class="w-100 d-block  slide" alt="..."
-                                            style="opacity: 0.6;object-fit: cover;object-position: center -175px;height: 659px;">
-                                        <div class="carousel-caption d-none d-md-block">
+                                        <img src="/image/Calendar.jpg" class="w-100 d-block  slide" alt="..."
+                                            style="opacity: 0.6;object-fit: cover;object-position: center 0px;">
+                                        <div class="carousel-caption d-none d-md-block"style="color:white; background-color:#00000080;">
                                             <h5>날짜가 임박한 시험</h5>
-                                            <p>시험일자가 임박한 시험을 보여드립니다.</p>
+                                            <p>시험일자가 임박한 시험을 보세요.</p>
                                         </div>
                                     </div>
                                 </a>
@@ -650,6 +649,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-1 col-sm-2">공백</div>
                     <!-- 풋터 -->
                     <div class="row">
                         <div class="col-12 footer">풋터</div>
@@ -658,8 +658,9 @@
             </div>
         </body>
         <script>
-            var slide = $('.slide').width();
-            $('.slide').height(slide * 0.5)
+        
+            /* var slide = $('.slide').width();
+            $('.slide').height(slide * 0.5) */
             var banner = $('.banner').width();
             $('.navi').width(banner);
             var cirsWidth = $('.circlesub').width();
@@ -669,6 +670,9 @@
             $('.circlesub').height(cirsWidth * 1);
             $('.circle').height(cirWidth * 1);
 
+            $("#carouselExampleDark").height(500);
+            $('.slide').height(500);
+            
             $(window).resize(function () {
                 var cirsWidth = $($('.circlesub')[2]).width();
                 var cirWidth = $($('.circle')[2]).width();
@@ -677,8 +681,8 @@
                 $('.circlesub').height(cirsWidth * 1);
                 $('.circle').height(cirWidth * 1);
 
-                var slide = $('.slide').width();
-                $('.slide').height(slide * 0.5)
+                $("#carouselExampleDark").height($("#carouselExampleDark").width()*0.4);
+                $('.slide').height($("#carouselExampleDark").width()*0.4)
                 var banner = $('.banner').width();
                 $('.navi').width(banner);
             });
@@ -760,7 +764,7 @@
                         subtitle.append(title);
                         subwriter.append(writer);
                     }
-                })
+                });
 
 
                 $(".btn-success").click(function () {
@@ -777,6 +781,10 @@
                         alert("로그인이 필요합니다");
                     }
                 });
+                $("#carouselExampleDark").height($("#carouselExampleDark").width()*0.4);
+                $('.slide').height($("#carouselExampleDark").width()*0.4)
+                var banner = $('.banner').width();
+                $('.navi').width(banner);
             });
 
             /* function loginpix(url){
