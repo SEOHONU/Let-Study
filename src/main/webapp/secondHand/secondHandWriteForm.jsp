@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +18,8 @@
         crossorigin="anonymous"></script>
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e7252ffaa17ffd29198c0279af09c9f9&libraries=services"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -37,46 +39,74 @@
     <form action="/insert.secondHand" method="post" id="insertForm">
         <table border="1" align="center">
             <tr>
-                <th colspan="2">
-                    중고거래 게시판 글 작성하기
-                </th>
+                <th colspan="2">중고거래 게시판 글 작성하기</th>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="text" id="title" placeholder="제목" name="title" required></td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="text" id="title" placeholder="제목" name="title" required>
-                </td>
-            </tr>
-            <tr>
-                <td align="right" colspan="2">
-                    <input type="file" id="file" name="file">
+                    <textarea name="contents" id="summernote" class="summernote" required readonly></textarea>
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <textarea name="contents" id="contents" cols="100" rows="10" placeholder="내용" required></textarea>
+                    <div id="map" style="width: 100%; height: 250px;"></div>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <div id="map" style="width:100%;height:250px;">
-                    </div>
+                <td><input type="text" placeholder="주소입력" id="target" required>
+                    <input type="button" value="검색" id="search"> <input type="hidden" name="lat" value="위도" id="Lat"
+                        required> <input type="hidden" name="lng" value="경도" id="Lng" required>
                 </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="text" placeholder="주소입력" id="target" required>
-                    <input type="button" value="검색" id="search">
-                    <input type="hidden" name="lat" value="위도" id="Lat" required>
-                    <input type="hidden" name="lng" value="경도" id="Lng" required>
-                </td>
-                <td align="right">
-                    <input type="submit" value="작성하기" id="submit" disabled>
-                    <input type="button" value="목록으로">
-                </td>
+                <td align="right"><input type="submit" value="작성하기" id="submit" disabled> <input type="button"
+                        value="목록으로"></td>
             </tr>
         </table>
     </form>
     <script>
+        $("#summernote").summernote({
+            height: 500, // 에디터 높이
+            minHeight: null, // 최소 높이
+            maxHeight: null, // 최대 높이
+            focus: true, // 에디터 로딩후 포커스를 맞출지 여부
+            lang: "ko-KR", // 한글 설정
+            placeholder: 'SummerNote 연습 제발제발~', //placeholder 설정
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['picture']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ],
+            callbacks: { //여기 부분이 이미지를 첨부하는 부분
+                onImageUpload: function (files) {
+                    for (let i = 0; i < files.length; i++) {
+                        uploadImg(files[i], this);
+                        console.log(this);
+                    }
+                }
+            }
+        });
+        function uploadImg(img, summerNote) {
+            data = new FormData();
+            data.append("img", img);
+            $.ajax({
+                data: data,
+                type: "POST",
+                url: "/insertFile.secondHand",
+                contentType: false,
+                processData: false
+            }).done(function (url) {
+                img = JSON.parse(url);
+                console.log("url : " + url);
+                console.log("img.url : " + img.url);
+                $(summerNote).summernote("insertImage", img.url);
+            });
+        }
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
             mapOption = {
                 center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
