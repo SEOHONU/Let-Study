@@ -81,6 +81,10 @@
 				.banner {
 					position: relative;
 					height: 300px;
+					background-color: #3c757980;
+					border: 1px solid #ddd;
+					border-radius: 20px;
+					margin: 1px;
 				}
 
 				.bannersub {
@@ -92,15 +96,26 @@
 					background-color: rgba(0, 0, 0, 0.5);
 					z-index: 1;
 					opacity: 0.7;
+					border-radius: 20px;
 				}
 
 
 				#totalimg {
+					border-radius: 20px;
 					opacity: 0.5;
 					position: relative;
 					z-index: 0;
 					display: block;
 					width: 100%;
+				}
+
+				#totaltext {
+					width: 100%;
+					height: 100%;
+					margin: 0px;
+					text-align: center;
+					line-height: 150px;
+					color: white;
 				}
 
 				#menu_wrap hr {
@@ -266,7 +281,9 @@
 
 					<div class="col-12 w-100 banner" style="padding:0px;"><img class="d-block" id="totalimg"
 							src="/image/studytotal.jpg" style="object-fit: cover; height: 100%; width: 100%;">
-						<div class="bannersub" style="height:100%; width:100%; background-color:black;"></div>
+						<div class="bannersub" style="height:100%; width:100%; background-color:black;">
+							<h1 id="totaltext">통합검색</h1>
+						</div>
 					</div>
 					<div class="col-12">
 						<div class="row bodysub">
