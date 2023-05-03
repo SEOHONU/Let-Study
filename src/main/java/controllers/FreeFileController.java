@@ -33,6 +33,8 @@ public class FreeFileController extends HttpServlet {
 
 			String uploadPath = request.getServletContext().getRealPath("upload2");
 			String sysName = request.getParameter("sysName");
+			System.out.println(uploadPath);
+			System.out.println(sysName);
 
 			File target = new File(uploadPath + "/" + sysName);
 

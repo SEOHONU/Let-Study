@@ -121,6 +121,7 @@ public class FreeBoardController extends HttpServlet {
 				request.setAttribute("replyResult", replyResult);
 				request.getRequestDispatcher("/freeBoard/FreeBoardContents.jsp").forward(request, response);
 				
+				
 				// 게시글 업데이트
 			}else if(cmd.equals("/update.freeBoard")) {
 				String realPath = request.getServletContext().getRealPath("freeBoardUpload");

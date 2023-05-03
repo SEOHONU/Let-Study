@@ -40,9 +40,7 @@
 	z-index: 999;
 }
 
-.margin {
-	height: 20px;
-}
+
 
 .reply_text {
 	height: 50px;
@@ -94,7 +92,6 @@
 	border: 0.5px solid grey;
 	border-radius : 10px;
 	background-color : #F2F2F2;
-	border:none;
 }
 
 #replyInsert {
@@ -144,7 +141,7 @@
 	border-radius: 10px;
 }
 
-.nickname{
+.reply_nickname{
 	padding-left:10px;
 	padding-top : 10px;
 	color : grey;
@@ -194,7 +191,51 @@ padding:0px;
 height:30px;
 }
 
+.guide{
+height:130px;
+width:100%;
+border:none;
+background-color : white;
+display:none;
 
+}
+
+.iconArea{
+    height:50%;
+    width:100%;
+}
+
+.nickname{
+    position:relative;
+    height:20%;
+    padding:0;
+    margin:0;
+	left:8px;
+    }
+
+
+.btnRow{
+    height:20%;
+}
+
+.content{
+    width:100%;
+    height:60%;
+    margin:0;
+}
+
+.re_replyContent{
+	width:100%;
+	height:100%;
+	border:none;
+}
+
+.margin{
+position:relative;
+float:left;
+height: 10%;
+display:block;
+}
 </style>
 
 </head>
@@ -447,7 +488,7 @@ height:30px;
 				<c:forEach var="i" items="${replyResult}">
 					<form action="/update.reply" method="post">
 						<div id="replyForm">
-							<div class="nickname" readonly>${i.nickname}</div>
+							<div class="reply_nickname" readonly>${i.nickname}</div>
 							<input type="text" class="reply_text" name="replyContent"
 								value="${i.contents}" readonly>
 							<div class="reply_info">
@@ -460,13 +501,12 @@ height:30px;
 										<a href="/delete.reply?seq=${list.seq}&replySeq=${i.seq}">
 											<input type="button" class="noBorderBtn" value="댓글삭제">
 										</a>
+										<input type="submit" class="noBorderBtn" value="수정완료"
+											style="display: none">
 									</c:when>
 								</c:choose>
-
-								<input type="submit" class="noBorderBtn" value="수정완료"
-									style="display: none"> <input type="hidden"
-									value="${i.seq}" name="replySeq"> <input type="hidden"
-									value="${list.seq}" name="seq">
+								<input type="hidden" value="${i.seq}" name="replySeq"> 
+								<input type="hidden" value="${list.seq}" name="seq">
 							</div>
 						</div>
 						<div id="margin10"></div>
@@ -532,8 +572,6 @@ height:30px;
 		
 			}); 
 			$("#file").css("display", "block");
-	/* 		$('#file-upload-button').show(); */
-
 			$(".fileDel").css("display", "inline-block");
 		})
 
@@ -565,6 +603,7 @@ height:30px;
 				$target.parent("div").remove();
 			});
 		})
+		
 	</script>
 </body>
 

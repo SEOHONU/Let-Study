@@ -120,12 +120,8 @@ a {
 	color: inherit;
 }
 
-
 .page-item{
 float:left;
-}
-
-#select{
 }
 
 
@@ -140,8 +136,6 @@ float:left;
             <div class="container-fluid">
                 <!-- 헤더 네비 -->
                 <c:import url="/board/topMenu.jsp"></c:import>
-			
-
 		<!-- 바디 -->
 
 		<!-- 자유게시판 이미지 -->
@@ -238,10 +232,6 @@ float:left;
 		<div class="block text-center" id="footer"></div>
 
 	</div>
-
-	<script>
-
-	</script>
 </body>
 
 </html>
