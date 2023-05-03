@@ -64,7 +64,18 @@ public class Profile_settingDAO {
 		}
 	}
 
+	public int profileInsertnull(String id,String nickname) throws Exception {
+		String sql = "insert into profile values (?,?,null,null,null,null)";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, id);
+			pstat.setString(2, nickname);
+			
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+			
+	}
 	
-
+	}
 	
 }

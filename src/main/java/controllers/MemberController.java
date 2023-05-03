@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import commons.EncryptionUtils;
 import dao.MembersDAO;
+import dao.Profile_settingDAO;
 import dto.MembersDTO;
 
 @WebServlet("*.member")
@@ -66,7 +68,7 @@ public class MemberController extends HttpServlet {
 				String birthYear = request.getParameter("birthYear"); 
 				String birthMonth = request.getParameter("birthMonth"); 
 				String birthDay = request.getParameter("birthDay"); 
-				//생년월일 값 받음 
+								//생년월일 값 받음 
 
 				String nickname = request.getParameter("nickname");
 				String contact = request.getParameter("contact");
@@ -76,13 +78,19 @@ public class MemberController extends HttpServlet {
 				String detailAddress = request.getParameter("detailAddress");
 				Timestamp join_date = new Timestamp(System.currentTimeMillis()); 
 
+				
+				
 				// 회원가입일자 현재 시간으로 받음 
 				MembersDTO dto = new MembersDTO
 						(id, pw, name, birthYear+""+birthMonth+""+birthDay, nickname, contact, email, zipcode, roadAddress, detailAddress, join_date);
 				int result = dao.insertAll(dto); 
 				// 회원가입하면 나타날 페이지 일단 메인페이지로 씀 
+
+				Profile_settingDAO.getInstance().profileInsertnull(id, nickname);
 				response.sendRedirect("/index.jsp"); 
 				// 회원가입하면 나타날 페이지 써야함 
+				
+				
 			}else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
@@ -95,7 +103,7 @@ public class MemberController extends HttpServlet {
 				// update 회원정보수정
 			} else if (cmd.equals("/update.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
-				String pw = request.getParameter("pw");
+				String pw = EncryptionUtils.sha512(request.getParameter("pw"));
 				String name = request.getParameter("name");
 				String birth_date = request.getParameter("birth_date");
 				String nickname = request.getParameter("nickname");

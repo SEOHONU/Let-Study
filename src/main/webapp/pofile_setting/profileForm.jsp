@@ -129,18 +129,16 @@ div {
 						자기소개
 						<div id="introduce1">
 							<textarea name="introduceMyslef1" id="introduceMyslef1"
-								value="${update.profile_introduce}" readonly></textarea>
+							 readonly>${select.profile_introduce}</textarea>
 							
 							<br>
 						</div>
-
 						<div id="introduce2">
 							<span id="counter"> 0 자 / 180자</span><br>
 							<textarea placeholder="내용을 입력하세요.(최대 180자)" id="introduceMyslef2"
 								name="introduceMyslef2" maxlength="180">${select.profile_introduce}</textarea>
 							<br>
 						</div>
-
 						SNS<br>
 						<div class="instgram">
 							<i class="fa-brands fa-instagram"></i> 
