@@ -119,8 +119,7 @@ a {
 			location.href = "/member/joinForm.jsp";
 		})
 
-		// 로그인 실패시
-		// 아이디 또는 비밀번호를 잘못 입력했습니다.
+// ajax로 페이지 전환없이 데이터 전송
 
 		$("#btnLogin").on("click", function() {
 			let id = $("#id").val();
@@ -130,10 +129,12 @@ a {
 				url : "/login.member",
 				type : "post",
 				dataType : "json",
+				// 데이터 타입을 json형태로 돌려받겠다 
 				data : {
 					id : id,
 					pw : pw
 				},
+				// id랑 pw를 보내겠다 
 				success : function(resp) {
 					//로그인이 실패한 경우 
 					if (!resp) {
@@ -145,6 +146,10 @@ a {
 						//로그인 폼 초기화 
 						$("#id").val("");
 						$("#pw").val("");
+					// 로그인이 성공할 경우 
+					}else {
+						location.href = "/index.jsp"; 
+						console.log("로그인이 성공할 경우"); 
 					}
 				},
 				error : function(xhr, status, error) {

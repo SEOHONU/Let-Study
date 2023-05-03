@@ -39,12 +39,15 @@ public class MemberController extends HttpServlet {
 				String pw = request.getParameter("pw"); 
 				boolean result = MembersDAO.getInstance().isMember(id, pw); 
 				if(result) {
+					// 로그인 실패시 ajax로 아이디 및 비번 확인 문구 전송 
 					request.getSession().setAttribute("loggedID", id); 
 					System.out.println(result);
 					// 닉네임 세션에 가져옴 
 					String nickname = MembersDAO.getInstance().getNickname(id); 
 					request.getSession().setAttribute("nickname", nickname); 
-					response.sendRedirect("/index.jsp");
+					System.out.println("닉네임 세션에 가져오기 성공");
+					String resp = g.toJson(result);
+					response.getWriter().append(resp); 
 				// 로그인 실패시 아이디 및 비번 확인 문구 ajax 전송 
 				}else {
 					String resp = g.toJson(result);
@@ -76,7 +79,6 @@ public class MemberController extends HttpServlet {
 				// 회원가입하면 나타날 페이지 일단 메인페이지로 씀 
 				response.sendRedirect("/index.jsp"); 
 				// 회원가입하면 나타날 페이지 써야함 
-				response.sendRedirect("/"); 
 			}else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
