@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -16,11 +16,16 @@ pageEncoding="UTF-8"%>
         crossorigin="anonymous"></script>
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e7252ffaa17ffd29198c0279af09c9f9&libraries=services"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <style>
-        /* * {
+        * {
             box-sizing: border-box;
             border: 1px solid black;
-        } */
+        }
 
         table {
             width: 100%;
@@ -66,7 +71,9 @@ pageEncoding="UTF-8"%>
                                 readonly></th>
                     </tr>
                     <tr>
-                        <td colspan="3"><textarea name="contents" id="contents" readonly>${dto.contents}</textarea></td>
+                        <td colspan="3">
+                            <textarea name="contents" id="summernote" class="summernote" required>${dto.contents}</textarea>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="3" id="mapTd">
@@ -93,15 +100,16 @@ pageEncoding="UTF-8"%>
             <form action="/insertComments.shComments" method="post" class="col-lg-8 col-12">
                 <table border="1" align="center">
                     <tr>
-                        <td colspan="2">${loggedID} <input type="hidden" name="writer" value="${loggedID}"> <input
+                        <td colspan="2">${loggedID}<input type="hidden" name="writer" value="${loggedID}"> <input
                                 type="hidden" name="seq" value="${dto.seq}"> <input type="hidden" name="currentPage"
                                 value="${currentPage}">
                         </td>
                     </tr>
                     <tr>
                         <td align="left" class="commentTd"><textarea name="contents" id="writeComment"
-                                placeholder="댓글 내용을 작성해주세요"></textarea></td>
-                        <td align="right"><input type="submit" value="댓글쓰기" class="writeComment"></td>
+                                placeholder="댓글 내용을 작성해주세요" required></textarea></td>
+                        <td align="right"><input type="submit" value="댓글쓰기" class="writeComment">
+                        </td>
                     </tr>
                 </table>
             </form>
@@ -111,62 +119,62 @@ pageEncoding="UTF-8"%>
         <c:forEach var="i" items="${list}">
             <c:choose>
                 <c:when test="${i.parent_seq != 0}">
-              		<script>
-              			console.log("i.parent_seq : "+${i.parent_seq});
-              			var rowDiv = $("<div class='row'>");
-              			var modForm = $("<form action='/modifyComments.shComments' class='col-lg-7 col-12'>");
-              			modForm.onsubmit = "return confirm('답글을 수정하시겠습니까?')";
-              			var hidden_currentPage = $("<input type='hidden' name='currentPage' value='${currentPage}'>");
-              			var hidden_board_seq = $("<input type='hidden' name='board_seq' value='${dto.seq}'>");
-              			var hidden_com_seq = $("<input type='hidden' name='com_seq' value='${i.com_seq}'>");
-              			
-              			var table = $("<table border='1' align='center' class='comment'>");
-              			
-              			var tr1 = $("<tr>");
-              			var tr2 = $("<tr>");
-              			
-              			var space1 = $("<div class='col-lg-2 d-none d-lg-block'>");
-              			var space2 = $("<div class='col-lg-2 d-none d-lg-block'>");
-              			
-              			var replySpace = $("<div class='col-lg-1 d-none d-lg-block'>");
-              			replySpace.text("ㄴ");
-              			var td_writer = $("<td align='left'>");
-              			var td_date = $("<td align='right'>");
-              			td_writer.text("${i.com_writer}");
-              			td_date.text("${i.detailDate}");
-              			
-              			td_comment = $("<td align='left' class='commentTd'>");
-              			textarea = $("<textarea name='contents' class='comment' readonly>");
-              			textarea.text("${i.com_contents}");
-              			td_comment.append(textarea);
-              			
-              			td_control = $("<td align='right'>");
-              			if(${i.com_writer == loggedID}){
-              				let modBtn = $("<input type='button' value='수정' class='modCom'>");
-              				let delBtn = $("<input type='button' value='삭제' class='delCom' seq='${i.com_seq}'>");
-              				td_control.append(modBtn);
-              				td_control.append(delBtn);
-              			}
-              			modForm.append(hidden_currentPage);
-              			modForm.append(hidden_board_seq);
-              			modForm.append(hidden_com_seq);
-              			modForm.append(table);
-              			
-              			table.append(tr1);
-              			table.append(tr2);
-              			
-              			tr1.append(td_writer);
-              			tr1.append(td_date);
-              			tr2.append(td_comment);
-              			tr2.append(td_control);
-              			rowDiv.append(space1);
-              			rowDiv.append(replySpace);
-              			rowDiv.append(modForm);
-              			rowDiv.append(space2);
-              			
-              			var targetDiv = $(document).find($("div[com_seq=${i.parent_seq}]"));
-              			targetDiv.after(rowDiv);
-              		</script>
+                    <script>
+                        console.log("i.parent_seq : " + ${ i.parent_seq });
+                        var modForm = $("<form action='/modifyComments.shComments' class='col-lg-7 col-11'>");
+                        modForm.onsubmit = "return confirm('답글을 수정하시겠습니까?')";
+                        var hidden_currentPage = $("<input type='hidden' name='currentPage' value='${currentPage}'>");
+                        var hidden_board_seq = $("<input type='hidden' name='board_seq' value='${dto.seq}'>");
+                        var hidden_com_seq = $("<input type='hidden' name='com_seq' value='${i.com_seq}'>");
+
+                        var table = $("<table border='1' align='center' class='comment'>");
+
+                        var tr1 = $("<tr>");
+                        var tr2 = $("<tr>");
+
+                        var space1 = $("<div class='col-lg-2 d-none d-lg-block'>");
+                        var space2 = $("<div class='col-lg-2 d-none d-lg-block'>");
+
+                        var arrowSpace = $("<div class='col-1'>");
+                        var icon = $("<i class='fa-solid fa-square-caret-down'></i>");
+                        arrowSpace.append(icon);
+                        var com_writer = "${i.com_writer}";
+                        var td_writer = $("<td align='left'>");
+                        td_writer.append(com_writer);
+                        var td_date = $("<td align='right'>");
+                        td_date.text("${i.detailDate}");
+
+                        td_comment = $("<td align='left' class='commentTd'>");
+                        textarea = $("<textarea name='contents' class='comment' readonly required>");
+                        textarea.text("${i.com_contents}");
+                        td_comment.append(textarea);
+
+                        td_control = $("<td align='right'>");
+                        if (${ i.com_writer == loggedID }) {
+                            let modBtn = $("<input type='button' value='수정' class='modCom'>");
+                            let delBtn = $("<input type='button' value='삭제' class='delCom' seq='${i.com_seq}'>");
+                            td_control.append(modBtn);
+                            td_control.append(delBtn);
+                        }
+                        modForm.append(hidden_currentPage);
+                        modForm.append(hidden_board_seq);
+                        modForm.append(hidden_com_seq);
+                        modForm.append(table);
+
+                        table.append(tr1);
+                        table.append(tr2);
+
+                        tr1.append(td_writer);
+                        tr1.append(td_date);
+                        tr2.append(td_comment);
+                        tr2.append(td_control);
+                        var targetDiv = $(document).find($("div[com_seq=${i.parent_seq}]"));
+
+                        targetDiv.append(space1);
+                        targetDiv.append(arrowSpace);
+                        targetDiv.append(modForm);
+                        targetDiv.append(space2);
+                    </script>
                 </c:when>
                 <c:otherwise>
                     <div class="row" com_seq="${i.com_seq}">
@@ -182,8 +190,8 @@ pageEncoding="UTF-8"%>
                                     <td align="right">${i.detailDate}</td>
                                 </tr>
                                 <tr>
-                                    <td align="left" class="commentTd">
-                                        <textarea name="contents" class="comment" readonly>${i.com_contents}</textarea>
+                                    <td align="left" class="commentTd"><textarea name="contents" class="comment"
+                                            readonly>${i.com_contents}</textarea>
                                     </td>
                                     <td align="right">
                                         <c:if test="${i.com_writer == loggedID}">
@@ -203,6 +211,51 @@ pageEncoding="UTF-8"%>
         </c:forEach>
     </div>
     <script>
+        $("#summernote").summernote({
+            height: 500, // 에디터 높이
+            minHeight: null, // 최소 높이
+            maxHeight: null, // 최대 높이
+            focus: true, // 에디터 로딩후 포커스를 맞출지 여부
+            disableDragAndDrop: true,
+            lang: "ko-KR", // 한글 설정
+            placeholder: 'SummerNote 연습 제발제발~', //placeholder 설정
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['picture']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ],
+            callbacks: { //여기 부분이 이미지를 첨부하는 부분
+                onImageUpload: function (files) {
+                    for (let i = 0; i < files.length; i++) {
+                        uploadImg(files[i], this);
+                        console.log(this);
+                    }
+                }
+            }
+        });
+        $("#summernote").summernote("disable");
+        
+        function uploadImg(img, summerNote) {
+            data = new FormData();
+            data.append("img", img);
+            $.ajax({
+                data: data,
+                type: "POST",
+                url: "/insertFile.secondHand",
+                contentType: false,
+                processData: false
+            }).done(function (url) {
+                img = JSON.parse(url);
+                console.log("url : " + url);
+                console.log("img.url : " + img.url);
+                $(summerNote).summernote("insertImage", img.url);
+            });
+        }
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
             mapOption = {
                 center: new kakao.maps.LatLng(${ dto.lat }, ${ dto.lng }), // 지도의 중심좌표
@@ -280,7 +333,7 @@ pageEncoding="UTF-8"%>
             if (confirm("댓글을 삭제하시겠습니까?")) {
                 alert("삭제 완료되었습니다.");
                 location.href = "/deleteComments.shComments?com_seq=" + seq +
-                		"&currentPage=${currentPage}&board_seq=${dto.seq}";
+                    "&currentPage=${currentPage}&board_seq=${dto.seq}";
             }
         });
         $(".modCom").on("click", function () {
@@ -298,11 +351,9 @@ pageEncoding="UTF-8"%>
             target.append(cancle);
         })
         $("#modify").on("click", function () {
+        	$("#summernote").summernote("enable");
             marker.setMap(null);
             infowindow.setMap(null);
-            $("#title").removeAttr("readonly");
-            $("#contents").removeAttr("readonly");
-            $("#title").focus();
             let searchText = $("<input type='text' placeholder='주소를 입력하세요' id='target'>");
             let searchBtn = $("<input type='button' id='search' value='검색'>");
             let cancleBtn = $("<input type='button' id='cancle' value='취소'>");

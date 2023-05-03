@@ -84,7 +84,7 @@ h2 {
 				<div class="col-6">
 					<label for="idInput">아이디*</label> <input type="text"
 						class="form-control" id="id" name="id" placeholder="아이디 입력(6~20자)"
-						maxlength = "20" required>
+						maxlength="20" required>
 					<div id="idFeedback"></div>
 				</div>
 				<div class="col-3"></div>
@@ -94,7 +94,8 @@ h2 {
 				<div class="col-6">
 					<label for="pwInput">비밀번호*</label> <input type="password"
 						class="form-control" id="pw" name="pw"
-						placeholder="비밀번호 입력 (문자, 숫자, 특수문자 포함 8~20자)" maxlength="20" required>
+						placeholder="비밀번호 입력 (문자, 숫자, 특수문자 포함 8~20자)" maxlength="20"
+						required>
 				</div>
 				<div class="col-3"></div>
 			</div>
@@ -217,44 +218,67 @@ h2 {
 		var idValidFlag = false;
 
 		$("#id").on("keyup", function() {
-			idValIdFlag = false;
+			idValidFlag = false;
 		});
 		// 아이디 중복체크 ajax 
-		// 아이디 지웠을 때 사용가능한 아이디창 안나오게 하기 
-		
+
 		$("#id").focusout(function() {
 
 			let id = $("#id").val();
 
-			$.ajax({
-				url : "/idCheck.member",
-				type : "post",
-				dataType : "json",
-				data : {
-					id : id
-				},
-				success : function(resp) {
-					if (resp) {
-						console.log(resp);
-						$("#idFeedback").html("이미 존재하는 아이디입니다.");
-						$("#idFeedback").css({
-							color : "red"
-						});
-					} else {
-						$("#idFeedback").html("사용가능한 아이디입니다.");
-						$("#idFeedback").css({
-							color : "blue"
-						});
-						idValIdFlag = true;
-					}
-				},
-				error : function(xhr, status, error) {
-					console.log(xhr);
-					console.log(status);
-					console.log(error);
+			if (id == "") {
+				// 아이디를 입력하지 않은 경우 
+				console.log("아이디를 입력하지 않은 경우")
+				$("#idFeedback").html("필수정보입니다.");
+				$("#idFeedback").css({
+					color : "red"
+				});
+				idValidFlag = false;
+			} else {
+				// 일단 뭐라도 입력했을 경우 
+				let regexId = /^[a-z]+[a-z0-9]{5,19}$/
+				let resultId = regexId.test(id);
+				if (!resultId) {
+					// 정규식에 맞게 안썼을 경우 
+					$("#idFeedback").html("아이디는 6~20자 영소문자와 숫자를 사용하세요.");
+					$("#idFeedback").css({
+						color : "red"
+					});
+					// 정규식에 맞게 썼을 경우
+				} else {
+					$.ajax({
+						url : "/idCheck.member",
+						type : "post",
+						dataType : "json",
+						data : {
+							id : id
+						},
+						success : function(resp) {
+							if (resp) {
+								console.log(resp);
+								$("#idFeedback").html("이미 존재하는 아이디입니다.");
+								$("#idFeedback").css({
+									color : "red"
+								});
+							} else {
+								$("#idFeedback").html("사용가능한 아이디입니다.");
+								$("#idFeedback").css({
+									color : "#284ee3"
+								});
+								idValidFlag = true;
+							}
+						},
+						error : function(xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+
+					});
 				}
 
-			});
+			}
+
 		});
 
 		// 비밀번호가 일치하는지 검사
@@ -272,7 +296,7 @@ h2 {
 					// 비밀번호 일치 여부 확인
 					if (pw == pwCheck) {
 						$("#pwFeedback").html("비밀번호가 일치합니다.").css({
-							color : "blue"
+							color : "#284ee3"
 						});
 					} else {
 						$("#pwFeedback").html("비밀번호가 일치하지 않습니다.").css({
@@ -294,7 +318,7 @@ h2 {
 		let regexPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
 		let regexName = /^[가-힣]{2,5}$/;
 		let regexBirthYear = /^[12][0-9]{3}$/;
-		/* let regexBirthDay = /^[0-9]{2}$/; */
+		let regexBirthDay = /^[0-9]$/;
 		let regexNickname = /^[a-zA-Z0-9가-힣]{2,10}$/;
 		let regexContact = /^(01[016789])([1-9]\d{2,3})\d{4}$/;
 		let regexEmail = /[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+/;
@@ -338,10 +362,10 @@ h2 {
 				return false;
 			}
 
-			/* if (!resultBirthDay) {
+			if (!resultBirthDay) {
 				alert("생년월일을 다시 확인해주세요.");
 				return false;
-			} */
+			}
 
 			if (!reusultNickname) {
 				alert("닉네임은 2~10자의 영문, 소문자, 대문자만 사용 가능합니다.");
