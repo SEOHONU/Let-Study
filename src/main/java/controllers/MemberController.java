@@ -57,15 +57,16 @@ public class MemberController extends HttpServlet {
 					response.getWriter().append(resp); 
 				}
 				
-				
-			}else if(cmd.equals("/joinMember.member")) {
+				}else if(cmd.equals("/joinMember.member")) {
 				String id = request.getParameter("id"); 
 				String pw = request.getParameter("pw"); 
 				String name = request.getParameter("name"); 
 				//         생년월일 값 받아야함 
 				String birthYear = request.getParameter("birthYear"); 
 				String birthMonth = request.getParameter("birthMonth"); 
-				String birthDay = request.getParameter("birthDay"); 
+				int birthDay = Integer.parseInt(request.getParameter("birthDay"));
+				String birthDayStr = String.format("%02d", birthDay);
+				// 두자리가 아니면 앞에 0이 붙게함 
 				//생년월일 값 받음 
 
 				String nickname = request.getParameter("nickname");
@@ -78,7 +79,7 @@ public class MemberController extends HttpServlet {
 
 				// 회원가입일자 현재 시간으로 받음 
 				MembersDTO dto = new MembersDTO
-						(id, pw, name, birthYear+""+birthMonth+""+birthDay, nickname, contact, email, zipcode, roadAddress, detailAddress, join_date);
+						(id, pw, name, birthYear+""+birthMonth+""+birthDayStr, nickname, contact, email, zipcode, roadAddress, detailAddress, join_date);
 				int result = dao.insertAll(dto); 
 				// 회원가입하면 나타날 페이지 일단 메인페이지로 씀 
 				response.sendRedirect("/index.jsp"); 
