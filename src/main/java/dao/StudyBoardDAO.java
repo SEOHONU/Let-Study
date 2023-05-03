@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import dto.FreeBoardDTO;
 import dto.StudyBoardDTO;
 import statics.Settings;
 
@@ -225,4 +226,49 @@ public class StudyBoardDAO {
 			return result;
 		}
 	}
+	
+	//마이페이지 내게시글만 뽑아오기
+	public List<StudyBoardDTO> mystudyboard(String id) throws Exception{
+		String sql = "select seq, title from studyboard where writer=?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, id);
+			try(ResultSet rs = pstat.executeQuery();){
+
+				List<StudyBoardDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					int seq = rs.getInt("seq");
+					String title = rs.getString("title");
+					list.add(new StudyBoardDTO(seq,id,title,null,null,0,null,0,0,null));
+				}
+				return list;
+			}
+		}
+	}
+	public void delete (String id) throws Exception{
+		String sql ="delete from studyboard where writer=?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, id);
+		pstat.executeUpdate();
+		con.commit();
+		
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

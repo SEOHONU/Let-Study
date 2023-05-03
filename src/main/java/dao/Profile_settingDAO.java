@@ -41,9 +41,8 @@ public class Profile_settingDAO {
 				String instargram = rs.getString("profile_instargram");
 				String facebook = rs.getString("profile_facebook");
 				String url = rs.getString("profile_url");
-
 				Profile_settingDTO dto = new Profile_settingDTO(id, nickname, introduce, instargram, facebook, url);
-
+			
 				return dto;
 			}
 		}

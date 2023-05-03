@@ -33,6 +33,7 @@ public class MemberController extends HttpServlet {
 				String resp = g.toJson(result);
 				response.getWriter().append(resp);
 
+
 			} else if (cmd.equals("/login.member")) {
 
 				String id = request.getParameter("id"); 
@@ -43,24 +44,22 @@ public class MemberController extends HttpServlet {
 					System.out.println(result);
 					// 닉네임 세션에 가져옴 
 					String nickname = MembersDAO.getInstance().getNickname(id); 
-					request.getSession().setAttribute("nickname", nickname); 
-					response.sendRedirect("/index.jsp");
-				// 로그인 실패시 아이디 및 비번 확인 문구 ajax 전송 
-				}else {
-					String resp = g.toJson(result);
-					System.out.println(result);
-					response.getWriter().append(resp); 
+
+					request.getSession().setAttribute("loggedNickname", nickname); // 닉네임 세션에 가져옴
 				}
-			} else if (cmd.equals("/joinMember.member")) {
-				String id = request.getParameter("id");
-				System.out.println(id);
-				String pw = request.getParameter("pw");
-				String name = request.getParameter("name");
-				// 생년월일 값 받아야함
-				String birthYear = request.getParameter("birthYear");
-				String birthMonth = request.getParameter("birthMonth");
-				String birthDay = request.getParameter("birthDay");
-				// 생년월일 값 받음
+				response.sendRedirect("/index.jsp");
+				
+				
+			}else if(cmd.equals("/joinMember.member")) {
+				String id = request.getParameter("id"); 
+				String pw = request.getParameter("pw"); 
+				String name = request.getParameter("name"); 
+				//         생년월일 값 받아야함 
+				String birthYear = request.getParameter("birthYear"); 
+				String birthMonth = request.getParameter("birthMonth"); 
+				String birthDay = request.getParameter("birthDay"); 
+				//생년월일 값 받음 
+
 				String nickname = request.getParameter("nickname");
 				String contact = request.getParameter("contact");
 				String email = request.getParameter("email");

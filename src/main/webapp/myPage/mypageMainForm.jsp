@@ -255,7 +255,7 @@ div {
 						</div>
 						<div class="col-12">
 							<div class="myBoard">
-								<a href="/myPage/myboard.jsp">
+								<a href="/mypageboard.mypageboardController">
 									<button type="button" id="myboardBtn">
 										<i class="fa-solid fa-address-book"></i> 내 게시판
 									</button>
