@@ -263,7 +263,7 @@ h2 {
 							} else {
 								$("#idFeedback").html("사용가능한 아이디입니다.");
 								$("#idFeedback").css({
-									color : "blue"
+									color : "#284ee3"
 								});
 								idValidFlag = true;
 							}
@@ -296,7 +296,7 @@ h2 {
 					// 비밀번호 일치 여부 확인
 					if (pw == pwCheck) {
 						$("#pwFeedback").html("비밀번호가 일치합니다.").css({
-							color : "blue"
+							color : "#284ee3"
 						});
 					} else {
 						$("#pwFeedback").html("비밀번호가 일치하지 않습니다.").css({
@@ -318,7 +318,7 @@ h2 {
 		let regexPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
 		let regexName = /^[가-힣]{2,5}$/;
 		let regexBirthYear = /^[12][0-9]{3}$/;
-		/* let regexBirthDay = /^[0-9]{2}$/; */
+		let regexBirthDay = /^[0-9]$/;
 		let regexNickname = /^[a-zA-Z0-9가-힣]{2,10}$/;
 		let regexContact = /^(01[016789])([1-9]\d{2,3})\d{4}$/;
 		let regexEmail = /[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+/;
@@ -362,10 +362,10 @@ h2 {
 				return false;
 			}
 
-			/* if (!resultBirthDay) {
+			if (!resultBirthDay) {
 				alert("생년월일을 다시 확인해주세요.");
 				return false;
-			} */
+			}
 
 			if (!reusultNickname) {
 				alert("닉네임은 2~10자의 영문, 소문자, 대문자만 사용 가능합니다.");
