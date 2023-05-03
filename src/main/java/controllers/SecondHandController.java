@@ -1,6 +1,8 @@
 package controllers;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import commons.EncryptionUtils;
 import dao.SecondHandDAO;
@@ -120,6 +125,40 @@ public class SecondHandController extends HttpServlet {
 				List<SecondHandDTO> list = shDAO.getAllLatLng();
 				String gList = gson.toJson(list);
 				response.getWriter().append(gList);
+			}
+			else if(cmd.equals("/insertFile.secondHand")) {
+				JsonObject jo = new JsonObject();
+				Gson g = new Gson();
+				System.out.println("insert.summer 진입");
+				String targetPath = request.getServletContext().getRealPath("img");
+				System.out.println("realPath : "+targetPath);
+				File targetFolder = new File(targetPath);
+				if(!targetFolder.exists()) {
+					targetFolder.mkdir();
+					System.out.println("폴더 생성");
+				}
+				System.out.println("경로 설정");
+				MultipartRequest multi = new MultipartRequest
+						(request, targetPath, 1024*1024*10, "utf8", new DefaultFileRenamePolicy());
+				System.out.println("realPath - 파일 업로드 완료");
+				Enumeration<String> names = multi.getFileNames();
+				System.out.println("파일이름 받아옴 : "+names);
+				while(names.hasMoreElements()) {
+					System.out.println("while문 진입");
+					String name = names.nextElement();
+					System.out.println("name : "+name);
+					if(multi.getFile(name) != null) {
+						String oriName = multi.getOriginalFileName(name);
+						System.out.println("oriName : "+oriName);
+						String sysName = multi.getFilesystemName(name);
+						System.out.println("sysName : "+sysName);
+						String url = "/img/"+sysName;
+						System.out.println("url : "+url);
+						jo.addProperty("url", url);
+					}
+				}
+				System.out.println(jo.toString());
+				response.getWriter().append(jo.toString());
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
