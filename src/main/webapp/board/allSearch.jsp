@@ -114,7 +114,6 @@
 					height: 100%;
 					margin: 0px;
 					text-align: center;
-					line-height: 150px;
 					color: white;
 				}
 
@@ -449,17 +448,14 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-2" style="background-color: #3c7579;">공백</div>
 						</div>
 					</div>
-
+					<div class="col-2" style="background-color: #3c7579;">공백</div>
 				</div>
 				<div class="row footer">풋터</div>
 			</div>
 		</body>
 		<script>
-			$(".banner").height($(".banner").width() * 0.23);
-
 
 			$(window).on("load", function () {
 				$(".btn-success").click(function () {
@@ -483,7 +479,10 @@
 				$(".placelist").height($(".mapsize").width());
 				$(".maptotal").height($(".mapsize").width());
 				$(".map_wrap").height($(".mapsize").width());
-				$(".banner").height($(".banner").width() * 0.23);
+				var bannerWidth = $(".banner").width();
+				var bannerHeight = bannerWidth * 0.23;
+				$(".banner").height(bannerHeight);
+				$("#totaltext").css("line-height", bannerHeight + "px");
 			});
 
 			$(document).ready(function () {
@@ -491,6 +490,10 @@
 				$(".placelist").height($(".mapsize").width());
 				$(".maptotal").height($(".mapsize").width());
 				$(".map_wrap").height($(".mapsize").width());
+				var bannerWidth = $(".banner").width();
+				var bannerHeight = bannerWidth * 0.23;
+				$(".banner").height(bannerHeight);
+				$("#totaltext").css("line-height", bannerHeight + "px");
 			});
 		</script>
 
@@ -526,11 +529,6 @@
 
 				var keyword = document.getElementById('keyword').value;
 
-				if (!keyword.replace(/^\s+|\s+$/g, '')) {
-					alert('키워드를 입력해주세요!');
-					return false;
-				}
-
 				// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
 				ps.keywordSearch(keyword, placesSearchCB);
 			}
@@ -549,10 +547,6 @@
 				} else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 
 					$(".placelist").html('검색 결과가 존재하지 않습니다.');
-
-				} else if (status === kakao.maps.services.Status.ERROR) {
-
-					alert('검색 결과 중 오류가 발생했습니다.');
 
 				}
 			}
@@ -701,7 +695,6 @@
 			// 인포윈도우에 장소명을 표시합니다
 			function displayInfowindow(marker, title) {
 				var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
-
 				infowindow.setContent(content);
 				infowindow.open(map, marker);
 			}

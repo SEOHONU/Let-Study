@@ -17,12 +17,14 @@
             <script src="https://code.jquery.com/jquery-3.6.4.js"
                 integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
             <script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <style>
-                /*  * {
-                    box-sizing: border-box;
+                 * {
+                     box-sizing: border-box;
                 }
 
-                div {
+                /*div {
                     border: 1px solid black;
                 } */
 
@@ -285,7 +287,7 @@
                                 Licence
                             </div>
 
-                            <div class="col-lg-2 d-none d-lg-block  order-lg-last">
+                            <div class="col-lg-2 d-none d-lg-block  order-lg-last" style="text-align: center">
                                 <div class="row">
 
                                     <c:choose>
