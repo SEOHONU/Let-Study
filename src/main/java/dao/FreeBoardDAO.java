@@ -46,32 +46,6 @@ public class FreeBoardDAO {
 
 		}
 	}
-
-	public List<FreeBoardDTO> selectFreeBoard(int start, int end) throws Exception{
-		 String sql = "select * from (select board_seq,board_title,board_contents,board_writer,board_view_count,board_write_date,rank() over(order by board_seq desc) rank from free_board) where rank between ? and ?";
-		try(
-				Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				){
-			pstat.setInt(1, start);
-			pstat.setInt(2, end);
-			try(
-					ResultSet rs = pstat.executeQuery();
-					){
-				List<FreeBoardDTO> list = new ArrayList<>();
-				while(rs.next()) {
-					int seq = rs.getInt("board_seq");
-					String title = rs.getString("board_title");
-					String contents = rs.getString("board_contents");
-					String writer = rs.getString("board_writer");
-					int view_count = rs.getInt("board_view_count");
-					Timestamp write_date = rs.getTimestamp("board_write_date");
-					list.add(new FreeBoardDTO(seq,title,contents,writer,view_count,write_date));
-				}
-				return list;
-			}
-		}
-	}
 	
 	
 //	FreeBoardDTO와 MembersDTO 조인 통해서 nickname 가져오기
@@ -101,10 +75,6 @@ public class FreeBoardDAO {
 			}
 		}
 	}
-	
-	
-	
-	
 
 	public String getNicknameBySeq(int seq) throws Exception{
 		String sql = "SELECT m.nickname FROM free_board b INNER JOIN members m ON b.board_writer = m.id where b.board_seq =?";
@@ -163,9 +133,7 @@ public class FreeBoardDAO {
 			list.add("<");
 		}
 		for(int i = startNavi;i<=endNavi;i++) {
-
 			list.add(String.valueOf(i));
-
 		}
 		if(needNext) {
 			list.add(">");
@@ -279,6 +247,63 @@ public class FreeBoardDAO {
 			con.commit();
 			return result;
 
+		}
+	}
+	
+
+	//마이페이지 내게시글만 뽑아오기
+	public List<FreeBoardDTO> myfreeboard(String id) throws Exception{
+		String sql = "select board_seq, board_title from free_board where board_writer=?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, id);
+			try(ResultSet rs = pstat.executeQuery();){
+
+				List<FreeBoardDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					int seq = rs.getInt("board_seq");
+					String title = rs.getString("board_title");
+					list.add(new FreeBoardDTO(seq,title,null,null,0,null));
+				}
+			return list;
+			}
+		}
+	}
+
+	
+	public List<FreeBoardAndMemberDTO> freeBoardSearch(String option, String target,int start, int end) throws Exception{
+		String sql = "";
+		if (option.equals("제목")) {
+			sql = "select * from(select b.board_seq, b.board_title, b.board_contents, b.board_writer, m.nickname, b.board_view_count, b.board_write_date, rank() over(order by b.board_seq desc) as rank from free_board b left join members m on b.board_writer = m.id) where rank between ? and ? and  LOWER(board_title) like LOWER(?)";
+		} else if (option.equals("내용")) {
+			sql = "select * from(select b.board_seq, b.board_title, b.board_contents, b.board_writer, m.nickname, b.board_view_count, b.board_write_date, rank() over(order by b.board_seq desc) as rank from free_board b left join members m on b.board_writer = m.id) where rank between ? and ? and  LOWER(board_contents) like LOWER(?)";
+		} else if (option.equals("닉네임")) {
+			sql = "select * from(select b.board_seq, b.board_title, b.board_contents, b.board_writer, m.nickname, b.board_view_count, b.board_write_date, rank() over(order by b.board_seq desc) as rank from free_board b left join members m on b.board_writer = m.id) where rank between ? and ? and  LOWER(nickname) like LOWER(?)";
+		}
+		try (Connection con = this.getConnection(); 
+			PreparedStatement pstat = con.prepareStatement(sql);) {
+			System.out.println(start);
+			System.out.println(end);
+			pstat.setInt(1, start);
+			pstat.setInt(2, end);
+			pstat.setString(3, "%" + target + "%");
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				List<FreeBoardAndMemberDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					int seq = rs.getInt("board_seq");
+					String title = rs.getString("board_title");
+					String contents = rs.getString("board_contents");
+					String writer = rs.getString("board_writer");
+					String nickname = rs.getString("nickname");
+					int view_count = rs.getInt("board_view_count");
+					Timestamp write_date = rs.getTimestamp("board_write_date");
+					list.add(new FreeBoardAndMemberDTO(seq,title,contents,writer,nickname, view_count,write_date));
+
+				}
+				return list;
+			}
 		}
 	}
 }
