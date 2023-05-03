@@ -202,49 +202,177 @@ height:30px;
 <body>
 	<div class="container">
 		<!-- 헤더 -->
-		<div class="row navi">
-			<div class="col-12">
-				<div class="row">
+	
+                <!-- 헤더 네비 -->
+                <div class="row navi">
 
-					<div class="col-6 col-lg-2 order-2 order-lg-first">logo</div>
-					<div class="col-lg-4 d-none d-lg-block order-lg-1">여백</div>
-					<div class="col-4 d-block d-lg-none order-1">
-						<div class="row">
-							<div class="col-6">
-								<div class="row">
-									<div class="col-12">네비햄버거</div>
-									<div class="col-12">회원가입</div>
-								</div>
-							</div>
-							<div class="col-6">
-								<div class="row">
-									<div class="col-12 subsearch">검색</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-1 d-none d-lg-block order-lg-2">
-						<button type="button" class="btn btn-primary btn-lg">hi</button>
-					</div>
-					<div class="col-lg-1 d-none d-lg-block order-lg-3">
-						<button type="button" class="btn btn-primary btn-lg">hi</button>
-					</div>
-					<div class="col-lg-1 d-none d-lg-block order-lg-4">
-						<button type="button" class="btn btn-primary btn-lg">hi</button>
-					</div>
-					<div class="col-lg-1 d-none d-lg-block order-lg-5">
-						<button type="button" class="btn btn-primary btn-lg">hi</button>
-					</div>
-					<div class="col-lg-2 d-none d-lg-block  order-lg-last">ㅎㅇ</div>
-					<div class="col-2 d-block d-lg-none order-last">
-						<div class="row">
-							<div class="col-12">공백</div>
-							<div class="col-12">로그인</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                    <div class="col-12 top">
+                        <div class="row">
+                            <div class="col-8 col-lg-2 order-2 order-lg-first" id="logo">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <a href="/index.jsp">logo</a>
+
+                                    </div>
+                                    <div class="col-12 d-lg-none d-block">
+                                        <div class="row">
+                                            <div class="col-12" id="subsearch">
+                                                <i class="fa-solid fa-magnifying-glass" id="subsearchclick"
+                                                    style="display: inline;"></i>
+                                            </div>
+
+
+                                            <div class="col-12" id="subsearchback">
+                                                <form class="container-fluid" id="total_search"
+                                                    action="/allsearch.maincontroller" style="padding:0px;">
+                                                    <i class="fa-solid fa-arrow-left" id="searsubback"
+                                                        style="display: inline;"></i> <select name="select">
+                                                        <option value="제목">제목</option>
+                                                        <option value="내용">내용</option>
+                                                        <option value="작성자">작성자</option>
+                                                    </select> <input type="text" class="form-control"
+                                                        placeholder="통합검색창" aria-label="Username"
+                                                        aria-describedby="basic-addon1"
+                                                        style="width: 40%; padding: 0; display: inline;" name="title">
+                                                    <button type="button" class="btn btn-success"
+                                                        style="z-index: 0; background-color: rgb(60, 117, 121); padding: 0;">검색</button>
+                                                </form>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-4 d-none d-lg-block order-lg-1">여백</div>
+                            <div class="col-2 d-block d-lg-none order-1">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <i class="fa-solid fa-bars" id="hamberger"></i>
+                                            </div>
+
+                                            <!-- 네비햄버거 누를시 나오는거 -->
+                                            <div class="col-12 navisub">
+                                                <div class="row" style="text-align: right;">
+                                                    <div class="col-12 naviname" style="text-align: center;"
+                                                        onclick="javascript:checkLogin('/select.studyboard');">
+                                                        Study
+                                                    </div>
+                                                    <div class="col-12 naviname" style="text-align: center;"
+                                                        onclick="javascript:checkLogin('/selectBound.secondHand');">
+                                                        second
+                                                    </div>
+                                                    <div class="col-12 naviname" style="text-align: center;"
+                                                        onclick="javascript:checkLogin('/contentList.freeBoard');">
+                                                        free
+                                                    </div>
+                                                    <div class="col-12 naviname" style="text-align: center;"
+                                                        onclick="javascript:checkLogin('/contentList.freeBoard');">
+                                                        licence
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <c:choose>
+                                                <c:when test="${loggedID==null}">
+                                                    <div class="col-12">
+                                                        <a href="/member/joinForm.jsp"><i
+                                                                class="fa-solid fa-user-plus"></i></a>
+                                                        <!--로그인안됐을때-->
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="col-12">
+                                                        <a href="/myPage/mypageMainForm.jsp"><i
+                                                                class="fa-solid fa-user"></i></a>
+                                                        <!--로그인됐을때-->
+                                                    </div>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-1 d-none d-lg-block order-lg-2 naviname" style="text-align: center;"
+                                onclick="javascript:checkLogin('/select.studyboard');">
+                                Study
+                            </div>
+                            <div class="col-lg-1 d-none d-lg-block order-lg-3 naviname" style="text-align: center;"
+                                onclick="javascript:checkLogin('/selectBound.secondHand');">
+                                Sencond
+                            </div>
+                            <div class="col-lg-1 d-none d-lg-block order-lg-4 naviname" style="text-align: center;"
+                                onclick="javascript:checkLogin('/contentList.freeBoard');">
+                                Board
+                            </div>
+                            <div class="col-lg-1 d-none d-lg-block order-lg-5 naviname" style="text-align: center;"
+                                onclick="javascript:checkLogin('/자격증 게시판으로');">
+                                Licence
+                            </div>
+
+                            <div class="col-lg-2 d-none d-lg-block  order-lg-last">
+                                <div class="row">
+
+                                    <c:choose>
+                                        <c:when test="${loggedID==null}">
+                                            <div class="col-6 login">
+                                                <a href="/member/loginForm.jsp"><i
+                                                        class="fa-solid fa-right-to-bracket"></i></a>
+                                                <!--로그인안됐을때-->
+                                            </div>
+                                            <div class="col-6 signup">
+                                                <a href="/member/joinForm.jsp"><i class="fa-solid fa-user-plus"></i></a>
+                                                <!--로그인안됐을때-->
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="col-6 profile">
+                                                <a href="/myPage/mypageMainForm.jsp"><i
+                                                        class="fa-solid fa-user"></i></a>
+                                                <!--로그인됐을때-->
+                                            </div>
+                                            <div class="col-6 logout">
+                                                <a href="/logout.member"><i
+                                                        class="fa-solid fa-right-from-bracket"></i></a>
+                                                <!--로그인됐을때-->
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+
+                                </div>
+                            </div>
+
+                            <div class="col-2 d-block d-lg-none order-last">
+                                <div class="row">
+
+                                    <c:choose>
+                                        <c:when test="${loggedID==null}">
+                                            <div class="col-12">　</div>
+                                            <div class="col-12" style="text-align: right;">
+                                                <a href="/member/loginForm.jsp"><i
+                                                        class="fa-solid fa-right-to-bracket"></i></a>
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="col-12">${sessionScope.loggedID}회원</div>
+                                            <div class="col-12" style="text-align: right;">
+                                                <a href="/logout.member"><i
+                                                        class="fa-solid fa-right-from-bracket"></i></a>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 		<!-- 바디 -->
 
 		<div class="row">
@@ -351,7 +479,7 @@ height:30px;
 		<div class="row ReplyInputRow">
 
 			<div class="col ReplyInputCol">
-				<div id="nick_name">${sessionScope.loggedNickname}</div>
+				<div id="nick_name">${sessionScope.nickname}</div>
 				<input type="text" name="replyContent" id="replyContent"
 					placeholder="댓글을 입력해주세요"> <input type=button class="replyInsertBtn" value="등록"
 					id="replyInsert">
