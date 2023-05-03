@@ -358,7 +358,7 @@
                                 <a href="인기 있는 스터디">
                                     <div class="carousel-item active" data-bs-interval="5000">
                                         <img src="/image/study.jpg" class="w-100 d-block slide" alt="..."
-                                            style="opacity: 0.6;object-fit: cover;object-position: center -256px;;">
+                                            style="opacity: 0.6;object-fit: cover;object-position: center 0px;">
                                         <div class="carousel-caption d-none d-md-block"
                                             style="color:white; background-color:#00000080;">
                                             <h5>인기있는 스터디</h5>
@@ -368,7 +368,7 @@
                                 </a> <a href="등급 정보">
                                     <div class="carousel-item" data-bs-interval="5000">
                                         <img src="/image/booktrade.jpg" class="w-100 d-block  slide" alt="..."
-                                            style="opacity: 0.6;object-fit: cover;object-position: center -391px;">
+                                            style="opacity: 0.6;object-fit: cover;object-position: center 0px;">
                                         <div class="carousel-caption d-none d-md-block"style="color:white; background-color:#00000080;">
                                             <h5>저렴한 책 구매</h5>
                                             <p>중고거래로 저렴하게 책을 구매하세요.</p>
@@ -785,6 +785,14 @@
                 $('.slide').height($("#carouselExampleDark").width()*0.4)
                 var banner = $('.banner').width();
                 $('.navi').width(banner);
+                const bodySize = parseInt($("body").css("width"));
+                if(bodySize > 992){
+                	$(".slide").css("object-position", "center -185px");
+                }else if(bodySize < 992 &&bodySize >= 768){
+                	$(".slide").css("object-position", "center -152px");
+                }else if(bodySize < 768){
+                	$(".slide").css("object-position", "center -80px");
+                }
             });
 
             /* function loginpix(url){
@@ -800,7 +808,7 @@
 
             addEventListener("resize", function (event) {
                 const bodySize = parseInt($("body").css("width"));
-                if (bodySize > 992) {
+                if (bodySize >= 992) {
                     const navisub = $(".navisub");
                     const divsearch = $("#subsearchback")
                     const addsearch = $("#subsearch")
@@ -809,6 +817,11 @@
                     }
                     addsearch.css("display", "block")
                     divsearch.css("display", "none")
+                    $(".slide").css("object-position", "center -185px");
+                }else if(bodySize < 992 &&bodySize >= 768){
+                	$(".slide").css("object-position", "center -152px");
+                }else if(bodySize < 768){
+                	$(".slide").css("object-position", "center -80px");
                 }
             });
 
