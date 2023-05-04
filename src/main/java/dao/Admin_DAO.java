@@ -231,37 +231,41 @@ public class Admin_DAO {
 			}
 		}
 	}
-	public List<MembersDTO> user_search() throws Exception {
-		String sql = "select * from members";
-//		SQL바꿔줘야함
-		
-		try(
-				Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				){
-			
 
-			try (ResultSet rs = pstat.executeQuery()) {
-				ArrayList<MembersDTO> list = new ArrayList<>();
-				while(rs.next()) {
-				String myid = rs.getString("id");
-				String name = rs.getString("name");
-				String birth_date = rs.getString("birth_date");
-				String nickname = rs.getString("nickname");
-				String contact = rs.getString("contact");
-				String email = rs.getString("email");
-				String zipcode = rs.getString("zipcode");
-				String address1 = rs.getString("address1");
-				String address2 = rs.getString("address2");
+//	회원목록 서치 
+	
+	public List<MembersDTO> usersearch(String select, String title) throws Exception {
+		String sql = "";
+		if (select.equals("작성자")) {
+			sql = "select * from members where LOWER(id) like LOWER(?) order by id desc";
+		}
+		try (Connection con = this.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setString(1, "%" + title + "%");
+			try (ResultSet rs = pstmt.executeQuery()) {
+				List<MembersDTO>result = new ArrayList<>();
+					while(rs.next()) {
+					String myid = rs.getString("id");
+					String name = rs.getString("name");
+					String birth_date = rs.getString("birth_date");
+					String nickname = rs.getString("nickname");
+					String contact = rs.getString("contact");
+					String email = rs.getString("email");
+					String zipcode = rs.getString("zipcode");
+					String address1 = rs.getString("address1");
+					String address2 = rs.getString("address2");
 
-				Timestamp join_date = rs.getTimestamp("join_date");
-				MembersDTO mbdto = new MembersDTO(myid, null, name, birth_date, nickname, contact, email, zipcode,
-						address1, address2, join_date);
-				list.add(mbdto);
-				}
-				return list;
+					Timestamp join_date = rs.getTimestamp("join_date");
+					MembersDTO mbdto = new MembersDTO(myid, null, name, birth_date, nickname, contact, email, zipcode,
+							address1, address2, join_date);
+					result.add(mbdto);
+					}
+					return result;
 			}
 		}
 	}
+	
+	
+	
+	
 	
 }

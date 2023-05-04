@@ -161,7 +161,7 @@ right:19%;
 
 
 
-	<!-- 회원 목록 출력 시작 -->
+	<!--스터디  출력 시작 -->
 	<div class="container font_1">
 		<div class="row">
 			<h1>StudyBoard</h1>
@@ -230,13 +230,7 @@ right:19%;
                         <th class="col d-none d-md-block">조회수</th>
                         <th class="col col-md-2">작성일</th>
                         <th>버튼</th>
-                        <!-- <th class="col col-md-1 th_nul"></th> -->
                     </tr>
-
-
-
-                    <!-- 추후 이렇게 수정할거임 -->
-
                 </thead>
                 <tbody>
                     <c:forEach var="i" items="${sdto}">
@@ -315,6 +309,53 @@ right:19%;
                     <!-- 자유게시판 종료 -->
 <!-- 유저시작 -->
 
+
+<div class="container font_1">
+    <div class="row">
+        <h1>회원 목록</h1>
+        <div class="col">
+            <table
+                summary="This table shows how to create responsive tables using Datatables' extended functionality"
+                class="table table-bordered table-hover dt-responsive">
+                
+                <thead>
+                   <tr>
+							<th class="col col-md-1">ID</th>
+							<th class="col col-md-2">이름</th>
+							<th class="col col-md-2">생년월일</th>
+							<th class="col d-none d-md-block">이메일</th>
+							<th class="col col-md-2">가입일</th>
+							<th>버튼</th>
+						</tr>
+
+
+                    <!-- 추후 이렇게 수정할거임 -->
+
+                </thead>
+                <tbody>
+                    <c:forEach var="i" items="${mbdto}">
+                       <tr>
+								<td>${i.id}</td>
+								<td>${i.name}</td>
+								<td>${i.birth_date}</td>
+								<td class="col d-none d-md-block" style="height: 55px;">${i.email}</td>
+								<td>${i.join_date}</td>
+								<td><a
+									href="/userList_delete.adminBoard?id=${i.id}&cpage=${cpage}"><button
+											type="button" class="btn btn-outline-danger btn_del">현생</button></a></td>
+
+							</tr>
+                    </c:forEach>
+
+
+
+
+                </tbody>
+               
+            </table>
+        </div>
+    </div>
+</div>
 	<!-- 회원 정보 출력 종료  -->
 
 	<!-- 회원검색폼 시작-->

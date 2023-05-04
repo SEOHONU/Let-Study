@@ -185,7 +185,6 @@
 							<th class="col d-none d-md-block">이메일</th>
 							<th class="col col-md-2">가입일</th>
 							<th>버튼</th>
-							<!-- <th class="col col-md-1 th_nul"></th> -->
 						</tr>
 
 
