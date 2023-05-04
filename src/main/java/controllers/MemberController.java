@@ -67,6 +67,8 @@ public class MemberController extends HttpServlet {
 				String birthYear = request.getParameter("birthYear");
 				String birthMonth = request.getParameter("birthMonth");
 				String birthDay = request.getParameter("birthDay");
+				  String birthDayStr = String.format("%02d", birthDay);
+		            // 두자리가 아니면 앞에 0이 붙게함 
 				// 생년월일 값 받음
 
 				String nickname = request.getParameter("nickname");
@@ -78,8 +80,7 @@ public class MemberController extends HttpServlet {
 				Timestamp join_date = new Timestamp(System.currentTimeMillis());
 
 				// 회원가입일자 현재 시간으로 받음
-				MembersDTO dto = new MembersDTO(id, pw, name, birthYear + "" + birthMonth + "" + birthDay, nickname,
-						contact, email, zipcode, roadAddress, detailAddress, join_date);
+				MembersDTO dto = new MembersDTO (id, pw, name, birthYear+""+birthMonth+""+birthDayStr, nickname, contact, email, zipcode, roadAddress, detailAddress, join_date);
 				int result = dao.insertAll(dto);
 				// 회원가입하면 나타날 페이지 일단 메인페이지로 씀
 
@@ -90,7 +91,13 @@ public class MemberController extends HttpServlet {
 			} else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
-				
+	            
+	         } else if (cmd.equals("/myInfoSelect.member")) {
+	            String id = (String) request.getSession().getAttribute("loggedID");
+	            MembersDTO dto = dao.myInfoSelect(id);
+	            request.setAttribute("myInfo", dto);
+	            request.getRequestDispatcher("/member/memberInfo.jsp").forward(request, response);
+
 				// select 회원정보출력
 			} else if (cmd.equals("/myInfoSelect.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
@@ -110,8 +117,6 @@ public class MemberController extends HttpServlet {
 				String zipcode = request.getParameter("zipcode");
 				String roadAddress = request.getParameter("roadAddress");
 				String detailAddress = request.getParameter("detailAddress");
-				
-				request.getSession().setAttribute("loggedNickname", nickname);
 				MembersDTO dto = new MembersDTO(id, pw, name, birth_date, nickname, contact, email, zipcode,
 						roadAddress, detailAddress, null);
 				dao.update(dto);

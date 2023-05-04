@@ -318,7 +318,7 @@ h2 {
 		let regexPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
 		let regexName = /^[가-힣]{2,5}$/;
 		let regexBirthYear = /^[12][0-9]{3}$/;
-		let regexBirthDay = /^[0-9]$/;
+		let regexBirthDay = /^(0?[1-9]|[1-2][0-9]|3[0-1])$/; 
 		let regexNickname = /^[a-zA-Z0-9가-힣]{2,10}$/;
 		let regexContact = /^(01[016789])([1-9]\d{2,3})\d{4}$/;
 		let regexEmail = /[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+/;
