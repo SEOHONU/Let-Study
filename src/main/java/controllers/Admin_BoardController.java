@@ -43,8 +43,8 @@ public class Admin_BoardController extends HttpServlet {
 		try {
 
 			// 리스트 출력 시작
-			System.out.println("스터디 리스트 출력");
 			if (cmd.equals("/study_select.adminBoard")) {
+				System.out.println("스터디 리스트 출력");
 				request.setCharacterEncoding("utf8");
 				response.setContentType("text/html; charset=utf8");
 				int currentPage = Integer.parseInt(request.getParameter("cpage"));
@@ -227,10 +227,11 @@ public class Admin_BoardController extends HttpServlet {
 			} else if (cmd.equals("/usersearch.adminBoard")) {
 				System.out.println("유저 검색출력");
 				String select = request.getParameter("select");
-				String title = request.getParameter("title");
-				List<MembersDTO> mbdto = dao.usersearch(select, title);
-				request.setAttribute("mddto", mbdto);
-				request.getRequestDispatcher("/admin/admin_searchpage.jsp").forward(request, response);
+				String id = request.getParameter("id");
+				List<MembersDTO> mbdto = dao.usersearch(select, id);
+				request.setAttribute("mbdto", mbdto);
+				request.setAttribute("id", id);
+				request.getRequestDispatcher("/admin/admin_UserSearchpage.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

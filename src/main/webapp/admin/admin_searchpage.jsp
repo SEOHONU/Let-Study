@@ -285,7 +285,7 @@ right:19%;
                 <tbody>
                     <c:forEach var="i" items="${fdto}">
                         <tr>
-                            <td>${i.seq}</td>
+                            <td>no : ${i.seq}</td>
                             <td>${i.writer}</td>
                             <td><a href="/detail.freeBoard?seq=${i.seq}">${i.title}</a></td>
                             <td class="col d-none d-md-block" style="height: 55px;">${i.view_count}</td>
@@ -332,26 +332,6 @@ right:19%;
                     <!-- 추후 이렇게 수정할거임 -->
 
                 </thead>
-                <tbody>
-                    <c:forEach var="i" items="${mbdto}">
-                       <tr>
-								<td>${i.id}</td>
-								<td>${i.name}</td>
-								<td>${i.birth_date}</td>
-								<td class="col d-none d-md-block" style="height: 55px;">${i.email}</td>
-								<td>${i.join_date}</td>
-								<td><a
-									href="/userList_delete.adminBoard?id=${i.id}&cpage=${cpage}"><button
-											type="button" class="btn btn-outline-danger btn_del">현생</button></a></td>
-
-							</tr>
-                    </c:forEach>
-
-
-
-
-                </tbody>
-               
             </table>
         </div>
     </div>

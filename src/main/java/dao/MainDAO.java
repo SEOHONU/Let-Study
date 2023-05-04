@@ -48,6 +48,10 @@ public class MainDAO {
 		} else if (select.equals("작성자")) {
 			joongosql = "select * from secondHand where LOWER(writer) like LOWER(?) order by seq desc";
 		}
+		
+		
+		
+		
 		try (Connection con = this.getconnection(); PreparedStatement pstmt = con.prepareStatement(joongosql);) {
 			pstmt.setString(1, "%" + secondhand + "%");
 			try (ResultSet rs = pstmt.executeQuery()) {
@@ -79,6 +83,7 @@ public class MainDAO {
 		} else if (select.equals("작성자")) {
 			studysql = "select * from studyboard where LOWER(writer) like LOWER(?) order by seq desc";
 		}
+		
 		try (Connection con = this.getconnection(); PreparedStatement pstmt = con.prepareStatement(studysql);) {
 			pstmt.setString(1, "%" + study + "%");
 			try (ResultSet rs = pstmt.executeQuery()) {
