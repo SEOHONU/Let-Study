@@ -9,15 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>글쓰기</title>
-<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-	crossorigin="anonymous"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -32,6 +24,11 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
 	integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
+	 <script src="https://code.jquery.com/jquery-3.6.4.js"
+        integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+	 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+   
 
 <style>
 * {
@@ -76,25 +73,19 @@
 	height: 20px;
 }
 
-.note-insert {
-	display: none;
-}
-
 #content {
 	width: 100%;
 	height: 500px;
-	border:0.5px solid #C8C8C9;
+	border: 0.5px solid #C8C8C9;
 }
 
 .fileRow {
-height:45px;
+	height: 45px;
 }
-
 
 #file {
 	width: 100%;
 	float: right;
-
 }
 
 input[type=file]::file-selector-button {
@@ -103,13 +94,15 @@ input[type=file]::file-selector-button {
 	background-color: #408558;
 	border: none;
 	border-radius: 10px;
-    color : white;
-     cursor: pointer;
+	color: white;
+	cursor: pointer;
 }
 
-.fileCol{
-margin:0;
+#freeboard_img {
+	width:100%;
+	height: 200px;
 }
+
 </style>
 
 
@@ -119,178 +112,11 @@ margin:0;
 
 
 	<div class="container">
-		<!-- 헤더 -->
-		
-                <!-- 헤더 네비 -->
-                <div class="row navi">
+	<!-- 헤더 -->
 
-                    <div class="col-12 top">
-                        <div class="row">
-                            <div class="col-8 col-lg-2 order-2 order-lg-first" id="logo">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <a href="/index.jsp">logo</a>
-
-                                    </div>
-                                    <div class="col-12 d-lg-none d-block">
-                                        <div class="row">
-                                            <div class="col-12" id="subsearch">
-                                                <i class="fa-solid fa-magnifying-glass" id="subsearchclick"
-                                                    style="display: inline;"></i>
-                                            </div>
-
-
-                                            <div class="col-12" id="subsearchback">
-                                                <form class="container-fluid" id="total_search"
-                                                    action="/allsearch.maincontroller" style="padding:0px;">
-                                                    <i class="fa-solid fa-arrow-left" id="searsubback"
-                                                        style="display: inline;"></i> <select name="select">
-                                                        <option value="제목">제목</option>
-                                                        <option value="내용">내용</option>
-                                                        <option value="작성자">작성자</option>
-                                                    </select> <input type="text" class="form-control"
-                                                        placeholder="통합검색창" aria-label="Username"
-                                                        aria-describedby="basic-addon1"
-                                                        style="width: 40%; padding: 0; display: inline;" name="title">
-                                                    <button type="button" class="btn btn-success"
-                                                        style="z-index: 0; background-color: rgb(60, 117, 121); padding: 0;">검색</button>
-                                                </form>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-lg-4 d-none d-lg-block order-lg-1">여백</div>
-                            <div class="col-2 d-block d-lg-none order-1">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <i class="fa-solid fa-bars" id="hamberger"></i>
-                                            </div>
-
-                                            <!-- 네비햄버거 누를시 나오는거 -->
-                                            <div class="col-12 navisub">
-                                                <div class="row" style="text-align: right;">
-                                                    <div class="col-12 naviname" style="text-align: center;"
-                                                        onclick="javascript:checkLogin('/select.studyboard');">
-                                                        Study
-                                                    </div>
-                                                    <div class="col-12 naviname" style="text-align: center;"
-                                                        onclick="javascript:checkLogin('/selectBound.secondHand');">
-                                                        second
-                                                    </div>
-                                                    <div class="col-12 naviname" style="text-align: center;"
-                                                        onclick="javascript:checkLogin('/contentList.freeBoard');">
-                                                        free
-                                                    </div>
-                                                    <div class="col-12 naviname" style="text-align: center;"
-                                                        onclick="javascript:checkLogin('/contentList.freeBoard');">
-                                                        licence
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <c:choose>
-                                                <c:when test="${loggedID==null}">
-                                                    <div class="col-12">
-                                                        <a href="/member/joinForm.jsp"><i
-                                                                class="fa-solid fa-user-plus"></i></a>
-                                                        <!--로그인안됐을때-->
-                                                    </div>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <div class="col-12">
-                                                        <a href="/myPage/mypageMainForm.jsp"><i
-                                                                class="fa-solid fa-user"></i></a>
-                                                        <!--로그인됐을때-->
-                                                    </div>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-
-
-                            <div class="col-lg-1 d-none d-lg-block order-lg-2 naviname" style="text-align: center;"
-                                onclick="javascript:checkLogin('/select.studyboard');">
-                                Study
-                            </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-3 naviname" style="text-align: center;"
-                                onclick="javascript:checkLogin('/selectBound.secondHand');">
-                                Sencond
-                            </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-4 naviname" style="text-align: center;"
-                                onclick="javascript:checkLogin('/contentList.freeBoard');">
-                                Board
-                            </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-5 naviname" style="text-align: center;"
-                                onclick="javascript:checkLogin('/자격증 게시판으로');">
-                                Licence
-                            </div>
-
-                            <div class="col-lg-2 d-none d-lg-block  order-lg-last">
-                                <div class="row">
-
-                                    <c:choose>
-                                        <c:when test="${loggedID==null}">
-                                            <div class="col-6 login">
-                                                <a href="/member/loginForm.jsp"><i
-                                                        class="fa-solid fa-right-to-bracket"></i></a>
-                                                <!--로그인안됐을때-->
-                                            </div>
-                                            <div class="col-6 signup">
-                                                <a href="/member/joinForm.jsp"><i class="fa-solid fa-user-plus"></i></a>
-                                                <!--로그인안됐을때-->
-                                            </div>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <div class="col-6 profile">
-                                                <a href="/myPage/mypageMainForm.jsp"><i
-                                                        class="fa-solid fa-user"></i></a>
-                                                <!--로그인됐을때-->
-                                            </div>
-                                            <div class="col-6 logout">
-                                                <a href="/logout.member"><i
-                                                        class="fa-solid fa-right-from-bracket"></i></a>
-                                                <!--로그인됐을때-->
-                                            </div>
-                                        </c:otherwise>
-                                    </c:choose>
-
-                                </div>
-                            </div>
-
-                            <div class="col-2 d-block d-lg-none order-last">
-                                <div class="row">
-
-                                    <c:choose>
-                                        <c:when test="${loggedID==null}">
-                                            <div class="col-12">　</div>
-                                            <div class="col-12" style="text-align: right;">
-                                                <a href="/member/loginForm.jsp"><i
-                                                        class="fa-solid fa-right-to-bracket"></i></a>
-                                            </div>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <div class="col-12">${sessionScope.loggedID}회원</div>
-                                            <div class="col-12" style="text-align: right;">
-                                                <a href="/logout.member"><i
-                                                        class="fa-solid fa-right-from-bracket"></i></a>
-                                            </div>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+		<div class="row">
+			<div class="col-12 " id="freeboard_img">자유게시판 이미지</div>
+		</div>
 		<!-- 바디 -->
 		<div class="row margin"></div>
 		<div class="row writingHeader">
@@ -298,34 +124,23 @@ margin:0;
 			<hr style="width: 98%; margin-left: 10px;">
 
 		</div>
-		<form action="/write.freeBoard" method="post" enctype="multipart/form-data" id="insertForm">
+		<form action="/write.freeBoard" method="post" id="insertForm">
 			<div class="row titleRow">
 				<div class="col titleCol ">
 					<div id="title">
 						<input type="text" placeholder="제목을 입력해주세요" id="titleInput"
 							name="title">
-						<button type="submit" class="btn btn-success" >저장</button>
+						<button type="submit" class="btn btn-success">저장</button>
 					</div>
 				</div>
 			</div>
-            <div class="row" style="height:10px;">
-                    <hr style="width: 98%; margin-left: 10px;">
-               <!-- 파일 입력 -->
-            </div>
-			<div class="row fileRow">
-				<div class="col fileCol">
-					<input class="form-control form-control-sm" id="formFileSm" name="file" type="file" dir="rtl">
-				</div>
-
-
-
+			<div class="row" style="height: 10px;">
+				<hr style="width: 98%; margin-left: 10px;">
 			</div>
 			<div class="row content">
 				<div class="col-12" id="body">
-					<div contenteditable="true" id="content" name="content" placeholder="내용을 입력해주세요"></div>
-					<input type="hidden" name="realContent" id="realContent" >
+					 <textarea name="contents" id="summernote" class="summernote" required></textarea>
 				</div>
-
 			</div>
 		</form>
 
@@ -333,13 +148,49 @@ margin:0;
 	</div>
 
 	<script>
-	/* texteditable에 있는 값을 넘겨주기 위한 함수 */
-	$("#insertForm").on("submit", function(){
-		$("#realContent").val($("#content").html());
-	})
-	
-	
-    </script>
+	 $("#summernote").summernote({
+         height: 500, // 에디터 높이
+         minHeight: null, // 최소 높이
+         maxHeight: null, // 최대 높이
+         focus: true, // 에디터 로딩후 포커스를 맞출지 여부
+         lang: "ko-KR", // 한글 설정
+         placeholder: '자유롭게 글을 작성해주세요.', //placeholder 설정
+         toolbar: [
+             ['style', ['style']],
+             ['font', ['bold', 'underline', 'clear']],
+             ['fontname', ['fontname']],
+             ['color', ['color']],
+             ['para', ['ul', 'ol', 'paragraph']],
+             ['table', ['table']],
+             ['insert', ['picture']],
+             ['view', ['fullscreen', 'codeview', 'help']]
+         ],
+         callbacks: { //여기 부분이 이미지를 첨부하는 부분
+             onImageUpload: function (files) {
+                 for (let i = 0; i < files.length; i++) {
+                     uploadImg(files[i], this);
+                     console.log(this);
+                 }
+             }
+         }
+     });
+     function uploadImg(img, summerNote) {
+         data = new FormData();
+         data.append("img", img);
+         $.ajax({
+             data: data,
+             type: "POST",
+             url: "/insertFile.freeBoard",
+             contentType: false,
+             processData: false
+         }).done(function (url) {
+             img = JSON.parse(url);
+             console.log("url : " + url);
+             console.log("img.url : " + img.url);
+             $(summerNote).summernote("insertImage", img.url);
+         });
+     }
+	</script>
 
 </body>
 

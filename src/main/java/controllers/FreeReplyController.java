@@ -24,8 +24,6 @@ public class FreeReplyController extends HttpServlet {
 			try {
 				if(cmd.equals("/insert.reply")){
 					request.setAttribute("writer", writer);
-					
-					
 					int boardSeq = Integer.parseInt(request.getParameter("seq"));
 					String replyContent = request.getParameter("replyContent");
 					dao.insertReply(writer, replyContent, boardSeq);
@@ -45,6 +43,14 @@ public class FreeReplyController extends HttpServlet {
 					int reply_seq = Integer.parseInt(request.getParameter("replySeq"));
 					int result = dao.deleteBySeq(reply_seq);
 					response.sendRedirect("/detail.freeBoard?seq="+board_seq);
+				}else if(cmd.equals("/insertReReply.reply")) {
+					int reply_seq =  Integer.parseInt(request.getParameter("reply_seq"));
+					String re_replyContent = (String)request.getParameter("re_replyContent");
+					int result = dao.insertReReply(writer, re_replyContent,reply_seq ); 
+					if(result==1) {
+						System.out.println("업로드 성공");
+					}
+				
 				}
 
 
