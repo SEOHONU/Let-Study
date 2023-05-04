@@ -33,7 +33,9 @@ public class Profile_settingDAO {
 	public Profile_settingDTO select(String id) throws Exception {
 		String sql = "select * from profile where profile_id=?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			System.out.println(id);
 			pstat.setString(1, id);
+			
 			try (ResultSet rs = pstat.executeQuery();) {
 				rs.next();
 				String nickname = rs.getString("profile_nickname");
