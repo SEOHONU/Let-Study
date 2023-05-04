@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import commons.EncryptionUtils;
 import dao.MembersDAO;
+import dao.Profile_settingDAO;
 import dto.MembersDTO;
 
 @WebServlet("*.member")
@@ -33,40 +35,41 @@ public class MemberController extends HttpServlet {
 				String resp = g.toJson(result);
 				response.getWriter().append(resp);
 
-
 			} else if (cmd.equals("/login.member")) {
 
-				String id = request.getParameter("id"); 
-				String pw = request.getParameter("pw"); 
-				boolean result = MembersDAO.getInstance().isMember(id, pw); 
-				if(result) {
+				String id = request.getParameter("id");
+				String pw = request.getParameter("pw");
+				boolean result = MembersDAO.getInstance().isMember(id, pw);
+				if (result) {
 					// 로그인 성공시 ajax로 아이디 및 비번 전송
-					request.getSession().setAttribute("loggedID", id); 
+					request.getSession().setAttribute("loggedID", id);
 					System.out.println("아이디 세션에 가져오기 성공");
-					// 닉네임 세션에 가져옴 
-					String nickname = MembersDAO.getInstance().getNickname(id); 
+					// 닉네임 세션에 가져옴
+					String nickname = MembersDAO.getInstance().getNickname(id);
 					request.getSession().setAttribute("loggedNickname", nickname);
 					System.out.println("닉네임 세션에 가져오기 성공");
 					String resp = g.toJson(result);
-					
-					response.getWriter().append(resp); 
-				// 로그인 실패시 ajax로 아이디 및 비번 확인 문구 전송 
-				}else {
+
+					response.getWriter().append(resp);
+					// 로그인 실패시 ajax로 아이디 및 비번 확인 문구 전송
+				} else {
 					String resp = g.toJson(result);
 					System.out.println(result);
-					response.getWriter().append(resp); 
+					response.getWriter().append(resp);
 				}
-				
-				
-			}else if(cmd.equals("/joinMember.member")) {
-				String id = request.getParameter("id"); 
-				String pw = request.getParameter("pw"); 
-				String name = request.getParameter("name"); 
-				//         생년월일 값 받아야함 
-				String birthYear = request.getParameter("birthYear"); 
-				String birthMonth = request.getParameter("birthMonth"); 
-				String birthDay = request.getParameter("birthDay"); 
-				//생년월일 값 받음 
+
+				//
+			} else if (cmd.equals("/joinMember.member")) {
+				String id = request.getParameter("id");
+				String pw = request.getParameter("pw");
+				String name = request.getParameter("name");
+				// 생년월일 값 받아야함
+				String birthYear = request.getParameter("birthYear");
+				String birthMonth = request.getParameter("birthMonth");
+				String birthDay = request.getParameter("birthDay");
+				  String birthDayStr = String.format("%02d", birthDay);
+		            // 두자리가 아니면 앞에 0이 붙게함 
+				// 생년월일 값 받음
 
 				String nickname = request.getParameter("nickname");
 				String contact = request.getParameter("contact");
@@ -74,18 +77,28 @@ public class MemberController extends HttpServlet {
 				String zipcode = request.getParameter("zipcode");
 				String roadAddress = request.getParameter("roadAddress");
 				String detailAddress = request.getParameter("detailAddress");
-				Timestamp join_date = new Timestamp(System.currentTimeMillis()); 
+				Timestamp join_date = new Timestamp(System.currentTimeMillis());
 
-				// 회원가입일자 현재 시간으로 받음 
-				MembersDTO dto = new MembersDTO
-						(id, pw, name, birthYear+""+birthMonth+""+birthDay, nickname, contact, email, zipcode, roadAddress, detailAddress, join_date);
-				int result = dao.insertAll(dto); 
-				// 회원가입하면 나타날 페이지 일단 메인페이지로 씀 
-				response.sendRedirect("/index.jsp"); 
-				// 회원가입하면 나타날 페이지 써야함 
-			}else if (cmd.equals("/logout.member")) {
+				// 회원가입일자 현재 시간으로 받음
+				MembersDTO dto = new MembersDTO (id, pw, name, birthYear+""+birthMonth+""+birthDayStr, nickname, contact, email, zipcode, roadAddress, detailAddress, join_date);
+				int result = dao.insertAll(dto);
+				// 회원가입하면 나타날 페이지 일단 메인페이지로 씀
+
+				Profile_settingDAO.getInstance().profileInsertnull(id, nickname); // 마이페이지-프로필로 회원가입시 값 보냄
+				response.sendRedirect("/index.jsp");
+				// 회원가입하면 나타날 페이지 써야함
+
+			} else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
+	            
+	         } else if (cmd.equals("/myInfoSelect.member")) {
+	            String id = (String) request.getSession().getAttribute("loggedID");
+	            MembersDTO dto = dao.myInfoSelect(id);
+	            request.setAttribute("myInfo", dto);
+	            request.getRequestDispatcher("/member/memberInfo.jsp").forward(request, response);
+
+				// select 회원정보출력
 			} else if (cmd.equals("/myInfoSelect.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
 				MembersDTO dto = dao.myInfoSelect(id);
@@ -95,7 +108,7 @@ public class MemberController extends HttpServlet {
 				// update 회원정보수정
 			} else if (cmd.equals("/update.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
-				String pw = request.getParameter("pw");
+				String pw = EncryptionUtils.sha512(request.getParameter("pw"));
 				String name = request.getParameter("name");
 				String birth_date = request.getParameter("birth_date");
 				String nickname = request.getParameter("nickname");
@@ -108,11 +121,12 @@ public class MemberController extends HttpServlet {
 						roadAddress, detailAddress, null);
 				dao.update(dto);
 				response.sendRedirect("/myPage/mypageMainForm.jsp");
+
 				// delete 회원탈퇴
 			} else if (cmd.equals("/memberOut.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
 				dao.memberOut(id);
-				response.sendRedirect("/index.jsp");
+				response.sendRedirect("/logout.member");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
