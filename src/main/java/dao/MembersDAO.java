@@ -135,8 +135,7 @@ public class MembersDAO {
 	   public int update(MembersDTO dto) throws Exception {
 	      String sql = "update members set pw=?,nickname=?,contact=?,email=?,zipcode=?,address1=?,address2=? where id =?";
 	      try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-	         pstat.setString(1, dto.getPw());
-
+	         pstat.setString(1, EncryptionUtils.sha512(dto.getPw()));
 	         pstat.setString(2, dto.getNickname());
 	         pstat.setString(3, dto.getContact());
 	         pstat.setString(4, dto.getEmail());
