@@ -81,7 +81,7 @@ a {
 </style>
 
 <body>
-	<form action="/login.member" method="post">
+	<form >
 		<div class="container">
 			<div class="loginBox">
 				<h2>로그인</h2>
@@ -106,7 +106,7 @@ a {
 				<div class="errorMessage" id="errorMessage"></div>
 
 				<div class="btn">
-					<button type="submit" class="btn btn-primary" id="btnLogin">로그인</button>
+					<button type="button" class="btn btn-primary" id="btnLogin">로그인</button>
 					<button type="button" class="btn btn-light" id="btnJoin">회원가입</button>
 				</div>
 			</div>
@@ -155,6 +155,8 @@ a {
 				error : function(xhr, status, error) {
 					console.log(xhr);
 					console.log(status);
+					
+					
 					console.log(error);
 				}
 
