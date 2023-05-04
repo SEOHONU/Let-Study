@@ -71,7 +71,7 @@ h2 {
 }
 </style>
 <body>
-	<form method="post" action="/joinMember.member" id="joinMember">
+	<form method="post" action="/update.member" id="joinMember">
 		<div class="container">
 			<div class="row header">
 				<div class="col-12">
@@ -126,7 +126,7 @@ h2 {
 				<div class="col-6">
 					<label for="birthInput" class="form-label">생년월일*</label> <input
 						type="text" class="form-control" id="birthYear" name="birth_date"
-						value="${myInfo.birth_date}" readonly>
+						value="${myInfo.birth_date}">
 						</div>
 				<div class="col-3"></div>
 
@@ -136,7 +136,7 @@ h2 {
 				<div class="col-6">
 					<label for="nicknameInput">닉네임*</label> <input type="text"
 						class="form-control" id="nickname" name="nickname"
-						value="${myInfo.nickname}" maxlength="10" required>
+						value="${loggedNickname}" maxlength="10" required>
 				</div>
 				<div class="col-3"></div>
 			</div>

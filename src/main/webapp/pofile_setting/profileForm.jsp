@@ -128,27 +128,28 @@ div {
 
 						자기소개
 						<div id="introduce1">
-							<textarea name="introduceMyslef1" id="introduceMyslef1"
+							<textarea name="introduceMyslef1"
 							 readonly>${select.profile_introduce}</textarea>
 							
 							<br>
 						</div>
 						<div id="introduce2">
 							<span id="counter"> 0 자 / 180자</span><br>
-							<textarea placeholder="내용을 입력하세요.(최대 180자)" id="introduceMyslef2"
+							<textarea placeholder="내용을 입력하세요.(최대 180자)" 
 								name="introduceMyslef2" maxlength="180">${select.profile_introduce}</textarea>
 							<br>
 						</div>
 						SNS<br>
-						<div class="instgram">
-							<i class="fa-brands fa-instagram"></i> 
-							<input type="text" id="instagram" name ="instargram" size='50'
-								value="www.instargram/${select.profile_instargram }" readonly>
+						<div class="instagram">
+							<i class="fa-brands fa-instagram"></i>
+							<input type="text" name ="instagram" size='50'
+							value="${select.profile_instargram }" readonly>
 						</div>
+						
 						<div class="facebook">
 							<i class="fa-brands fa-facebook-f"></i> 
 							<input type="text" id="facebook" name="facebook" size='50'
-								value="www.facebook/${select.profile_facebook }" readonly>
+								value="${select.profile_facebook }" readonly>
 						</div>
 						<div class="url">
 							<i class="fa-brands fa-internet-explorer"></i> 
@@ -173,6 +174,7 @@ div {
 $(function(){
 	$("#okBtn").css("display","none");
 	$("#introduce2").css("display","none");
+	 
 	})
 	
 </script>
@@ -195,13 +197,11 @@ $(function(){
 	 $("#introduce1").css("display","none");
 	 $("#introduce2").css("display","");
 	 
+	 
 	 $("#updateBtn").css("display","none");
 	 $("#okBtn").css("display","");
    })
 
-   
-   
-     
     
     </script>
 

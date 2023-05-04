@@ -42,7 +42,7 @@ public class Profile_settingDAO {
 				String facebook = rs.getString("profile_facebook");
 				String url = rs.getString("profile_url");
 				Profile_settingDTO dto = new Profile_settingDTO(id, nickname, introduce, instargram, facebook, url);
-			
+
 				return dto;
 			}
 		}
@@ -64,18 +64,17 @@ public class Profile_settingDAO {
 		}
 	}
 
-	public int profileInsertnull(String id,String nickname) throws Exception {
+	// 회원가입시 id,nickname값 받아오기
+	public int profileInsertnull(String id, String nickname) throws Exception {
 		String sql = "insert into profile values (?,?,null,null,null,null)";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, id);
 			pstat.setString(2, nickname);
-			
+
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
-			
+
+		}
 	}
-	
-	}
-	
 }
