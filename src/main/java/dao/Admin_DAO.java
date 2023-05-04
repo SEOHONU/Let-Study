@@ -40,6 +40,7 @@ public class Admin_DAO {
 			pstat.setString(1, admin_id);
 			pstat.setString(2, admin_pw);
 			try (ResultSet rs = pstat.executeQuery();) {
+
 				return rs.next();
 			}
 		}
@@ -62,8 +63,8 @@ public class Admin_DAO {
 				double lat = rs.getDouble("lat");
 				double lng = rs.getDouble("lng");
 				String mapname = rs.getString("mapname");
-				result.add(new StudyBoardDTO
-						(seq, writer, title, contents, detailcontents, view_count, write_date, lat, lng, mapname));
+				result.add(new StudyBoardDTO(seq, writer, title, contents, detailcontents, view_count, write_date, lat,
+						lng, mapname));
 				System.out.println("AdminDAO 스터디리스트 출력");
 			}
 			return result;
@@ -93,174 +94,166 @@ public class Admin_DAO {
 		}
 
 	}
-	//자유게시판
-	public List<FreeBoardDTO> selectFreeBoard(int start, int end) throws Exception{
+
+	// 자유게시판
+	public List<FreeBoardDTO> selectFreeBoard(int start, int end) throws Exception {
 		String sql = "select * from (select board_seq,board_title,board_contents,board_writer,board_view_count,board_write_date,rank() over(order by board_seq desc) rank from board) where rank between ? and ?";
-		try(
-				Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				){
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setInt(1, start);
 			pstat.setInt(2, end);
-			try(
-					ResultSet rs = pstat.executeQuery();
-					){
+			try (ResultSet rs = pstat.executeQuery();) {
 				List<FreeBoardDTO> list = new ArrayList<>();
-				while(rs.next()) {
+				while (rs.next()) {
 					int seq = rs.getInt("board_seq");
 					String title = rs.getString("board_title");
 					String contents = rs.getString("board_contents");
 					String writer = rs.getString("board_writer");
 					int view_count = rs.getInt("board_view_count");
 					Timestamp write_date = rs.getTimestamp("board_write_date");
-					list.add(new FreeBoardDTO(seq,title,contents,writer,view_count,write_date));
+					list.add(new FreeBoardDTO(seq, title, contents, writer, view_count, write_date));
 				}
 				return list;
 			}
 		}
 	}
-	public int getRecordCount() throws Exception{
-		String sql = "select count(*) from board";
-		try(
-				Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				ResultSet rs = pstat.executeQuery();
-				){
-			rs.next();
-			return rs.getInt(1);
 
-		}
-	}public int getRecordCount_user() throws Exception{
-		String sql = "select count(*) from members";
-		try(
-				Connection con = this.getConnection();
+	public int getRecordCount() throws Exception {
+		String sql = "select count(*) from board";
+		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
-				ResultSet rs = pstat.executeQuery();
-				){
+				ResultSet rs = pstat.executeQuery();) {
 			rs.next();
 			return rs.getInt(1);
 
 		}
 	}
-	public List<String> getPageNavi(int recordCount, int currentPage) throws Exception{
+
+	public int getRecordCount_user() throws Exception {
+		String sql = "select count(*) from members";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();) {
+			rs.next();
+			return rs.getInt(1);
+
+		}
+	}
+
+	public List<String> getPageNavi(int recordCount, int currentPage) throws Exception {
 		int recordTotalCount = recordCount;
 		int recordCountPerPage = Settings.BOARD_RECORD_COUNT_PER_PAGE;
 		int naviCountPerPage = Settings.BOARD_NAVI_COUNT_PER_PAGE;
 
-		int pageTotalCount = (int)Math.ceil(recordTotalCount/(double)recordCountPerPage);
+		int pageTotalCount = (int) Math.ceil(recordTotalCount / (double) recordCountPerPage);
 
-		if(currentPage < 1) {
+		if (currentPage < 1) {
 			currentPage = 1;
-		}else if(currentPage > pageTotalCount) {
+		} else if (currentPage > pageTotalCount) {
 			currentPage = pageTotalCount;
 		}
-		int startNavi = ((currentPage-1)/naviCountPerPage)*naviCountPerPage+1;
-		int endNavi = startNavi + (naviCountPerPage-1);
-		if(endNavi > pageTotalCount) {
+		int startNavi = ((currentPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
+		int endNavi = startNavi + (naviCountPerPage - 1);
+		if (endNavi > pageTotalCount) {
 			endNavi = pageTotalCount;
 		}
 		boolean needPagePrev = true;
 		boolean needPageNext = true;
 		boolean needPrev = true;
 		boolean needNext = true;
-		if(startNavi == 1) {
+		if (startNavi == 1) {
 			needPagePrev = false;
 		}
-		if(endNavi == pageTotalCount) {
+		if (endNavi == pageTotalCount) {
 			needPageNext = false;
 		}
-		if(currentPage == pageTotalCount) {
+		if (currentPage == pageTotalCount) {
 			needNext = false;
 		}
-		if(currentPage == 1) {
+		if (currentPage == 1) {
 			needPrev = false;
 		}
 		List<String> list = new ArrayList<>();
-		if(needPagePrev) {
+		if (needPagePrev) {
 			list.add("<<");
 		}
-		if(needPrev) {
+		if (needPrev) {
 			list.add("<");
 		}
-		for(int i = startNavi;i<=endNavi;i++) {
+		for (int i = startNavi; i <= endNavi; i++) {
 
 			list.add(String.valueOf(i));
 
 		}
-		if(needNext) {
+		if (needNext) {
 			list.add(">");
 		}
-		if(needPageNext) {
+		if (needPageNext) {
 			list.add(">>");
 		}
 
 		return list;
 
 	}
+
 	public List<MembersDTO> user_list(int start, int end) throws Exception {
 		String sql = "select * from (SELECT id,pw,name,birth_date,nickname,contact,email,zipcode,address1,address2,join_date,rank() over(order by id desc) rank from members) where rank between ? and ?";
 //		SQL바꿔줘야함
-		
-		try(
-				Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				){
+
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setInt(1, start);
 			pstat.setInt(2, end);
 
 			try (ResultSet rs = pstat.executeQuery()) {
 				ArrayList<MembersDTO> list = new ArrayList<>();
-				while(rs.next()) {
-				String myid = rs.getString("id");
-				String name = rs.getString("name");
-				String birth_date = rs.getString("birth_date");
-				String nickname = rs.getString("nickname");
-				String contact = rs.getString("contact");
-				String email = rs.getString("email");
-				String zipcode = rs.getString("zipcode");
-				String address1 = rs.getString("address1");
-				String address2 = rs.getString("address2");
+				while (rs.next()) {
+					String myid = rs.getString("id");
+					String name = rs.getString("name");
+					String birth_date = rs.getString("birth_date");
+					String nickname = rs.getString("nickname");
+					String contact = rs.getString("contact");
+					String email = rs.getString("email");
+					String zipcode = rs.getString("zipcode");
+					String address1 = rs.getString("address1");
+					String address2 = rs.getString("address2");
 
-				Timestamp join_date = rs.getTimestamp("join_date");
-				MembersDTO mbdto = new MembersDTO(myid, null, name, birth_date, nickname, contact, email, zipcode,
-						address1, address2, join_date);
-				list.add(mbdto);
+					Timestamp join_date = rs.getTimestamp("join_date");
+					MembersDTO mbdto = new MembersDTO(myid, null, name, birth_date, nickname, contact, email, zipcode,
+							address1, address2, join_date);
+					list.add(mbdto);
 				}
 				return list;
 			}
 		}
 	}
-	public List<MembersDTO> user_search() throws Exception {
-		String sql = "select * from members";
-//		SQL바꿔줘야함
+
+//	회원목록 서치 
+
+	public List<MembersDTO> usersearch(String select, String id) throws Exception {
+		String sql = "select * from members where LOWER(id) like LOWER(?) order by id desc";
+		System.out.println(sql);
+			try (Connection con = this.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+				pstmt.setString(1, "%" + id + "%");
+				try (ResultSet rs = pstmt.executeQuery()) {
+					List<MembersDTO> result = new ArrayList<>();
+					while (rs.next()) {
+						String myid = rs.getString("id");
+						String name = rs.getString("name");
+						String birth_date = rs.getString("birth_date");
+						String nickname = rs.getString("nickname");
+						String contact = rs.getString("contact");
+						String email = rs.getString("email");
+						String zipcode = rs.getString("zipcode");
+						String address1 = rs.getString("address1");
+						String address2 = rs.getString("address2");
+						Timestamp join_date = rs.getTimestamp("join_date");
+						MembersDTO mbdto = new MembersDTO(myid, null, name, birth_date, nickname, contact, email,
+								zipcode, address1, address2, join_date);
+						result.add(mbdto);
+					}
+					return result;
+				}
+			}
 		
-		try(
-				Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				){
-			
-
-			try (ResultSet rs = pstat.executeQuery()) {
-				ArrayList<MembersDTO> list = new ArrayList<>();
-				while(rs.next()) {
-				String myid = rs.getString("id");
-				String name = rs.getString("name");
-				String birth_date = rs.getString("birth_date");
-				String nickname = rs.getString("nickname");
-				String contact = rs.getString("contact");
-				String email = rs.getString("email");
-				String zipcode = rs.getString("zipcode");
-				String address1 = rs.getString("address1");
-				String address2 = rs.getString("address2");
-
-				Timestamp join_date = rs.getTimestamp("join_date");
-				MembersDTO mbdto = new MembersDTO(myid, null, name, birth_date, nickname, contact, email, zipcode,
-						address1, address2, join_date);
-				list.add(mbdto);
-				}
-				return list;
-			}
-		}
 	}
-	
+
 }
