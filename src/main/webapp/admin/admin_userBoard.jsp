@@ -150,7 +150,7 @@
 					<li class="nav-item"><a class="nav-link"
 						href="/secondHand.adminBoard?cpage=1">중고책게시판 관리</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/admin_userBoard.jsp">회원관리</a></li>
+						href="/user_Board.adminBoard">회원관리</a></li>
 					<!--<li class="nav-item"><a class="nav-link disabled" href="#"
               tabindex="-1" aria-disabled="true">배너관리</a></li>-->
 
@@ -185,7 +185,6 @@
 							<th class="col d-none d-md-block">이메일</th>
 							<th class="col col-md-2">가입일</th>
 							<th>버튼</th>
-							<!-- <th class="col col-md-1 th_nul"></th> -->
 						</tr>
 
 
@@ -232,17 +231,15 @@
 	 <div class="col-lg-12" style="text-align: center;">
 
             <nav class="navbar navbar-light bg-light ">
-                <form class="container d-flex justify-content-center w-75 p-3" action="/allsearch.adminBoard">
+                <form class="container d-flex justify-content-center w-75 p-3" action="/usersearch.adminBoard">
                     <div class="input-group">
                         <select name="select">
-                            <option value="제목">제목</option>
-                            <option value="내용">내용</option>
-                            <option value="작성자">작성자</option>
+                            <option value="제목">아이디</option>
                         </select>
                         &nbsp;
                         <input type="text" class="form-control"id="input_tag" aria-label="Sizing example input"
-                         aria-describedby="inputGroup-sizing-default"placeholder="통합검색창" name="title"
-                          value="${title}">
+                         aria-describedby="inputGroup-sizing-default"placeholder="통합검색창" name="id"
+                          value="${id}">
                    
                         &nbsp;
                         <button type="submit" class="btn btn-success"
@@ -286,29 +283,6 @@
 				</c:forEach>
 			</ul>
 		</nav>
-
-
-
-		<nav>
-			<ul class="pagination">
-				<!-- JavaScript 코드로 페이지 내비게이션 생성 -->
-			</ul>
-		</nav>
 	</div>
-	<!-- 하단 네비 종료 -->
-
-
-	<!-- 
-삭제 버튼 누를때 탈퇴시키겠습니까? 
-안내나오게해야함 
-
-
-
-
-          -->
-
-
-
-
 </body>
 </html>

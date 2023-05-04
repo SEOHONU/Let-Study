@@ -141,7 +141,6 @@ a {
 		$("#btnLogin").on("click", function() {
 			let id = $("#id").val();
 			let pw = $("#pw").val();
-
 			$.ajax({
 				url : "/login.member",
 				type : "post",

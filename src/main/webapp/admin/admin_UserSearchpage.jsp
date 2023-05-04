@@ -112,11 +112,6 @@
 
 </head>
 <body>
-	<!-- <div class="col header_topLine col-lg-12">
-        관리자 페이지입니다. 
-        <button type="button" class="btn btn-outline-dark btn_header admin_top_btn">수정하기</button>
-        <button type="button" class="btn btn-outline-dark btn_header admin_top_btn">로그아웃</button>
-        </div> -->
 
 	<div class="col header_topLine col-lg-12">
 		관리자 페이지입니다.
@@ -167,7 +162,7 @@
 	<!-- 회원 목록 출력 시작 -->
 	<div class="container font_1">
 		<div class="row">
-			<h1>왁자지껄 자유게시판</h1>
+			<h1>유저 검색창입니다.</h1>
 			<div class="col">
 				<table
 					summary="This table shows how to create responsive tables using Datatables' extended functionality"
@@ -179,13 +174,12 @@
 					</caption>
 					<thead>
 						<tr>
-							<th class="col col-md-1">no.</th>
-							<th class="col col-md-2">작성자</th>
-							<th class="col col-md-2">제목</th>
-							<th class="col d-none d-md-block">조회수</th>
-							<th class="col col-md-2">작성일</th>
+							<th class="col col-md-1">ID</th>
+							<th class="col col-md-2">이름</th>
+							<th class="col col-md-2">생년월일</th>
+							<th class="col d-none d-md-block">이메일</th>
+							<th class="col col-md-2">가입일</th>
 							<th>버튼</th>
-							<!-- <th class="col col-md-1 th_nul"></th> -->
 						</tr>
 
 
@@ -194,24 +188,18 @@
 
 					</thead>
 					<tbody>
-						<c:forEach var="i" items="${list}">
+						<c:forEach var="i" items="${mbdto}">
 							<tr>
-								<td>${i.seq}</td>
-								<td>${i.writer}</td>
-								<td><a href="/detail.freeBoard?seq=${i.seq}">${i.title}</a></td>
-								
-								<td class="col d-none d-md-block" style="height: 55px;">${i.view_count}</td>
-								<td>${i.write_date}</td>
+								<td>${i.id}</td>
+								<td>${i.name}</td>
+								<td>${i.birth_date}</td>
+								<td class="col d-none d-md-block" style="height: 55px;">${i.email}</td>
+								<td>${i.join_date}</td>
 								<td><a
-									href="/freeboard_Delete.adminBoard?seq=${i.seq}&cpage=${cpage}"><button
-											type="button" class="btn btn-outline-danger btn_del">삭제</button></a></td>
-
+									href="/userList_delete.adminBoard?id=${i.id}&cpage=${cpage}"><button
+											type="button" class="btn btn-outline-danger btn_del">현생</button></a></td>
 							</tr>
 						</c:forEach>
-
-
-
-
 					</tbody>
 					<tfoot>
 						<tr>
@@ -230,22 +218,18 @@
 	<!-- 회원 정보 출력 종료  -->
 
 	<!-- 회원검색폼 시작-->
- <div class="col-lg-12" style="text-align: center;">
+	 <div class="col-lg-12" style="text-align: center;">
 
             <nav class="navbar navbar-light bg-light ">
-                <form class="container d-flex justify-content-center w-75 p-3" action="/allsearch.adminBoard">
+                <form class="container d-flex justify-content-center w-75 p-3" action="/usersearch.adminBoard">
                     <div class="input-group">
                         <select name="select">
-                            <option value="제목">제목</option>
-                            <option value="내용">내용</option>
-                            <option value="작성자">작성자</option>
                             <option value="아이디">아이디</option>
-                            
                         </select>
                         &nbsp;
                         <input type="text" class="form-control"id="input_tag" aria-label="Sizing example input"
-                         aria-describedby="inputGroup-sizing-default"placeholder="통합검색창" name="title"
-                          value="${title}">
+                         aria-describedby="inputGroup-sizing-default"placeholder="통합검색창" name="id"
+                          value="${id}">
                    
                         &nbsp;
                         <button type="submit" class="btn btn-success"
@@ -258,49 +242,37 @@
 
 		<!-- 하단 네비 시작 -->
 
-					<nav aria-label="Page navigation example ">
-						<ul class="pagination d-flex justify-content-center">
-							<c:forEach var="i" items="${navi}">
-								<c:choose>
-									<c:when test="${i eq '<<'}">
-										<li class="page-item"><a class="page-link" href="/freeBoard.adminBoard?cpage=${start}">${i}</a></li>
-									</c:when>
-									<c:when test="${i eq '<'}">
-										<li class="page-item"><a class="page-link" href="/freeBoard.adminBoard?cpage=${cpage-1}">${i}</a></li>
-									</c:when>
-									<c:when test="${i eq '>'}">
-										<li class="page-item"><a class="page-link" href="/freeBoard.adminBoard?cpage=${cpage+1}">${i}</a></li>
-									</c:when>
-									<c:when test="${i eq '>>'}">
-										<li class="page-item"><a class="page-link" href="/freeBoard.adminBoard?cpage=${end}">${i}</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link" href="/freeBoard.adminBoard?cpage=${i}">${i}</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-						</ul>
-					</nav>
 
 
 
-			
-
+		<nav aria-label="Page navigation example" align="center">
+			<ul class="pagination d-flex justify-content-center">
+				<c:forEach var="i" items="${navi}">
+					<c:choose>
+						<c:when test="${i eq '<<'}">
+							<li class="page-item"><a class="page-link"
+								href="/user_Board.adminBoard?cpage=${start}">${i}</a></li>
+						</c:when>
+						<c:when test="${i eq '<'}">
+							<li class="page-item"><a class="page-link"
+								href="/user_Board.adminBoard?cpage=${cpage-1}">${i}</a></li>
+						</c:when>
+						<c:when test="${i eq '>'}">
+							<li class="page-item"><a class="page-link"
+								href="/user_Board.adminBoard?cpage=${cpage+1}">${i}</a></li>
+						</c:when>
+						<c:when test="${i eq '>>'}">
+							<li class="page-item"><a class="page-link"
+								href="/user_Board.adminBoard?cpage=${end}">${i}</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link"
+								href="/user_Board.adminBoard?cpage=${i}">${i}</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</ul>
+		</nav>
 	</div>
-	<!-- 하단 네비 종료 -->
-
-
-	<!-- 
-삭제 버튼 누를때 탈퇴시키겠습니까? 
-안내나오게해야함 
-
-
-
-
-          -->
-
-
-
-
 </body>
 </html>
