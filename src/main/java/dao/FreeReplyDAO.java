@@ -99,8 +99,18 @@ public class FreeReplyDAO {
 			return result;
 		}
 	}
-
-	
-	
-	
+	//대댓글 입력
+	public int insertReReply(String writer, String contents, int reply_seq) throws Exception{
+		String sql = "insert into fr_re_reply values(fr_re_reply_seq.nextval,?,?,?,sysdate)";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, writer);
+			pstat.setString(2, contents);
+			pstat.setInt(3, reply_seq);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
 }
