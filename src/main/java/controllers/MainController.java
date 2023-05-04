@@ -58,6 +58,7 @@ public class MainController extends HttpServlet {
 			request.setAttribute("sdto", sdto);
 			request.setAttribute("stdto", stdto);
 			request.setAttribute("fdto", fdto);
+			request.setAttribute("select", select);
 			request.setAttribute("title", title);
 			request.setAttribute("cpage", currentPage);
 			request.getRequestDispatcher("/board/allSearch.jsp").forward(request, response);

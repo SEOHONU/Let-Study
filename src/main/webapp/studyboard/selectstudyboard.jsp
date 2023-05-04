@@ -25,20 +25,6 @@ div {
 	border: 1px solid black;
 }
 
-.d-block {
-	height: 400px;
-}
-
-.header {
-	position: relative;
-}
-
-.navi {
-	position: sticky;
-	top: 0;
-	background-color: white;
-	z-index: 999;
-}
 
 .inbox{
 	padding-left: 3%;
