@@ -351,4 +351,22 @@ public class SecondHandDAO {
 			return list;
 		}
 	}
+	// 마이페이지 내게시글만 뽑아오기
+	public List<SecondHandDTO> mySecondHandBoard(String id) throws Exception {
+		String sql = "select seq, title from secondHand where writer=?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, id);
+			try (ResultSet rs = pstat.executeQuery();) {
+
+				List<SecondHandDTO> list = new ArrayList<>();
+				while (rs.next()) {
+					int seq = rs.getInt("seq");
+					String title = rs.getString("title");
+					list.add(new SecondHandDTO(seq, title, null, id, null, 0, 0, 0));
+					System.out.println("중고DAO 출력");
+				}
+				return list;
+			}
+		}
+	}
 }
