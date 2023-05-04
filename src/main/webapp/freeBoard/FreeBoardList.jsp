@@ -133,7 +133,7 @@ float:left;
 </head>
 
 <body>
-            <div class="container-fluid">
+            <div class="container">
                 <!-- 헤더 네비 -->
                 <c:import url="/board/topMenu.jsp"></c:import>
 		<!-- 바디 -->
@@ -176,7 +176,7 @@ float:left;
 				<tr class="row">
 					<th class="col-4 col-md-1 center">순번</th>
 					<th class="col-8 col-md-5 center">제목</th>
-					<th class="d-none d-md-block col-md-3 center">작성자</th>
+					<th class="d-none d-md-block col-md-3 center">닉네임</th>
 					<th class="d-none d-md-block col-md-2 center">작성일</th>
 					<th class="d-none d-md-block col-md-1 center">조회수</th>
 				</tr>
