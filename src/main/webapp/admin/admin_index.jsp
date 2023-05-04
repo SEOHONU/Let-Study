@@ -45,7 +45,7 @@
 
 
 	<div class="container top_nul1">
-		<h1>관리자 로그인</h1>
+		<img style="width: 100%;" src="https://img.khan.co.kr/news/2014/01/18/2014011801002854400208051.jpg" alt="">
 	</div>
 	<section class="vh-100">
 		<div class="container h-custom">
@@ -53,7 +53,7 @@
 				class="row d-flex justify-content-center align-items-center h-100">
 				<div class="col-md-9 col-lg-6 col-xl-5">
 					<img
-						src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+						src=""
 						class="img-fluid" alt="Sample image">
 				</div>
 				<div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
@@ -63,8 +63,8 @@
 						<div class="form-outline mb-4">
 							<input type="text" id="form3Example3"
 								class="form-control form-control-lg" name="admin_id"
-								placeholder="Enter a valid email address" /> <label
-								class="form-label" for="form3Example3">Email address</label>
+								placeholder="Enter id" /> <label
+								class="form-label" for="form3Example3">Admin ID</label>
 						</div>
 
 						<!-- Password input -->
@@ -72,7 +72,7 @@
 							<input type="password" id="form3Example4"
 								class="form-control form-control-lg" name="admin_pw"
 								placeholder="Enter password" /> <label class="form-label"
-								for="form3Example4">Password</label>
+								for="form3Example4">Admin Password</label>
 						</div>
 
 						<div class="d-flex justify-content-between align-items-center">

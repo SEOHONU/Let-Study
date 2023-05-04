@@ -50,7 +50,7 @@ public class MemberController extends HttpServlet {
 					String resp = g.toJson(result);
 					
 					response.getWriter().append(resp); 
-				// 로그인 실패시 ajax로 아이디 및 비번 확인 문구 전송 
+				// 로그인 실패시 ajax로 아이디 및 비번 확인 문구 전송
 				}else {
 					String resp = g.toJson(result);
 					System.out.println(result);
