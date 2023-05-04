@@ -2,11 +2,7 @@ package controllers;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,9 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import commons.EncryptionUtils;
 import dao.FreeBoardDAO;
 import dao.FreeFileDAO;
 import dao.FreeReplyDAO;
@@ -25,7 +24,6 @@ import dto.FreeBoardAndMemberDTO;
 import dto.FreeBoardDTO;
 import dto.FreeFileDTO;
 import dto.ReplyAndMemberDTO;
-import dto.SecondHandDTO;
 import statics.Settings;
 
 @WebServlet("*.freeBoard")
@@ -43,35 +41,13 @@ public class FreeBoardController extends HttpServlet {
 		try {
 			//자유게시판 글쓰기
 			if(cmd.equals("/write.freeBoard")) {
-				
-				String realPath = request.getServletContext().getRealPath("freeBoardUpload");
-				System.out.println("다운로드 파일 경로 : " + realPath);
-				
-				File realPathFile = new File(realPath);
-				if(!realPathFile.exists()) {
-					realPathFile.mkdir();
-				}
-				
-				MultipartRequest multi = new MultipartRequest(request,realPath,1024*1024*10,"utf8",new DefaultFileRenamePolicy());				
-				String title = multi.getParameter("title");
-				String content= multi.getParameter("realContent");			
-				System.out.println(writer);
-				int result = dao.insert(writer, title, content);
-
-				String oriName = multi.getOriginalFileName("file");
-				String sysName = multi.getFilesystemName("file");
-				FreeFileDTO dto = new FreeFileDTO(0,oriName, sysName, 0);
-				
-				if(oriName==null) {
-					System.out.println("파일이 없어서 바로 넘어감");
-					response.sendRedirect("/contentList.freeBoard");
-				}else {
-					System.out.println("파일이 있어서 dao거쳐서 넘어감");
-					FreeFileDAO fileDao = FreeFileDAO.getInstance();
-					int result2 = fileDao.insert(dto);
-					response.sendRedirect("/contentList.freeBoard");
-				}
-				
+				String title = request.getParameter("title");
+				String contents= request.getParameter("contents");
+				title = EncryptionUtils.AntiXSS(title);
+				contents = EncryptionUtils.AntiXSS(contents);
+			
+				int result = dao.insert(writer, title, contents);
+				response.sendRedirect("/contentList.freeBoard");
 			// 자유게시판 목록 리스트 보기			
 			}else if(cmd.equals("/contentList.freeBoard")) {
 				int currentPage = request.getParameter("cpage") == null ? 1 : Integer.parseInt(request.getParameter("cpage"));
@@ -108,48 +84,21 @@ public class FreeBoardController extends HttpServlet {
 				String nick = dao.getNicknameBySeq(seq);
 				System.out.println(nick);
 				request.setAttribute("nickname", nick);
-				// 파일 출력
-				FreeFileDAO daoF = FreeFileDAO.getInstance();
 				
-				if(daoF.findFile(seq)) {
-					FreeFileDTO fileResult = daoF.selectByP_seq(seq);
-					request.setAttribute("fileResult", fileResult);
-				}
 				// 댓글 출력
 				FreeReplyDAO daoRP = FreeReplyDAO.getInstance();
 				List<ReplyAndMemberDTO> replyResult = daoRP.selectReply(seq);
 				request.setAttribute("replyResult", replyResult);
 				request.getRequestDispatcher("/freeBoard/FreeBoardContents.jsp").forward(request, response);
 				
+				
 				// 게시글 업데이트
 			}else if(cmd.equals("/update.freeBoard")) {
-				String realPath = request.getServletContext().getRealPath("freeBoardUpload");
-				System.out.println("다운로드 파일 경로 : " + realPath);
-				File realPathFile = new File(realPath);
-				if(!realPathFile.exists()) {
-					realPathFile.mkdir();
-				}
-				
-				MultipartRequest multi = new MultipartRequest(request,realPath,1024*1024*10,"utf8",new DefaultFileRenamePolicy());				
-				
-				int seq = Integer.parseInt(multi.getParameter("seq"));
-				String title = multi.getParameter("title");
-				String content= multi.getParameter("realContent");			
-				
-				int result = dao.update(seq, title, content);
-				String oriName = multi.getOriginalFileName("file");
-				String sysName = multi.getFilesystemName("file");
-				FreeFileDTO dto = new FreeFileDTO(0,oriName, sysName, seq);
-				
-				if(oriName==null) {
-					System.out.println("!!!!!!파일이 없어서 바로 넘어감!!!!!");
-					response.sendRedirect("detail.freeBoard?seq="+seq);
-				}else {
-					System.out.println("!!!!!파일이 있어서 dao거쳐서 넘어감!!!!!");
-					FreeFileDAO fileDao = FreeFileDAO.getInstance();
-					int result2 = fileDao.insert(dto);
-					response.sendRedirect("detail.freeBoard?seq="+seq);
-				}
+				int seq = Integer.parseInt(request.getParameter("seq"));
+				String title = request.getParameter("title");
+				String contents= request.getParameter("contents");			
+				int result = dao.update(seq, title, contents);	
+				response.sendRedirect("detail.freeBoard?seq="+seq);
 				
 			// 게시글 삭제
 			}else if(cmd.equals("/delete.freeBoard")){
@@ -178,6 +127,43 @@ public class FreeBoardController extends HttpServlet {
 				request.setAttribute("start", first);
 				request.setAttribute("end", last);
 				request.getRequestDispatcher("/freeBoard/FreeBoardList.jsp").forward(request, response);
+				}
+			
+			
+			
+			else if(cmd.equals("/insertFile.freeBoard")) {
+					JsonObject jo = new JsonObject();
+					Gson g = new Gson();
+					System.out.println("insert.summer 진입");
+					String targetPath = request.getServletContext().getRealPath("freeImg");
+					System.out.println("realPath : "+targetPath);
+					File targetFolder = new File(targetPath);
+					if(!targetFolder.exists()) {
+						targetFolder.mkdir();
+						System.out.println("폴더 생성");
+					}
+					System.out.println("경로 설정");
+					MultipartRequest multi = new MultipartRequest
+							(request, targetPath, 1024*1024*10, "utf8", new DefaultFileRenamePolicy());
+					System.out.println("realPath - 파일 업로드 완료");
+					Enumeration<String> names = multi.getFileNames();
+					System.out.println("파일이름 받아옴 : "+names);
+					while(names.hasMoreElements()) {
+						System.out.println("while문 진입");
+						String name = names.nextElement();
+						System.out.println("name : "+name);
+						if(multi.getFile(name) != null) {
+							String oriName = multi.getOriginalFileName(name);
+							System.out.println("oriName : "+oriName);
+							String sysName = multi.getFilesystemName(name);
+							System.out.println("sysName : "+sysName);
+							String url = "/img/"+sysName;
+							System.out.println("url : "+url);
+							jo.addProperty("url", url);
+						}
+					}
+					System.out.println(jo.toString());
+					response.getWriter().append(jo.toString());
 				}
 		}catch(Exception e) {
 			e.printStackTrace();
