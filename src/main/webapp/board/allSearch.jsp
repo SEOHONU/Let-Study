@@ -574,15 +574,15 @@
 					// LatLngBounds 객체에 좌표를 추가합니다
 					bounds.extend(placePosition);
 
-					// 마커와 검색결과 항목에 mouseover 했을때
+					// 마커와 검색결과 항목에 onclick 했을때
 					// 해당 장소에 인포윈도우에 장소명을 표시합니다
-					// mouseout 했을 때는 인포윈도우를 닫습니다
+					// onclick 했을 때는 인포윈도우를 닫습니다
 					(function (marker, title) {
-						kakao.maps.event.addListener(marker, 'mouseover', function () {
+						kakao.maps.event.addListener(marker, 'onclick', function () {
 							displayInfowindow(marker, title);
 						});
 
-						kakao.maps.event.addListener(marker, 'mouseout', function () {
+						kakao.maps.event.addListener(marker, 'onclick', function () {
 							infowindow.close();
 						});
 

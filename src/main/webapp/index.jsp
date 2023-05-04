@@ -44,6 +44,11 @@
                     padding: 0px;
                     position: relative;
                 }
+                
+                .carousel-inner{
+                border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+                }
 
                 .cir {
                     position: relative;
@@ -687,6 +692,7 @@
                 $('.slide').height($("#carouselExampleDark").width()*0.4)
                 var banner = $('.banner').width();
                 $('.navi').width(banner);
+                
             });
 
             var hamberger = document.querySelector("#hamberger");
