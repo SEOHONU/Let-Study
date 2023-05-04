@@ -324,19 +324,21 @@
 														<div class="col-3">
 															<a href="/inner.studyboard?seq=${study.seq}&cpage=${cpage}">
 																<div class="card">
-																	<img src="/image/다운로드.jpg" class="card-img-top" alt="...">
+																	<img src="/image/다운로드.jpg" class="card-img-top"
+																		alt="...">
 																	<div class="card-body" style="text-align: center;">
 																		<h5 class="card-title">${study.title}</h5>
 																		<p class="card-text">${study.contents}</p>
 																		<a href="/inner.studyboard?seq=${study.seq}&cpage=${cpage}"
-																			class="btn btn-primary" style="padding:0px; font-size:small; background-color:black; border:0px">참여</a>
+																			class="btn btn-primary"
+																			style="padding:0px; font-size:small; background-color:black; border:0px">참여</a>
 																	</div>
 																</div>
 															</a>
 														</div>
 													</c:forEach>
 													<div class="col-12" style="text-align: right;">
-														<a href="스터디 관련검색 최신순으로 정리되어 있게 전부 보여주는거"> 더보기 </a>
+														<a href="스터디"> 더보기 </a>
 													</div>
 												</c:when>
 												<c:otherwise>
@@ -382,7 +384,23 @@
 														</div>
 													</c:forEach>
 													<div class="col-12" style="text-align: right;">
-														<a href="중고책 관련검색 최신순으로 정리되어 있게 전부 보여주는거">더보기</a>
+														<c:choose>
+															<c:when test="${select eq '제목'}">
+																<a
+																	href="/searchSecondHand.secondHand?option=title&searchText=${title}&currentPage=${cpage}">
+																	더보기</a>
+															</c:when>
+															<c:when test="${select eq '내용'}">
+																<script>
+																	alert("내용으로는 찾을 수 없습니다.")
+																</script>
+															</c:when>
+															<c:otherwise>
+																<a
+																	href="/searchSecondHand.secondHand?option=writer&searchText=${title}&currentPage=${cpage}">
+																	더보기</a>
+															</c:otherwise>
+														</c:choose>
 													</div>
 												</c:when>
 												<c:otherwise>
@@ -414,7 +432,26 @@
 										</div>
 									</div>
 									<div class="col-12" style="text-align: right;">
-										<a href="자유게시판 관련검색 최신순으로 정리되어 있게 전부 보여주는거"> 더보기 </a>
+
+										<c:choose>
+											<c:when test="${select eq '제목'}">
+												<a
+													href="/searchByOption.freeBoard?optionValue=제목&searchValue=${title}&currentPage=${cpage}">
+													더보기</a>
+											</c:when>
+											<c:when test="${select eq '작성자'}">
+												<a
+													href="/searchByOption.freeBoard?optionValue=닉네임&searchValue=${title}&currentPage=${cpage}">
+													더보기</a>
+											</c:when>
+											<c:otherwise>
+												<a
+													href="/searchByOption.freeBoard?optionValue=내용&searchValue=${title}&currentPage=${cpage}">
+													더보기</a>
+											</c:otherwise>
+										</c:choose>
+
+
 									</div>
 									</c:when>
 									<c:otherwise>
