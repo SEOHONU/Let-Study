@@ -239,9 +239,9 @@ div {
 						<div class="col-12 circle">
 							<div id="profilecircle"></div>
 							<div class="nickname" align="center">
-								<b>${sessionScope.loggedNickname}</b>
+								<b>${loggedNickname}</b>
 							</div>
-							<div class="greetings" align="center">${update.profile_introduce}</div>
+							<div class="greetings" align="center">${select.profile_introduce}</div>
 							<div id="circles">
 								<div id="message">
 									<a href=""><i class="fa-regular fa-envelope" id="pictogram"></i></a>

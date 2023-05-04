@@ -238,8 +238,8 @@
                         </select>
                         &nbsp;
                         <input type="text" class="form-control"id="input_tag" aria-label="Sizing example input"
-                         aria-describedby="inputGroup-sizing-default"placeholder="통합검색창" name="title"
-                          value="${title}">
+                         aria-describedby="inputGroup-sizing-default"placeholder="통합검색창" name="id"
+                          value="${id}">
                    
                         &nbsp;
                         <button type="submit" class="btn btn-success"
