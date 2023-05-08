@@ -359,7 +359,7 @@
 														<div class="col-6 d-none d-lg-block">
 															<a
 																href="/secondHandBoardContents.secondHand?seq=${second.seq}&currentPage=${cpage}">
-																<div class="card mb-3" style="max-width: 540px;">
+																<div class="card" style="max-width: 540px;">
 																	<div class="row g-0">
 																		<div class="col-md-4" style="line-height:128px">
 																			<img src="/image/다운로드.jpg"
