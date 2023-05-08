@@ -73,7 +73,6 @@ public class StudyBoardDAO {
 				){
 			rs.next();
 			return rs.getInt(1);
-
 		}
 	}
 	
