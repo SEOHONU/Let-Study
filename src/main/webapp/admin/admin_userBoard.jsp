@@ -303,7 +303,8 @@
     });
   }
   
-  const currentPage2 = document.querySelector('.current-page');
+  const currentPage2 = document.querySel
+  ector('.current-page');
   currentPage2.style.backgroundColor = '#1e3c3e';
 </script>
 	</div>
