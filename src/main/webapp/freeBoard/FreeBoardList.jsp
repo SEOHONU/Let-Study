@@ -74,6 +74,7 @@
 
 .table {
 	width: 100%;
+	min-height:350px;
 }
 
 .writeBtnRow {
@@ -271,8 +272,7 @@ object-fit:cover;
                </nav>
 
 		<!-- 푸터 -->
-		<div class="block text-center" id="footer"></div>
-
+		 <c:import url="/board/footer.jsp"></c:import>
 	</div>
 </body>
 

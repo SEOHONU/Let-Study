@@ -419,7 +419,7 @@ object-fit:cover;
 			</div>
 		</form>
 
-		<div class="col-12" id="footer">푸터입니다.</div>
+		 <c:import url="/board/footer.jsp"></c:import>
 	</div>
 
 	<script>

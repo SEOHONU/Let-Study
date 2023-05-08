@@ -80,7 +80,7 @@
 
 				.banner {
 					position: relative;
-					height: 300px;
+					height: 150px;
 					background-color: #3c757980;
 					border: 1px solid #ddd;
 					border-radius: 20px;
@@ -517,7 +517,7 @@
 				$(".maptotal").height($(".mapsize").width());
 				$(".map_wrap").height($(".mapsize").width());
 				var bannerWidth = $(".banner").width();
-				var bannerHeight = bannerWidth * 0.23;
+				var bannerHeight = bannerWidth * 0.15;
 				$(".banner").height(bannerHeight);
 				$("#totaltext").css("line-height", bannerHeight + "px");
 			});
@@ -528,7 +528,7 @@
 				$(".maptotal").height($(".mapsize").width());
 				$(".map_wrap").height($(".mapsize").width());
 				var bannerWidth = $(".banner").width();
-				var bannerHeight = bannerWidth * 0.23;
+				var bannerHeight = bannerWidth * 0.15;
 				$(".banner").height(bannerHeight);
 				$("#totaltext").css("line-height", bannerHeight + "px");
 			});
