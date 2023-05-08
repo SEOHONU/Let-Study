@@ -410,7 +410,7 @@
                     </div>
                 </div>
                 <div class="row searchbar">
-                    <div class="col-lg-2 d-none d-lg-block" style="background-color: rgb(30, 60, 62);">공백</div>
+                    <div class="col-lg-2 d-none d-lg-block" style="background-color: rgb(30, 60, 62);"></div>
                     <div class="col-lg-8 d-none d-lg-block"
                         style="text-align: center; background-color: rgb(30, 60, 62);">
 
@@ -434,13 +434,13 @@
 
 
                     </div>
-                    <div class="col-lg-2 d-none d-lg-block" style="background-color: rgb(30, 60, 62);">공백</div>
+                    <div class="col-lg-2 d-none d-lg-block" style="background-color: rgb(30, 60, 62);"></div>
                 </div>
                 <div class="row">
-                    <div class="col-1 col-sm-2">공백</div>
+                    <div class="col-1 col-sm-2"></div>
                     <div class="col-10 col-sm-8">
                         <div class="row 스터디" style="text-align: center;">
-                            <div class="col-12">공백</div>
+                            <div class="col-12"></div>
                             <div class="col-12" style="text-align: left;">
                                 <a onclick="javascript:checkLogin('/select.studyboard');">스터디 종류</a>
                             </div>
@@ -594,42 +594,42 @@
                             </div>
 
 
-                            <div class="col-12">공백</div>
+                            <div class="col-12"></div>
                         </div>
                         <div class="row">
                             <div class="col-12 joongo">
                                 <div class="row 중고책1">
-                                    <div class="col-1 col-sm-2">공백</div>
+                                    <div class="col-1 col-sm-2"></div>
                                     <div class="col-10 col-sm-8">
                                         <div class="row 중고책2">
-                                            <div class="col-12">공백</div>
+                                            <div class="col-12"></div>
                                             <div class="col-12">
                                                 <a onclick="javascript:checkLogin('/selectBound.secondHand');">중고책</a>
                                             </div>
                                             <div class="col-12">
                                                 <div class="row">
-                                                    <div class="col-1 col-xl-2" style="padding:0px;">여백</div>
+                                                    <div class="col-1 col-xl-2" style="padding:0px;"></div>
                                                     <div class="col-10 col-xl-8">
                                                         <div class="row" id="joong">
 
                                                         </div>
                                                     </div>
-                                                    <div class="col-1 col-xl-2" style="padding:0px;">여백</div>
+                                                    <div class="col-1 col-xl-2" style="padding:0px;"></div>
                                                 </div>
                                             </div>
 
-                                            <div class="col-12">공백</div>
+                                            <div class="col-12"></div>
                                         </div>
                                     </div>
-                                    <div class="col-1 col-sm-2">공백</div>
+                                    <div class="col-1 col-sm-2"></div>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="row 중고책">
-                                    <div class="col-1 col-sm-2">공백</div>
+                                    <div class="col-1 col-sm-2"></div>
                                     <div class="col-10 col-sm-8">
                                         <div class="row 사진">
-                                            <div class="col-12">공백</div>
+                                            <div class="col-12"></div>
                                             <div class="col-12 col-sm-6">
                                                 <div class="col">
                                                     <div class="card">
@@ -652,19 +652,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-12">공백</div>
+                                            <div class="col-12"></div>
                                         </div>
                                     </div>
-                                    <div class="col-1 col-sm-2">공백</div>
+                                    <div class="col-1 col-sm-2"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-1 col-sm-2">공백</div>
+                    <div class="col-1 col-sm-2"></div>
                     <!-- 풋터 -->
-                    <div class="row">
-                        <div class="col-12 footer">풋터</div>
-                    </div>
+                    <c:import url="/board/footer.jsp"></c:import>
                 </div>
             </div>
         </body>
