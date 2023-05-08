@@ -108,6 +108,9 @@
 	position: relative;
 	bottom: 8px;
 }
+.current-page{
+  color: white;
+}
 </style>
 
 </head>
@@ -251,38 +254,58 @@
 		<!-- 회원검색폼 종료-->
 
 		<!-- 하단 네비 시작 -->
+<nav aria-label="Page navigation example" align="center">
+  <ul class="pagination d-flex justify-content-center">
+    <c:forEach var="i" items="${navi}">
+      <c:choose>
+        <c:when test="${i eq '<<'}">
+          <li class="page-item"><a class="page-link" href="/user_Board.adminBoard?cpage=${start}">${i}</a></li>
+        </c:when>
+        <c:when test="${i eq '<'}">
+          <li class="page-item"><a class="page-link" href="/user_Board.adminBoard?cpage=${cpage - 1}">${i}</a></li>
+        </c:when>
+        <c:when test="${i eq '>'}">
+          <li class="page-item"><a class="page-link" href="/user_Board.adminBoard?cpage=${cpage + 1}">${i}</a></li>
+        </c:when>
+        <c:when test="${i eq '>>'}">
+          <li class="page-item"><a class="page-link" href="/user_Board.adminBoard?cpage=${end}">${i}</a></li>
+        </c:when>
+        <c:otherwise>
+          <li class="page-item">
+            <a class="page-link ${i == cpage ? 'current-page' : ''}" 
+               href="/user_Board.adminBoard?cpage=${i}" 
+               ${i == cpage ? "disabled" : ""} 
+               onclick="${i == cpage ? "event.preventDefault()" : ""}">
+              ${i}
+            </a>
+          </li>
+        </c:otherwise>
+      </c:choose>
+    </c:forEach>
+  </ul>
+</nav>
 
+<script>
+  var currentPage = ${cpage}; // 현재 페이지 번호
+  var pageLinks = document.querySelectorAll(".page-link"); // 페이지 링크 요소들을 가져옴
 
-
-
-		<nav aria-label="Page navigation example" align="center">
-			<ul class="pagination d-flex justify-content-center">
-				<c:forEach var="i" items="${navi}">
-					<c:choose>
-						<c:when test="${i eq '<<'}">
-							<li class="page-item"><a class="page-link"
-								href="/user_Board.adminBoard?cpage=${start}">${i}</a></li>
-						</c:when>
-						<c:when test="${i eq '<'}">
-							<li class="page-item"><a class="page-link"
-								href="/user_Board.adminBoard?cpage=${cpage-1}">${i}</a></li>
-						</c:when>
-						<c:when test="${i eq '>'}">
-							<li class="page-item"><a class="page-link"
-								href="/user_Board.adminBoard?cpage=${cpage+1}">${i}</a></li>
-						</c:when>
-						<c:when test="${i eq '>>'}">
-							<li class="page-item"><a class="page-link"
-								href="/user_Board.adminBoard?cpage=${end}">${i}</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link"
-								href="/user_Board.adminBoard?cpage=${i}">${i}</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-			</ul>
-		</nav>
+  for (var i = 0; i < pageLinks.length; i++) {
+    // 페이지 링크 요소들에 클릭 이벤트를 추가
+    pageLinks[i].addEventListener("click", function(event) {
+      if (parseInt(event.target.textContent) === currentPage) {
+        // 현재 페이지 번호와 클릭한 페이지 번호가 같으면 클릭 이벤트를 막음
+        event.preventDefault();
+      } else {
+        // 현재 페이지 번호와 클릭한 페이지 번호가 다르면 링크를 따라 이동
+        window.location.href = event.target.getAttribute("href");
+      }
+      
+    });
+  }
+  
+  const currentPage2 = document.querySelector('.current-page');
+  currentPage2.style.backgroundColor = '#1e3c3e';
+</script>
 	</div>
 </body>
 </html>
