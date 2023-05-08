@@ -88,6 +88,7 @@ public class SecondHandController extends HttpServlet {
 				request.setAttribute("currentPage", currentPage);
 				request.setAttribute("recordList", recordList);
 				request.setAttribute("pageNavi", pageNavi);
+				System.out.println("Bound");
 				request.getRequestDispatcher("/secondHand/secondHandList.jsp").forward(request, response);
 			}
 			else if(cmd.equals("/searchSecondHand.secondHand")) {
