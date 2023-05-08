@@ -92,6 +92,7 @@ public class MemberController extends HttpServlet {
 			} else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
+
 				// 아이디 찾기
 			} else if (cmd.equals("/findId.member")) {
 				String name = request.getParameter("name");
