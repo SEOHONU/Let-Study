@@ -47,13 +47,15 @@ a>.btn {
 
 <body>
 	<div class="container">
-	<c:import url="/board/topMenu.jsp"></c:import>
+		<c:import url="/board/topMenu.jsp"></c:import>
+	<div align="center">
+		<img src="/image/shBanner_main.jpg">
+	</div>
 		<div class="row">
 			<div class="col-4"></div>
-			<div class="col-4">
-				<a href="/index.jsp" class="btn_a"><button type="button" class="btn btn-primary">메인페이지로</button></a>
-				<a href="/selectBound.secondHand?currentPage=1" class="btn_a"><button type="button" class="btn btn-primary">1페이지로</button></a>
-				<a href="/secondHand/secondHandClusterer.jsp?currentPage=${currentPage}" class="btn_a"><button type="button" class="btn btn-primary">동네 중고거래 찾기</button></a>
+			<div class="col-4" align="center">
+				<a href="/selectBound.secondHand?currentPage=1" class="btn_a"><button type="button" class="btn btn-primary p-0">1페이지로</button></a>
+				<a href="/secondHand/secondHandClusterer.jsp?currentPage=${currentPage}" class="btn_a"><button type="button" class="btn btn-primary p-0">동네 중고거래 찾기</button></a>
 			</div>
 			<div class="col-4"></div>
 		</div>
@@ -61,7 +63,7 @@ a>.btn {
 			<div class="col-12">
 				<div class="row">
 					<div class="col-lg-2 d-none d-lg-block"></div>
-					<div class="col-lg-3">중고거래 게시판</div>
+					<div class="col-lg-3"></div>
 					<div class="col-lg-5">
 						<form action="/searchSecondHand.secondHand">
 							<select name="option" id="option">
@@ -69,7 +71,7 @@ a>.btn {
 								<option value="writer">작성자</option>
 							</select>
 							<input type="text" placeholder="검색어 입력" name="searchText">
-							<button type="submit" class="btn btn-primary" id="searchBtn">검색하기</button>
+							<button type="submit" class="btn btn-primary p-0" id="searchBtn">검색하기</button>
 						</form>
 					</div>
 					<div class="col-lg-2 d-none d-lg-block"></div>
@@ -95,9 +97,9 @@ a>.btn {
                                 <div>
                                     작성일 : ${i.detailDate}
                                 </div>
-                                <div>
+                                <div align="right">
                                     <a href="/secondHandBoardContents.secondHand?seq=${i.seq}&currentPage=${currentPage}">
-                                        <button type="button" class="btn btn-primary">이동하기</button>
+                                        <button type="button" class="btn btn-primary p-0">이동하기</button>
                                     </a>
                                 </div>
                             </div>
@@ -121,9 +123,9 @@ a>.btn {
                                 <div>
                                     작성일 : ${i.detailDate}
                                 </div>
-                                <div>
+                                <div align="right">
                                     <a href="/secondHandBoardContents.secondHand?seq=${i.seq}&currentPage=${currentPage}">
-                                        <button type="button" class="btn btn-primary">이동하기</button>
+                                        <button type="button" class="btn btn-primary p-0">이동하기</button>
                                     </a>
                                 </div>
                             </div>
@@ -149,9 +151,9 @@ a>.btn {
                                 <div>
                                     작성일 : ${i.detailDate}
                                 </div>
-                                <div>
+                                <div align="right">
                                     <a href="/secondHandBoardContents.secondHand?seq=${i.seq}&currentPage=${currentPage}">
-                                        <button type="button" class="btn btn-primary">이동하기</button>
+                                        <button type="button" class="btn btn-primary p-0">이동하기</button>
                                     </a>
                                 </div>
                             </div>
@@ -218,11 +220,12 @@ a>.btn {
 						</c:choose>
 					</div>
 					<div class="col-4" align="right">
-						<button type="button" class="btn btn-primary" id="shWrite">글쓰기</button>
+						<button type="button" class="btn btn-primary p-0" id="shWrite">글쓰기</button>
 					</div>
 				</div>
 			</div>
 		</div>
+		<c:import url="/board/footer.jsp"></c:import>
 	</div>
 </body>
 

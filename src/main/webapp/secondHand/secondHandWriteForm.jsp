@@ -44,10 +44,19 @@
 .note-frame {
 	max-width: 750px;
 }
+
+.p-0, #submit, #back {
+	background-color: #1e3c3e;
+}
 </style>
 </head>
 
 <body>
+<div class="container">
+<c:import url="/board/topMenu.jsp"></c:import>
+<div align="center">
+	<img src="/image/shBanner_write.jpg">
+</div>
 	<form action="/insert.secondHand" method="post" id="insertForm">
 		<table border="1" align="center">
 			<tr>
@@ -70,17 +79,23 @@
 			</tr>
 			<tr>
 				<td><input type="text" placeholder="주소입력" id="target" required>
-					<input type="button" value="검색" id="search"> <input
+					<button type="button" class="btn btn-primary p-0" id="search">검색</button> 
+					<input
 					type="hidden" name="lat" value="위도" id="Lat" required> <input
 					type="hidden" name="lng" value="경도" id="Lng" required></td>
-				<td align="right"><input type="submit" value="작성하기" id="submit"
-					disabled> <input type="button" value="목록으로" onclick="location.href=/selectBound.secondHand?currentPage=1"> 
-					</td>
+				<td align="right">
+					<button type="submit" id="submit" class="btn btn-primary p-0" disabled>작성하기</button>
+					<button type="button" id="back" class="btn btn-primary p-0">목록으로</button>
+				</td>
 			</tr>
 		</table>
 	</form>
+	<c:import url="/board/footer.jsp"></c:import>
+</div>
 	<script>
-		let count = 1;
+		$("#back").on("click",function(){
+			location.href="/selectBound.secondHand?currentPage=1";
+		});
 		$("#summernote").summernote(
 				{
 					height : 500, // 에디터 높이
