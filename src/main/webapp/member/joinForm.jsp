@@ -215,6 +215,12 @@ h2 {
 	</form>
 
 	<script>
+	
+	$("#btnCancel").on("click", function() {
+		location.href = "/index.jsp";
+	})
+	
+	
 		var idValidFlag = false;
 
 		$("#id").on("keyup", function() {

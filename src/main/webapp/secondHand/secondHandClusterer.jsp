@@ -20,12 +20,28 @@
 	crossorigin="anonymous"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e7252ffaa17ffd29198c0279af09c9f9&libraries=clusterer"></script>
+	<style>
+		#back {
+			background-color: #1e3c3e;
+		}
+	</style>
 </head>
 <body>
-	지도 클러스터러 보기
+<div class="container">
+<c:import url="/board/topMenu.jsp"></c:import>
+	<div align="center">
+		<img src="/image/shBanner_clusterer.jpg">
+	</div>
 	<div id="map" style="width: 100%; height: 500px;"></div>
-	<input type="button" onclick="location.href='/selectBound.secondHand?currentPage=1'" value="목록으로">
+	<div align="right">
+		<button type="button" id="back" class="btn btn-primary p-0">목록으로</button>
+	</div>
+	<c:import url="/board/footer.jsp"></c:import>
+</div>
 	<script>
+	$("#back").on("click",function(){
+		location.href="/selectBound.secondHand?currentPage=1";
+	});
 		var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
 			center : new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표 
 			level : 13

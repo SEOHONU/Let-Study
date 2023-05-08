@@ -188,7 +188,7 @@ public class Admin_BoardController extends HttpServlet {
 						: Integer.parseInt(request.getParameter("seq"));
 				System.out.println("중고책 : " + currentPage);
 				int result = shDAO.deleteContents(seq);
-				response.sendRedirect("/secondHand.adminBoard?currentPage=" + currentPage);
+				response.sendRedirect("/secondHand.adminBoard?cpage=" + currentPage);
 			} else if (cmd.equals("/userList_delete.adminBoard")) {
 				request.setCharacterEncoding("utf8");
 				response.setContentType("text/html; charset=utf8");
