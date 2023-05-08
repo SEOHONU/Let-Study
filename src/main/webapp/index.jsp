@@ -183,10 +183,10 @@
 
                     <div class="col-12 top">
                         <div class="row">
-                            <div class="col-6 col-lg-2 order-2 order-lg-first" id="logo">
+                            <div class="col-6 col-lg-2 order-2 order-lg-first" id="logo" style="text-align:center">
                                 <div class="row">
-                                    <div class="col-12">
-                                        <a href="/index.jsp">logo</a>
+                                    <div class="col-12" style="padding:0%">
+                                        <a href="/index.jsp"><img src="/image/mainlogo.png"></a>
 
                                     </div>
                                     <div class="col-12 d-lg-none d-block">
@@ -600,7 +600,7 @@
                                         <div class="row 중고책2">
                                             <div class="col-12">공백</div>
                                             <div class="col-12">
-                                                <a onclick="javascript:checkLogin('//selectBound.secondHand');">중고책</a>
+                                                <a onclick="javascript:checkLogin('/selectBound.secondHand');">중고책</a>
                                             </div>
                                             <div class="col-12">
                                                 <div class="row">

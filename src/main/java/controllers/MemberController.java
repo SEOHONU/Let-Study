@@ -58,7 +58,7 @@ public class MemberController extends HttpServlet {
 					response.getWriter().append(resp);
 				}
 
-				//회원가입 
+				// 회원가입
 			} else if (cmd.equals("/joinMember.member")) {
 				String id = request.getParameter("id");
 				String pw = request.getParameter("pw");
@@ -66,9 +66,8 @@ public class MemberController extends HttpServlet {
 				// 생년월일 값 받아야함
 				String birthYear = request.getParameter("birthYear");
 				String birthMonth = request.getParameter("birthMonth");
-				int birthDay = Integer.parseInt(request.getParameter("birthDay"));
-				String birthDayStr = String.format("%02d", birthDay);
-				System.out.println("회원가입 날짜 두자리수 입력 결과 :" + birthDayStr);
+				String birthDay = request.getParameter("birthDay");
+				String birthDayStr = String.format("%02d", Integer.parseInt(birthDay));
 				// 두자리가 아니면 앞에 0이 붙게함
 				// 생년월일 값 받음
 

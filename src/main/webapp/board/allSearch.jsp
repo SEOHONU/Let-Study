@@ -80,7 +80,7 @@
 
 				.banner {
 					position: relative;
-					height: 300px;
+					height: 150px;
 					background-color: #3c757980;
 					border: 1px solid #ddd;
 					border-radius: 20px;
@@ -359,7 +359,7 @@
 														<div class="col-6 d-none d-lg-block">
 															<a
 																href="/secondHandBoardContents.secondHand?seq=${second.seq}&currentPage=${cpage}">
-																<div class="card mb-3" style="max-width: 540px;">
+																<div class="card" style="max-width: 540px;">
 																	<div class="row g-0">
 																		<div class="col-md-4" style="line-height:128px">
 																			<img src="/image/다운로드.jpg"
@@ -517,7 +517,7 @@
 				$(".maptotal").height($(".mapsize").width());
 				$(".map_wrap").height($(".mapsize").width());
 				var bannerWidth = $(".banner").width();
-				var bannerHeight = bannerWidth * 0.23;
+				var bannerHeight = bannerWidth * 0.15;
 				$(".banner").height(bannerHeight);
 				$("#totaltext").css("line-height", bannerHeight + "px");
 			});
@@ -528,7 +528,7 @@
 				$(".maptotal").height($(".mapsize").width());
 				$(".map_wrap").height($(".mapsize").width());
 				var bannerWidth = $(".banner").width();
-				var bannerHeight = bannerWidth * 0.23;
+				var bannerHeight = bannerWidth * 0.15;
 				$(".banner").height(bannerHeight);
 				$("#totaltext").css("line-height", bannerHeight + "px");
 			});

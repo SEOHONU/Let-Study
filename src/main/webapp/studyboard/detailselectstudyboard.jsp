@@ -127,57 +127,7 @@
     	})
     </script>
     <div class="container">
-        <div class="row navi">
-            <div class="col-12">
-                <div class="row">
-
-                    <div class="col-6 col-lg-2 order-2 order-lg-first">
-                        logo
-                    </div>
-                    <div class="col-lg-4 d-none d-lg-block order-lg-1">
-                        여백
-                    </div>
-                    <div class="col-4 d-block d-lg-none order-1">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="row">
-                                    <div class="col-12">
-                                        네비햄버거
-                                    </div>
-                                    <div class="col-12">회원가입</div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="row">
-                                    <div class="col-12 subsearch">검색</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-1 d-none d-lg-block order-lg-2">
-                        <button type="button" class="btn btn-primary btn-lg">hi</button>
-                    </div>
-                    <div class="col-lg-1 d-none d-lg-block order-lg-3">
-                        <button type="button" class="btn btn-primary btn-lg">hi</button>
-                    </div>
-                    <div class="col-lg-1 d-none d-lg-block order-lg-4">
-                        <button type="button" class="btn btn-primary btn-lg">hi</button>
-                    </div>
-                    <div class="col-lg-1 d-none d-lg-block order-lg-5">
-                        <button type="button" class="btn btn-primary btn-lg">hi</button>
-                    </div>
-                    <div class="col-lg-2 d-none d-lg-block  order-lg-last">
-                        ㅎㅇ
-                    </div>
-                    <div class="col-2 d-block d-lg-none order-last">
-                        <div class="row">
-                            <div class="col-12">공백</div>
-                            <div class="col-12">로그인</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <c:import url="/board/topMenu.jsp"></c:import>
         <form action="/update.studyboard" method="post" id="updateForm">
         	<div class="row header">
             	<div class="col-12">
@@ -285,10 +235,10 @@
                 				<input type="hidden" value="${i.seq}">
                 				<c:if test="${i.writer == loggedID}">
                 					<div align="right">
-                						<button type="button" class="replyacceptbtn">확인</button>
-                						<button type="button" class="replycancelbtn">취소</button>
-                						<button type="button" class="replyupdatebtn">수정하기</button>
-                						<button type="button" class="replydeletebtn">삭제하기</button>
+                						<button type="button" class="btn btn-outline-dark replyacceptbtn">확인</button>
+                						<button type="button" class="btn btn-outline-dark replycancelbtn">취소</button>
+                						<button type="button" class="btn btn-outline-dark replyupdatebtn">수정하기</button>
+                						<button type="button" class="btn btn-outline-dark replydeletebtn">삭제하기</button>
                 					</div>
                 				</c:if>
                 			</div>
@@ -568,57 +518,7 @@
     	})
     </script>
     <div class="container">
-        <div class="row navi">
-            <div class="col-12">
-                <div class="row">
-
-                    <div class="col-6 col-lg-2 order-2 order-lg-first">
-                        logo
-                    </div>
-                    <div class="col-lg-4 d-none d-lg-block order-lg-1">
-                        여백
-                    </div>
-                    <div class="col-4 d-block d-lg-none order-1">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="row">
-                                    <div class="col-12">
-                                        네비햄버거
-                                    </div>
-                                    <div class="col-12">회원가입</div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="row">
-                                    <div class="col-12 subsearch">검색</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-1 d-none d-lg-block order-lg-2">
-                        <button type="button" class="btn btn-primary btn-lg">hi</button>
-                    </div>
-                    <div class="col-lg-1 d-none d-lg-block order-lg-3">
-                        <button type="button" class="btn btn-primary btn-lg">hi</button>
-                    </div>
-                    <div class="col-lg-1 d-none d-lg-block order-lg-4">
-                        <button type="button" class="btn btn-primary btn-lg">hi</button>
-                    </div>
-                    <div class="col-lg-1 d-none d-lg-block order-lg-5">
-                        <button type="button" class="btn btn-primary btn-lg">hi</button>
-                    </div>
-                    <div class="col-lg-2 d-none d-lg-block  order-lg-last">
-                        ㅎㅇ
-                    </div>
-                    <div class="col-2 d-block d-lg-none order-last">
-                        <div class="row">
-                            <div class="col-12">공백</div>
-                            <div class="col-12">로그인</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <c:import url="/board/topMenu.jsp"></c:import>
         <div class="row header">
             <div class="col-12">
                 <div class="row">
@@ -630,7 +530,7 @@
                             <h3>${dto.title}</h3>
                             <div>${dto.contents}</div>
                             <div>작성자 : ${dto.writer}</div>
-                            <button id="applybtn">신청하기</button>    
+                            <button type="button" id="applybtn">신청하기</button>    
                         </div>
                     </div>
                 </div>
@@ -721,10 +621,11 @@
     </div>
     <script>
     	$("#applybtn").on("click",function(){
+    		console.log("123");
     		$.ajax({
     			url:"/insert.studyapply",
     			data:{
-    				id:${loggedID},
+    				id:'${loggedID}',
     				board_seq:${dto.seq}
     			}
     		}).done(function(resp){
