@@ -21,14 +21,23 @@
         }
 
         div {
-            border: 1px solid black;
+            <!--border: 1px solid black;-->
             position: relative;
+        }
+        
+        .container{
+        	border: 1px solid black;
+        }
+        
+        .footer{
+        	border: 1px solid black;
         }
 
         #studyprint {
             margin-top: 12px;
             margin-bottom: 12px;
             border-radius: 100%;
+            border: 1px solid black;
         }
 
         .studyguestprint {
@@ -44,6 +53,7 @@
         }
         .header{
             position: relative;
+            border: 1px solid black;
         }
         .navi {
             position:sticky;
@@ -81,6 +91,12 @@
         #btnbox {
             text-align: right;
         }
+        
+        .btns{
+        	border: 1px solid black;
+			background-color: white;
+			border-radius: 5px;
+		}
 
         #replyfont {
             font-weight: 900;
@@ -100,6 +116,15 @@
             right: 5px;
             bottom: 5px;
         }
+        
+        #opendetailcontents{
+        	border: 1px solid black;
+        }
+        
+        #opencontents{
+        	border: 1px solid black;
+        }
+        
     </style>
 </head>
 
@@ -138,7 +163,7 @@
                 	<div class="row">
                     	<div class="col-12">
                     		<input type="text" placeholder="주소입력" name="mapname" id="target" required>
-                    		<input type="button" value="검색" id="mapsearch">
+                    		<input type="button" value="검색" id="mapsearch" class="btns">
                     		<input type="hidden" name="lat" value="위도" id="Lat" required>
                     		<input type="hidden" name="lng" value="경도" id="Lng" required>
                     	</div>
@@ -158,8 +183,8 @@
                 	</div>
             	</div>
             	<div class="col-12" id="btnbox">
-                	<button type="submit">작성 완료</button>
-                	<a href="/select.studyboard?cpage=1"><button type="button">목록으로</button></a>
+                	<button type="submit" class="btns">작성 완료</button>
+                	<a href="/select.studyboard?cpage=1"><button type="button" class="btns">목록으로</button></a>
             	</div>
         	</div>
         </form>
