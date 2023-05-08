@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.FreeBoardDAO;
-
+import dao.MembersDAO;
 import dao.Profile_settingDAO;
 import dao.SecondHandDAO;
 import dao.StudyBoardDAO;
 import dto.FreeBoardDTO;
+import dto.MembersDTO;
 import dto.SecondHandDTO;
 import dto.StudyBoardDTO;
 
@@ -43,12 +44,15 @@ public class MypageboardController extends HttpServlet {
 				// 자유게시판
 				List<FreeBoardDTO> fdto = fdao.myfreeboard(id);
 				request.setAttribute("freeboard", fdto);
-				request.getRequestDispatcher("/myPage/myboard.jsp").forward(request, response);
+				MembersDTO dto = MembersDAO.getInstance().myInfoSelect(id);
+	            request.setAttribute("myInfoMain", dto);
+				request.getRequestDispatcher("/myPage/mypageMainForm.jsp").forward(request, response);
 			
+				
 			}else if (cmd.equals("/delete.mypageboardController")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
 				sdao.delete(id);
-				response.sendRedirect("/myPage/myboard.jsp");
+				response.sendRedirect("/myPage/mypageMainForm.jsp");
 			}
 
 		} catch (Exception e) {

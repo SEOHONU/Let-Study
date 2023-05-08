@@ -312,8 +312,8 @@
                                             </div>
                                         </c:when>
                                         <c:otherwise>
-                                            <div class="col-6 profile" style="line-height: 100px;">
-                                                <a href="/myPage/mypageMainForm.jsp"><i
+                                            <div class="col-6 profile">
+                                                <a href="/mypageboard.mypageboardController"><i
                                                         class="fa-solid fa-user"></i></a>
                                                 <!--로그인됐을때-->
                                             </div>
