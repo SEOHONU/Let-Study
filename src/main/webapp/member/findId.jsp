@@ -65,7 +65,7 @@
 				</div>
 				<div class="row form-group">
 					<input type="text" class="form-control" id="contact" name="contact"
-						placeholder="전화번호" required />
+						placeholder="휴대폰 번호 입력 ('-'제외 입력)" required />
 				</div>
 				<div class="btn">
 					<button class="btn btn-primary" id="btnFind">찾기</button>
