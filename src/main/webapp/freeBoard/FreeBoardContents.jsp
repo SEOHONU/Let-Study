@@ -584,9 +584,9 @@ object-fit:cover;
 					placeholder="댓글을 입력해주세요"> <input type=button class="replyInsertBtn" value="등록"
 					id="replyInsert">
 			</div>
-
+	<hr style="width: 100%;">
 		</div>
-		<div class="col-12" id="footer">푸터입니다.</div>
+		 <c:import url="/board/footer.jsp"></c:import>
 	</div>
 	</div>
 
