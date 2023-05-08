@@ -67,7 +67,7 @@ public class MemberController extends HttpServlet {
 				String birthYear = request.getParameter("birthYear");
 				String birthMonth = request.getParameter("birthMonth");
 				String birthDay = request.getParameter("birthDay");
-				  String birthDayStr = String.format("%02d", birthDay);
+				String birthDayStr = String.format("%02d", Integer.parseInt(birthDay));
 		            // 두자리가 아니면 앞에 0이 붙게함 
 				// 생년월일 값 받음
 
@@ -92,12 +92,7 @@ public class MemberController extends HttpServlet {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
 	            
-	         } else if (cmd.equals("/myInfoSelect.member")) {
-	            String id = (String) request.getSession().getAttribute("loggedID");
-	            MembersDTO dto = dao.myInfoSelect(id);
-	            request.setAttribute("myInfo", dto);
-	            request.getRequestDispatcher("/member/memberInfo.jsp").forward(request, response);
-
+	         
 				// select 회원정보출력
 			} else if (cmd.equals("/myInfoSelect.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
