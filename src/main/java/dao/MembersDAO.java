@@ -96,6 +96,28 @@ public class MembersDAO {
 	      }
 	   }
 	   
+	   public String findId(String name, String email, String contact) throws Exception {
+		   
+		   String sql = "select * from members where name = ? and email =? and contact =?"; 
+		   try(Connection con = this.getConnection();
+				   PreparedStatement pstat = con.prepareStatement(sql);){
+			   pstat.setString(1, name);
+			   pstat.setString(2, email); 
+			   pstat.setString(3, contact);
+			  try(ResultSet rs = pstat.executeQuery();){
+				  if(rs.next()) {
+					  // 데이터가 존재하는 경우에만 rs.getString()호출
+				  String foundId = rs.getString("id");
+				  System.out.println(foundId);
+				  return foundId; 
+				  }else {
+					  // 데이터가 없는 경우 null반환 
+					  return null; 
+				  }
+			  }
+		   }
+	   }
+	   
 		public int insertProfile(String id, String nickname) throws Exception {
 			 String sql = "insert into profile values (?,?,null,null,null,null)";
 			   try(Connection con = this.getConnection(); 
@@ -122,7 +144,6 @@ public class MembersDAO {
 	            String zipcode = rs.getString("zipcode");
 	            String address1 = rs.getString("address1");
 	            String address2 = rs.getString("address2");
-
 	            Timestamp join_date = rs.getTimestamp("join_date");
 	            MembersDTO dto = new MembersDTO(id, null, name, birth_date, nickname, contact, email, zipcode,
 	                  address1, address2, join_date);

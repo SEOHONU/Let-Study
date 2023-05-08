@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js"
+        integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 <!-- CSS only -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -19,6 +20,11 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 	crossorigin="anonymous"></script>
+	<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 
 
@@ -28,21 +34,68 @@
 	box-sizing: border-box;
 	/* border: 1px solid grey; */
 }
+/* 헤더 스타일 */
+.container {
+                    position: relative;
+                }
 
-.header {
-	position: relative;
-}
+                .top {
+                    background-color: #3c757980;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    margin: 1px;
+                }
 
-.navi {
-	position: sticky;
-	top: 0;
-	background-color: white;
-	z-index: 999;
-}
+                .li {
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    padding: 10px;
+                }
 
-.margin {
-	height: 20px;
-}
+                .navi {
+                    position: sticky;
+                    top: 0;
+                    z-index: 999;
+                }
+
+                .loggedid {
+                    text-align: right;
+                }
+
+                .profile {
+                    text-align: center;
+                }
+
+                .logout {
+                    text-align: center;
+                }
+
+                #logo {
+                    z-index: 2;
+                }
+
+
+                #subsearch {
+                    display: block;
+                }
+
+                #subsearchback {
+                    display: none;
+                    text-align: center;
+                }
+
+                .naviname {
+                    cursor: pointer;
+                    transition-duration: 0.5s
+                }
+
+                .naviname:hover {
+                    background-color: #3c757970;
+                    color: white;
+
+                }
+
+/* 헤더 스타일 */
 
 .reply_text {
 	height: 50px;
@@ -94,14 +147,11 @@
 	border: 0.5px solid grey;
 	border-radius : 10px;
 	background-color : #F2F2F2;
-	border:none;
 }
 
 #replyInsert {
 	float: right;
 	position : relative;
-	
-	
 }
 
 .reply_area {
@@ -120,6 +170,7 @@
 #content {
 	border: none;
 	padding:5px;
+	 min-height: 500px;
 	
 }
 
@@ -144,7 +195,7 @@
 	border-radius: 10px;
 }
 
-.nickname{
+.reply_nickname{
 	padding-left:10px;
 	padding-top : 10px;
 	color : grey;
@@ -162,7 +213,7 @@
 
 .replyInsertBtn{
 border : none;
-background-color : green;
+background-color : #254F4C;
 font-size : 15px;
 color : white;
 width: 60px;
@@ -189,26 +240,86 @@ margin-bottom:10px;
 margin-right:10px;
 }
 
-.fileCol{
-padding:0px;
-height:30px;
+
+.btnRow{
+    height:20%;
+}
+
+.content{
+    width:100%;
+    height:60%;
+    margin:0;
 }
 
 
-</style>
+.margin{
+position:relative;
+float:left;
+height:5px;
+display:block;
+}
 
+#freeboard_img {
+position:relative;
+width:100%;
+height: 200px;
+}
+
+#freeboard_img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+}
+
+#freeboard_img img{
+opacity:0.5;
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+#imgTitle{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* text 요소를 커버 위에 위치시킵니다. */
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+
+
+}
+</style>
+<script>
+                function checkLogin(url) {
+                    var login = '<c:out value="${loggedID}"/>';
+                    if (login == "") {
+                        alert("로그인이 필요합니다.");
+                        location.href = "/index.jsp";
+                    } else {
+                        location.href = url;
+                    }
+                }
+            </script>
 </head>
 
 <body>
 	<div class="container">
 		<!-- 헤더 -->
-	
-                <!-- 헤더 네비 -->
-                <div class="row navi">
+		  <div class="row navi">
 
                     <div class="col-12 top">
                         <div class="row">
-                            <div class="col-8 col-lg-2 order-2 order-lg-first" id="logo">
+                            <div class="col-6 col-lg-2 order-2 order-lg-first" id="logo">
                                 <div class="row">
                                     <div class="col-12">
                                         <a href="/index.jsp">logo</a>
@@ -247,7 +358,7 @@ height:30px;
                             </div>
 
                             <div class="col-lg-4 d-none d-lg-block order-lg-1">여백</div>
-                            <div class="col-2 d-block d-lg-none order-1">
+                            <div class="col-3 d-block d-lg-none order-1">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="row">
@@ -349,7 +460,7 @@ height:30px;
                                 </div>
                             </div>
 
-                            <div class="col-2 d-block d-lg-none order-last">
+                            <div class="col-3 d-block d-lg-none order-last">
                                 <div class="row">
 
                                     <c:choose>
@@ -361,7 +472,7 @@ height:30px;
                                             </div>
                                         </c:when>
                                         <c:otherwise>
-                                            <div class="col-12">${sessionScope.loggedID}회원</div>
+                                            <div class="col-12 loggedid">${sessionScope.loggedID}회원</div>
                                             <div class="col-12" style="text-align: right;">
                                                 <a href="/logout.member"><i
                                                         class="fa-solid fa-right-from-bracket"></i></a>
@@ -373,13 +484,24 @@ height:30px;
                         </div>
                     </div>
                 </div>
+		<!-- 자유게시판 이미지 -->
+		
+		<div class="row">
+			<div class="col-12 " id="freeboard_img">
+			<a href="/contentList.freeBoard">
+			<img src="/image/freeboardImg.jpg">
+			<h1 id=imgTitle>자유게시판</h1>
+			</a>
+			</div>
+		</div>
+				
+		
 		<!-- 바디 -->
-
 		<div class="row">
 			<div class="col margin"></div>
+			<hr style="width: 100%;">
 		</div>
-		<form action="/update.freeBoard" method="post" id="updateFreeBoard"
-			enctype="multipart/form-data">
+		<form action="/update.freeBoard" method="post" >
 			<div class="row rowTitle">
 				<div class="col colTitle">
 					<input type="hidden" value="${list.seq}" name="seq" id="board_seq">
@@ -395,31 +517,13 @@ height:30px;
 				</div>
 				<hr style="width: 100%;">
 			</div>
-			<!--파일 첨부 출력 -->
-			<c:choose>
-				<c:when test="${fileResult!=null}">
-					<div class="row fileRow">
-						<div class="col fileCol">
-						<span>첨부파일 : </span>
-							<a
-								href="/download.file?sysName=${fileResult.sysName}&oriName=${fileResult.oriName} id="fileList">${fileResult.oriName}</a>
-							<input type="button" class="noBorderBtn fileDel" value="x"
-								style="display: none"> <input type="hidden"
-								name="file_seq" id="file_seq" value="${fileResult.seq}">
-						</div>
-						<hr style="width: 100%;">
-					</div>
-				</c:when>
-			</c:choose>
-			<div class="row fileRow">
-					<input type="file" name="file" id="file" dir="rtl"
-						style="display: none">
-			</div>
 			<!-- 게시글 출력 -->
 			<div class="row">
+			<div id=hiddenSummernote style="display:none;">
+			 <textarea name="contents" id="summernote" class="summernote" required>${list.content}</textarea>
+				</div>
 				<div contenteditable="false" id="content" placeholder="내용을 입력해주세요"
-					style="height: 500px">${list.content}</div>
-				<input type="hidden" name="realContent" id="realContent">
+					>${list.content}</div>
 						<hr style="width: 100%; margin-bottom:5px;">
 			</div>
 
@@ -432,8 +536,7 @@ height:30px;
 					<c:choose>
 						<c:when test="${sessionScope.loggedID eq list.writer}">
 							<input type="button" value="수정" id="updateBtn">
-							<a href="delete.freeBoard?seq=${list.seq}"> <input
-								type="button" value="삭제">
+							 <input type="button" value="삭제" onclick="delContent()">
 							</a>
 						</c:when>
 					</c:choose>
@@ -447,7 +550,7 @@ height:30px;
 				<c:forEach var="i" items="${replyResult}">
 					<form action="/update.reply" method="post">
 						<div id="replyForm">
-							<div class="nickname" readonly>${i.nickname}</div>
+							<div class="reply_nickname" readonly>${i.nickname}</div>
 							<input type="text" class="reply_text" name="replyContent"
 								value="${i.contents}" readonly>
 							<div class="reply_info">
@@ -457,16 +560,13 @@ height:30px;
 									<c:when test="${sessionScope.loggedID eq i.writer}">
 										<input type="button" class="noBorderBtn replyUpdate"
 											value="댓글수정">
-										<a href="/delete.reply?seq=${list.seq}&replySeq=${i.seq}">
-											<input type="button" class="noBorderBtn" value="댓글삭제">
-										</a>
+											<input type="button" class="noBorderBtn replyDel" value="댓글삭제" seq="${i.seq}">
+										<input type="submit" class="noBorderBtn" value="수정완료"
+											style="display: none">
 									</c:when>
 								</c:choose>
-
-								<input type="submit" class="noBorderBtn" value="수정완료"
-									style="display: none"> <input type="hidden"
-									value="${i.seq}" name="replySeq"> <input type="hidden"
-									value="${list.seq}" name="seq">
+								<input type="hidden" value="${i.seq}" name="replySeq"> 
+								<input type="hidden" value="${list.seq}" name="seq">
 							</div>
 						</div>
 						<div id="margin10"></div>
@@ -479,18 +579,65 @@ height:30px;
 		<div class="row ReplyInputRow">
 
 			<div class="col ReplyInputCol">
-				<div id="nick_name">${sessionScope.nickname}</div>
+				<div id="nick_name">${sessionScope.loggedNickname}</div>
 				<input type="text" name="replyContent" id="replyContent"
 					placeholder="댓글을 입력해주세요"> <input type=button class="replyInsertBtn" value="등록"
 					id="replyInsert">
 			</div>
-
+	<hr style="width: 100%;">
 		</div>
-		<div class="col-12" id="footer">푸터입니다.</div>
+		 <c:import url="/board/footer.jsp"></c:import>
 	</div>
 	</div>
 
 	<script>
+	 $("#summernote").summernote({
+         height: 500, // 에디터 높이
+         minHeight: null, // 최소 높이
+         maxHeight: null, // 최대 높이
+         focus: true, // 에디터 로딩후 포커스를 맞출지 여부
+         disableDragAndDrop: true,
+         lang: "ko-KR", // 한글 설정
+         placeholder: '자유롭게 글을 작성해주세요.', //placeholder 설정
+         toolbar: [
+             ['style', ['style']],
+             ['font', ['bold', 'underline', 'clear']],
+             ['fontname', ['fontname']],
+             ['color', ['color']],
+             ['para', ['ul', 'ol', 'paragraph']],
+             ['table', ['table']],
+             ['insert', ['picture']],
+             ['view', ['fullscreen', 'codeview', 'help']]
+         ],
+         callbacks: { //여기 부분이 이미지를 첨부하는 부분
+             onImageUpload: function (files) {
+                 for (let i = 0; i < files.length; i++) {
+                     uploadImg(files[i], this);
+                     console.log(this);
+                 }
+             }
+         }
+     });
+	
+     function uploadImg(img, summerNote) {
+         data = new FormData();
+         data.append("img", img);
+         $.ajax({
+             data: data,
+             type: "POST",
+             url: "/insertFile.secondHand",
+             contentType: false,
+             processData: false
+         }).done(function (url) {
+             img = JSON.parse(url);
+             console.log("url : " + url);
+             console.log("img.url : " + img.url);
+             $(summerNote).summernote("insertImage", img.url);
+         });
+     }
+	
+	
+	
 		/* 댓글 입력 */
 		$("#replyInsert").on("click", function() {
 			location.href = "/insert.reply?seq=" + ${list.seq}
@@ -500,24 +647,28 @@ height:30px;
 		/* 게시글 수정하기, 수정 버튼 숨기기*/
 		$("#updateBtn").on("click", function() {
 			$("#titleInput").removeAttr("readonly");
-			$("#content").attr("contenteditable", true);
+			$("#hiddenSummernote").css("display","block");
+			$("#content").css("display","none");
 			$("#updateBtn").hide();
 
+			$(".reply_area").hide();
+			$(".ReplyInputRow").hide();
+			
 			let updateComplete = $("<button>");
 			updateComplete.text("수정완료");
 			updateComplete.attr("type", "submit");
 			updateComplete.css({
-				'background-color': 'transparent',
+				'background-color': '#254F4C',
+				'color':'white',
+				'font-weight':'bold',
 				'border': 'none',
 				'position': 'relative',
-				'color' : 'grey',
 				'font-size': '13px',
 				'border' : '0.5px solid #F2F2F2',
 					'padding':'5px',
 			'padding-left': '10px',
 			'padding-right': '10px'
 				});
-			
 
 			$("#btnsBoardCol").append(updateComplete);
 			 $("#file").css({
@@ -531,14 +682,6 @@ height:30px;
 				'padding' : '5px'
 		
 			}); 
-			$("#file").css("display", "block");
-	/* 		$('#file-upload-button').show(); */
-
-			$(".fileDel").css("display", "inline-block");
-		})
-
-		$("#updateFreeBoard").on("submit", function() {
-			$("#realContent").val($("#content").html());
 		})
 
 		/* 댓글 수정하기  */
@@ -549,22 +692,64 @@ height:30px;
 			$(this).next().next().css("display", "inline-block");
 			
 		})
-
-		/* 파일 삭제  */
-		$(".fileDel").on("click", function() {
-			var $target = $(event.target);
-			$.ajax({
-				url : "/delete.file",
-				dataType : "json",
-				type : "post",
-				data : {
-					file_seq : $("#file_seq").val(),
-					board_seq : $("#board_seq").val()
-				}
-			}).done(function(resp) {
-				$target.parent("div").remove();
-			});
+		
+		/* 댓글 삭제 확인  */
+		$(".replyDel").on("click", function(){
+			let replySeq = $(this).attr("seq");
+			console.log(replySeq);
+			if(confirm("댓글을 삭제하시겠습니까?")){
+				alert("삭제 완료되었습니다.");
+				location.href = "/delete.reply?seq=${list.seq}&replySeq="+replySeq;
+			}
 		})
+		
+		
+		/* 게시글 삭제 확인 */
+		function delContent(){
+			if(confirm("게시글을 삭제하시겠습니까?")){
+				alert("삭제 완료되었습니다.");
+				location.href="delete.freeBoard?seq=${list.seq}";
+			}
+		}
+		
+		
+		/* 헤더이벤트 */
+		  $("#subsearchclick").on("click", function () {
+                if ($("#subsearch").css("display", "none")) {//돋보기있는 div
+                    $("#subsearchback").css("display", "block")//검색창있는 div
+                }
+            })
+            $("#searsubback").on("click", function () {
+                if ($("#subsearchback").css("display", "none")) {//돋보기있는 div
+                    $("#subsearch").css("display", "block");//검색창있는 div
+                }
+            })
+            var hamberger = document.querySelector("#hamberger");
+            var navisub = document.querySelector(".navisub");
+            navisub.style.display = "none";
+
+            hamberger.addEventListener("click", function () {
+                if (navisub.style.display === "block") {
+                    navisub.style.display = "none";
+                } else {
+                    navisub.style.display = "block";
+                }
+            });
+
+            addEventListener("resize", function (event) {
+                const bodySize = parseInt($("body").css("width"));
+                if (bodySize > 992) {
+                    const navisub = $(".navisub");
+                    const divsearch = $("#subsearchback")
+                    const addsearch = $("#subsearch")
+                    if (navisub.css("display") == "block") {
+                        navisub.css("display", "none");
+                    }
+                    addsearch.css("display", "block")
+                    divsearch.css("display", "none")
+                }
+            });
+		
 	</script>
 </body>
 

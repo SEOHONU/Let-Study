@@ -58,7 +58,7 @@ public class MemberController extends HttpServlet {
 					response.getWriter().append(resp);
 				}
 
-				//
+				// 회원가입
 			} else if (cmd.equals("/joinMember.member")) {
 				String id = request.getParameter("id");
 				String pw = request.getParameter("pw");
@@ -68,7 +68,7 @@ public class MemberController extends HttpServlet {
 				String birthMonth = request.getParameter("birthMonth");
 				String birthDay = request.getParameter("birthDay");
 				String birthDayStr = String.format("%02d", Integer.parseInt(birthDay));
-		            // 두자리가 아니면 앞에 0이 붙게함 
+				// 두자리가 아니면 앞에 0이 붙게함
 				// 생년월일 값 받음
 
 				String nickname = request.getParameter("nickname");
@@ -80,7 +80,8 @@ public class MemberController extends HttpServlet {
 				Timestamp join_date = new Timestamp(System.currentTimeMillis());
 
 				// 회원가입일자 현재 시간으로 받음
-				MembersDTO dto = new MembersDTO (id, pw, name, birthYear+""+birthMonth+""+birthDayStr, nickname, contact, email, zipcode, roadAddress, detailAddress, join_date);
+				MembersDTO dto = new MembersDTO(id, pw, name, birthYear + "" + birthMonth + "" + birthDayStr, nickname,
+						contact, email, zipcode, roadAddress, detailAddress, join_date);
 				int result = dao.insertAll(dto);
 				// 회원가입하면 나타날 페이지 일단 메인페이지로 씀
 
@@ -91,8 +92,19 @@ public class MemberController extends HttpServlet {
 			} else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
-	            
-	         
+
+				// 아이디 찾기
+			} else if (cmd.equals("/findId.member")) {
+				String name = request.getParameter("name");
+				System.out.println("name : " + name);
+				String email = request.getParameter("email");
+				System.out.println("email : " + email);
+				String contact = request.getParameter("contact");
+				System.out.println("contact : " + contact);
+				String foundId = dao.findId(name, email, contact);
+				request.setAttribute("foundId", foundId);
+				request.getRequestDispatcher("/member/findIdResult.jsp").forward(request, response);
+
 				// select 회원정보출력
 			} else if (cmd.equals("/myInfoSelect.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");

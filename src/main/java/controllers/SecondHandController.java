@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import dao.SecondHandDAO;
 import dao.Sh_CommentsDAO;
 import dto.SecondHandDTO;
 import dto.Sh_CommentsDTO;
+import dto.Sh_FilesDTO;
 import statics.Settings;
 
 @WebServlet("*.secondHand")
@@ -43,6 +45,9 @@ public class SecondHandController extends HttpServlet {
 				String writer = (String)request.getSession().getAttribute("loggedID");
 				String title = request.getParameter("title");
 				String contents = request.getParameter("contents");
+				List<Sh_FilesDTO> list = (List)request.getSession().getAttribute("att");
+				System.out.println("list.size() : "+list.size());
+				System.out.println("list : "+list);
 				double lat = Double.parseDouble(request.getParameter("lat"));
 				double lng = Double.parseDouble(request.getParameter("lng"));
 				title = EncryptionUtils.AntiXSS(title);
@@ -53,10 +58,26 @@ public class SecondHandController extends HttpServlet {
 				dto.setContents(contents);
 				dto.setLat(lat);
 				dto.setLng(lng);
-				shDAO.insertSecondHand(dto);
+				if(list.size() > 0) {	// 첨부파일이 있으면
+					int seq = shDAO.getShSeqNextval();
+					dto.setSeq(seq);
+					for(Sh_FilesDTO i : list) {
+						String oriName = i.getOriName();
+						String sysName = i.getSysName();
+						int parent_seq = seq;
+						shDAO.insertShFiles(new Sh_FilesDTO(0, oriName, sysName, parent_seq));
+					}
+					shDAO.insertSecondHandWithFiles(dto);
+				}
+				else {					// 첨부파일이 없을 경우
+					shDAO.insertSecondHand(dto);
+				}
+				list.clear();
 				response.sendRedirect("/selectBound.secondHand?currentPage=1");
 			}
 			else if(cmd.equals("/selectBound.secondHand")) {
+				List<Sh_FilesDTO> list = new ArrayList<>();
+				request.getSession().setAttribute("att", list);
 				int currentPage = request.getParameter("currentPage") == null ? 1 
 						: Integer.parseInt(request.getParameter("currentPage"));
 				int startRecord = (currentPage * Settings.SH_BOARD_RECORD_COUNT_PER_PAGE) - 
@@ -67,6 +88,7 @@ public class SecondHandController extends HttpServlet {
 				request.setAttribute("currentPage", currentPage);
 				request.setAttribute("recordList", recordList);
 				request.setAttribute("pageNavi", pageNavi);
+				System.out.println("Bound");
 				request.getRequestDispatcher("/secondHand/secondHandList.jsp").forward(request, response);
 			}
 			else if(cmd.equals("/searchSecondHand.secondHand")) {
@@ -143,6 +165,8 @@ public class SecondHandController extends HttpServlet {
 				System.out.println("realPath - 파일 업로드 완료");
 				Enumeration<String> names = multi.getFileNames();
 				System.out.println("파일이름 받아옴 : "+names);
+				String resp = "";
+				List<Sh_FilesDTO> list = (List)request.getSession().getAttribute("att");
 				while(names.hasMoreElements()) {
 					System.out.println("while문 진입");
 					String name = names.nextElement();
@@ -152,13 +176,17 @@ public class SecondHandController extends HttpServlet {
 						System.out.println("oriName : "+oriName);
 						String sysName = multi.getFilesystemName(name);
 						System.out.println("sysName : "+sysName);
+						list.add(new Sh_FilesDTO(0, oriName, sysName, 0));
 						String url = "/img/"+sysName;
 						System.out.println("url : "+url);
-						jo.addProperty("url", url);
+						System.out.println("sysName : "+sysName);
+						System.out.println("oriName : "+oriName);
+						String[] fileArr = new String[] {url, oriName, sysName};
+						resp = g.toJson(fileArr);
 					}
 				}
-				System.out.println(jo.toString());
-				response.getWriter().append(jo.toString());
+				System.out.println(resp);
+				response.getWriter().append(resp);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

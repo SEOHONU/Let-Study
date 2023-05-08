@@ -210,7 +210,7 @@ p {
 			<!--------- 상단네비,헤더 ---------->
 
 			<div class="col-12" id="studyimg">
-				<img src="/image/study.jpg" width="100%" height="300px";>
+				<img src="/image/studyMypage.jpg" width="100%" height="300px";>
 				<h1 class="imgInText" style="font-size: 50px;">마이페이지</h1>
 				<div class="imgInText2">${loggedNickname}님,LetStudy에오신것을
 					환영합니다.</div>

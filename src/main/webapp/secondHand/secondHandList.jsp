@@ -26,6 +26,15 @@
 	box-sizing: border-box;
 	border: 0px solid black;
 }
+a>.btn {
+    background-color: #1e3c3e;
+}
+#searchBtn {
+    background-color: #1e3c3e;
+}
+#shWrite {
+    background-color: #1e3c3e;
+}
 </style>
 <script>
         $(function () {
@@ -38,29 +47,23 @@
 
 <body>
 	<div class="container">
+		<c:import url="/board/topMenu.jsp"></c:import>
+	<div align="center">
+		<img src="/image/shBanner_main.jpg">
+	</div>
 		<div class="row">
-			<div class="col-12">
-				<div class="row">
-					<div class="col-4 col-lg-2 order-2 order-lg-first">logo</div>
-					<div class="col-lg-4 d-none d-lg-block order-lg-1">
-						<a href="/index.jsp">index로</a>
-						<a href="/selectBound.secondHand?currentPage=1">1페이지로</a>
-						<a href="/secondHand/secondHandClusterer.jsp?currentPage=${currentPage}">클러스터러</a>
-					</div>
-					<div class="col-4 d-block d-lg-none order-1">햄버거</div>
-					<div class="col-lg-1 d-none d-lg-block order-lg-2">menu1</div>
-					<div class="col-lg-1 d-none d-lg-block order-lg-3">menu2</div>
-					<div class="col-lg-1 d-none d-lg-block order-lg-4">menu3</div>
-					<div class="col-lg-1 d-none d-lg-block order-lg-5">menu4</div>
-					<div class="col-4 col-lg-2 order-3 order-lg-last">icons</div>
-				</div>
+			<div class="col-4"></div>
+			<div class="col-4" align="center">
+				<a href="/selectBound.secondHand?currentPage=1" class="btn_a"><button type="button" class="btn btn-primary p-0">1페이지로</button></a>
+				<a href="/secondHand/secondHandClusterer.jsp?currentPage=${currentPage}" class="btn_a"><button type="button" class="btn btn-primary p-0">동네 중고거래 찾기</button></a>
 			</div>
+			<div class="col-4"></div>
 		</div>
 		<div class="row">
 			<div class="col-12">
 				<div class="row">
-					<div class="col-lg-2 d-none d-lg-block">여백</div>
-					<div class="col-lg-3">중고책</div>
+					<div class="col-lg-2 d-none d-lg-block"></div>
+					<div class="col-lg-3"></div>
 					<div class="col-lg-5">
 						<form action="/searchSecondHand.secondHand">
 							<select name="option" id="option">
@@ -68,17 +71,17 @@
 								<option value="writer">작성자</option>
 							</select>
 							<input type="text" placeholder="검색어 입력" name="searchText">
-							<button>검색</button>
+							<button type="submit" class="btn btn-primary p-0" id="searchBtn">검색하기</button>
 						</form>
 					</div>
-					<div class="col-lg-2 d-none d-lg-block">여백</div>
+					<div class="col-lg-2 d-none d-lg-block"></div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-12">
 				<div class="row">
-					<div class="col-lg-2 d-none d-lg-block">여백</div>
+					<div class="col-lg-2 d-none d-lg-block"></div>
 					<c:forEach var="i" items="${recordList}" begin="0" end="3" step="1">
 						<div class="col-4 col-lg-2">
 							<div>
@@ -94,17 +97,17 @@
                                 <div>
                                     작성일 : ${i.detailDate}
                                 </div>
-                                <div>
+                                <div align="right">
                                     <a href="/secondHandBoardContents.secondHand?seq=${i.seq}&currentPage=${currentPage}">
-                                        <input type="button" value="이동하기">
+                                        <button type="button" class="btn btn-primary p-0">이동하기</button>
                                     </a>
                                 </div>
                             </div>
 						</div>
 					</c:forEach>
 					<c:if test="${recordList.size() > 4}">
-					<div class="col-lg-2 d-none d-lg-block">여백</div>
-					<div class="col-lg-2 d-none d-lg-block">여백</div>
+					<div class="col-lg-2 d-none d-lg-block"></div>
+					<div class="col-lg-2 d-none d-lg-block"></div>
 					<c:forEach var="i" items="${recordList}" begin="4" end="7" step="1">
 						<div class="col-4 col-lg-2">
 							<div>
@@ -120,9 +123,9 @@
                                 <div>
                                     작성일 : ${i.detailDate}
                                 </div>
-                                <div>
+                                <div align="right">
                                     <a href="/secondHandBoardContents.secondHand?seq=${i.seq}&currentPage=${currentPage}">
-                                        <input type="button" value="이동하기">
+                                        <button type="button" class="btn btn-primary p-0">이동하기</button>
                                     </a>
                                 </div>
                             </div>
@@ -130,8 +133,8 @@
 					</c:forEach>
 					</c:if>
 					<c:if test="${recordList.size() > 8}">
-					<div class="col-lg-2 d-none d-lg-block">여백</div>
-					<div class="col-lg-2 d-none d-lg-block">여백</div>
+					<div class="col-lg-2 d-none d-lg-block"></div>
+					<div class="col-lg-2 d-none d-lg-block"></div>
 					<c:forEach var="i" items="${recordList}" begin="8" end="11"
 						step="1">
 						<div class="col-4 col-lg-2">
@@ -148,15 +151,15 @@
                                 <div>
                                     작성일 : ${i.detailDate}
                                 </div>
-                                <div>
+                                <div align="right">
                                     <a href="/secondHandBoardContents.secondHand?seq=${i.seq}&currentPage=${currentPage}">
-                                        <input type="button" value="이동하기">
+                                        <button type="button" class="btn btn-primary p-0">이동하기</button>
                                     </a>
                                 </div>
                             </div>
 						</div>
 					</c:forEach>
-					<div class="col-lg-2 d-none d-lg-block">여백</div>
+					<div class="col-lg-2 d-none d-lg-block"></div>
 					</c:if>
 				</div>
 			</div>
@@ -217,11 +220,12 @@
 						</c:choose>
 					</div>
 					<div class="col-4" align="right">
-						<input type="button" value="글쓰기" id="shWrite">
+						<button type="button" class="btn btn-primary p-0" id="shWrite">글쓰기</button>
 					</div>
 				</div>
 			</div>
 		</div>
+		<c:import url="/board/footer.jsp"></c:import>
 	</div>
 </body>
 

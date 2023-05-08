@@ -62,7 +62,7 @@
 	border-radius: 10px;
 	display: block;
 	width: 100%;
-	margin-top: 15px;
+	margin-top: 10px;
 }
 
 #errorMessage {
@@ -78,10 +78,28 @@ a {
 	text-decoration: none;
 	color: #6c6c81;
 }
+
+/* 하단 링크 스타일 */
+.bottom-link {
+	margin-top: 10px;
+	text-align: center;
+}
+
+/* 링크 스타일 */
+.bottom-link a {
+	color: #6c6c81;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+/* 링크 호버 스타일 */
+.bottom-link a:hover {
+	color: #ed4e12;
+}
 </style>
 
 <body>
-	<form >
+	<form>
 		<div class="container">
 			<div class="loginBox">
 				<h2>로그인</h2>
@@ -98,9 +116,6 @@ a {
 						<label><input type="checkbox" name="rememberId" value="1" />
 							아이디 기억하기</label>
 					</div>
-					<div class="findIdPw">
-						<a href="#">아이디/비밀번호 찾기</a>
-					</div>
 				</div>
 				<br>
 				<div class="errorMessage" id="errorMessage"></div>
@@ -109,22 +124,23 @@ a {
 					<button type="button" class="btn btn-primary" id="btnLogin">로그인</button>
 					<button type="button" class="btn btn-light" id="btnJoin">회원가입</button>
 				</div>
+				<div class="bottom-link">
+					<a href="/member/findId.jsp">아이디 찾기</a> | <a href="#">비밀번호 찾기 </a>
+				</div>
 			</div>
 		</div>
 	</form>
 
 	<script>
-
 		$("#btnJoin").on("click", function() {
 			location.href = "/member/joinForm.jsp";
 		})
 
-// ajax로 페이지 전환없이 데이터 전송
+		// ajax로 페이지 전환없이 데이터 전송
 
 		$("#btnLogin").on("click", function() {
 			let id = $("#id").val();
 			let pw = $("#pw").val();
-
 			$.ajax({
 				url : "/login.member",
 				type : "post",
@@ -146,23 +162,26 @@ a {
 						//로그인 폼 초기화 
 						$("#id").val("");
 						$("#pw").val("");
-					// 로그인이 성공할 경우 
-					}else {
-						location.href = "/index.jsp"; 
-						console.log("로그인이 성공할 경우"); 
+						// 로그인이 성공할 경우 
+					} else {
+						location.href = "/index.jsp";
+						console.log("로그인이 성공할 경우");
 					}
 				},
 				error : function(xhr, status, error) {
 					console.log(xhr);
 					console.log(status);
-					
-					
+
 					console.log(error);
 				}
 
 			});
 
 		});
+		
+
+
+
 	</script>
 </body>
 </html>

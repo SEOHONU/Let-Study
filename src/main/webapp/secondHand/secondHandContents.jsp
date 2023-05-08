@@ -24,7 +24,7 @@
     <style>
         * {
             box-sizing: border-box;
-            border: 1px solid black;
+            border: 0px solid black;
         }
 
         table {
@@ -48,13 +48,25 @@
         .writeReply {
             resize: none;
         }
+        .btn {
+            background-color: #1e3c3e;
+        }
+        #title {
+        	background-color: #1e3c3e;
+        	font-size: 18pt;
+        	color: white;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
+    <c:import url="/board/topMenu.jsp"></c:import>
+		<div align="center">
+			<img src="/image/shBanner_main.jpg">
+		</div>
         <div class="row">
-            <div class="col-lg-2 d-none d-lg-block">여백</div>
+            <div class="col-lg-2 d-none d-lg-block"></div>
             <form action="/modifyContents.secondHand" class="col-lg-8 col-12"
                 onsubmit="return confirm('${dto.title} 글을 수정하시겠습니까?')">
                 <table align="center" width="100%">
@@ -72,7 +84,8 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <textarea name="contents" id="summernote" class="summernote" required>${dto.contents}</textarea>
+                            <textarea name="contents" id="summernote" class="summernote"
+                                required>${dto.contents}</textarea>
                         </td>
                     </tr>
                     <tr>
@@ -83,20 +96,21 @@
                     <tr>
                         <td colspan="3" align="center">
                             <c:if test="${dto.writer == loggedID}">
-                                <input type="button" value="수정하기" id="modify">
-                                <input type="button" value="삭제하기" onclick="confirmDel()">
-                            </c:if> <input type="button"
-                                onclick="location.href='/selectBound.secondHand?currentPage=${currentPage}'"
-                                value="돌아가기">
+                                <button type="button" id="modify" class="btn btn-primary">수정하기</button>
+                                <button type="button" id="modify" class="btn btn-primary"
+                                    onclick="confirmDel()">삭제하기</button>
+                            </c:if>
+                            <button type="button" class="btn btn-primary"
+                                onclick="location.href='/selectBound.secondHand?currentPage=${currentPage}'">목록으로</button>
                         </td>
                     </tr>
                 </table>
             </form>
-            <div class="col-lg-2 d-none d-lg-block">여백</div>
+            <div class="col-lg-2 d-none d-lg-block"></div>
         </div>
         <hr>
         <div class="row">
-            <div class="col-lg-2 d-none d-lg-block">여백</div>
+            <div class="col-lg-2 d-none d-lg-block"></div>
             <form action="/insertComments.shComments" method="post" class="col-lg-8 col-12">
                 <table border="1" align="center">
                     <tr>
@@ -108,12 +122,13 @@
                     <tr>
                         <td align="left" class="commentTd"><textarea name="contents" id="writeComment"
                                 placeholder="댓글 내용을 작성해주세요" required></textarea></td>
-                        <td align="right"><input type="submit" value="댓글쓰기" class="writeComment">
+                        <td align="right">
+                            <button type="submit" id="modify" class="btn btn-primary writeComment p-0">댓글쓰기</button>
                         </td>
                     </tr>
                 </table>
             </form>
-            <div class="col-lg-2 d-none d-lg-block">여백</div>
+            <div class="col-lg-2 d-none d-lg-block"></div>
         </div>
         <hr>
         <c:forEach var="i" items="${list}">
@@ -151,10 +166,10 @@
 
                         td_control = $("<td align='right'>");
                         if (${ i.com_writer == loggedID }) {
-                            let modBtn = $("<input type='button' value='수정' class='modCom'>");
-                            let delBtn = $("<input type='button' value='삭제' class='delCom' seq='${i.com_seq}'>");
-                            td_control.append(modBtn);
-                            td_control.append(delBtn);
+                        let modBtn = $("<button type='button' class='btn btn-primary modCom p-0'>수정</button>");
+                        let delBtn = $("<button type='button' class='btn btn-primary delCom p-0' seq='${i.com_seq}'>삭제</button>");
+                        td_control.append(modBtn);
+                        td_control.append(delBtn);
                         }
                         modForm.append(hidden_currentPage);
                         modForm.append(hidden_board_seq);
@@ -169,7 +184,6 @@
                         tr2.append(td_comment);
                         tr2.append(td_control);
                         var targetDiv = $(document).find($("div[com_seq=${i.parent_seq}]"));
-
                         targetDiv.append(space1);
                         targetDiv.append(arrowSpace);
                         targetDiv.append(modForm);
@@ -178,7 +192,7 @@
                 </c:when>
                 <c:otherwise>
                     <div class="row" com_seq="${i.com_seq}">
-                        <div class="col-lg-2 d-none d-lg-block">여백</div>
+                        <div class="col-lg-2 d-none d-lg-block"></div>
                         <form action="/modifyComments.shComments" class="col-lg-8 col-12"
                             onsubmit="return confirm('댓글을 수정하시겠습니까?')">
                             <input type="hidden" name="currentPage" value="${currentPage}">
@@ -195,20 +209,21 @@
                                     </td>
                                     <td align="right">
                                         <c:if test="${i.com_writer == loggedID}">
-                                            <input type="button" value="수정" class="modCom">
-                                            <input type="button" value="삭제" class='delCom' seq="${i.com_seq}">
+                                            <button type="button" class="btn btn-primary modCom p-0">수정</button>
+                                            <button type="button" class="btn btn-primary delCom p-0" seq="${i.com_seq}">삭제</button>
                                         </c:if>
-                                        <input type="button" value="대댓글" class="writeReplyBtn" com_seq="${i.com_seq}">
+                                        <button type="button" class="btn btn-primary writeReplyBtn p-0" com_seq="${i.com_seq}">답글</button>
                                     </td>
                                 </tr>
                             </table>
                         </form>
-                        <div class="col-lg-2 d-none d-lg-block">여백</div>
+                        <div class="col-lg-2 d-none d-lg-block"></div>
                     </div>
                     <hr>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
+        <c:import url="/board/footer.jsp"></c:import>
     </div>
     <script>
         $("#summernote").summernote({
@@ -218,7 +233,7 @@
             focus: true, // 에디터 로딩후 포커스를 맞출지 여부
             disableDragAndDrop: true,
             lang: "ko-KR", // 한글 설정
-            placeholder: 'SummerNote 연습 제발제발~', //placeholder 설정
+            placeholder: '내용을 입력하세요', //placeholder 설정
             toolbar: [
                 ['style', ['style']],
                 ['font', ['bold', 'underline', 'clear']],
@@ -239,7 +254,7 @@
             }
         });
         $("#summernote").summernote("disable");
-        
+
         function uploadImg(img, summerNote) {
             data = new FormData();
             data.append("img", img);
@@ -288,8 +303,8 @@
             let replyForm = $("<form action='/insertReply.shReply'>");
             let replyWriter = $("<input type='text' value='${loggedID}' readonly>");
             let replyContents = $("<textarea class='writeReply' name='contents'>");
-            let replySubmit = $("<input type='submit' value='답글쓰기'>");
-            let replyCancle = $("<input type='button' value='취소'>");
+            let replySubmit = $("<button type='submit' class='btn btn-primary'>답글</button>");
+            let replyCancle = $("<button type='button' class='btn btn-primary modCom'>취소</button>");
             let hidden_board_seq = $("<input type='hidden' name='board_seq'>");
             hidden_board_seq.val("${dto.seq}");
             let hidden_currentPage = $("<input type='hidden' name='currentPage'>");
@@ -338,8 +353,8 @@
         });
         $(".modCom").on("click", function () {
             $(this).parent().prev().find($(".comment")).removeAttr("readonly");
-            let submit = $("<input type='submit' value='수정하기'>");
-            let cancle = $("<input type='button' value='취소'>");
+            let submit = $("<button type='submit' class='btn btn-primary'>수정하기</button>");
+            let cancle = $("<button type='button' class='btn btn-primary'>취소</button>");
             cancle.on("click", function () {
                 location.reload();
             })
@@ -351,13 +366,14 @@
             target.append(cancle);
         })
         $("#modify").on("click", function () {
-        	$("#summernote").summernote("enable");
+        	$("#title").removeAttr("readonly");
+            $("#summernote").summernote("enable");	
             marker.setMap(null);
             infowindow.setMap(null);
             let searchText = $("<input type='text' placeholder='주소를 입력하세요' id='target'>");
-            let searchBtn = $("<input type='button' id='search' value='검색'>");
-            let cancleBtn = $("<input type='button' id='cancle' value='취소'>");
-            let submit = $("<input type='submit' value='수정완료' id='submit' disabled>");
+            let searchBtn = $("<button type='button' id='search' class='btn btn-primary'>검색</button>");
+            let cancleBtn = $("<button type='button' id='cancle' class='btn btn-primary'>취소</button>");
+            let submit = $("<button type='submit' id='submit' class='btn btn-primary' disabled>수정완료</button>");
             let lat = $("<input type='hidden' name='lat' value='위도' id='Lat' required>");
             let lng = $("<input type='hidden' name='lng' value='경도' id='Lng' required>");
             cancleBtn.on("click", function () {

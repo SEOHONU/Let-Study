@@ -25,20 +25,6 @@ div {
 	border: 1px solid black;
 }
 
-.d-block {
-	height: 400px;
-}
-
-.header {
-	position: relative;
-}
-
-.navi {
-	position: sticky;
-	top: 0;
-	background-color: white;
-	z-index: 999;
-}
 
 .inbox{
 	padding-left: 3%;
@@ -66,10 +52,6 @@ div {
 	overflow: hidden;
 }
 
-.writer {
-	text-align: right;
-}
-
 .leftorrightbtn {
 	padding-top: 120px;
 	padding-bottom: 120px;
@@ -92,6 +74,7 @@ div {
 }
 
 .selectbox {
+
 	height: 12%;
 	position: relative;
 	line-height: 53px;
@@ -140,7 +123,7 @@ div {
 		</div>
 		<div class="row body">
 			<div class="col-12" id="mainstudyfont">
-				<h3>이달의 스터디</h3>
+				<h3>스터디 목록</h3>
 			</div>
 			<div class="col-12" class="fastfindstudy">
 				<div class="row">
@@ -157,11 +140,11 @@ div {
 													<div>${j.seq}</div>
 												</div>
 											</div>
-											<div class="col-10">${j.title}</div>
+											<div class="col-10 title">${j.title}</div>
 											<div class="col-12 content">${j.contents}</div>
-											<div class="col-12 writer">${j.writer}</div>
-											<div class="col-12">${j.write_date}</div>
-											<div class="col-12">${j.view_count}</div>
+											<div class="col-12 writer" align="right">${j.writer}</div>
+											<div class="col-12 write_date" align="right">${j.write_date}</div>
+											<div class="col-12 view_count" align="right">조회수:${j.view_count}</div>
 										</div>
 									</a>
 								</div>
@@ -174,7 +157,7 @@ div {
 			<div classs="col-12">
 				<div class="row">
 					<div class="col-2"></div>
-					<div class="col-8" align="right"><a href="/studyboard/insertstudyboard.jsp"><button>아싸라비야 콜롬비야</button></a></div>
+					<div class="col-8" align="right"><a href="/studyboard/insertstudyboard.jsp"><button>글쓰기</button></a></div>
 					<div class="col-2"></div>
 				</div>
 				
