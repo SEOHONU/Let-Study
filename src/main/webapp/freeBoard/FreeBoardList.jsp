@@ -64,17 +64,6 @@
 	margin-top: 15px;
 }
 
-.header {
-	position: relative;
-}
-
-.navi {
-	position: sticky;
-	top: 0;
-	background-color: white;
-	z-index: 999;
-}
-
 .margin {
 	height: 28px;
 }
@@ -96,6 +85,9 @@
 	position: relative;
 	top: 10%;
 	height: 35px;
+}
+#writeBtn{
+background-color : #254F4C;
 }
 
 .center {
@@ -124,6 +116,49 @@ a {
 float:left;
 }
 
+#freeboard_img {
+position:relative;
+width:100%;
+height: 200px;
+}
+
+#freeboard_img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+}
+
+#freeboard_img img{
+opacity:0.5;
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+#imgTitle{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* text 요소를 커버 위에 위치시킵니다. */
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+
+
+}
+
+
+
+
 
 </style>
 
@@ -137,10 +172,17 @@ float:left;
                 <!-- 헤더 네비 -->
                 <c:import url="/board/topMenu.jsp"></c:import>
 		<!-- 바디 -->
-
 		<!-- 자유게시판 이미지 -->
 		<div class="row">
-			<div class="col-12 " id="freeboard_img">자유게시판 이미지</div>
+			<div class="col-12 " id="freeboard_img">
+			<a href="/contentList.freeBoard">
+			<img src="/image/freeboardImg.jpg">
+			<h1 id=imgTitle>자유게시판</h1>
+			</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col margin"></div>
 		</div>
 		<!--검색 바  -->
 		<form action="/searchByOption.freeBoard" method="post">
@@ -198,7 +240,7 @@ float:left;
 		<div class="row writeBtnRow">
 			<div class="col writeBtnCol">
 				<a href="/freeBoard/FreeBoardWriteForm.jsp">
-					<button type="button" class="btn btn-success">글쓰기</button>
+					<button type="button" class="btn btn-success" id="writeBtn" >글쓰기</button>
 				</a>
 			</div>
 		</div>
