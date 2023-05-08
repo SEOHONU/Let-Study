@@ -186,7 +186,7 @@
                             <div class="col-6 col-lg-2 order-2 order-lg-first" id="logo" style="text-align:center">
                                 <div class="row">
                                     <div class="col-12" style="padding:0%">
-                                        <a href="/index.jsp"><img src="/image/logo.png"></a>
+                                        <a href="/index.jsp"><img src="/image/mainlogo.png"></a>
 
                                     </div>
                                     <div class="col-12 d-lg-none d-block">
