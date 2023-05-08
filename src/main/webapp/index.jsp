@@ -600,7 +600,7 @@
                                         <div class="row 중고책2">
                                             <div class="col-12">공백</div>
                                             <div class="col-12">
-                                                <a onclick="javascript:checkLogin('//selectBound.secondHand');">중고책</a>
+                                                <a onclick="javascript:checkLogin('/selectBound.secondHand');">중고책</a>
                                             </div>
                                             <div class="col-12">
                                                 <div class="row">
