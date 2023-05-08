@@ -287,7 +287,7 @@
 					<div class="col-12">
 						<div class="row bodysub">
 
-							<div class="col-2" style="background-color: #3c7579;">공백</div>
+							<div class="col-2" style="background-color: #3c7579;">　</div>
 							<div class="col-8">
 								<div class="row">
 
@@ -312,7 +312,7 @@
 											</div>
 										</form>
 									</div>
-									<div class="col-12" style="text-align: center; background-color: #a0cbce;">공백</div>
+									<div class="col-12" style="text-align: center; background-color: #a0cbce;">　</div>
 
 									<div class="col-12">
 										스터디
@@ -347,7 +347,7 @@
 											</c:choose>
 										</div>
 									</div>
-									<div class="col12" style="text-align: center; background-color: #a0cbce;">공백</div>
+									<div class="col12" style="text-align: center; background-color: #a0cbce;">　</div>
 
 
 									<div class="col-12">
@@ -409,7 +409,7 @@
 											</c:choose>
 										</div>
 									</div>
-									<div class="col12" style="text-align: center; background-color: #a0cbce;">공백</div>
+									<div class="col12" style="text-align: center; background-color: #a0cbce;">　</div>
 
 
 									<div class="col-12">
@@ -458,7 +458,7 @@
 										<div class="col-12">검색한 결과가 없습니다.</div>
 									</c:otherwise>
 									</c:choose>
-									<div class="col-12" style="text-align: center; background-color: #a0cbce;">공백</div>
+									<div class="col-12" style="text-align: center; background-color: #a0cbce;">　</div>
 									<div class="col-12 maptotal" style="text-align: center; padding: 0px">
 										<div class="row map_wrap" style="margin: 0px;">
 											<div class="col-7 mapsize" style="padding: 0px;">
@@ -485,11 +485,13 @@
 									</div>
 								</div>
 							</div>
+							<div class="col-2" style="background-color: #3c7579;">　</div>
 						</div>
+						
 					</div>
-					<div class="col-2" style="background-color: #3c7579;">공백</div>
+					
 				</div>
-				<div class="row footer">풋터</div>
+				<c:import url="/board/footer.jsp"></c:import>
 			</div>
 		</body>
 		<script>
