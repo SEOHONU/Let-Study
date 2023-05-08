@@ -56,6 +56,10 @@
 
 <body>
     <div class="container">
+    <c:import url="/board/topMenu.jsp"></c:import>
+		<div align="center">
+			<img src="/image/shBanner_main.jpg">
+		</div>
         <div class="row">
             <div class="col-lg-2 d-none d-lg-block"></div>
             <form action="/modifyContents.secondHand" class="col-lg-8 col-12"
@@ -214,6 +218,7 @@
                 </c:otherwise>
             </c:choose>
         </c:forEach>
+        <c:import url="/board/footer.jsp"></c:import>
     </div>
     <script>
         $("#summernote").summernote({
@@ -223,7 +228,7 @@
             focus: true, // 에디터 로딩후 포커스를 맞출지 여부
             disableDragAndDrop: true,
             lang: "ko-KR", // 한글 설정
-            placeholder: 'SummerNote 연습 제발제발~', //placeholder 설정
+            placeholder: '내용을 입력하세요', //placeholder 설정
             toolbar: [
                 ['style', ['style']],
                 ['font', ['bold', 'underline', 'clear']],
