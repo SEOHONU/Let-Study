@@ -21,7 +21,9 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e7252ffaa17ffd29198c0279af09c9f9&libraries=clusterer"></script>
 	<style>
-		
+		#back {
+			background-color: #1e3c3e;
+		}
 	</style>
 </head>
 <body>

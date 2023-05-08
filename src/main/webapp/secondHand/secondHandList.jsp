@@ -53,8 +53,7 @@ a>.btn {
 	</div>
 		<div class="row">
 			<div class="col-4"></div>
-			<div class="col-4">
-				<a href="/index.jsp" class="btn_a"><button type="button" class="btn btn-primary p-0">메인페이지로</button></a>
+			<div class="col-4" align="center">
 				<a href="/selectBound.secondHand?currentPage=1" class="btn_a"><button type="button" class="btn btn-primary p-0">1페이지로</button></a>
 				<a href="/secondHand/secondHandClusterer.jsp?currentPage=${currentPage}" class="btn_a"><button type="button" class="btn btn-primary p-0">동네 중고거래 찾기</button></a>
 			</div>

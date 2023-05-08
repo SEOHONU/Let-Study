@@ -51,6 +51,11 @@
         .btn {
             background-color: #1e3c3e;
         }
+        #title {
+        	background-color: #1e3c3e;
+        	font-size: 18pt;
+        	color: white;
+        }
     </style>
 </head>
 
@@ -118,7 +123,7 @@
                         <td align="left" class="commentTd"><textarea name="contents" id="writeComment"
                                 placeholder="댓글 내용을 작성해주세요" required></textarea></td>
                         <td align="right">
-                            <button type="submit" id="modify" class="btn btn-primary writeComment">댓글쓰기</button>
+                            <button type="submit" id="modify" class="btn btn-primary writeComment p-0">댓글쓰기</button>
                         </td>
                     </tr>
                 </table>
@@ -161,8 +166,8 @@
 
                         td_control = $("<td align='right'>");
                         if (${ i.com_writer == loggedID }) {
-                        let modBtn = $("<button type='button' class='btn btn-primary modCom'>수정</button>");
-                        let delBtn = $("<button type='button' class='btn btn-primary delCom' seq='${i.com_seq}'>삭제</button>");
+                        let modBtn = $("<button type='button' class='btn btn-primary modCom p-0'>수정</button>");
+                        let delBtn = $("<button type='button' class='btn btn-primary delCom p-0' seq='${i.com_seq}'>삭제</button>");
                         td_control.append(modBtn);
                         td_control.append(delBtn);
                         }
@@ -204,10 +209,10 @@
                                     </td>
                                     <td align="right">
                                         <c:if test="${i.com_writer == loggedID}">
-                                            <button type="button" class="btn btn-primary modCom">수정</button>
-                                            <button type="button" class="btn btn-primary delCom" seq="${i.com_seq}">삭제</button>
+                                            <button type="button" class="btn btn-primary modCom p-0">수정</button>
+                                            <button type="button" class="btn btn-primary delCom p-0" seq="${i.com_seq}">삭제</button>
                                         </c:if>
-                                        <button type="button" class="btn btn-primary writeReplyBtn" com_seq="${i.com_seq}">답글</button>
+                                        <button type="button" class="btn btn-primary writeReplyBtn p-0" com_seq="${i.com_seq}">답글</button>
                                     </td>
                                 </tr>
                             </table>
