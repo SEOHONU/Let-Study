@@ -116,6 +116,11 @@
             right: 5px;
             bottom: 5px;
         }
+        
+        .btns{
+			background-color: white;
+			border-radius: 5px;
+		}
     </style>
     <script>
     	$(function(){
@@ -161,7 +166,7 @@
                 	<div class="row" id="update_map_search">
                 		<div class="col-12">
                     		<input type="text" placeholder="주소입력" name="mapname" value="${dto.mapname}" id="target" required>
-                    		<input type="button" value="검색" id="mapsearch">
+                    		<input type="button" class="btns" value="검색" id="mapsearch">
                     		<input type="hidden" name="lat" value="${dto.lat}" id="Lat" required>
                     		<input type="hidden" name="lng" value="${dto.lng}" id="Lng" required>
                     	</div>
@@ -179,9 +184,9 @@
                         			<div class="col-12 p-0">
                         				<div>${sbm.id}</div>
                         				<div class="applybtnyorn" align="right">
-                        					<button type="button" class="applyacceptbtn">수락</button>
+                        					<button type="button" class="applyacceptbtn btns">수락</button>
                         					<input type="hidden" value="${sbm.yorN}">
-                        					<button type="button" class="applycancelbtn">거절</button>
+                        					<button type="button" class="applycancelbtn btns">거절</button>
                         				</div>
                         			</div>
                         		</c:forEach>
@@ -206,11 +211,11 @@
                 	</div>
             	</div>
             	<div class="col-12" id="btnbox">
-            		<button type="submit" id="acceptbtn">확인</button>
-            		<button type="button" id="cancelbtn">취소</button>
-                	<button type="button" id="updatebtn">수정하기</button>
-                	<button type="button" id="deletebtn">삭제하기</button>
-                	<a href="/select.studyboard?cpage=${cpage}"><button type="button">목록으로</button></a>
+            		<button type="submit" id="acceptbtn" class="btns">확인</button>
+            		<button type="button" id="cancelbtn" class="btns">취소</button>
+                	<button type="button" id="updatebtn" class="btns">수정하기</button>
+                	<button type="button" id="deletebtn" class="btns">삭제하기</button>
+                	<a href="/select.studyboard?cpage=${cpage}"><button type="button" class="btns">목록으로</button></a>
             	</div>
         	</div>
         	<input type="hidden" name="cpage" value="${cpage}">
@@ -235,10 +240,10 @@
                 				<input type="hidden" value="${i.seq}">
                 				<c:if test="${i.writer == loggedID}">
                 					<div align="right">
-                						<button type="button" class="btn btn-outline-dark replyacceptbtn">확인</button>
-                						<button type="button" class="btn btn-outline-dark replycancelbtn">취소</button>
-                						<button type="button" class="btn btn-outline-dark replyupdatebtn">수정하기</button>
-                						<button type="button" class="btn btn-outline-dark replydeletebtn">삭제하기</button>
+                						<button type="button" class="btns replyacceptbtn">확인</button>
+                						<button type="button" class="btns replycancelbtn">취소</button>
+                						<button type="button" class="btns replyupdatebtn">수정하기</button>
+                						<button type="button" class="btns replydeletebtn">삭제하기</button>
                 					</div>
                 				</c:if>
                 			</div>
@@ -248,7 +253,7 @@
             	<div class="col-12 p-0" id="replywritebox">
                 	<div contenteditable="true" id="replytext"></div>
                 	<input type="hidden" name="studyreplycontents" id="studyreplycontents">
-                	<button type="submit" id="replywritebtn">작성하기</button>
+                	<button type="submit" id="replywritebtn" class="btns">작성하기</button>
             	</div>
             	<div class="col-12">아래 대충 띄어놓기</div>
         	</div>
@@ -510,6 +515,11 @@
             right: 5px;
             bottom: 5px;
         }
+        
+        .btns{
+			background-color: white;
+			border-radius: 5px;
+		}
     </style>
     <script>
     	$(function(){
@@ -530,7 +540,7 @@
                             <h3>${dto.title}</h3>
                             <div>${dto.contents}</div>
                             <div>작성자 : ${dto.writer}</div>
-                            <button type="button" id="applybtn">신청하기</button>    
+                            <button type="button" id="applybtn" class="btns">신청하기</button>    
                         </div>
                     </div>
                 </div>
@@ -576,7 +586,7 @@
                 </div>
             </div>
             <div class="col-12" id="totitle">
-            	<a href="/select.studyboard?cpage=${cpage}"><button type="button">목록으로</button></a>
+            	<a href="/select.studyboard?cpage=${cpage}"><button type="button" class="btns">목록으로</button></a>
             </div>
         </div>
         <form action="/insert.studyreply" method="post" id="replyForm">
@@ -597,10 +607,10 @@
                 				<input type="hidden" value="${i.seq}">
                 				<c:if test="${i.writer == loggedID}">
                 					<div align="right">
-                						<button type="button" class="replyacceptbtn">확인</button>
-                						<button type="button" class="replycancelbtn">취소</button>
-                						<button type="button" class="replyupdatebtn">수정하기</button>
-                						<button type="button" class="replydeletebtn">삭제하기</button>
+                						<button type="button" class="replyacceptbtn btns">확인</button>
+                						<button type="button" class="replycancelbtn btns">취소</button>
+                						<button type="button" class="replyupdatebtn btns">수정하기</button>
+                						<button type="button" class="replydeletebtn btns">삭제하기</button>
                 					</div>
                 				</c:if>
                 			</div>
@@ -610,7 +620,7 @@
             	<div class="col-12 p-0" id="replywritebox">
                 	<div contenteditable="true" id="replytext"></div>
                 	<input type="hidden" name="studyreplycontents" id="studyreplycontents">
-                	<button type="submit" id="replywritebtn">작성하기</button>
+                	<button type="submit" id="replywritebtn" class="btns">작성하기</button>
             	</div>
             	<div class="col-12">아래 대충 띄어놓기</div>
         	</div>
