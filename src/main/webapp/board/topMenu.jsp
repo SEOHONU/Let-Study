@@ -84,6 +84,9 @@
                     color: white;
 
                 }
+                i{
+                color:#aebabb;
+                }
             </style>
             <script>
                 function checkLogin(url) {
@@ -141,7 +144,7 @@
 
                             </div>
 
-                            <div class="col-lg-4 d-none d-lg-block order-lg-1">여백</div>
+                            <div class="col-lg-4 d-none d-lg-block order-lg-1"></div>
                             <div class="col-3 d-block d-lg-none order-1">
                                 <div class="row">
                                     <div class="col-12">
@@ -153,21 +156,21 @@
                                             <!-- 네비햄버거 누를시 나오는거 -->
                                             <div class="col-12 navisub">
                                                 <div class="row" style="text-align: right;">
-                                                    <div class="col-12 naviname" style="text-align: center;"
+                                                    <div class="col-12 naviname" style="text-align: center;font-size:12px; color:#aebabb;"
                                                         onclick="javascript:checkLogin('/select.studyboard');">
-                                                        Study
+                                                        스터디
                                                     </div>
-                                                    <div class="col-12 naviname" style="text-align: center;"
+                                                    <div class="col-12 naviname" style="text-align: center;font-size:12px; color:#aebabb;"
                                                         onclick="javascript:checkLogin('/selectBound.secondHand');">
-                                                        second
+                                                        중고책거래
                                                     </div>
-                                                    <div class="col-12 naviname" style="text-align: center;"
+                                                    <div class="col-12 naviname" style="text-align: center;font-size:12px; color:#aebabb;"
                                                         onclick="javascript:checkLogin('/contentList.freeBoard');">
-                                                        free
+                                                        자유게시판
                                                     </div>
-                                                    <div class="col-12 naviname" style="text-align: center;"
+                                                    <div class="col-12 naviname licence" style="text-align: center;font-size:12px; color:#aebabb;"
                                                         onclick="javascript:checkLogin('/contentList.freeBoard');">
-                                                        licence
+                                                        자격증게시판
                                                     </div>
                                                 </div>
                                             </div>
@@ -195,21 +198,21 @@
                             </div>
 
 
-                            <div class="col-lg-1 d-none d-lg-block order-lg-2 naviname" style="text-align: center;"
+                            <div class="col-lg-1 d-none d-lg-block order-lg-2 naviname" style="text-align: center;padding:0px; font-size:12px; line-height: 100px; color:#aebabb"
                                 onclick="javascript:checkLogin('/select.studyboard');">
-                                Study
+                                스터디
                             </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-3 naviname" style="text-align: center;"
+                            <div class="col-lg-1 d-none d-lg-block order-lg-3 naviname" style="text-align: center;padding:0px; font-size:12px; line-height: 100px; color:#aebabb"
                                 onclick="javascript:checkLogin('/selectBound.secondHand');">
-                                Sencond
+                                중고책거래
                             </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-4 naviname" style="text-align: center;"
+                            <div class="col-lg-1 d-none d-lg-block order-lg-4 naviname" style="text-align: center;padding:0px; font-size:12px; line-height: 100px; color:#aebabb"
                                 onclick="javascript:checkLogin('/contentList.freeBoard');">
-                                Board
+                                자유게시판
                             </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-5 naviname" style="text-align: center;"
+                            <div class="col-lg-1 d-none d-lg-block order-lg-5 naviname licence" style="text-align: center;padding:0px; font-size:12px; line-height: 100px; color:#aebabb"
                                 onclick="javascript:checkLogin('/자격증 게시판으로');">
-                                Licence
+                                자격증게시판
                             </div>
 
                             <div class="col-lg-2 d-none d-lg-block  order-lg-last">
@@ -217,23 +220,23 @@
 
                                     <c:choose>
                                         <c:when test="${loggedID==null}">
-                                            <div class="col-6 login">
+                                            <div class="col-6 login" style="line-height: 100px;">
                                                 <a href="/member/loginForm.jsp"><i
                                                         class="fa-solid fa-right-to-bracket"></i></a>
                                                 <!--로그인안됐을때-->
                                             </div>
-                                            <div class="col-6 signup">
+                                            <div class="col-6 signup" style="line-height: 100px;">
                                                 <a href="/member/joinForm.jsp"><i class="fa-solid fa-user-plus"></i></a>
                                                 <!--로그인안됐을때-->
                                             </div>
                                         </c:when>
                                         <c:otherwise>
-                                            <div class="col-6 profile">
+                                            <div class="col-6 profile" style="line-height: 100px;">
                                                 <a href="/myPage/mypageMainForm.jsp"><i
                                                         class="fa-solid fa-user"></i></a>
                                                 <!--로그인됐을때-->
                                             </div>
-                                            <div class="col-6 logout">
+                                            <div class="col-6 logout" style="line-height: 100px;">
                                                 <a href="/logout.member"><i
                                                         class="fa-solid fa-right-from-bracket"></i></a>
                                                 <!--로그인됐을때-->
@@ -321,6 +324,11 @@
                     divsearch.css("display", "none")
                 }
             });
+            
+            $(".licence").on("click",function(){
+            	alert("아직 미구현 입니다.")
+                location.reload();
+            })
 
         </script>
 
