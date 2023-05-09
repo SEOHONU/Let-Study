@@ -16,7 +16,7 @@
 				crossorigin="anonymous"></script>
 			<script src="https://code.jquery.com/jquery-3.6.4.js"
 				integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
-
+<script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
 			<script type="text/javascript"
 				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=06950442fcd14966ee4bef261d2ee0dd&libraries=services,clusterer,drawing"></script>
 			<style>
@@ -347,7 +347,7 @@
 											</c:choose>
 										</div>
 									</div>
-									<div class="col12" style="text-align: center; background-color: #a0cbce;">　</div>
+									<div class="col-12" style="text-align: center; background-color: #a0cbce;">　</div>
 
 
 									<div class="col-12">
@@ -485,11 +485,11 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-2" style="background-color: #3c7579;">　</div>
+							
 						</div>
 						
 					</div>
-					
+					<div class="col-2" style="background-color: #3c7579;">　</div>
 				</div>
 				<c:import url="/board/footer.jsp"></c:import>
 			</div>
