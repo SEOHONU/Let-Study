@@ -121,6 +121,9 @@
 			background-color: white;
 			border-radius: 5px;
 		}
+		#applyguestcount{
+			display:inline-block;
+		}
     </style>
     <script>
     	$(function(){
@@ -173,7 +176,7 @@
                 	</div>
             	</div>
             	<div class="col-6">상세 내역<br>
-            		참여 인원수 : 
+            		참여 인원수 : <div id="applyguestcount">${guestcount}</div>/
             		<input type="text" value="${dto.guestcount}" id="guestcount" name="guestcount" readonly>
             		<div id="detailcontents">${dto.detailcontents}</div>
             		<input type="hidden" name="detailcontents" id="hiddendetailcontents">
@@ -536,6 +539,9 @@
 			background-color: white;
 			border-radius: 5px;
 		}
+		#applyguestcount{
+			display:inline-block;
+		}
     </style>
     <script>
     	$(function(){
@@ -571,6 +577,7 @@
                 </div>
             </div>
             <div class="col-6">상세내역<br>
+            	참여 인원수 : <div id="applyguestcount">${guestcount}</div>/${dto.guestcount}
             	<div>${dto.detailcontents}</div>
             </div>
             <div class="col-3 p-0">

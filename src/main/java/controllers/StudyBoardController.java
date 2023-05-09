@@ -60,9 +60,11 @@ public class StudyBoardController extends HttpServlet {
 				StudyBoardMembersDAO sbmdao = StudyBoardMembersDAO.getInstance();
 				List<StudyBoardMembersDTO> sbmlist = sbmdao.selectapply(seq);
 				List<StudyBoardMembersDTO> cksbmlist = sbmdao.selectapplycheck(seq);
+				int guestcount = sbmdao.updateguestcount(new StudyBoardMembersDTO(null,seq,null));
 				StudyReplyDAO rdao = StudyReplyDAO.getInstance();
 				List<StudyReplyDTO> list = rdao.selectreply(seq);
 				dao.updateViewCount(dto.getView_count()+1, seq);
+				request.setAttribute("guestcount", guestcount);
 				request.setAttribute("sbmlist", sbmlist);
 				request.setAttribute("cksbmlist", cksbmlist);
 				request.setAttribute("replylist", list);
