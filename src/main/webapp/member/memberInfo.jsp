@@ -7,12 +7,12 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>회원가입 폼</title>
+<title>Member Update</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
+	rel="stylesheet"=
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous" />
 <script
@@ -212,14 +212,23 @@ h2 {
 					<a href="/myPage/mypageMainForm.jsp">취소</a>
 				</button>
 				<button type="button" id="btnMemberOut">
-					<a href="/memberOut.member">탈퇴</a>
+					탈퇴
 				</button>
 			</div>
 		</div>
 	</form>
 
 	<script>
+	$("#btnJoin").on("click",function(){
+		if(confirm("회원 정보를 수정 하시겠습니까?"))
+			location.href="/memberOut.member";
+	})	
 		
+		$("#btnMemberOut").on("click",function(){
+			if(confirm("정말 탈퇴 하시겠습니까?"))
+				location.href="/memberOut.member";
+		})	
+	
 		// 비밀번호가 일치하는지 검사
 		// 둘 다 입력된 경우에만 비교하여 일치 여부를 확인 
 		$(document).ready(function() {
