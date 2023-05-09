@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>Mypage</title>
 <!-- CSS only -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -35,9 +35,6 @@
 	box-sizing: border-box;
 }
 
-/* div {
-            border: 1px solid black;
-        } */
 body {
 	margin-top: 20px;
 }
@@ -90,7 +87,7 @@ body {
 	display: inline-block;
 	font-size: 18px;
 	text-align: center;
-	color: #ffffff;
+
 	background: #254F4C;
 	height: 41px;
 	line-height: 41px;
@@ -108,10 +105,15 @@ body {
 	vertical-align: middle;
 	display: inline-block;
 	margin: 20px;
+	border-radius: 50px;
 }
 
-.list-unstyled .contact {
-	margin-left: 1%;
+.list-unstyled>.email {
+	margin-left: 17%
+}
+
+.list-unstyled>.contact {
+	margin-left: 18%;
 }
 
 /* 왼쪽 네비 ---------------------------------------------------- */
@@ -153,7 +155,7 @@ p {
 	border-radius: 3%;
 }
 
-#leftNavi a {
+#leftNavi i {
 	font-size: medium;
 	color: inherit;
 	color: #254F4C;
@@ -161,7 +163,6 @@ p {
 }
 
 #leftNavi div:hover {
-	width: 100%;
 	background-color: #f3f3f3;
 	border-radius: 4%;
 }
@@ -205,10 +206,9 @@ p {
 <body style="background-color: #f3f3f3;">
 
 	<div class="container">
+		<!--------- 상단네비,헤더 ---------->
 		<c:import url="/board/topMenu.jsp"></c:import>
 		<div class="rowheader">
-			<!--------- 상단네비,헤더 ---------->
-
 			<div class="col-12" id="studyimg">
 				<img src="/image/studyMypage.jpg" width="100%" height="300px";>
 				<h1 class="imgInText" style="font-size: 50px;">마이페이지</h1>
@@ -229,32 +229,29 @@ p {
 								<b>${loggedNickname}</b>
 							</h3>
 						</div>
-						<br>
+						
 
 						<ul class="list-unstyled">
-							<li class=""><i
+							<li class="email"><i
 								class="far fa-envelope display-25 me-3 text-secondary"></i>${myInfoMain.email}
 							</li>
 							<li class="contact"><i
 								class="fas fa-mobile-alt display-25 me-3 text-secondary"></i>${myInfoMain.contact}
 							</li>
-
 						</ul>
 
 						<div class="icon-style2 ">
 							<div class="message">
-								<a href="#!" class="rounded-3" style="color: white"> <i
+								<a href="쪽지" class="rounded-5" > <i
 									class="fa-regular fa-envelope" id="pictogram"></i></a>
 							</div>
 							<div class="prorileSetting">
 								<a href="/select.profile_settingController"
-									class="rounded-3 style="color:#254F4C;"> <i
+									 class="rounded-5"> <i
 									class="fa-solid fa-gear"></i>
 								</a>
 							</div>
-
 						</div>
-
 					</div>
 				</div>
 				<div class="empty"></div>
@@ -264,15 +261,15 @@ p {
 					<div class="myBoard">
 						<a href="/mypageboard.mypageboardController"> <input
 							type="button" style="opacity: 0;"> <i
-							class="fa-solid fa-address-book"> 내 게시판</i> </input>
+							class="fa-solid fa-address-book"> 내 게시판</i></input>
 						</a>
 					</div>
 
 					<hr>
 					<div class="myInfo">
 						<a href="/myInfoSelect.member"> <input type="button"
-							style="opacity: 0;"> <i class="fa-solid fa-gear"> 내
-								정보 관리</i> </input>
+							style="opacity: 0;"> <i class="fa-solid fa-gear"> 내정보
+								관리</i></input>
 						</a>
 					</div>
 					<hr>
@@ -324,7 +321,7 @@ p {
 								summary="This table shows how to create responsive tables using Datatables' extended functionality"
 								class="table table-bordered table-hover dt-responsive">
 								<c:choose>
-									<c:when test="${empty secondhandboard}}">
+									<c:when test="${empty secondhandboard}">
 										<div id="emptyText">작성한 게시글이 없습니다.</div>
 									</c:when>
 									<c:otherwise>
@@ -369,16 +366,18 @@ p {
 												<td><a href="/detail.freeBoard?seq=${f.seq}">${f.title}</a></td>
 											</tr>
 										</c:forEach>
-										</c:otherwise>
+									</c:otherwise>
 								</c:choose>
 							</table>
 						</div>
-
+						<div class="empty"></div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="rowfooter">footer</div>
+		<div class="rowfooter">
+			<c:import url="/board/footer.jsp"></c:import>
+		</div>
 	</div>
 
 
