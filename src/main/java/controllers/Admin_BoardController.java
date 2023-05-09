@@ -211,7 +211,7 @@ public class Admin_BoardController extends HttpServlet {
 				System.out.println("스터디");
 				List<FreeBoardDTO> fdto = mndao.boardsearch(select, title);
 				System.out.println("자유");
-				List<MembersDTO> mbdto = dao.usersearch(select, title);
+				List<MembersDTO> mbdto = dao.user_Id_search(select, title);
 				System.out.println("유저 검색출력");
 				request.setAttribute("mddto", mbdto);
 				System.out.println(mbdto);
@@ -228,7 +228,8 @@ public class Admin_BoardController extends HttpServlet {
 				System.out.println("유저 검색출력");
 				String select = request.getParameter("select");
 				String id = request.getParameter("id");
-				List<MembersDTO> mbdto = dao.usersearch(select, id);
+				List<MembersDTO> mbdto = dao.user_Id_search(select, id);
+				
 				request.setAttribute("mbdto", mbdto);
 				request.setAttribute("id", id);
 				request.getRequestDispatcher("/admin/admin_UserSearchpage.jsp").forward(request, response);

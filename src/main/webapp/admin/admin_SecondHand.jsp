@@ -257,7 +257,7 @@
 		<!-- 하단 네비 시작 -->
 <nav aria-label="Page navigation example" align="center">
   <ul class="pagination d-flex justify-content-center">
-    <c:forEach var="i" items="${navi}">
+    <c:forEach var="i" items="${pageNavi}">
       <c:choose>
         <c:when test="${i eq '<<'}">
           <li class="page-item"><a class="page-link" href="/secondHand.adminBoard?cpage=${start}">${i}</a></li>
