@@ -60,9 +60,11 @@ public class StudyBoardController extends HttpServlet {
 				StudyBoardMembersDAO sbmdao = StudyBoardMembersDAO.getInstance();
 				List<StudyBoardMembersDTO> sbmlist = sbmdao.selectapply(seq);
 				List<StudyBoardMembersDTO> cksbmlist = sbmdao.selectapplycheck(seq);
+				int guestcount = sbmdao.updateguestcount(new StudyBoardMembersDTO(null,seq,null));
 				StudyReplyDAO rdao = StudyReplyDAO.getInstance();
 				List<StudyReplyDTO> list = rdao.selectreply(seq);
 				dao.updateViewCount(dto.getView_count()+1, seq);
+				request.setAttribute("guestcount", guestcount);
 				request.setAttribute("sbmlist", sbmlist);
 				request.setAttribute("cksbmlist", cksbmlist);
 				request.setAttribute("replylist", list);
@@ -83,7 +85,8 @@ public class StudyBoardController extends HttpServlet {
 				double lat = Double.parseDouble(request.getParameter("lat"));
 				double lng = Double.parseDouble(request.getParameter("lng"));
 				String mapname = request.getParameter("mapname");
-				dao.insertstudyboard(new StudyBoardDTO(0,id,title,contents,detailcontents,0,null,lat,lng,mapname));
+				int guestcount = Integer.parseInt(request.getParameter("guestcount"));
+				dao.insertstudyboard(new StudyBoardDTO(0,id,title,contents,detailcontents,0,null,lat,lng,mapname,guestcount));
 				response.sendRedirect("/select.studyboard?cpage=1");
 			}else if(cmd.equals("/update.studyboard")) {
 				int currentPage = request.getParameter("cpage") == null ? 1 
@@ -96,7 +99,8 @@ public class StudyBoardController extends HttpServlet {
 				double lat = Double.parseDouble(request.getParameter("lat"));
 				double lng = Double.parseDouble(request.getParameter("lng"));
 				String mapname = request.getParameter("mapname");
-				dao.updatestudyboard(new StudyBoardDTO(seq,id,title,contents,detailcontents,0,null,lat,lng,mapname));
+				int guestcount = Integer.parseInt(request.getParameter("guestcount"));
+				dao.updatestudyboard(new StudyBoardDTO(seq,id,title,contents,detailcontents,0,null,lat,lng,mapname,guestcount));
 				response.sendRedirect("/inner.studyboard?cpage="+currentPage+"&seq="+seq);
 			}
 		}catch(Exception e) {

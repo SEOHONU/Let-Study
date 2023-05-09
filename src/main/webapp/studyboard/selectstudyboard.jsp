@@ -252,7 +252,10 @@ object-fit:cover;
 												</div>
 											</div>
 											<div class="col-10 title">${j.title}</div>
-											<div class="col-12 content">${j.contents}</div>
+											<div class="col-12 content">
+												인원 : ${j.guestcount} 명<br>
+												${j.detailcontents}
+											</div>
 											<div class="col-12 box-bottom" align="right">${j.writer}</div>
 											<div class="col-12 box-bottom" align="right">${j.write_date}</div>
 											<div class="col-12 box-bottom" align="right">조회수:${j.view_count}</div>
