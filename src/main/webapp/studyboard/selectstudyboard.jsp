@@ -37,6 +37,12 @@ div {
 .inbox{
 	padding-left: 3%;
 	padding-right: 3%;
+	padding-bottom: 2%;
+}
+
+a{
+	text-decoration : none;
+	color:black;	
 }
 
 #mainstudyfont {
@@ -64,23 +70,28 @@ div {
 }
 
 .ratio{
-	background-color: red;
+	background-color: white;
 }
 
 .title{
-	background-color: orange;
+	display:block;
+	background-color: white;
 	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: x-large;
+	
 }
 
 .content {
 	height: 100px;
 	word-break: break-word;
 	overflow: hidden;
-	background-color: yellow;
+	background-color: white;
 }
 
 .box-bottom{
-	background-color: green;
+	background-color: white;
 }
 
 /* .leftorrightbtn {
@@ -89,9 +100,6 @@ div {
 	background-color: rgb(72,143,149,1);
 } */
 
-.box{
-	background-color: rgb(72,143,149,1);
-}
 
 .btns{
 	background-color: white;
@@ -182,11 +190,31 @@ object-fit:cover;
 .margin {
 	height: 28px;
 }
+.ininbox{
+	border-radius: 10px;
+	overflow: hidden;
+}
+.line{
+	border: 1px solid gray;
+	
+}
+.seq{
+	background-color: white;
+}
 
+.box{
+	position: relative;
+	height: 30px;
+}
+
+.writebtn{
+	position: absolute;
+	right: 2%;
+}
 </style>
 </head>
 
-<body>
+<body style="background-color: #f3f3f3">
 	<div class="container">
 		<c:import url="/board/topMenu.jsp"></c:import>
 		<div class="row">
@@ -239,26 +267,25 @@ object-fit:cover;
 		<div class="row body">
 			<div class="col-12" class="fastfindstudy">
 				<div class="row">
-					<div class="col-2 leftorrightbtn">여백</div>
-					<div class="col-8">
+					<div class="col-1"></div>
+					<div class="col-10">
 						<div class="row">
 							<c:forEach var="j" items="${list}">
 								<div class="col-6 inbox">
 									<a href="/inner.studyboard?seq=${j.seq}&cpage=${cpage}">
 										<div class="row ininbox">
 
-											<div class="col-2 p-0" align="center">
-												<div class="ratio ratio-1x1" align="center">
-													<div>${j.seq}</div>
-												</div>
+											<div class="col-2 p-0 seq" align="center">
+												${j.seq}
 											</div>
-											<div class="col-10 title">${j.title}</div>
+											<div class="col-10 title p-2">${j.title}</div>
+											<div class="col-12 line"></div>
 											<div class="col-12 content">
 												인원 : ${j.guestcount} 명<br>
 												${j.detailcontents}
 											</div>
+											<div class="col-12 line"></div>
 											<div class="col-12 box-bottom" align="right">${j.writer}</div>
-											<div class="col-12 box-bottom" align="right">${j.write_date}</div>
 											<div class="col-12 box-bottom" align="right">조회수:${j.view_count}</div>
 										</div>
 									</a>
@@ -266,14 +293,14 @@ object-fit:cover;
 							</c:forEach>
 						</div>
 					</div>
-					<div class="col-2 leftorrightbtn">여백</div>
+					<div class="col-1"></div>
 				</div>
 			</div>
 			<div classs="col-12">
-				<div class="row box">
-					<div class="col-2"></div>
-					<div class="col-8" align="right"><a href="/studyboard/insertstudyboard.jsp"><button class="btns">글쓰기</button></a></div>
-					<div class="col-2"></div>
+				<div class="row">
+					<div class="col-1"></div>
+					<div class="col-10 box"><a href="/studyboard/insertstudyboard.jsp"><button class="btns writebtn">글쓰기</button></a></div>
+					<div class="col-1"></div>
 				</div>
 				
 			</div>
@@ -306,8 +333,8 @@ object-fit:cover;
 
 		</div>
 		<div class="row footer">
-			<div class="col-12">아래 대충 띄어놓기</div>
-		</div>
+        <c:import url="/board/footer.jsp"></c:import>
+        </div>
 	</div>
 	
 	<script>
