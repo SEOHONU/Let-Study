@@ -12,7 +12,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-	rel="stylesheet"=
+	rel="stylesheet"
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous" />
 <script
@@ -207,7 +207,7 @@ h2 {
 				<div class="col-3"></div>
 			</div>
 			<div class="btnsParent text-center">
-				<button type="submit" id="btnJoin">수정</button>
+				<button type="submit" id="btnupdate">수정</button>
 				<button type="button" id="btnCancel">
 					<a href="/myPage/mypageMainForm.jsp">취소</a>
 				</button>
@@ -219,9 +219,9 @@ h2 {
 	</form>
 
 	<script>
-	$("#btnJoin").on("click",function(){
+	$("#btnupdate").on("click",function(){
 		if(confirm("회원 정보를 수정 하시겠습니까?"))
-			location.href="/memberOut.member";
+			
 	})	
 		
 		$("#btnMemberOut").on("click",function(){
