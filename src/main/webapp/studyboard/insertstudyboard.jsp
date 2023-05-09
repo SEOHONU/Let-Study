@@ -25,7 +25,10 @@
         }
         
         h3{
-        	border: 1px solid black;
+        	background-color : white;
+        	border: 1px solid #254f4c;
+        	display: inline-block;
+        	word-break: break-all;
         }
         
         h3:empty:before {
@@ -34,17 +37,20 @@
 		}
 		
 		.header{
+			position: relative;
         	border-radius:5px;
+        	background-color : white;
 		}
         
         .body{
-        	border: 1px solid black;
         	border-radius:5px;
+        	background-color : white;
         }
         
         .footer{
         	border: 1px solid black;
         	border-radius:5px;
+        	background-color : white;
         }
 
         #studyprint {
@@ -64,10 +70,7 @@
             padding: 0px;
             position: relative;
             overflow: hidden;
-        }
-        .header{
-            position: relative;
-            border: 1px solid black;
+            background-color: white;
         }
         .navi {
             position:sticky;
@@ -140,7 +143,10 @@
         }
         
         #opencontents{
-        	border: 1px solid black;
+        	border: 1px solid #254f4c;
+        	background-color:white;
+        	display: inline-block;
+        	word-break: break-all;
         }
         
         #opencontents:empty:before {
@@ -162,7 +168,7 @@
     </style>
 </head>
 
-<body>
+<body style="background-color : #f3f3f3">
     <div class="container">
         <c:import url="/board/topMenu.jsp"></c:import>
         <form action="/insert.studyboard" method="post" id="insertForm">
@@ -171,13 +177,13 @@
                 	<div class="row">
                     	<div class="col-2">
                         	<div class="ratio ratio-1x1" id="studyprint">
-                            	<img src="행복해요.gif" class="imgs">
                         	</div>
                     	</div>
                     	<div class="col-10">
                         	<div id="studybtnbox">
                             	<h3 contenteditable="true" id="opentitle" data-placeholder="스터디 이름을 입력하세요."></h3>
                             	<input type="hidden" name="title" id="hiddentitle">
+                            	<br>
                             	<div contenteditable="true" id="opencontents" data-placeholder="스터디를 소개해주세요."></div>
                             	<input type="hidden" name="contents" id="hiddencontents">
                         	</div>
