@@ -175,31 +175,39 @@ a>.btn {
 				<div class="row">
 					<div class="col-4"></div>
 					<div class="col-4" align="center">
+						<nav aria-label="Page navigation example" align="center">
+  						<ul class="pagination d-flex justify-content-center">
 						<c:choose>
 							<c:when test="${searchText != null}">
 								<c:forEach var="i" items="${pageNavi}" varStatus="status">
 									<c:choose>
 										<c:when test="${i eq '◀' }">
-											<a
+ 											<li class="page-item">
+											<a class="page-link"
 												href="/searchSecondHand.secondHand?
 												currentPage=${pageNavi[status.index+1]-1}&
 												option=${option}&
 												searchText=${searchText}">${i }
 											</a>
+ 											</li>
 										</c:when>
 										<c:when test="${i eq '▶' }">
-											<a
+										<li class="page-item">
+											<a class="page-link"
 												href="/searchSecondHand.secondHand?
 												currentPage=${pageNavi[status.index-1]+1}&
 												option=${option}&
 												searchText=${searchText}">${i }
 											</a>
+										</li>
 										</c:when>
 										<c:otherwise>
-											<a href="/searchSecondHand.secondHand?
+										<li class="page-item">
+											<a class="page-link" href="/searchSecondHand.secondHand?
 											currentPage=${i}&
 											option=${option}&
 											searchText=${searchText}">${i}</a>
+										</li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
@@ -208,22 +216,30 @@ a>.btn {
 								<c:forEach var="i" items="${pageNavi}" varStatus="status">
 									<c:choose>
 										<c:when test="${i eq '◀' }">
-											<a
+										<li class="page-item">
+											<a class="page-link"
 												href="/selectBound.secondHand?currentPage=${pageNavi[status.index+1]-1 }">${i }
 											</a>
+										</li>
 										</c:when>
 										<c:when test="${i eq '▶' }">
-											<a
+										<li class="page-item">
+											<a class="page-link"
 												href="/selectBound.secondHand?currentPage=${pageNavi[status.index-1]+1 }">${i }
 											</a>
+										</li>
 										</c:when>
 										<c:otherwise>
-											<a href="/selectBound.secondHand?currentPage=${i}">${i}</a>
+										<li class="page-item">
+											<a class="page-link" href="/selectBound.secondHand?currentPage=${i}">${i}</a>
+										</li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 							</c:otherwise>						
 						</c:choose>
+						  </ul>
+						</nav>
 					</div>
 					<div class="col-4" align="right">
 						<button type="button" class="btn btn-primary p-0" id="shWrite">글쓰기</button>

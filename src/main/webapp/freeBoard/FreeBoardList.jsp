@@ -304,7 +304,6 @@ color:white;
   currentPage2.style.color = 'white';
   
 </script>
-
 		<!-- 푸터 -->
 		 <c:import url="/board/footer.jsp"></c:import>
 	</div>

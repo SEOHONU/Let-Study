@@ -69,6 +69,7 @@ div {
 
 .title{
 	background-color: orange;
+	overflow: hidden;
 }
 
 .content {

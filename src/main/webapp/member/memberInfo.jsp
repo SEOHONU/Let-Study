@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>회원가입 폼</title>
+<title>Member Update</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 <link
@@ -207,19 +207,70 @@ h2 {
 				<div class="col-3"></div>
 			</div>
 			<div class="btnsParent text-center">
-				<button type="submit" id="btnJoin">수정</button>
+				<button type="submit" id="btnupdate">수정</button>
 				<button type="button" id="btnCancel">
 					<a href="/myPage/mypageMainForm.jsp">취소</a>
 				</button>
 				<button type="button" id="btnMemberOut">
-					<a href="/memberOut.member">탈퇴</a>
+					탈퇴
 				</button>
 			</div>
 		</div>
 	</form>
 
 	<script>
+		let regexPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
+		let regexName = /^[가-힣]{2,5}$/;
+		let regexNickname = /^[a-zA-Z0-9가-힣]{2,10}$/;
+		let regexContact = /^(01[016789])([1-9]\d{2,3})\d{4}$/;
+		let regexEmail = /[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+/;	
+	
+		$("#joinMember").on("submit",function(){
+			let pw = $("#pw").val();
+			let resultPw = regexPw.test(pw);
+			let name = $("#name").val();
+			let resultName = regexName.test(name);
+			let nickname = $("#nickname").val();
+			let reusultNickname = regexNickname.test(nickname);
+			let contact = $("#contact").val();
+			let resultContact = regexContact.test(contact);
+			let email = $("#email").val();
+			let resultEmail = regexEmail.test(email);
+			
+			if (!resultPw) {
+				alert("비밀번호는 8~20자 영문 대 소문자, 숫자, 특수문자를 사용하세요. ");
+				return false;
+			}
+			if (!resultName) {
+				alert("이름은 2~5자 한글을 사용하세요.");
+				return false;
+			}
+			if (!reusultNickname) {
+				alert("닉네임은 2~10자의 영문, 소문자, 대문자만 사용 가능합니다.");
+				return false;
+			}
+			if (!resultContact) {
+				alert("휴대전화번호를 다시 확인해주세요.");
+				return false;
+			}
+
+			if (!resultEmail) {
+				alert("이메일 양식을 확인해주세요.");
+				return false;
+			}
+				
+			if(confirm("회원정보를 수정하시겠습니까?")){
+				
+			}else{
+				return false;
+			}
+		})
 		
+		$("#btnMemberOut").on("click",function(){
+			if(confirm("정말 탈퇴 하시겠습니까?"))
+				location.href="/memberOut.member";
+		})	
+	
 		// 비밀번호가 일치하는지 검사
 		// 둘 다 입력된 경우에만 비교하여 일치 여부를 확인 
 		$(document).ready(function() {
@@ -243,69 +294,21 @@ h2 {
 						});
 					}
 
-				} else {
-					// 두 필드 중 하나라도 값이 입력되지 않았을 때
-					$("#pwFeedback").html("").css({
-						color : "#fd1d1d"
-					});
 				}
 			});
 		});
-		// 유효성 검사를 위한 정규식 
-
 		
-		let regexPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
-		let regexName = /^[가-힣]{2,5}$/;
-		let regexNickname = /^[a-zA-Z0-9가-힣]{2,10}$/;
-		let regexContact = /^(01[016789])([1-9]\d{2,3})\d{4}$/;
-		let regexEmail = /[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+/;
-
-		let joinMember = document.getElementById("joinMember");
-		// onsubmit 이벤트는 버튼에 주는게 아니라 form태그에 준다
-
-		joinMember.onsubmit = function() {
-			let pw = $("#pw").val();
-			let resultPw = regexPw.test(pw);
-			let name = $("#name").val();
-			let resultName = regexName.test(name);
-			let nickname = $("#nickname").val();
-			let reusultNickname = regexNickname.test(nickname);
-			let contact = $("#contact").val();
-			let resultContact = regexContact.test(contact);
-			let email = $("#email").val();
-			let resultEmail = regexEmail.test(email);
-
-			if (!resultPw) {
-				alert("비밀번호는 8~20자 영문 대 소문자, 숫자, 특수문자를 사용하세요. ");
-				return false;
-			}
-			if (!resultName) {
-				alert("이름은 2~5자 한글을 사용하세요.");
-				return false;
-			}
-			if (!reusultNickname) {
-				alert("닉네임은 2~10자의 영문, 소문자, 대문자만 사용 가능합니다.");
-				return false;
-			}
-			if (!resultContact) {
-				alert("휴대전화번호를 다시 확인해주세요.");
-				return false;
-			}
-
-			if (!resultEmail) {
-				alert("이메일 양식을 확인해주세요.");
-				return false;
-			}
-		};
+	</script>
+	<script>
 		// 우편번호 카카오 api
 		document.getElementById("searchZipcode").onclick = function() {
 			new daum.Postcode(
-					{
-						oncomplete : function(data) {
-							document.getElementById("zipcode").value = data.zonecode;
-							document.getElementById("roadAddress").value = data.address;
-						},
-					}).open();
+				{
+					oncomplete : function(data) {
+						document.getElementById("zipcode").value = data.zonecode;
+						document.getElementById("roadAddress").value = data.address;
+					},
+				}).open();
 		};
 	</script>
 </body>
