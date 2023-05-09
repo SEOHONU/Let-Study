@@ -63,8 +63,9 @@ public class Admin_DAO {
 				double lat = rs.getDouble("lat");
 				double lng = rs.getDouble("lng");
 				String mapname = rs.getString("mapname");
+				int guestcount = rs.getInt("guestcount");
 				result.add(new StudyBoardDTO(seq, writer, title, contents, detailcontents, view_count, write_date, lat,
-						lng, mapname));
+						lng, mapname, guestcount));
 				System.out.println("AdminDAO 스터디리스트 출력");
 			}
 			return result;
