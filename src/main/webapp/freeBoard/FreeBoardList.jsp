@@ -153,14 +153,8 @@ object-fit:cover;
   color: white;
   text-align: center;
   font-size: 2rem;
-
-
 }
 
-
-.current-page2{
-color:white;
-}
 
 </style>
 
@@ -306,6 +300,9 @@ color:white;
 		<!-- 푸터 -->
 		 <c:import url="/board/footer.jsp"></c:import>
 	</div>
+	
+	
+	
 </body>
 
 </html>
