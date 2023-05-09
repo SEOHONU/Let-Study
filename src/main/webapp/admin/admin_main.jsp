@@ -9,6 +9,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Admin Panel</title>
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+
+
+
 <!-- Bootstrap CSS -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -28,9 +33,26 @@
 	href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
 	rel="stylesheet">
 
+<!-- calender style -->
+<link rel="stylesheet" href="/calendar/style.css">
+<!-- calender js -->
+<script src="/calendar/main.js"></script>
+<script src="/calendar/jquery.min.js"></script>
+<script src="/calendar/bootstrap.min.js"></script>
 
 
-
+	<!-- Bootstrap JS -->
+			<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+				integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+				crossorigin="anonymous"></script>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+				integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+				crossorigin="anonymous"></script>
+			<script
+				src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+				integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+				crossorigin="anonymous"></script>
 
 
 <style>
@@ -50,8 +72,8 @@
 	float: right;
 	margin-bottom: 10px;
 	position: relative;
-    top: 70px;
-	background-color: white; 
+	top: 70px;
+	background-color: white;
 }
 
 .dashboard {
@@ -61,10 +83,10 @@
 .freeboard_start {
 	margin-top: 20px;
 }
-.header_topLine{
-background-color: #1e3c3e;
-}
 
+.header_topLine {
+	background-color: #1e3c3e;
+}
 </style>
 </head>
 
@@ -74,10 +96,10 @@ background-color: #1e3c3e;
 			<!-- justify-content-center -->
 			<!-- 페이지 최 상단 관리자페이지 이름과 수정하기/로그아웃 버튼 시작 -->
 			<div class="col header_topLine col-lg-12">
-                <!-- <button type="button" class="btn btn-outline-dark btn_header">수정하기</button> -->
-				<form action="/admin_logout.admin"method="post">
-                    <img alt="" src="새 프로젝트.png"style="height: 100%;">
-                
+				<!-- <button type="button" class="btn btn-outline-dark btn_header">수정하기</button> -->
+				<form action="/admin_logout.admin" method="post">
+					<img alt="" src="새 프로젝트.png" style="height: 100%;">
+
 					<button type="submit" class="btn btn-outline-dark btn_header">로그아웃</button>
 				</form>
 			</div>
@@ -125,18 +147,83 @@ background-color: #1e3c3e;
 		<div class="row body">
 			<!-- 바디 > 대시보드 시작 -->
 			<div class="col body_header ">
-
-				<h1>대시보드</h1>
+				<h1>공지사항</h1>
 				<div class="row">
-					<div class="col-md-4 col-md-push-4 dashboard1">
-						<img src="https://66.media.tumblr.com/56ebae6954fcd3b0b9b0d0b9f91e228e/e7e3f065f45e8fca-59/s540x810/01926a2c92531eb4fd5ee76a31db39672bf5000a.png" alt="" class="w-100 p-3">
-					</div>
-					<div class="col-md-4 col-md-push-4 dashboard2">
-						<img src="https://mblogthumb-phinf.pstatic.net/MjAyMTA2MThfMTg2/MDAxNjIzOTg3OTg5NDMy.9DaTvxBwdMlK9sFnnfQhAdYP-gBw9Vl6gRVf0rrm3RAg.TKgjC_ELaXd549a9kzAqRqfVj8amZAhteC48YvI_uW4g.JPEG.kokafilms/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C_(1).jpg?type=w800" alt="" class="w-100 p-3">
-					</div>
-					<div class="col-md-4 col-md-push-4 dashboard3">
-						<img src="https://coinpan.com/files/attach/images/198/970/234/197/1dce05efecab9ed731d4666efdd7da2a.jpg" alt="" class="w-100 p-3">
-					</div>
+					<section class="ftco-section">
+						<div class="container">
+							<div class="row justify-content-center">
+								<div class="col-md-6 text-center mb-5">
+									<h2 class="heading-section">Calendar #04</h2>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="content w-100">
+										<div class="calendar-container">
+											<div class="calendar">
+												<div class="year-header">
+													<span class="left-button fa fa-chevron-left" id="prev">
+													</span> <span class="year" id="label"></span> <span
+														class="right-button fa fa-chevron-right" id="next">
+													</span>
+												</div>
+												<table class="months-table w-100">
+													<tbody>
+														<tr class="months-row">
+															<td class="month">Jan</td>
+															<td class="month">Feb</td>
+															<td class="month">Mar</td>
+															<td class="month">Apr</td>
+															<td class="month">May</td>
+															<td class="month">Jun</td>
+															<td class="month">Jul</td>
+															<td class="month">Aug</td>
+															<td class="month">Sep</td>
+															<td class="month">Oct</td>
+															<td class="month">Nov</td>
+															<td class="month">Dec</td>
+														</tr>
+													</tbody>
+												</table>
+
+												<table class="days-table w-100">
+													<td class="day">Sun</td>
+													<td class="day">Mon</td>
+													<td class="day">Tue</td>
+													<td class="day">Wed</td>
+													<td class="day">Thu</td>
+													<td class="day">Fri</td>
+													<td class="day">Sat</td>
+												</table>
+												<div class="frame">
+													<table class="dates-table w-100">
+														<tbody class="tbody">
+														</tbody>
+													</table>
+												</div>
+												<button class="button" id="add-button">Add Event</button>
+											</div>
+										</div>
+										<div class="events-container"></div>
+										<div class="dialog" id="dialog">
+											<h2 class="dialog-header">Add New Event</h2>
+											<form class="form" id="form">
+												<div class="form-container" align="center">
+													<label class="form-label" id="valueFromMyButton" for="name">Event
+														name</label>
+														 <input class="input" type="text" id="name"maxlength="36"> 
+														 <label class="form-label"id="valueFromMyButton" for="count">Number of people to invite</label> 
+														 <input class="input" type="number"id="count" min="0" max="1000000" maxlength="7"> 
+														 <input type="button" value="Cancel" class="button"id="cancel-button"> 
+														 <input type="button" value="OK" class="button button-white" id="ok-button">
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
 				</div>
 			</div>
 			<!-- 바디 > 대시보드 종료 -->
@@ -198,7 +285,7 @@ background-color: #1e3c3e;
 										<td><a href="inner.studyboard?seq=${i.seq}&cpage=1">${i.contents}</a></td>
 										<td>${i.view_count}</td>
 										<td>${i.write_date}</td>
-										
+
 									</tr>
 								</c:if>
 							</c:forEach>
@@ -227,10 +314,11 @@ background-color: #1e3c3e;
 
 										<td>${i.seq}</td>
 										<td>${i.writer}</td>
-										<td><a href="secondHandBoardContents.secondHand?seq=${i.seq}&currentPage=1">${i.title}</a></td>
+										<td><a
+											href="secondHandBoardContents.secondHand?seq=${i.seq}&currentPage=1">${i.title}</a></td>
 										<td>${i.view_count}</td>
 										<td>${i.write_date}</td>
-										
+
 									</tr>
 								</c:if>
 							</c:forEach>
@@ -244,18 +332,8 @@ background-color: #1e3c3e;
 
 
 
-			<!-- Bootstrap JS -->
-			<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-				integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-				crossorigin="anonymous"></script>
-			<script
-				src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-				integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-				crossorigin="anonymous"></script>
-			<script
-				src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-				integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-				crossorigin="anonymous"></script>
+		
+
 </body>
 
 </html>
