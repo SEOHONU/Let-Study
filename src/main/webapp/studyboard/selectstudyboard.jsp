@@ -21,8 +21,6 @@
 	<script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d79f132798324278c93739a54ae859c&libraries=services"></script>
 	
-<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-	<script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
               
 <style>
 * {
