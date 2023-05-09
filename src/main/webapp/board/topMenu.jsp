@@ -52,11 +52,7 @@
                     text-align: right;
                 }
 
-                .profile {
-                    text-align: center;
-                }
-
-                .logout {
+                .profile, .logout, .signup, .login {
                     text-align: center;
                 }
 
