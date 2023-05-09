@@ -197,7 +197,7 @@ public class Admin_DAO {
 	}
 
 	public List<MembersDTO> user_list(int start, int end) throws Exception {
-		String sql = "select * from (SELECT id,pw,name,birth_date,nickname,contact,email,zipcode,address1,address2,join_date,rank() over(order by id desc) rank from members) where rank between ? and ?";
+		String sql = "select * from (SELECT id,pw,name,birth_date,nickname,contact,email,zipcode,address1,address2,join_date,rank() over(order by join_date desc) rank from members) where rank between ? and ?";
 //		SQL바꿔줘야함
 
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -229,8 +229,8 @@ public class Admin_DAO {
 
 //	회원목록 서치 
 
-	public List<MembersDTO> usersearch(String select, String id) throws Exception {
-		String sql = "select * from members where LOWER(id) like LOWER(?) order by id desc";
+	public List<MembersDTO> user_Id_search(String select, String id) throws Exception {
+		String sql = "select * from members where LOWER(id) like LOWER(?) order by join_date desc";
 		System.out.println(sql);
 			try (Connection con = this.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
 				pstmt.setString(1, "%" + id + "%");
@@ -256,5 +256,9 @@ public class Admin_DAO {
 			}
 		
 	}
+	
+	
+	
+	
 
 }
