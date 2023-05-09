@@ -6,16 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-	crossorigin="anonymous"></script>
+	<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+	integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
+	<script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d79f132798324278c93739a54ae859c&libraries=services"></script>
+	
 <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+	<script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
+              
 <style>
 * {
 	box-sizing: border-box;
@@ -61,6 +69,7 @@ div {
 
 .title{
 	background-color: orange;
+	overflow: hidden;
 }
 
 .content {
@@ -172,7 +181,10 @@ div {
 												</div>
 											</div>
 											<div class="col-10 title">${j.title}</div>
-											<div class="col-12 content">${j.contents}</div>
+											<div class="col-12 content">
+												인원 : ${j.guestcount} 명<br>
+												${j.detailcontents}
+											</div>
 											<div class="col-12 box-bottom" align="right">${j.writer}</div>
 											<div class="col-12 box-bottom" align="right">${j.write_date}</div>
 											<div class="col-12 box-bottom" align="right">조회수:${j.view_count}</div>
