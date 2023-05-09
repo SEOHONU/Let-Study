@@ -6,7 +6,7 @@
 
 <head>
    <meta charset="UTF-8">
-   <title>Insert title here</title>
+   <title>Profile</title>
    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
    <!-- CSS only -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -53,13 +53,13 @@
 
       #profile input[type='text'] {
          border-radius: 5px;
-         border: 2px solid #254F4C;
+         border: 1px solid #254F4C;
          width: 90%;
       }
 
       #profile textarea {
          border-radius: 5px;
-         border: 2px solid #254F4C;
+         border: 1px solid #254F4C;
          width: 90%;
          height: 100px;
 
@@ -135,7 +135,7 @@
          background-color: #254F4C;
          color: #f3f3f3;
          border: none;
-         border: 3px solid #254F4C;
+         border: 1px solid #254F4C;
          transition-duration: 0.8s;
          width: 80px;
          border-radius: 5%;
@@ -185,7 +185,7 @@
 
                   <div class="nicknamebox P">
                      <b>닉네임</b><br>
-                     <input type="text" id="nickname" name="nickname" value="${select.profile_nickname}" readonly><br>
+                     <input type="text" id="nickname" name="nickname" value="${select.profile_nickname}" maxlength="10" readonly><br>
                   </div>
 
                   <div class="introducebox P">
@@ -220,7 +220,7 @@
 
                   <div class="button">
                      <input type="button" id="backBtn" value="취소" style="float: right"
-                        onclick="location.href='/myPage/mypageMainForm.jsp'">
+                        onclick="location.href='/mypageboard.mypageboardController'">
                      <input type="submit" id="okBtn" value="확인">
                      <input type="button" id="updateBtn" value="수정">
                   </div>
@@ -262,6 +262,17 @@
          $("#okBtn").css("display", "");
       })
 
+     
+		let ok = document.getElementById("okBtn");
+		ok.onsubmit = function() {
+    	  let regexName = /^[가-힣]{2,5}$/;
+			let nickname = $("#nickname").val();
+			let reusultNickname = regexNickname.test(nickname);
+			if (!resultName) {
+				alert("닉네임은 2~10자의 영문, 소문자, 대문자만 사용 가능합니다.");
+				return false;
+			}
+		}
    </script>
 </body>
 </html>
