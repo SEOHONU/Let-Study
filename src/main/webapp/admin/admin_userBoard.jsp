@@ -238,6 +238,7 @@
                     <div class="input-group">
                         <select name="select">
                             <option value="제목">아이디</option>
+                            <option value="제목">이름</option>
                         </select>
                         &nbsp;
                         <input type="text" class="form-control"id="input_tag" aria-label="Sizing example input"
@@ -256,7 +257,7 @@
 		<!-- 하단 네비 시작 -->
 <nav aria-label="Page navigation example" align="center">
   <ul class="pagination d-flex justify-content-center">
-    <c:forEach var="i" items="${navi}">
+    <c:forEach var="i" items="${pageNavi}">
       <c:choose>
         <c:when test="${i eq '<<'}">
           <li class="page-item"><a class="page-link" href="/user_Board.adminBoard?cpage=${start}">${i}</a></li>
@@ -303,10 +304,8 @@
     });
   }
   
-  const currentPage2 = document.querySel
-  ector('.current-page');
+  const currentPage2 = document.querySelector('.current-page');
   currentPage2.style.backgroundColor = '#1e3c3e';
 </script>
-	</div>
 </body>
 </html>

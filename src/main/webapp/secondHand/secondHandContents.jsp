@@ -255,22 +255,24 @@
         });
         $("#summernote").summernote("disable");
 
-        function uploadImg(img, summerNote) {
-            data = new FormData();
-            data.append("img", img);
-            $.ajax({
-                data: data,
-                type: "POST",
-                url: "/insertFile.secondHand",
-                contentType: false,
-                processData: false
-            }).done(function (url) {
-                img = JSON.parse(url);
-                console.log("url : " + url);
-                console.log("img.url : " + img.url);
-                $(summerNote).summernote("insertImage", img.url);
-            });
-        }
+		function uploadImg(img, summerNote) {
+			data = new FormData();
+			data.append("img", img);
+			$.ajax({
+				data : data,
+				type : "POST",
+				url : "/insertFile.secondHand",
+				contentType : false,
+				processData : false
+			}).done(function(resp) {
+				imgInfo = JSON.parse(resp);
+				console.log("url : " + imgInfo[0]);
+				console.log("oriName : " + imgInfo[1]);
+				console.log("sysName : "+ imgInfo[2]);
+				$(summerNote).summernote("insertImage", imgInfo[0]);
+// 				server 저장소에 저장만 하고 DB에는 저장 안함
+			});
+		}
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
             mapOption = {
                 center: new kakao.maps.LatLng(${ dto.lat }, ${ dto.lng }), // 지도의 중심좌표

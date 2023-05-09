@@ -15,7 +15,7 @@
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d79f132798324278c93739a54ae859c&libraries=services"></script>
 </head>
-<body>
+<body style="background-color : #f3f3f3">
 
 	<c:choose>
 		<c:when test="${dto.writer == loggedID}">
@@ -25,18 +25,19 @@
         }
 
         div {
-            border: 1px solid black;
             position: relative;
             word-break: break-word;
         }
 
         #studyprint {
+        	border: 1px solid black;
             margin-top: 12px;
             margin-bottom: 12px;
             border-radius: 100%;
         }
 
         .studyguestprint {
+        	border: 1px solid black;
             margin-top: 12px;
             margin-bottom: 12px;
             border-radius: 100%;
@@ -49,6 +50,16 @@
         }
         .header{
             position: relative;
+            background-color: white;
+        }
+        .body{
+        	background-color: white;
+        }
+        .body2{
+        	background-color: white;
+        }
+        .footer{
+        	background-color: white;
         }
         .navi {
             position:sticky;
@@ -68,6 +79,7 @@
         }
 
         #applybox {
+        	border: 1px solid black;
             overflow: auto;
         }
 
@@ -75,13 +87,10 @@
             display: none;
         }
 
-        #applybox>div {
-            height: 30%;
-        }
-        
         .applybtnyorn{
-        	position: relative;
-        	bottom: 0px;
+        	position: absolute;
+        	bottom: 3%;
+        	right: 1%;
         }
 
         .nicknamebox {
@@ -101,6 +110,7 @@
         }
 
         #replytext {
+        	border: 1px solid black;
             padding-right: 90px;
             min-height: 80px;
             max-height: 80px;
@@ -116,6 +126,25 @@
             right: 5px;
             bottom: 5px;
         }
+        
+        .btns{
+			background-color: white;
+			border-radius: 5px;
+		}
+		#applyguestcount{
+			display:inline-block;
+		}
+		.applysolobox{
+			height: 30%;
+			position: relative;
+			background-color: grey;
+		}
+		.studyapplybox{
+			border: 1px solid black;
+		}
+		.nicknamebox{
+			border: 1px solid black;
+		}
     </style>
     <script>
     	$(function(){
@@ -134,7 +163,6 @@
                 	<div class="row">
                     	<div class="col-2">
                         	<div class="ratio ratio-1x1" id="studyprint">
-                            	<img src="행복해요.gif" class="imgs">
                         	</div>
                     	</div>
                     	<div class="col-10">
@@ -149,6 +177,7 @@
                 	</div>
             	</div>
         	</div>
+        	<br>
         	<div class="row body">
             	<div class="col-3">
                 	<div class="row">
@@ -161,13 +190,15 @@
                 	<div class="row" id="update_map_search">
                 		<div class="col-12">
                     		<input type="text" placeholder="주소입력" name="mapname" value="${dto.mapname}" id="target" required>
-                    		<input type="button" value="검색" id="mapsearch">
+                    		<input type="button" class="btns" value="검색" id="mapsearch">
                     		<input type="hidden" name="lat" value="${dto.lat}" id="Lat" required>
                     		<input type="hidden" name="lng" value="${dto.lng}" id="Lng" required>
                     	</div>
                 	</div>
             	</div>
             	<div class="col-6">상세 내역<br>
+            		참여 인원수 : <div id="applyguestcount">${guestcount}</div>/
+            		<input type="text" value="${dto.guestcount}" id="guestcount" name="guestcount" readonly>
             		<div id="detailcontents">${dto.detailcontents}</div>
             		<input type="hidden" name="detailcontents" id="hiddendetailcontents">
             	</div>
@@ -176,12 +207,12 @@
                    		<div class="col-12 ratio" style="--bs-aspect-ratio: 130%;">
                         	<div class="row m-0 p-0" id="applybox">
                         		<c:forEach var="sbm" items="${sbmlist}">
-                        			<div class="col-12 p-0">
+                        			<div class="col-12 p-0 applysolobox">
                         				<div>${sbm.id}</div>
                         				<div class="applybtnyorn" align="right">
-                        					<button type="button" class="applyacceptbtn">수락</button>
+                        					<button type="button" class="applyacceptbtn btns">수락</button>
                         					<input type="hidden" value="${sbm.yorN}">
-                        					<button type="button" class="applycancelbtn">거절</button>
+                        					<button type="button" class="applycancelbtn btns">거절</button>
                         				</div>
                         			</div>
                         		</c:forEach>
@@ -192,36 +223,39 @@
             	<div class="col-12">
                 	<div class="row">
                     	<div class="col-1 p-0 m-0">스터디 멤버</div>
-                    	<div class="col-1">
+                    	<div class="col-1 studyapplybox">
                         	<div class="ratio ratio-1x1 studyguestprint"></div>
-                        	<div class="d-none d-md-block nicknamebox" align="center">host</div>
-                        	<div align="center">${dto.writer}</div>
+                        	<div class="d-none d-md-block" align="center">host</div>
+                        	<div align="center" class="nicknamebox">${dto.writer}</div>
                     	</div>
                     	<c:forEach var="cksbm" items="${cksbmlist}">
-                    		<div class="col-1">
+                    		<div class="col-1 studyapplybox">
                         	<div class="ratio ratio-1x1 studyguestprint"></div>
+                        	<br>
                         	<div class="d-none d-md-block nicknamebox" align="center">${cksbm.id}</div>
                     	</div>
                     	</c:forEach>
                 	</div>
             	</div>
             	<div class="col-12" id="btnbox">
-            		<button type="submit" id="acceptbtn">확인</button>
-            		<button type="button" id="cancelbtn">취소</button>
-                	<button type="button" id="updatebtn">수정하기</button>
-                	<button type="button" id="deletebtn">삭제하기</button>
-                	<a href="/select.studyboard?cpage=${cpage}"><button type="button">목록으로</button></a>
+            		<button type="submit" id="acceptbtn" class="btns">확인</button>
+            		<button type="button" id="cancelbtn" class="btns">취소</button>
+                	<button type="button" id="updatebtn" class="btns">수정하기</button>
+                	<button type="button" id="deletebtn" class="btns">삭제하기</button>
+                	<a href="/select.studyboard?cpage=${cpage}"><button type="button" class="btns">목록으로</button></a>
             	</div>
         	</div>
         	<input type="hidden" name="cpage" value="${cpage}">
         	<input type="hidden" name="writer" value="${dto.writer}">
         	<input type="hidden" name="seq" value="${dto.seq}">
         </form>
+        <br>
         <form action="/insert.studyreply" method="post" id="replyForm">
-        	<div class="row footer">
+        	<div class="row body2">
         		<div class="col-12" id="replyfont">
                 	댓글
             	</div>
+            	<hr>
             	<div class="col-12">
                 	<div class="row" id="allreplybox">
                     	<c:forEach var="i" items="${replylist}">
@@ -235,29 +269,34 @@
                 				<input type="hidden" value="${i.seq}">
                 				<c:if test="${i.writer == loggedID}">
                 					<div align="right">
-                						<button type="button" class="btn btn-outline-dark replyacceptbtn">확인</button>
-                						<button type="button" class="btn btn-outline-dark replycancelbtn">취소</button>
-                						<button type="button" class="btn btn-outline-dark replyupdatebtn">수정하기</button>
-                						<button type="button" class="btn btn-outline-dark replydeletebtn">삭제하기</button>
+                						<button type="button" class="btns replyacceptbtn">확인</button>
+                						<button type="button" class="btns replycancelbtn">취소</button>
+                						<button type="button" class="btns replyupdatebtn">수정하기</button>
+                						<button type="button" class="btns replydeletebtn">삭제하기</button>
                 					</div>
                 				</c:if>
                 			</div>
+                			<hr>
                 		</c:forEach>
                 	</div>
             	</div>
             	<div class="col-12 p-0" id="replywritebox">
                 	<div contenteditable="true" id="replytext"></div>
                 	<input type="hidden" name="studyreplycontents" id="studyreplycontents">
-                	<button type="submit" id="replywritebtn">작성하기</button>
+                	<button type="submit" id="replywritebtn" class="btns">작성하기</button>
             	</div>
-            	<div class="col-12">아래 대충 띄어놓기</div>
         	</div>
         	<input type="hidden" name="studyreplywriter" value="213">
         	<input type="hidden" name="cpage" value="${cpage}">
         	<input type="hidden" name="parent_seq" value="${dto.seq}">
         </form>
+        <br>
+       	<div class="row footer">
+       		<div class="col-12">아래 대충 띄어놓기</div>
+       	</div>
     </div>
     <script>
+    	let regexguestcount = /^[1]{0,1}[0-9]{1}$/;
     	$("#applybox").on("click",".applyacceptbtn",function(){
     		$.ajax({
     			url:"/update.studyapply",
@@ -292,6 +331,7 @@
     		$("#acceptbtn").css("display","");
     		$("#cancelbtn").css("display","");
     		$("#writer").css("display","none");
+    		$("#guestcount").removeAttr("readonly");
     		$("#title").attr("contenteditable","true");
     		$("#contents").attr("contenteditable","true");
     		$("#detailcontents").attr("contenteditable","true");
@@ -303,9 +343,15 @@
     		}
     	})
     	$("#updateForm").on("submit",function(){
+    		let guestcount = $("#guestcount").val();
+            let resultguestcount = regexguestcount.test(guestcount);
     		$("#hiddentitle").val($("#title").html());
     		$("#hiddencontents").val($("#contents").html());
     		$("#hiddendetailcontents").val($("#detailcontents").html());
+    		if(!resultguestcount){
+    			alert("참여인원수를 다시확인해주세요.");
+                return false;
+    		}
     	})
     	$("#replyForm").on("submit",function(){
     		$("#studyreplycontents").val($("#replytext").html());
@@ -420,10 +466,10 @@
 			<style>
         *{box-sizing: border-box;}
         div{
-        border: 1px solid black;
         word-break: break-word;
         }
         #studyprint{
+        	border: 1px solid black;
             margin-top: 12px;
             margin-bottom: 12px;
             border-radius: 100%;
@@ -433,6 +479,16 @@
         }
         .header{
             position: relative;
+            background-color: white;
+        }
+        .body{
+        	background-color: white;
+        }
+        .body2{
+        	background-color: white;
+        }
+        .footer{
+        	background-color: white;
         }
         .navi {
             position:sticky;
@@ -480,10 +536,14 @@
             height: 100%;
         }
         .nicknamebox{
+        	border: 1px solid black;
             overflow: hidden;
         }
         #totitle{
         	text-align: right;
+        }
+        #allreplybox{
+        	background-color: white;
         }
         #btnbox{
             text-align: right;
@@ -495,6 +555,7 @@
             position: relative;
         }
         #replytext{
+        	border: 1px solid black;
             padding-right: 90px;
             min-height: 80px;
             max-height: 80px;
@@ -510,6 +571,28 @@
             right: 5px;
             bottom: 5px;
         }
+        
+        .studyguestprint {
+        	border: 1px solid black;
+            margin-top: 12px;
+            margin-bottom: 12px;
+            border-radius: 100%;
+        }
+        
+        .btns{
+			background-color: white;
+			border-radius: 5px;
+		}
+		#applyguestcount{
+			display:inline-block;
+		}
+		.studyapplybox{
+			border: 1px solid black;
+		}
+		.bodybox{
+			padding-top: 2%;
+			padding-left: 3%;
+		}
     </style>
     <script>
     	$(function(){
@@ -530,60 +613,59 @@
                             <h3>${dto.title}</h3>
                             <div>${dto.contents}</div>
                             <div>작성자 : ${dto.writer}</div>
-                            <button type="button" id="applybtn">신청하기</button>    
+                            <button type="button" id="applybtn" class="btns">신청하기</button>    
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <br>
         <div class="row body">
-            <div class="col-3">
-                <div class="row">
+            <div class="col-3 bodybox">약속 장소
+                <div class="row m-0">
                     <div class="ratio ratio-1x1">
                     	<div id="map" style="width:100%;height:100%"></div>
                     </div>
                 </div>
             </div>
-            <div class="col-6">상세내역<br>
+            <div class="col-6 bodybox">상세내역<br>
+            	참여 인원수 : <div id="applyguestcount">${guestcount}</div>/${dto.guestcount}
             	<div>${dto.detailcontents}</div>
             </div>
             <div class="col-3 p-0">
                 <div class="row m-0">
-                    <div class="col-12 ratio" style="--bs-aspect-ratio: 130%;">
-                        <div class="row m-0" id="similarbox">
-                            <div id="similarstudyfont"><h5>연관 스터디 추천</h5></div>
-                            <div class="similarstudybox"><div class="similarstudy">연관 스터디1</div></div>
-                            <div class="similarstudybox"><div class="similarstudy">연관 스터디2</div></div>
-                            <div class="similarstudybox"><div class="similarstudy">연관 스터디3</div></div>
-                            <div class="similarstudybox"><div class="similarstudy">연관 스터디4</div></div>
-                            <div class="similarstudybox"><div class="similarstudy">연관 스터디5</div></div>
-                        </div>
-                    </div>
                 </div>
             </div>
+            <p>
+            <p>
             <div class="col-12">
                 <div class="row">
                     <div class="col-1 p-0 m-0">스터디 멤버</div>
-                    <div class="col-1">
+                    <div class="col-1 studyapplybox">
                         <div class="ratio ratio-1x1" id="studyprint"></div>
-                        <div class="nicknamebox" align="center">host</div>
-                        <div align="center">${dto.writer}</div>
+                        <div align="center">host</div>
+                        <div align="center" class="nicknamebox">${dto.writer}</div>
                     </div>
-                    <div class="col-1">
-                        <div class="ratio ratio-1x1" id="studyprint"></div>
-                        <div class="nicknamebox" align="center">확정아이디</div>
-                    </div>
+                    <c:forEach var="cksbm" items="${cksbmlist}">
+                    	<div class="col-1 studyapplybox">
+                        	<div class="ratio ratio-1x1 studyguestprint"></div>
+                        	<br>
+                        	<div class="d-none d-md-block nicknamebox" align="center">${cksbm.id}</div>
+                    	</div>
+                    </c:forEach>
                 </div>
             </div>
             <div class="col-12" id="totitle">
-            	<a href="/select.studyboard?cpage=${cpage}"><button type="button">목록으로</button></a>
+            	<a href="/select.studyboard?cpage=${cpage}"><button type="button" class="btns">목록으로</button></a>
             </div>
         </div>
+        <br>
         <form action="/insert.studyreply" method="post" id="replyForm">
-        	<div class="row footer">
+        	<div class="row body2">
         		<div class="col-12" id="replyfont">
                 	댓글
             	</div>
+            	<hr>
             	<div class="col-12">
                 	<div class="row" id="allreplybox">
                     	<c:forEach var="i" items="${replylist}">
@@ -597,28 +679,33 @@
                 				<input type="hidden" value="${i.seq}">
                 				<c:if test="${i.writer == loggedID}">
                 					<div align="right">
-                						<button type="button" class="replyacceptbtn">확인</button>
-                						<button type="button" class="replycancelbtn">취소</button>
-                						<button type="button" class="replyupdatebtn">수정하기</button>
-                						<button type="button" class="replydeletebtn">삭제하기</button>
+                						<button type="button" class="replyacceptbtn btns">확인</button>
+                						<button type="button" class="replycancelbtn btns">취소</button>
+                						<button type="button" class="replyupdatebtn btns">수정하기</button>
+                						<button type="button" class="replydeletebtn btns">삭제하기</button>
                 					</div>
                 				</c:if>
                 			</div>
+                			<hr>
                 		</c:forEach>
                 	</div>
             	</div>
             	<div class="col-12 p-0" id="replywritebox">
                 	<div contenteditable="true" id="replytext"></div>
                 	<input type="hidden" name="studyreplycontents" id="studyreplycontents">
-                	<button type="submit" id="replywritebtn">작성하기</button>
+                	<button type="submit" id="replywritebtn" class="btns">작성하기</button>
             	</div>
-            	<div class="col-12">아래 대충 띄어놓기</div>
         	</div>
         	<input type="hidden" name="studyreplywriter" value="213">
         	<input type="hidden" name="cpage" value="${cpage}">
         	<input type="hidden" name="parent_seq" value="${dto.seq}">
         </form>
+        <br>
+        <div class="row footer">
+    		<div class="col-12">아래 대충 띄어놓기</div>
+    	</div>
     </div>
+    
     <script>
     	$("#applybtn").on("click",function(){
     		console.log("123");

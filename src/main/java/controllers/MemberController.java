@@ -92,6 +92,7 @@ public class MemberController extends HttpServlet {
 			} else if (cmd.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
+
 				// 아이디 찾기
 			} else if (cmd.equals("/findId.member")) {
 				String name = request.getParameter("name");
@@ -148,8 +149,8 @@ public class MemberController extends HttpServlet {
 				MembersDTO dto = new MembersDTO(id, pw, name, birth_date, nickname, contact, email, zipcode,
 						roadAddress, detailAddress, null);
 				dao.update(dto);
-				response.sendRedirect("/myPage/mypageMainForm.jsp");
-
+				request.getSession().setAttribute("loggedNickname", nickname);
+				response.sendRedirect("/myInfoSelect.member");
 				// delete 회원탈퇴
 			} else if (cmd.equals("/memberOut.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");
