@@ -82,11 +82,11 @@ div {
 	background-color: green;
 }
 
-.leftorrightbtn {
+/* .leftorrightbtn {
 	padding-top: 120px;
 	padding-bottom: 120px;
 	background-color: rgb(72,143,149,1);
-}
+} */
 
 .box{
 	background-color: rgb(72,143,149,1);
@@ -135,6 +135,52 @@ div {
 	bottom: 0px;
 }
 
+#freeboard_img {
+position:relative;
+width:100%;
+height: 200px;
+}
+
+#freeboard_img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+}
+
+#freeboard_img img{
+/* object-position : center -370px; */
+opacity:0.5;
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+#imgTitle{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* text 요소를 커버 위에 위치시킵니다. */
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+}
+#searchDiv {
+	margin: auto;
+	display: relative;
+	margin-top: 5px;
+}
+.margin {
+	height: 28px;
+}
 
 </style>
 </head>
@@ -142,31 +188,57 @@ div {
 <body>
 	<div class="container">
 		<c:import url="/board/topMenu.jsp"></c:import>
-		<div class="row header">
-			<div class="col-12 p-0">
-				<div id="carouselExampleSlidesOnly" class="carousel slide"
-					data-bs-ride="carousel">
-					<div class="carousel-inner">
-						<div class="carousel-item active">
-							<img src="/image/study.jpg" class="d-block">
-						</div>
-						<div class="carousel-item">
-							<img src="/image/studytotal.jpg" class="d-block">
-						</div>
-						<div class="carousel-item">
-							<img src="/image/다운로드.jpg" class="d-block">
+		<div class="row">
+			<div class="col-12 " id="freeboard_img">
+			<a href="/select.studyboard">
+			<img src="/image/study.jpg" id="picture">
+			<h1 id=imgTitle>스터디 모임 게시판</h1>
+			</a>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col margin"></div>
+		</div>
+		
+		<!-- 검색 -->
+		<!-- <form action="/searchByOption.freeBoard" method="post">
+		<div class="row" id="searchRow">
+			<div class="col-12">
+				<div class="d-flex justify-content-center row" id="searchDiv">
+					<div class="col-2 p-0">
+						<select class="form-select text-center" id="select" aria-label="Default select example" name="optionValue">
+							<option selected >-- 검색 선택 --</option>
+							<option value="제목" >제목</option>
+							<option value="내용" >내용</option>
+							<option value="호스트">호스트</option>
+						</select>
+					</div>
+					<div class="col-10 p-0">
+						<div class="input-group mb-3">
+							<input type="text" class="form-control" placeholder="검색어를 입력하세요"
+								aria-label="Recipient's username" aria-describedby="basic-addon2" name="searchValue">
+							<button class="btn btn-outline-secondary" type="submit"
+								id="button-addon2">
+								<i class="fa-solid fa-magnifying-glass"></i>
+							</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		</form>
+		
+		<div class="row">
+			<div class="col margin"></div>
+		</div> -->
+		
+		<!-- 검색까지  -->
+		
 		<div class="row body">
-			<div class="col-12" id="mainstudyfont">
-				<h3>스터디 목록</h3>
-			</div>
 			<div class="col-12" class="fastfindstudy">
 				<div class="row">
-					<div class="col-2 leftorrightbtn"></div>
+					<div class="col-2 leftorrightbtn">여백</div>
 					<div class="col-8">
 						<div class="row">
 							<c:forEach var="j" items="${list}">
@@ -190,7 +262,7 @@ div {
 							</c:forEach>
 						</div>
 					</div>
-					<div class="col-2 leftorrightbtn"></div>
+					<div class="col-2 leftorrightbtn">여백</div>
 				</div>
 			</div>
 			<div classs="col-12">
@@ -233,5 +305,46 @@ div {
 			<div class="col-12">아래 대충 띄어놓기</div>
 		</div>
 	</div>
+	
+	<script>
+	 $(window).on("load", function () {
+		 const bodySize = parseInt($("body").css("width"));
+		 if (bodySize > 1399) {
+	            $("#picture").css("object-position", "center -370px");
+	        }
+		 else if (bodySize <= 1399 && bodySize > 1199){
+			 $("#picture").css("object-position", "center -305px");
+		 }
+		 else if (bodySize <= 1199 && bodySize > 991){
+			 $("#picture").css("object-position", "center -250px");
+		 }
+        else if (bodySize <= 991){
+        	$("#picture").css("object-position", "center -155px");
+        }
+        else if (bodySize <=767){
+        	$("#picture").css("object-position", "center -95px");
+        }
+     });
+	
+	addEventListener("resize", function (event) {
+		const bodySize = parseInt($("body").css("width"));
+        if (bodySize > 1399) {
+            $("#picture").css("object-position", "center -370px");
+        }
+        else if (bodySize <= 1399 && bodySize > 1199){
+			 $("#picture").css("object-position", "center -305px");
+		 }
+        else if (bodySize <= 1199 && bodySize > 991){
+			 $("#picture").css("object-position", "center -250px");
+		 }
+        else if (bodySize <= 991 && bodySize > 767){
+        	$("#picture").css("object-position", "center -155px");
+        }
+        else if (bodySize <=767){
+        	$("#picture").css("object-position", "center -95px");
+        }
+	});
+	
+	</script>
 </body>
 </html>
