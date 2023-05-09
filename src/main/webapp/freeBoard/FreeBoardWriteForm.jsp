@@ -210,7 +210,6 @@ object-fit:cover;
 	<div class="container">
 	<!-- 헤더 -->
 	  <div class="row navi">
-
                     <div class="col-12 top">
                         <div class="row">
                             <div class="col-6 col-lg-2 order-2 order-lg-first" id="logo">
