@@ -209,8 +209,7 @@
 											<h2 class="dialog-header">Add New Event</h2>
 											<form class="form" id="form">
 												<div class="form-container" align="center">
-													<label class="form-label" id="valueFromMyButton" for="name">Event
-														name</label>
+													<label class="form-label" id="valueFromMyButton" for="name">Event name</label>
 														 <input class="input" type="text" id="name"maxlength="36"> 
 														 <label class="form-label"id="valueFromMyButton" for="count">Number of people to invite</label> 
 														 <input class="input" type="number"id="count" min="0" max="1000000" maxlength="7"> 

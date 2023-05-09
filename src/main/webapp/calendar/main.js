@@ -158,7 +158,7 @@ function new_event(event) {
             init_calendar(date);
         }
     });
-}
+}                   
 
 // Adds a json event to event_data
 function new_event_json(name, count, date, day) {
