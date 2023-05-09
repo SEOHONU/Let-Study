@@ -159,11 +159,11 @@ public class FreeBoardController extends HttpServlet {
 							System.out.println("sysName : "+sysName);
 							String url = "/img/"+sysName;
 							System.out.println("url : "+url);
-							jo.addProperty("url", url);
+//							jo.addProperty("url", url);
+//							System.out.println(jo.toString());
+							response.getWriter().append(g.toJson(url));
 						}
 					}
-					System.out.println(jo.toString());
-					response.getWriter().append(jo.toString());
 				}
 		}catch(Exception e) {
 			e.printStackTrace();
