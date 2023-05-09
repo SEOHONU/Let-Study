@@ -13,10 +13,11 @@ public class StudyBoardDTO {
 	private double lat;
 	private double lng;
 	private String mapname;
+	private int guestcount;
 	
 	public StudyBoardDTO() {}
 	public StudyBoardDTO(int seq, String writer, String title, String contents, String detailcontents, int view_count,
-			Timestamp write_date, double lat, double lng, String mapname) {
+			Timestamp write_date, double lat, double lng, String mapname, int guestcount) {
 		this.seq = seq;
 		this.writer = writer;
 		this.title = title;
@@ -27,6 +28,7 @@ public class StudyBoardDTO {
 		this.lat = lat;
 		this.lng = lng;
 		this.mapname = mapname;
+		this.guestcount = guestcount;
 	}
 	public int getSeq() {
 		return seq;
@@ -87,5 +89,11 @@ public class StudyBoardDTO {
 	}
 	public void setMapname(String mapname) {
 		this.mapname = mapname;
+	}
+	public int getGuestcount() {
+		return guestcount;
+	}
+	public void setGuestcount(int guestcount) {
+		this.guestcount = guestcount;
 	}
 }

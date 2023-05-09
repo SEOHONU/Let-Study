@@ -99,7 +99,8 @@ public class MainDAO {
 					double lat = rs.getDouble("lat");
 					double lng = rs.getDouble("lng");
 					String mapname = rs.getString("mapname");
-					result.add(new StudyBoardDTO(seq,writer,title,contents,detailcontents,view_count,write_date,lat,lng,mapname));
+					int guestcount = rs.getInt("guestcount");
+					result.add(new StudyBoardDTO(seq,writer,title,contents,detailcontents,view_count,write_date,lat,lng,mapname,guestcount));
 				}
 				return result;
 			}
