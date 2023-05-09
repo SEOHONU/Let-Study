@@ -140,6 +140,7 @@
         
         #opendetailcontents{
         	border: 1px solid black;
+        	word-break: break-all;
         }
         
         #opencontents{
@@ -240,6 +241,10 @@
     		$("#hiddentitle").val($("#opentitle").html());
     		$("#hiddencontents").val($("#opencontents").html());
     		$("#hiddendetailcontents").val($("#opendetailcontents").html());
+    		if($("#guestcount").val()==""){
+    			alert("참여 인원을 적어주세요.");
+    			return false;
+    		}
     		let guestcount = $("#guestcount").val();
             let resultguestcount = regexguestcount.test(guestcount);
             console.log(resultgeustcount);
