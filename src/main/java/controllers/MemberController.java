@@ -104,6 +104,28 @@ public class MemberController extends HttpServlet {
 				String foundId = dao.findId(name, email, contact);
 				request.setAttribute("foundId", foundId);
 				request.getRequestDispatcher("/member/findIdResult.jsp").forward(request, response);
+				// 비밀번호 찾기
+			} else if (cmd.equals("/findPw.member")) {
+				String id = request.getParameter("id");
+				System.out.println("id : " + id);
+				String name = request.getParameter("name");
+				System.out.println("name : " + name);
+				String email = request.getParameter("email");
+				System.out.println("email : " + email);
+				String contact = request.getParameter("contact");
+				System.out.println("contact : " + contact);
+				boolean result = dao.findPw(id, name, email, contact);
+				String data = g.toJson(result);
+				System.out.println(data);
+				response.getWriter().append(data);
+				// 비밀번호 변경
+			} else if (cmd.equals("/updatePw.member")) {
+				String id = request.getParameter("id");
+				String newPw = request.getParameter("newPw");
+				int result = dao.updatePw(newPw, id);
+				String data = g.toJson(result); 
+				System.out.println(data + "비밀번호 변경 전송");
+				response.getWriter().append(data); 
 
 				// select 회원정보출력
 			} else if (cmd.equals("/myInfoSelect.member")) {
