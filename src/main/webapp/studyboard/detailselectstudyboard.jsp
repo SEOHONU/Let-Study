@@ -173,6 +173,8 @@
                 	</div>
             	</div>
             	<div class="col-6">상세 내역<br>
+            		참여 인원수 : 
+            		<input type="text" value="${dto.guestcount}" id="guestcount" name="guestcount" readonly>
             		<div id="detailcontents">${dto.detailcontents}</div>
             		<input type="hidden" name="detailcontents" id="hiddendetailcontents">
             	</div>
@@ -263,6 +265,7 @@
         </form>
     </div>
     <script>
+    	let regexguestcount = /^[1]{0,1}[0-9]{1}$/;
     	$("#applybox").on("click",".applyacceptbtn",function(){
     		$.ajax({
     			url:"/update.studyapply",
@@ -297,6 +300,7 @@
     		$("#acceptbtn").css("display","");
     		$("#cancelbtn").css("display","");
     		$("#writer").css("display","none");
+    		$("#guestcount").removeAttr("readonly");
     		$("#title").attr("contenteditable","true");
     		$("#contents").attr("contenteditable","true");
     		$("#detailcontents").attr("contenteditable","true");
@@ -308,9 +312,15 @@
     		}
     	})
     	$("#updateForm").on("submit",function(){
+    		let guestcount = $("#guestcount").val();
+            let resultguestcount = regexguestcount.test(guestcount);
     		$("#hiddentitle").val($("#title").html());
     		$("#hiddencontents").val($("#contents").html());
     		$("#hiddendetailcontents").val($("#detailcontents").html());
+    		if(!resultguestcount){
+    			alert("참여인원수를 다시확인해주세요.");
+                return false;
+    		}
     	})
     	$("#replyForm").on("submit",function(){
     		$("#studyreplycontents").val($("#replytext").html());
@@ -516,6 +526,12 @@
             bottom: 5px;
         }
         
+        .studyguestprint {
+            margin-top: 12px;
+            margin-bottom: 12px;
+            border-radius: 100%;
+        }
+        
         .btns{
 			background-color: white;
 			border-radius: 5px;
@@ -579,10 +595,12 @@
                         <div class="nicknamebox" align="center">host</div>
                         <div align="center">${dto.writer}</div>
                     </div>
-                    <div class="col-1">
-                        <div class="ratio ratio-1x1" id="studyprint"></div>
-                        <div class="nicknamebox" align="center">확정아이디</div>
-                    </div>
+                    <c:forEach var="cksbm" items="${cksbmlist}">
+                    	<div class="col-1">
+                        	<div class="ratio ratio-1x1 studyguestprint"></div>
+                        	<div class="d-none d-md-block nicknamebox" align="center">${cksbm.id}</div>
+                    	</div>
+                    </c:forEach>
                 </div>
             </div>
             <div class="col-12" id="totitle">
