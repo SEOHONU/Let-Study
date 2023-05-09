@@ -149,6 +149,10 @@
                     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
                     border-radius: 5px;
                 }
+
+                i{
+                    color:#18494d;
+                }
             </style>
 
             <script>
@@ -186,7 +190,7 @@
                             <div class="col-6 col-lg-2 order-2 order-lg-first" id="logo" style="text-align:center">
                                 <div class="row">
                                     <div class="col-12" style="padding:0%">
-                                        <a href="/index.jsp"><img src="/image/logo.png"></a>
+                                        <a href="/index.jsp"><img src="/image/mainlogo.png"></a>
 
                                     </div>
                                     <div class="col-12 d-lg-none d-block">
@@ -221,7 +225,7 @@
 
                             </div>
 
-                            <div class="col-lg-4 d-none d-lg-block order-lg-1">여백</div>
+                            <div class="col-lg-4 d-none d-lg-block order-lg-1"></div>
                             <div class="col-3 d-block d-lg-none order-1">
                                 <div class="row">
                                     <div class="col-12">
@@ -233,21 +237,21 @@
                                             <!-- 네비햄버거 누를시 나오는거 -->
                                             <div class="col-12 navisub">
                                                 <div class="row" style="text-align: right;">
-                                                    <div class="col-12 naviname" style="text-align: center;"
+                                                    <div class="col-12 naviname" style="text-align: center;font-size:12px;"
                                                         onclick="javascript:checkLogin('/select.studyboard');">
-                                                        Study
+                                                        스터디
                                                     </div>
-                                                    <div class="col-12 naviname" style="text-align: center;"
+                                                    <div class="col-12 naviname" style="text-align: center;font-size:12px;"
                                                         onclick="javascript:checkLogin('/selectBound.secondHand');">
-                                                        second
+                                                        중고책거래
                                                     </div>
-                                                    <div class="col-12 naviname" style="text-align: center;"
+                                                    <div class="col-12 naviname" style="text-align: center;font-size:12px;"
                                                         onclick="javascript:checkLogin('/contentList.freeBoard');">
-                                                        free
+                                                        자유게시판
                                                     </div>
-                                                    <div class="col-12 naviname" style="text-align: center;"
+                                                    <div class="col-12 naviname licence" style="text-align: center;font-size:12px;"
                                                         onclick="javascript:checkLogin('/contentList.freeBoard');">
-                                                        licence
+                                                        자격증게시판
                                                     </div>
                                                 </div>
                                             </div>
@@ -275,21 +279,21 @@
                             </div>
 
 
-                            <div class="col-lg-1 d-none d-lg-block order-lg-2 naviname" style="text-align: center;"
+                            <div class="col-lg-1 d-none d-lg-block order-lg-2 naviname" style="text-align: center; padding:0px; font-size:12px; line-height: 100px;"
                                 onclick="javascript:checkLogin('/select.studyboard');">
-                                Study
+                                스터디
                             </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-3 naviname" style="text-align: center;"
+                            <div class="col-lg-1 d-none d-lg-block order-lg-3 naviname" style="text-align: center; padding:0px; font-size:12px; line-height: 100px;"
                                 onclick="javascript:checkLogin('/selectBound.secondHand');">
-                                Sencond
+                                중고책거래
                             </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-4 naviname" style="text-align: center;"
+                            <div class="col-lg-1 d-none d-lg-block order-lg-4 naviname" style="text-align: center; padding:0px; font-size:12px; line-height: 100px;"
                                 onclick="javascript:checkLogin('/contentList.freeBoard');">
-                                Board
+                                자유게시판
                             </div>
-                            <div class="col-lg-1 d-none d-lg-block order-lg-5 naviname" style="text-align: center;"
+                            <div class="col-lg-1 d-none d-lg-block order-lg-5 naviname licence"style="text-align: center; padding:0px; font-size:12px; line-height: 100px;"
                                 onclick="javascript:checkLogin('/자격증 게시판으로');">
-                                Licence
+                                자격증게시판
                             </div>
 
                             <div class="col-lg-2 d-none d-lg-block  order-lg-last" style="text-align: center">
@@ -297,23 +301,23 @@
 
                                     <c:choose>
                                         <c:when test="${loggedID==null}">
-                                            <div class="col-6 login">
+                                            <div class="col-6 login" style="line-height: 100px;">
                                                 <a href="/member/loginForm.jsp"><i
                                                         class="fa-solid fa-right-to-bracket"></i></a>
                                                 <!--로그인안됐을때-->
                                             </div>
-                                            <div class="col-6 signup">
+                                            <div class="col-6 signup" style="line-height: 100px;">
                                                 <a href="/member/joinForm.jsp"><i class="fa-solid fa-user-plus"></i></a>
                                                 <!--로그인안됐을때-->
                                             </div>
                                         </c:when>
                                         <c:otherwise>
-                                            <div class="col-6 profile">
-                                                <a href="/myPage/mypageMainForm.jsp"><i
+                                            <div class="col-6 profile" style="line-height: 100px;">
+                                                <a href="/mypageboard.mypageboardController"><i
                                                         class="fa-solid fa-user"></i></a>
                                                 <!--로그인됐을때-->
                                             </div>
-                                            <div class="col-6 logout">
+                                            <div class="col-6 logout" style="line-height: 100px;">
                                                 <a href="/logout.member"><i
                                                         class="fa-solid fa-right-from-bracket"></i></a>
                                                 <!--로그인됐을때-->
@@ -361,8 +365,8 @@
                                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
                                     aria-label="Slide 3"></button>
                             </div>
-                            <div class="carousel-inner">
-                                <a href="인기 있는 스터디">
+                            <div class="carousel-inner licence">
+                                <!-- <a href="인기 있는 스터디"> -->
                                     <div class="carousel-item active" data-bs-interval="5000">
                                         <img src="/image/study.jpg" class="w-100 d-block slide" alt="..."
                                             style="opacity: 0.6;object-fit: cover;object-position: center 0px;">
@@ -372,7 +376,7 @@
                                             <p>좋아요를 많이 받은 호스트의 스터디를 확인하세요.</p>
                                         </div>
                                     </div>
-                                </a> <a href="등급 정보">
+                                <!-- </a> <a href="등급 정보"> -->
                                     <div class="carousel-item" data-bs-interval="5000">
                                         <img src="/image/booktrade.jpg" class="w-100 d-block  slide" alt="..."
                                             style="opacity: 0.6;object-fit: cover;object-position: center 0px;">
@@ -381,7 +385,7 @@
                                             <p>중고거래로 저렴하게 책을 구매하세요.</p>
                                         </div>
                                     </div>
-                                </a> <a href="임박 시험 날짜">
+                                <!-- </a> <a href="임박 시험 날짜"> -->
                                     <div class="carousel-item" data-bs-interval="5000">
                                         <img src="/image/Calendar.jpg" class="w-100 d-block  slide" alt="..."
                                             style="opacity: 0.6;object-fit: cover;object-position: center 0px;">
@@ -390,7 +394,7 @@
                                             <p>시험일자가 임박한 시험을 보세요.</p>
                                         </div>
                                     </div>
-                                </a>
+                                <!-- </a> -->
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
                                 data-bs-slide="prev">
@@ -406,7 +410,7 @@
                     </div>
                 </div>
                 <div class="row searchbar">
-                    <div class="col-lg-2 d-none d-lg-block" style="background-color: rgb(30, 60, 62);">공백</div>
+                    <div class="col-lg-2 d-none d-lg-block" style="background-color: rgb(30, 60, 62);"></div>
                     <div class="col-lg-8 d-none d-lg-block"
                         style="text-align: center; background-color: rgb(30, 60, 62);">
 
@@ -430,159 +434,159 @@
 
 
                     </div>
-                    <div class="col-lg-2 d-none d-lg-block" style="background-color: rgb(30, 60, 62);">공백</div>
+                    <div class="col-lg-2 d-none d-lg-block" style="background-color: rgb(30, 60, 62);"></div>
                 </div>
                 <div class="row">
-                    <div class="col-1 col-sm-2">공백</div>
+                    <div class="col-1 col-sm-2"></div>
                     <div class="col-10 col-sm-8">
                         <div class="row 스터디" style="text-align: center;">
-                            <div class="col-12">공백</div>
+                            <div class="col-12"></div>
                             <div class="col-12" style="text-align: left;">
                                 <a onclick="javascript:checkLogin('/select.studyboard');">스터디 종류</a>
                             </div>
                             <div class="col-12">
-                                <div class="row">
+                                <div class="row licence">
                                     <div class="col-3 d-none d-sm-block order-sm-first li">
                                         <div class="row">
                                             <div class="col-12 cir">
-                                                <a href="기술사 관련">
+                                                <!-- <a href="기술사 관련"> -->
                                                     <div class="circlesub">
                                                         <div class="circle"
                                                             style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
                                                         </div>
                                                     </div>
-                                                </a>
+                                                <!-- </a> -->
                                             </div>
                                             <div class="col-12">
-                                                <a href="기술사 관련"> 기술사 </a>
+                                                <!-- <a href="기술사 관련"> 기술사 </a> -->
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-3 d-none d-sm-block order-sm-1 li">
                                         <div class="row">
                                             <div class="col-12 cir">
-                                                <a href="기능장 관련">
+                                               <!--  <a href="기능장 관련"> -->
                                                     <div class="circlesub">
                                                         <div class="circle"
                                                             style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
                                                         </div>
                                                     </div>
-                                                </a>
+                                                <!-- </a> -->
                                             </div>
                                             <div class="col-12">
-                                                <a href="기능장 관련"> 기능장 </a>
+                                                <!-- <a href="기능장 관련"> 기능장 </a> -->
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-3 order-sm-2 order-2 li">
                                         <div class="row">
                                             <div class="col-12 cir">
-                                                <a href="기사 관련">
+                                                <!-- <a href="기사 관련"> -->
                                                     <div class="circlesub">
                                                         <div class="circle"
                                                             style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
                                                         </div>
                                                     </div>
-                                                </a>
+                                                <!-- </a> -->
                                             </div>
                                             <div class="col-12">
-                                                <a href="기사 관련"> 기사 </a>
+                                                <!-- <a href="기사 관련"> 기사 </a> -->
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-3 d-none d-sm-block order-sm-3 li">
                                         <div class="row">
                                             <div class="col-12 cir">
-                                                <a href="산업기사 관련">
+                                               <!--  <a href="산업기사 관련"> -->
                                                     <div class="circlesub">
                                                         <div class="circle"
                                                             style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
                                                         </div>
                                                     </div>
-                                                </a>
+                                                <!-- </a> -->
                                             </div>
                                             <div class="col-12">
-                                                <a href="산업기사 관련"> 산업기사 </a>
+                                               <!--  <a href="산업기사 관련"> 산업기사 </a> -->
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-3 order-sm-4 order-1 li">
                                         <div class="row">
                                             <div class="col-12 cir">
-                                                <a href="기능사 관련">
+                                                <!-- <a href="기능사 관련"> -->
                                                     <div class="circlesub">
                                                         <div class="circle"
                                                             style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
                                                         </div>
                                                     </div>
-                                                </a>
+                                                <!-- </a> -->
                                             </div>
                                             <div class="col-12">
-                                                <a href="기능사 관련"> 기능사 </a>
+                                                <!-- <a href="기능사 관련"> 기능사 </a> -->
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-3 order-sm-5 order-first li">
                                         <div class="row">
                                             <div class="col-12 cir">
-                                                <a href="서비스 관련">
+                                                <!-- <a href="서비스 관련"> -->
                                                     <div class="circlesub">
                                                         <div class="circle"
                                                             style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
                                                         </div>
                                                     </div>
-                                                </a>
+                                                <!-- </a> -->
                                             </div>
                                             <div class="col-12">
-                                                <a href="서비스 관련"> 서비스 </a>
+                                                <!-- <a href="서비스 관련"> 서비스 </a> -->
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-3 d-none d-sm-block order-sm-last li">
                                         <div class="row">
                                             <div class="col-12 cir">
-                                                <a href="국가기술자격 관련">
+                                                <!-- <a href="국가기술자격 관련"> -->
                                                     <div class="circlesub">
                                                         <div class="circle"
                                                             style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
                                                         </div>
                                                     </div>
-                                                </a>
+                                               <!--  </a> -->
                                             </div>
                                             <div class="col-12">
-                                                <a href="국가기술자격 관련"> 국가기술자격 </a>
+                                                <!-- <a href="국가기술자격 관련"> 국가기술자격 </a> -->
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-3 d-none d-sm-block order-sm-last li">
                                         <div class="row">
                                             <div class="col-12 cir">
-                                                <a href="국가전문자격 관련">
+                                                <!-- <a href="국가전문자격 관련"> -->
                                                     <div class="circlesub">
                                                         <div class="circle"
                                                             style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
                                                         </div>
                                                     </div>
-                                                </a>
+                                                <!-- </a> -->
                                             </div>
                                             <div class="col-12">
-                                                <a href="국가전문자격 관련">국가전문자격</a>
+                                                <!-- <a href="국가전문자격 관련">국가전문자격</a> -->
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-3 d-sm-none d-block order-last li">
                                         <div class="row">
                                             <div class="col-12 cir">
-                                                <a href="더보기 관련">
+                                                <!-- <a href="더보기 관련"> -->
                                                     <div class="circlesub">
                                                         <div class="circle"
                                                             style="background-position-x: center; background-position-y: center; background-image: url(/image/다운로드.jpg); background-size: cover; background-repeat: no-repeat;">
                                                         </div>
                                                     </div>
-                                                </a>
+                                                <!-- </a> -->
                                             </div>
                                             <div class="col-12">
-                                                <a href="더보기 관련"> 더보기 </a>
+                                                <!-- <a href="더보기 관련"> 더보기 </a> -->
                                             </div>
                                         </div>
                                     </div>
@@ -590,42 +594,42 @@
                             </div>
 
 
-                            <div class="col-12">공백</div>
+                            <div class="col-12"></div>
                         </div>
                         <div class="row">
                             <div class="col-12 joongo">
                                 <div class="row 중고책1">
-                                    <div class="col-1 col-sm-2">공백</div>
+                                    <div class="col-1 col-sm-2"></div>
                                     <div class="col-10 col-sm-8">
                                         <div class="row 중고책2">
-                                            <div class="col-12">공백</div>
+                                            <div class="col-12"></div>
                                             <div class="col-12">
                                                 <a onclick="javascript:checkLogin('/selectBound.secondHand');">중고책</a>
                                             </div>
                                             <div class="col-12">
                                                 <div class="row">
-                                                    <div class="col-1 col-xl-2" style="padding:0px;">여백</div>
+                                                    <div class="col-1 col-xl-2" style="padding:0px;"></div>
                                                     <div class="col-10 col-xl-8">
                                                         <div class="row" id="joong">
 
                                                         </div>
                                                     </div>
-                                                    <div class="col-1 col-xl-2" style="padding:0px;">여백</div>
+                                                    <div class="col-1 col-xl-2" style="padding:0px;"></div>
                                                 </div>
                                             </div>
 
-                                            <div class="col-12">공백</div>
+                                            <div class="col-12"></div>
                                         </div>
                                     </div>
-                                    <div class="col-1 col-sm-2">공백</div>
+                                    <div class="col-1 col-sm-2"></div>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="row 중고책">
-                                    <div class="col-1 col-sm-2">공백</div>
+                                    <div class="col-1 col-sm-2"></div>
                                     <div class="col-10 col-sm-8">
                                         <div class="row 사진">
-                                            <div class="col-12">공백</div>
+                                            <div class="col-12"></div>
                                             <div class="col-12 col-sm-6">
                                                 <div class="col">
                                                     <div class="card">
@@ -648,19 +652,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-12">공백</div>
+                                            <div class="col-12"></div>
                                         </div>
                                     </div>
-                                    <div class="col-1 col-sm-2">공백</div>
+                                    <div class="col-1 col-sm-2"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-1 col-sm-2">공백</div>
+                    <div class="col-1 col-sm-2"></div>
                     <!-- 풋터 -->
-                    <div class="row">
-                        <div class="col-12 footer">풋터</div>
-                    </div>
+                    <c:import url="/board/footer.jsp"></c:import>
                 </div>
             </div>
         </body>
@@ -838,9 +840,13 @@
                 var myDiv = document.querySelector('.myDiv');
                 var height = myDiv.offsetHeight;
                 myDiv.style.lineHeight = height + 'px';
+                
             });
 
-
+            $(".licence").on("click",function(){
+            	alert("아직 미구현 입니다.")
+                location.reload();
+            })
 
         </script>
 

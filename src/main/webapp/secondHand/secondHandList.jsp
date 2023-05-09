@@ -13,14 +13,20 @@
 	integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
 	crossorigin="anonymous"></script>
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
-	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-	crossorigin="anonymous"></script>
+	<!-- <script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+	crossorigin="anonymous"></script> -->
+	<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+	integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
+              
 <style>
 * {
 	box-sizing: border-box;
@@ -47,13 +53,15 @@ a>.btn {
 
 <body>
 	<div class="container">
-	<c:import url="/board/topMenu.jsp"></c:import>
+		<c:import url="/board/topMenu.jsp"></c:import>
+	<div align="center">
+		<img src="/image/shBanner_main.jpg">
+	</div>
 		<div class="row">
 			<div class="col-4"></div>
-			<div class="col-4">
-				<a href="/index.jsp" class="btn_a"><button type="button" class="btn btn-primary">메인페이지로</button></a>
-				<a href="/selectBound.secondHand?currentPage=1" class="btn_a"><button type="button" class="btn btn-primary">1페이지로</button></a>
-				<a href="/secondHand/secondHandClusterer.jsp?currentPage=${currentPage}" class="btn_a"><button type="button" class="btn btn-primary">동네 중고거래 찾기</button></a>
+			<div class="col-4" align="center">
+				<a href="/selectBound.secondHand?currentPage=1" class="btn_a"><button type="button" class="btn btn-primary p-0">1페이지로</button></a>
+				<a href="/secondHand/secondHandClusterer.jsp?currentPage=${currentPage}" class="btn_a"><button type="button" class="btn btn-primary p-0">동네 중고거래 찾기</button></a>
 			</div>
 			<div class="col-4"></div>
 		</div>
@@ -61,7 +69,7 @@ a>.btn {
 			<div class="col-12">
 				<div class="row">
 					<div class="col-lg-2 d-none d-lg-block"></div>
-					<div class="col-lg-3">중고거래 게시판</div>
+					<div class="col-lg-3"></div>
 					<div class="col-lg-5">
 						<form action="/searchSecondHand.secondHand">
 							<select name="option" id="option">
@@ -69,7 +77,7 @@ a>.btn {
 								<option value="writer">작성자</option>
 							</select>
 							<input type="text" placeholder="검색어 입력" name="searchText">
-							<button type="submit" class="btn btn-primary" id="searchBtn">검색하기</button>
+							<button type="submit" class="btn btn-primary p-0" id="searchBtn">검색하기</button>
 						</form>
 					</div>
 					<div class="col-lg-2 d-none d-lg-block"></div>
@@ -95,9 +103,9 @@ a>.btn {
                                 <div>
                                     작성일 : ${i.detailDate}
                                 </div>
-                                <div>
+                                <div align="right">
                                     <a href="/secondHandBoardContents.secondHand?seq=${i.seq}&currentPage=${currentPage}">
-                                        <button type="button" class="btn btn-primary">이동하기</button>
+                                        <button type="button" class="btn btn-primary p-0">이동하기</button>
                                     </a>
                                 </div>
                             </div>
@@ -121,9 +129,9 @@ a>.btn {
                                 <div>
                                     작성일 : ${i.detailDate}
                                 </div>
-                                <div>
+                                <div align="right">
                                     <a href="/secondHandBoardContents.secondHand?seq=${i.seq}&currentPage=${currentPage}">
-                                        <button type="button" class="btn btn-primary">이동하기</button>
+                                        <button type="button" class="btn btn-primary p-0">이동하기</button>
                                     </a>
                                 </div>
                             </div>
@@ -149,9 +157,9 @@ a>.btn {
                                 <div>
                                     작성일 : ${i.detailDate}
                                 </div>
-                                <div>
+                                <div align="right">
                                     <a href="/secondHandBoardContents.secondHand?seq=${i.seq}&currentPage=${currentPage}">
-                                        <button type="button" class="btn btn-primary">이동하기</button>
+                                        <button type="button" class="btn btn-primary p-0">이동하기</button>
                                     </a>
                                 </div>
                             </div>
@@ -218,11 +226,12 @@ a>.btn {
 						</c:choose>
 					</div>
 					<div class="col-4" align="right">
-						<button type="button" class="btn btn-primary" id="shWrite">글쓰기</button>
+						<button type="button" class="btn btn-primary p-0" id="shWrite">글쓰기</button>
 					</div>
 				</div>
 			</div>
 		</div>
+		<c:import url="/board/footer.jsp"></c:import>
 	</div>
 </body>
 

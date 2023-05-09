@@ -12,23 +12,46 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
 	<script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d79f132798324278c93739a54ae859c&libraries=services"></script>
-    <style>
     <style>
         * {
             box-sizing: border-box;
         }
 
         div {
-            border: 1px solid black;
             position: relative;
+        }
+        
+        h3{
+        	border: 1px solid black;
+        }
+        
+        h3:empty:before {
+  			content:attr(data-placeholder);
+  			color:gray;
+		}
+		
+		.header{
+        	border-radius:5px;
+		}
+        
+        .body{
+        	border: 1px solid black;
+        	border-radius:5px;
+        }
+        
+        .footer{
+        	border: 1px solid black;
+        	border-radius:5px;
         }
 
         #studyprint {
             margin-top: 12px;
             margin-bottom: 12px;
             border-radius: 100%;
+            border: 1px solid black;
         }
 
         .studyguestprint {
@@ -44,6 +67,7 @@
         }
         .header{
             position: relative;
+            border: 1px solid black;
         }
         .navi {
             position:sticky;
@@ -81,9 +105,19 @@
         #btnbox {
             text-align: right;
         }
+        
+        .btns{
+        	border: 1px solid black;
+			background-color: white;
+			border-radius: 5px;
+		}
 
         #replyfont {
             font-weight: 900;
+        }
+        
+        #guestcount{
+        	width:32%;
         }
 
         #replywritebox {
@@ -100,62 +134,37 @@
             right: 5px;
             bottom: 5px;
         }
+        
+        #opendetailcontents{
+        	border: 1px solid black;
+        }
+        
+        #opencontents{
+        	border: 1px solid black;
+        }
+        
+        #opencontents:empty:before {
+        	content:attr(data-placeholder);
+  			color:gray;
+        }
+        
+        .mapbox{
+        	padding-top:2%;
+        	padding-left:3%;
+        }
+        
+        .detailinfo{
+        	padding-top:2%;
+        	padding-left:3%;
+        	padding-right:5%;
+        }
+        
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="row navi">
-            <div class="col-12">
-                <div class="row">
-
-                    <div class="col-6 col-lg-2 order-2 order-lg-first">
-                        logo
-                    </div>
-                    <div class="col-lg-4 d-none d-lg-block order-lg-1">
-                        여백
-                    </div>
-                    <div class="col-4 d-block d-lg-none order-1">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="row">
-                                    <div class="col-12">
-                                        네비햄버거
-                                    </div>
-                                    <div class="col-12">회원가입</div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="row">
-                                    <div class="col-12 subsearch">검색</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-1 d-none d-lg-block order-lg-2">
-                        <button type="button" class="btn btn-primary btn-lg">hi</button>
-                    </div>
-                    <div class="col-lg-1 d-none d-lg-block order-lg-3">
-                        <button type="button" class="btn btn-primary btn-lg">hi</button>
-                    </div>
-                    <div class="col-lg-1 d-none d-lg-block order-lg-4">
-                        <button type="button" class="btn btn-primary btn-lg">hi</button>
-                    </div>
-                    <div class="col-lg-1 d-none d-lg-block order-lg-5">
-                        <button type="button" class="btn btn-primary btn-lg">hi</button>
-                    </div>
-                    <div class="col-lg-2 d-none d-lg-block  order-lg-last">
-                        ㅎㅇ
-                    </div>
-                    <div class="col-2 d-block d-lg-none order-last">
-                        <div class="row">
-                            <div class="col-12">공백</div>
-                            <div class="col-12">로그인</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <c:import url="/board/topMenu.jsp"></c:import>
         <form action="/insert.studyboard" method="post" id="insertForm">
         	<div class="row header">
             	<div class="col-12">
@@ -167,19 +176,21 @@
                     	</div>
                     	<div class="col-10">
                         	<div id="studybtnbox">
-                            	<h3 contenteditable="true" id="opentitle">스터디 이름</h3>
+                            	<h3 contenteditable="true" id="opentitle" data-placeholder="스터디 이름을 입력하세요."></h3>
                             	<input type="hidden" name="title" id="hiddentitle">
-                            	<div contenteditable="true" id="opencontents"></div>
+                            	<div contenteditable="true" id="opencontents" data-placeholder="스터디를 소개해주세요."></div>
                             	<input type="hidden" name="contents" id="hiddencontents">
                         	</div>
                     	</div>
                 	</div>
             	</div>
         	</div>
+        	<br>
         	<div class="row body">
-            	<div class="col-3">
+            	<div class="col-3 mapbox">
                 	<div class="row">
                     	<div class="col-12">
+                    		약속장소를 설정해주세요.
                         	<div class="ratio ratio-1x1">
                         		<div id="map" style="width:100%;height:100%"></div>
                         	</div>
@@ -188,40 +199,64 @@
                 	<div class="row">
                     	<div class="col-12">
                     		<input type="text" placeholder="주소입력" name="mapname" id="target" required>
-                    		<input type="button" value="검색" id="mapsearch">
+                    		<input type="button" value="검색" id="mapsearch" class="btns">
                     		<input type="hidden" name="lat" value="위도" id="Lat" required>
                     		<input type="hidden" name="lng" value="경도" id="Lng" required>
                     	</div>
                 	</div>
             	</div>
-            	<div class="col-6">
+            	<div class="col-9 detailinfo">
             		상세 내역<br>
-            		<div contenteditable="true" id="opendetailcontents"></div>
+            		참여 인원수 : 
+            		<input type="text" placeholder="참여인원을 숫자로 적어주세요.(1~19)" name="guestcount" id="guestcount">
+            		<br><br>
+            		<div contenteditable="true" id="opendetailcontents">
+            			연령 : <br>
+            			지역 : <br>
+            			시간 : <br>
+            		</div>
             	</div>
             	<input type="hidden" name="detailcontents" id="hiddendetailcontents">
-            	<div class="col-3 p-0">
-                	<div class="row m-0">
-                    	<div class="col-12 ratio" style="--bs-aspect-ratio: 130%;">
-                        	<div class="row m-0" id="applybox">
-                        	</div>
-                    	</div>
-                	</div>
-            	</div>
             	<div class="col-12" id="btnbox">
-                	<button type="submit">작성 완료</button>
-                	<a href="/select.studyboard?cpage=1"><button type="button">목록으로</button></a>
+                	<button type="submit" class="btns">작성 완료</button>
+                	<a href="/select.studyboard?cpage=1"><button type="button" class="btns">목록으로</button></a>
             	</div>
         	</div>
         </form>
+        <br>
         <div class="row footer">
             <div class="col-12">아래 대충 띄어놓기</div>
         </div>
     </div>
     <script>
+    	let regexguestcount = /^[1]{0,1}[0-9]{1}$/;
     	$("#insertForm").on("submit",function(){
     		$("#hiddentitle").val($("#opentitle").html());
     		$("#hiddencontents").val($("#opencontents").html());
     		$("#hiddendetailcontents").val($("#opendetailcontents").html());
+    		let guestcount = $("#guestcount").val();
+            let resultguestcount = regexguestcount.test(guestcount);
+            console.log(resultgeustcount);
+    		if($("#hiddentitle").val()==""){
+    			alert("제목을 입력해주세요.");
+    			return false;
+    		}
+    		if($("#hiddencontents").val()==""){
+    			alert("내용을 입력해주세요.");
+    			return false;
+    		}
+    		if($("#hiddendetailcontents").val()==""){
+    			alert("상세내용을 입력해주세요.");
+    			return false;
+    		}
+    		if($("#Lat").val()=="위도"){
+    			alert("위치를 지정해주세요.");
+    			return false;
+    		}
+    		if(!resultguestcount){
+    			alert("참여인원수를 다시확인해주세요.");
+                return false;
+    		}
     	})
     </script>
     <script>

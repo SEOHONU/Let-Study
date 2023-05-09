@@ -45,15 +45,14 @@
 
 
 	<div class="container top_nul1">
-		<img style="width: 100%;" src="https://img.khan.co.kr/news/2014/01/18/2014011801002854400208051.jpg" alt="">
 	</div>
 	<section class="vh-100">
 		<div class="container h-custom">
 			<div
 				class="row d-flex justify-content-center align-items-center h-100">
 				<div class="col-md-9 col-lg-6 col-xl-5">
-					<img
-						src=""
+					<img style="width: 50%;"
+						src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Anonymous_emblem.svg/160px-Anonymous_emblem.svg.png"
 						class="img-fluid" alt="Sample image">
 				</div>
 				<div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">

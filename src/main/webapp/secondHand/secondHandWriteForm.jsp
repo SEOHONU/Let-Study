@@ -12,15 +12,21 @@
 <script src="https://code.jquery.com/jquery-3.6.4.js"
 	integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
 	crossorigin="anonymous"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	
+	<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
-	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+	<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 	crossorigin="anonymous"></script>
+	<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+	integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e7252ffaa17ffd29198c0279af09c9f9&libraries=services"></script>
 <link
@@ -44,10 +50,19 @@
 .note-frame {
 	max-width: 750px;
 }
+
+.p-0, #submit, #back {
+	background-color: #1e3c3e;
+}
 </style>
 </head>
 
 <body>
+<div class="container">
+<c:import url="/board/topMenu.jsp"></c:import>
+<div align="center">
+	<img src="/image/shBanner_write.jpg">
+</div>
 	<form action="/insert.secondHand" method="post" id="insertForm">
 		<table border="1" align="center">
 			<tr>
@@ -70,17 +85,23 @@
 			</tr>
 			<tr>
 				<td><input type="text" placeholder="주소입력" id="target" required>
-					<input type="button" value="검색" id="search"> <input
+					<button type="button" class="btn btn-primary p-0" id="search">검색</button> 
+					<input
 					type="hidden" name="lat" value="위도" id="Lat" required> <input
 					type="hidden" name="lng" value="경도" id="Lng" required></td>
-				<td align="right"><input type="submit" value="작성하기" id="submit"
-					disabled> <input type="button" value="목록으로" onclick="location.href=/selectBound.secondHand?currentPage=1"> 
-					</td>
+				<td align="right">
+					<button type="submit" id="submit" class="btn btn-primary p-0" disabled>작성하기</button>
+					<button type="button" id="back" class="btn btn-primary p-0">목록으로</button>
+				</td>
 			</tr>
 		</table>
 	</form>
+	<c:import url="/board/footer.jsp"></c:import>
+</div>
 	<script>
-		let count = 1;
+		$("#back").on("click",function(){
+			location.href="/selectBound.secondHand?currentPage=1";
+		});
 		$("#summernote").summernote(
 				{
 					height : 500, // 에디터 높이

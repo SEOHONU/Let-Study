@@ -61,6 +61,27 @@ h2 {
     } */
 .btnsParent button {
 	margin: 10px;
+	background-color: #254F4C;
+	border: none;
+	border: 3px solid #254F4C;
+	color: white;
+	border-radius: 5%;
+	padding-left: 1%;
+	padding-right: 1%;
+}
+
+.btnsParent button:hover {
+	background-color: #f3f3f3;
+	color: #254F4C;
+}
+
+.btnsParent a {
+	text-decoration-line: none;
+	color: white;
+}
+
+.btnsParent a:hover {
+	color: #254F4C;
 }
 
 #searchZipcode {
@@ -75,7 +96,7 @@ h2 {
 		<div class="container">
 			<div class="row header">
 				<div class="col-12">
-							<h1 class="join-header text-center">개인정보수정</h1>
+					<h1 class="join-header text-center">개인정보수정</h1>
 					<h2 class="text-center">${loggedNickname}님,LetStudy에오신걸환영합니다.</h2>
 				</div>
 			</div>
@@ -83,9 +104,8 @@ h2 {
 				<div class="col-3"></div>
 				<div class="col-6">
 					<label for="idInput">아이디*</label> <input type="text"
-						class="form-control" id="id" name="id" 
-						maxlength="20" value="${loggedID}"
-						readonly>
+						class="form-control" id="id" name="id" maxlength="20"
+						value="${loggedID}" readonly>
 					<div id="idFeedback"></div>
 				</div>
 				<div class="col-3"></div>
@@ -114,9 +134,8 @@ h2 {
 				<div class="col-3"></div>
 				<div class="col-6">
 					<label for="nameInput">이름*</label> <input type="name"
-						class="form-control" id="name" name="name"
-					maxlength="5" value="${myInfo.name}"
-						readonly>
+						class="form-control" id="name" name="name" maxlength="5"
+						value="${myInfo.name}" readonly>
 				</div>
 				<div class="col-3"></div>
 			</div>
@@ -127,7 +146,7 @@ h2 {
 					<label for="birthInput" class="form-label">생년월일*</label> <input
 						type="text" class="form-control" id="birthYear" name="birth_date"
 						value="${myInfo.birth_date}">
-						</div>
+				</div>
 				<div class="col-3"></div>
 
 			</div>
@@ -153,7 +172,8 @@ h2 {
 				<div class="col-3"></div>
 				<div class="col-6">
 					<label for="emailInput">이메일*</label> <input type="text"
-						class="form-control" id="email" name="email" value="${myInfo.email }"required>
+						class="form-control" id="email" name="email"
+						value="${myInfo.email }" required>
 				</div>
 				<div class="col-3"></div>
 			</div>
@@ -161,9 +181,10 @@ h2 {
 				<div class="col-3"></div>
 				<div class="col-6">
 					<label for="zipcodeInput">우편번호</label> <input type="text"
-						class="form-control" id="zipcode" name="zipcode" value="${myInfo.zipcode }"readonly>
-					<input type="button" onclick="sample4_execDaumPostcode()"
-						value="우편번호 찾기" id="searchZipcode">
+						class="form-control" id="zipcode" name="zipcode"
+						value="${myInfo.zipcode }" readonly> <input type="button"
+						onclick="sample4_execDaumPostcode()" value="우편번호 찾기"
+						id="searchZipcode">
 				</div>
 				<div class="col-3"></div>
 			</div>
@@ -171,7 +192,8 @@ h2 {
 				<div class="col-3"></div>
 				<div class="col-6">
 					<label for="roadAddressInput">도로명주소</label> <input type="text"
-						class="form-control" id="roadAddress" name="roadAddress" value="${myInfo.zipcode }">
+						class="form-control" id="roadAddress" name="roadAddress"
+						value="${myInfo.zipcode }">
 				</div>
 				<div class="col-3"></div>
 			</div>
@@ -179,14 +201,19 @@ h2 {
 				<div class="col-3"></div>
 				<div class="col-6">
 					<label for="detailAddressInput">상세주소</label> <input type="text"
-						class="form-control" id="detailAddress" name="detailAddress" value="${myInfo.zipcode }">
+						class="form-control" id="detailAddress" name="detailAddress"
+						value="${myInfo.zipcode }">
 				</div>
 				<div class="col-3"></div>
 			</div>
 			<div class="btnsParent text-center">
-				<button type="submit" class="btn btn-primary" id="btnJoin">수정하기</button>
-				<button type="button" class="btn btn-light" id="btnCancel"><a href="/myPage/mypageMainForm.jsp">취소하기</a></button>
-				<button type="button" id="btnMemberOut"><a href="/memberOut.member">탈퇴하기</a></button>
+				<button type="submit" id="btnJoin">수정</button>
+				<button type="button" id="btnCancel">
+					<a href="/myPage/mypageMainForm.jsp">취소</a>
+				</button>
+				<button type="button" id="btnMemberOut">
+					<a href="/memberOut.member">탈퇴</a>
+				</button>
 			</div>
 		</div>
 	</form>

@@ -16,7 +16,7 @@
 				crossorigin="anonymous"></script>
 			<script src="https://code.jquery.com/jquery-3.6.4.js"
 				integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
-
+<script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
 			<script type="text/javascript"
 				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=06950442fcd14966ee4bef261d2ee0dd&libraries=services,clusterer,drawing"></script>
 			<style>
@@ -80,7 +80,7 @@
 
 				.banner {
 					position: relative;
-					height: 300px;
+					height: 150px;
 					background-color: #3c757980;
 					border: 1px solid #ddd;
 					border-radius: 20px;
@@ -287,7 +287,7 @@
 					<div class="col-12">
 						<div class="row bodysub">
 
-							<div class="col-2" style="background-color: #3c7579;">공백</div>
+							<div class="col-2" style="background-color: #3c7579;">　</div>
 							<div class="col-8">
 								<div class="row">
 
@@ -312,7 +312,7 @@
 											</div>
 										</form>
 									</div>
-									<div class="col-12" style="text-align: center; background-color: #a0cbce;">공백</div>
+									<div class="col-12" style="text-align: center; background-color: #a0cbce;">　</div>
 
 									<div class="col-12">
 										스터디
@@ -347,7 +347,7 @@
 											</c:choose>
 										</div>
 									</div>
-									<div class="col12" style="text-align: center; background-color: #a0cbce;">공백</div>
+									<div class="col-12" style="text-align: center; background-color: #a0cbce;">　</div>
 
 
 									<div class="col-12">
@@ -409,7 +409,7 @@
 											</c:choose>
 										</div>
 									</div>
-									<div class="col12" style="text-align: center; background-color: #a0cbce;">공백</div>
+									<div class="col12" style="text-align: center; background-color: #a0cbce;">　</div>
 
 
 									<div class="col-12">
@@ -458,7 +458,7 @@
 										<div class="col-12">검색한 결과가 없습니다.</div>
 									</c:otherwise>
 									</c:choose>
-									<div class="col-12" style="text-align: center; background-color: #a0cbce;">공백</div>
+									<div class="col-12" style="text-align: center; background-color: #a0cbce;">　</div>
 									<div class="col-12 maptotal" style="text-align: center; padding: 0px">
 										<div class="row map_wrap" style="margin: 0px;">
 											<div class="col-7 mapsize" style="padding: 0px;">
@@ -485,11 +485,13 @@
 									</div>
 								</div>
 							</div>
+							
 						</div>
+						
 					</div>
-					<div class="col-2" style="background-color: #3c7579;">공백</div>
+					<div class="col-2" style="background-color: #3c7579;">　</div>
 				</div>
-				<div class="row footer">풋터</div>
+				<c:import url="/board/footer.jsp"></c:import>
 			</div>
 		</body>
 		<script>
@@ -517,7 +519,7 @@
 				$(".maptotal").height($(".mapsize").width());
 				$(".map_wrap").height($(".mapsize").width());
 				var bannerWidth = $(".banner").width();
-				var bannerHeight = bannerWidth * 0.23;
+				var bannerHeight = bannerWidth * 0.15;
 				$(".banner").height(bannerHeight);
 				$("#totaltext").css("line-height", bannerHeight + "px");
 			});
@@ -528,7 +530,7 @@
 				$(".maptotal").height($(".mapsize").width());
 				$(".map_wrap").height($(".mapsize").width());
 				var bannerWidth = $(".banner").width();
-				var bannerHeight = bannerWidth * 0.23;
+				var bannerHeight = bannerWidth * 0.15;
 				$(".banner").height(bannerHeight);
 				$("#totaltext").css("line-height", bannerHeight + "px");
 			});

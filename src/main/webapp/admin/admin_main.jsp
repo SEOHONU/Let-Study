@@ -50,7 +50,7 @@
 	float: right;
 	margin-bottom: 10px;
 	position: relative;
-	bottom: 8px;
+    top: 70px;
 	background-color: white; 
 }
 
@@ -74,9 +74,10 @@ background-color: #1e3c3e;
 			<!-- justify-content-center -->
 			<!-- 페이지 최 상단 관리자페이지 이름과 수정하기/로그아웃 버튼 시작 -->
 			<div class="col header_topLine col-lg-12">
-				<img alt="" src="">
-				<!-- <button type="button" class="btn btn-outline-dark btn_header">수정하기</button> -->
+                <!-- <button type="button" class="btn btn-outline-dark btn_header">수정하기</button> -->
 				<form action="/admin_logout.admin"method="post">
+                    <img alt="" src="새 프로젝트.png"style="height: 100%;">
+                
 					<button type="submit" class="btn btn-outline-dark btn_header">로그아웃</button>
 				</form>
 			</div>
