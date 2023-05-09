@@ -21,6 +21,8 @@
 			<script type="text/javascript"
 				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d79f132798324278c93739a54ae859c&libraries=services"></script>
 
+			<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+			<script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
 
 			<style>
 				* {
@@ -28,10 +30,21 @@
 				}
 
 				div {
-					border: 1px solid black;
+					< !--border: 1px solid black;
+					-->
 				}
 
 
+				.inbox {
+					padding-left: 3%;
+					padding-right: 3%;
+					padding-bottom: 2%;
+				}
+
+				a {
+					text-decoration: none;
+					color: black;
+				}
 
 				#mainstudyfont {
 					height: 150px;
@@ -57,17 +70,30 @@
 					height: 100%;
 				}
 
+				.ratio {
+					background-color: white;
+				}
 
 				.title {
+					display: block;
+					background-color: white;
 					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					font-size: x-large;
+
 				}
 
 				.content {
 					height: 100px;
 					word-break: break-word;
 					overflow: hidden;
+					background-color: white;
 				}
 
+				.box-bottom {
+					background-color: white;
+				}
 
 				/* .leftorrightbtn {
 	padding-top: 120px;
@@ -169,14 +195,33 @@
 					height: 28px;
 				}
 
-				.inbox {
-					border: 1px solid black;
+				.ininbox {
 					border-radius: 10px;
+					overflow: hidden;
+				}
+
+				.line {
+					border: 1px solid gray;
+
+				}
+
+				.seq {
+					background-color: white;
+				}
+
+				.box {
+					position: relative;
+					height: 30px;
+				}
+
+				.writebtn {
+					position: absolute;
+					right: 2%;
 				}
 			</style>
 		</head>
 
-		<body>
+		<body style="background-color: #f3f3f3">
 			<div class="container">
 				<c:import url="/board/topMenu.jsp"></c:import>
 				<div class="row">
@@ -229,61 +274,45 @@
 				<div class="row body">
 					<div class="col-12" class="fastfindstudy">
 						<div class="row">
-							<div class="col-2 leftorrightbtn">여백</div>
-							<div class="col-8">
+							<div class="col-1"></div>
+							<div class="col-10">
 								<div class="row">
-								<c:forEach var="j" items="${list}">
-									<div class="col-6">
-									<a href="/inner.studyboard?seq=${j.seq}&cpage=${cpage}">
-										<div class="row">
-											<div class="col-4" style="border-radius: 10px;">사진</div>
-											<div class="col-8">
-												<div class="row">
-													<div class="col-12">${j.seq}</div>
-													<div class="col-12">${j.title}</div>
-													<div class="col-8">${j.writer}</div>
-													<div class="col-4">${j.guestcount} 명</div>
-													<div class="col-12">${j.detailcontents}</div>
-													<div class="col-8">${j.write_date}</div>
-													<div class="col-4">${j.view_count}</div>
-												</div>
-											</div>
-										</div>
-										</a>
-									</div>
-									</c:forEach>
-									<%-- <c:forEach var="j" items="${list}">
+									<c:forEach var="j" items="${list}">
 										<div class="col-6 inbox">
 											<a href="/inner.studyboard?seq=${j.seq}&cpage=${cpage}">
 												<div class="row ininbox">
 
-													<div class="col-2 p-0" align="center">
-														<div class="ratio ratio-1x1" align="center">
-															<div>${j.seq}</div>
-														</div>
+													<div class="col-2 p-0 seq" align="center">
+														${j.seq}
 													</div>
-													<div class="col-10 title">${j.title}</div>
+													<div class="col-10 title p-2">${j.title}</div>
+													<div class="col-12 line"></div>
 													<div class="col-12 content">
 														인원 : ${j.guestcount} 명<br>
 														${j.detailcontents}
 													</div>
+													<div class="col-12 line"></div>
 													<div class="col-12 box-bottom" align="right">${j.writer}</div>
-													<div class="col-12 box-bottom" align="right">${j.write_date}</div>
 													<div class="col-12 box-bottom" align="right">조회수:${j.view_count}
 													</div>
 												</div>
 											</a>
 										</div>
-										</c:forEach> --%>
+									</c:forEach>
 								</div>
 							</div>
-							<div class="col-2 leftorrightbtn">여백</div>
-						</div>
-						<div class="row">
-							<div class="col margin"></div>
+							<div class="col-1"></div>
 						</div>
 					</div>
+					<div classs="col-12">
+						<div class="row">
+							<div class="col-1"></div>
+							<div class="col-10 box"><a href="/studyboard/insertstudyboard.jsp"><button
+										class="btns writebtn">글쓰기</button></a></div>
+							<div class="col-1"></div>
+						</div>
 
+					</div>
 					<div class="col-12" align="center">
 						<c:forEach var="i" items="${navi}">
 							<c:choose>
@@ -309,23 +338,12 @@
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
-						<div class="row">
-							<div class="col margin"></div>
-						</div>
-					</div>
-
-					<div classs="col-12">
-						<div class="row box">
-							<div class="col-2"></div>
-							<div class="col-8" align="right"><a href="/studyboard/insertstudyboard.jsp"><button
-										class="btns">글쓰기</button></a></div>
-							<div class="col-2"></div>
-						</div>
-
 					</div>
 
 				</div>
-				<c:import url="/board/footer.jsp"></c:import>
+				<div class="row footer">
+					<c:import url="/board/footer.jsp"></c:import>
+				</div>
 			</div>
 
 			<script>
