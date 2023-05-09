@@ -155,14 +155,7 @@ object-fit:cover;
   font-size: 2rem;
 }
 
-<<<<<<< HEAD
-=======
 
-.current-page2{
-color:white;
-}
-
->>>>>>> 9798c8e2e129decce69c3933fa56ee1019f43388
 </style>
 
 
