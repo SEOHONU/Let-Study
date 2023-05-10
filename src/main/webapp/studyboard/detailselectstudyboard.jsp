@@ -58,9 +58,6 @@
         .body2{
         	background-color: white;
         }
-        .footer{
-        	background-color: white;
-        }
         .navi {
             position:sticky;
             top: 0;
@@ -291,9 +288,9 @@
         	<input type="hidden" name="parent_seq" value="${dto.seq}">
         </form>
         <br>
-       	<div class="row footer">
-       		<div class="col-12">아래 대충 띄어놓기</div>
-       	</div>
+        <div class="row footer">
+        <c:import url="/board/footer.jsp"></c:import>
+        </div>
     </div>
     <script>
     	let regexguestcount = /^[1]{0,1}[0-9]{1}$/;
@@ -485,9 +482,6 @@
         	background-color: white;
         }
         .body2{
-        	background-color: white;
-        }
-        .footer{
         	background-color: white;
         }
         .navi {
@@ -702,8 +696,8 @@
         </form>
         <br>
         <div class="row footer">
-    		<div class="col-12">아래 대충 띄어놓기</div>
-    	</div>
+        <c:import url="/board/footer.jsp"></c:import>
+        </div>
     </div>
     
     <script>

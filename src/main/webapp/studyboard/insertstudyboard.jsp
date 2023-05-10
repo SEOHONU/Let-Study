@@ -47,11 +47,6 @@
         	background-color : white;
         }
         
-        .footer{
-        	border: 1px solid black;
-        	border-radius:5px;
-        	background-color : white;
-        }
 
         #studyprint {
             margin-top: 12px;
@@ -232,7 +227,7 @@
         </form>
         <br>
         <div class="row footer">
-            <div class="col-12">아래 대충 띄어놓기</div>
+        <c:import url="/board/footer.jsp"></c:import>
         </div>
     </div>
     <script>
