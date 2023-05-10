@@ -314,41 +314,6 @@
 									</div>
 									<div class="col-12" style="text-align: center; background-color: #a0cbce;">　</div>
 
-									<div class="col-12">
-										스터디
-										<div class="row bodysubstudy">
-
-											<c:choose>
-												<c:when test="${stdto.size()>0}">
-													<c:forEach var="study" items="${stdto}" begin="0" end="3">
-														<div class="col-3">
-															<a href="/inner.studyboard?seq=${study.seq}&cpage=${cpage}">
-																<div class="card">
-																	<img src="/image/다운로드.jpg" class="card-img-top"
-																		alt="...">
-																	<div class="card-body" style="text-align: center;">
-																		<h5 class="card-title">${study.title}</h5>
-																		<p class="card-text">${study.contents}</p>
-																		<a href="/inner.studyboard?seq=${study.seq}&cpage=${cpage}"
-																			class="btn btn-primary"
-																			style="padding:0px; font-size:small; background-color:black; border:0px">참여</a>
-																	</div>
-																</div>
-															</a>
-														</div>
-													</c:forEach>
-													<div class="col-12" style="text-align: right;">
-														<a href="스터디"> 더보기 </a>
-													</div>
-												</c:when>
-												<c:otherwise>
-													<div class="col-12">검색한 결과가 없습니다.</div>
-												</c:otherwise>
-											</c:choose>
-										</div>
-									</div>
-									<div class="col-12" style="text-align: center; background-color: #a0cbce;">　</div>
-
 
 									<div class="col-12">
 										중고책
