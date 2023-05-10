@@ -18,11 +18,9 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import commons.EncryptionUtils;
 import dao.FreeBoardDAO;
-import dao.FreeFileDAO;
 import dao.FreeReplyDAO;
 import dto.FreeBoardAndMemberDTO;
 import dto.FreeBoardDTO;
-import dto.FreeFileDTO;
 import dto.ReplyAndMemberDTO;
 import statics.Settings;
 
