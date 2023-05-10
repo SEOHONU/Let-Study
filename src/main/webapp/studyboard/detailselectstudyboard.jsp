@@ -12,6 +12,7 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d79f132798324278c93739a54ae859c&libraries=services"></script>
 </head>
@@ -597,6 +598,52 @@
 			padding-top: 2%;
 			padding-left: 3%;
 		}
+		#freeboard_img {
+position:relative;
+width:100%;
+height: 200px;
+}
+
+#freeboard_img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+}
+
+#freeboard_img img{
+/* object-position : center -370px; */
+opacity:0.5;
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+#imgTitle{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* text 요소를 커버 위에 위치시킵니다. */
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+}
+#searchDiv {
+	margin: auto;
+	display: relative;
+	margin-top: 5px;
+}
+.margin {
+	height: 28px;
+}
     </style>
     <script>
     	$(function(){
@@ -606,6 +653,18 @@
     </script>
     <div class="container">
         <c:import url="/board/topMenu.jsp"></c:import>
+        <div class="row">
+			<div class="col-12 " id="freeboard_img">
+			<a href="/select.studyboard">
+			<img src="/image/study.jpg" id="picture">
+			<h1 id=imgTitle>스터디 모임 게시판</h1>
+			</a>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col margin"></div>
+		</div>
         <div class="row header">
             <div class="col-12">
                 <div class="row">
@@ -809,5 +868,46 @@
     </script>
 		</c:otherwise>
 	</c:choose>
+	
+	<script>
+	 $(window).on("load", function () {
+		 const bodySize = parseInt($("body").css("width"));
+		 if (bodySize > 1399) {
+	            $("#picture").css("object-position", "center -370px");
+	        }
+		 else if (bodySize <= 1399 && bodySize > 1199){
+			 $("#picture").css("object-position", "center -305px");
+		 }
+		 else if (bodySize <= 1199 && bodySize > 991){
+			 $("#picture").css("object-position", "center -250px");
+		 }
+        else if (bodySize <= 991){
+        	$("#picture").css("object-position", "center -155px");
+        }
+        else if (bodySize <=767){
+        	$("#picture").css("object-position", "center -95px");
+        }
+     });
+	
+	addEventListener("resize", function (event) {
+		const bodySize = parseInt($("body").css("width"));
+        if (bodySize > 1399) {
+            $("#picture").css("object-position", "center -370px");
+        }
+        else if (bodySize <= 1399 && bodySize > 1199){
+			 $("#picture").css("object-position", "center -305px");
+		 }
+        else if (bodySize <= 1199 && bodySize > 991){
+			 $("#picture").css("object-position", "center -250px");
+		 }
+        else if (bodySize <= 991 && bodySize > 767){
+        	$("#picture").css("object-position", "center -155px");
+        }
+        else if (bodySize <=767){
+        	$("#picture").css("object-position", "center -95px");
+        }
+	});
+	
+	</script>
 </body>
 </html>
