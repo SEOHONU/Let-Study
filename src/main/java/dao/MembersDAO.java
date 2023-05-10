@@ -114,25 +114,25 @@ public class MembersDAO {
 		String sql = "select * from members where id=? and name=? and email=? and contact=?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, id);
-			pstat.setString(2, name);  
+			pstat.setString(2, name);
 			pstat.setString(3, email);
 			pstat.setString(4, contact);
 			try (ResultSet rs = pstat.executeQuery();) {
 				boolean result = rs.next();
-				return result; 
+				return result;
 			}
 		}
 	}
 
-	// 비밀번호 변경 메서드 -> 맞나?...
+	// 비밀번호 변경 메서드 -> 아리까리 
 	public int updatePw(String pw, String id) throws Exception {
-		String sql = "update memeber set password = ? where id = ?"; 
-		try(Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setString(1,EncryptionUtils.sha512(pw));
-			pstat.setString(2,id); 
+		String sql = "update members set pw = ? where id = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, EncryptionUtils.sha512(pw));
+			pstat.setString(2, id);
 			int result = pstat.executeUpdate();
-			return result; 
+			con.commit();
+			return result;
 		}
 	}
 

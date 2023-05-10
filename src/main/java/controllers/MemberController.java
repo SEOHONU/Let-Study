@@ -22,7 +22,6 @@ public class MemberController extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
 		String cmd = request.getRequestURI();
 		Gson g = new Gson();
 		MembersDAO dao = MembersDAO.getInstance();
@@ -116,12 +115,15 @@ public class MemberController extends HttpServlet {
 				System.out.println("contact : " + contact);
 				boolean result = dao.findPw(id, name, email, contact);
 				String data = g.toJson(result);
-				System.out.println(data);
+				System.out.println("찾고싶은 비밀번호 결과는 " + data);
 				response.getWriter().append(data);
 				// 비밀번호 변경
 			} else if (cmd.equals("/updatePw.member")) {
 				String id = request.getParameter("id");
+				System.out.println(id);
 				String newPw = request.getParameter("newPw");
+				System.out.println("변경 비밀번호" + newPw);
+				// 여기서부터 전송 안됨 (출력 안됨) null이니까?..에러나는데 
 				int result = dao.updatePw(newPw, id);
 				String data = g.toJson(result); 
 				System.out.println(data + "비밀번호 변경 전송");
