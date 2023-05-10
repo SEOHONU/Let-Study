@@ -123,7 +123,6 @@
             right: 5px;
             bottom: 5px;
         }
-        
         .btns{
 			background-color: white;
 			border-radius: 5px;
@@ -150,6 +149,7 @@
     		$(".replyacceptbtn").css("display","none");
     		$(".replycancelbtn").css("display","none");
     		$("#update_map_search").css("display","none");
+    		$("#guestcount").css("border","0px");
     	})
     </script>
     <div class="container">
@@ -164,7 +164,7 @@
                     	</div>
                     	<div class="col-10">
                         	<div id="studybtnbox">
-                            	<h3 id="title">${dto.title}</h3><br>
+                            	<h3 id="title">${dto.title}</h3>
                             	<input type="hidden" name="title" id="hiddentitle">
                             	<div id="contents">${dto.contents}</div>
                             	<input type="hidden" name="contents" id="hiddencontents">
@@ -339,6 +339,10 @@
     		$("#contents").attr("contenteditable","true");
     		$("#detailcontents").attr("contenteditable","true");
     		$("#update_map_search").css("display","");
+    		$("#guestcount").css("border","1px solid black");
+    		$("#title").css("border","1px solid black");
+    		$("#contents").css("border","1px solid black");
+    		$("#detailcontents").css("border","1px solid black");
     	})
     	$("#cancelbtn").on("click",function(){
     		if(confirm("게시글 수정을 취소하시겠습니까?")){
