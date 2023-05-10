@@ -15,4 +15,5 @@ public class EncryptionUtils {
 	public static String AntiXSS(String text) {
 		return text.replaceAll("<script>", "&lt;script>");
 	}
+	
 }
