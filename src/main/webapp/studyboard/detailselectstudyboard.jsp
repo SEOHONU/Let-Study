@@ -702,19 +702,38 @@
     
     <script>
     	$("#applybtn").on("click",function(){
-    		console.log("123");
-    		$.ajax({
-    			url:"/insert.studyapply",
-    			data:{
-    				id:'${loggedID}',
-    				board_seq:${dto.seq}
-    			}
-    		}).done(function(resp){
-    			resp = JSON.parse(resp);
-    			if(resp > 0){
-    				alert("신청 완료");
-    			}
-    		})
+    		if(${guestcount}==${dto.guestcount}){
+    			alert("신청인원이 다 찼습니다.");
+    			return false;
+    		}else{
+    			$.ajax({
+    				url:"/multiapply.studyapply",
+    				data:{
+						id:'${loggedID}',
+						board_seq:${dto.seq}
+						}
+    			}).done(function(resp){
+    				resp = JSON.parse(resp);
+    				if(!resp){
+    					$.ajax({
+    						url:"/insert.studyapply",
+    						data:{
+    							id:'${loggedID}',
+    							board_seq:${dto.seq}
+    							}
+    						}).done(function(resp){
+    							resp = JSON.parse(resp);
+    							if(resp > 0){
+    							alert("신청 완료");
+    						}
+    					})
+    				}else{
+    					alert("이미 신청한 스터디입니다.");
+    					return false;
+    				}
+    			})
+    			
+    		}
     	})
     	$("#replyForm").on("submit",function(){
 			$("#studyreplycontents").val($("#replytext").html());
