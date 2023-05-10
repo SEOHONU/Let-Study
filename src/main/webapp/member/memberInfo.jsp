@@ -144,7 +144,7 @@ h2 {
 
 				<div class="col-6">
 					<label for="birthInput" class="form-label">생년월일*</label> <input
-						type="text" class="form-control" id="birthYear" name="birth_date"
+						type="text" class="form-control" id="birthdate" name="birth_date"
 						value="${myInfo.birth_date}">
 				</div>
 				<div class="col-3"></div>
@@ -219,103 +219,7 @@ h2 {
 	</form>
 
 	<script>
-	$("#btnupdate").on("click",function(){
-		if(confirm("회원 정보를 수정 하시겠습니까?"))
-			
-	})	
-		
-		$("#btnMemberOut").on("click",function(){
-			if(confirm("정말 탈퇴 하시겠습니까?"))
-				location.href="/memberOut.member";
-		})	
 	
-		// 비밀번호가 일치하는지 검사
-		// 둘 다 입력된 경우에만 비교하여 일치 여부를 확인 
-		$(document).ready(function() {
-			// html문서가 모두 로드되면 실행 
-			$("#pwCheck").on("keyup", function() {
-				var pw = $("#pw").val();
-				var pwCheck = $("#pwCheck").val();
-				console.log(pw, pwCheck);
-
-				// 두 필드 모두 값이 입력되었을 때 
-				// 둘 다 값이 존재할 때 조건을 만족 
-				if (pw && pwCheck) {
-					// 비밀번호 일치 여부 확인
-					if (pw == pwCheck) {
-						$("#pwFeedback").html("비밀번호가 일치합니다.").css({
-							color : "#284ee3"
-						});
-					} else {
-						$("#pwFeedback").html("비밀번호가 일치하지 않습니다.").css({
-							color : "#fd1d1d"
-						});
-					}
-
-				} else {
-					// 두 필드 중 하나라도 값이 입력되지 않았을 때
-					$("#pwFeedback").html("").css({
-						color : "#fd1d1d"
-					});
-				}
-			});
-		});
-		// 유효성 검사를 위한 정규식 
-
-		
-		let regexPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
-		let regexName = /^[가-힣]{2,5}$/;
-		let regexNickname = /^[a-zA-Z0-9가-힣]{2,10}$/;
-		let regexContact = /^(01[016789])([1-9]\d{2,3})\d{4}$/;
-		let regexEmail = /[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+/;
-
-		let joinMember = document.getElementById("joinMember");
-		// onsubmit 이벤트는 버튼에 주는게 아니라 form태그에 준다
-
-		joinMember.onsubmit = function() {
-			let pw = $("#pw").val();
-			let resultPw = regexPw.test(pw);
-			let name = $("#name").val();
-			let resultName = regexName.test(name);
-			let nickname = $("#nickname").val();
-			let reusultNickname = regexNickname.test(nickname);
-			let contact = $("#contact").val();
-			let resultContact = regexContact.test(contact);
-			let email = $("#email").val();
-			let resultEmail = regexEmail.test(email);
-
-			if (!resultPw) {
-				alert("비밀번호는 8~20자 영문 대 소문자, 숫자, 특수문자를 사용하세요. ");
-				return false;
-			}
-			if (!resultName) {
-				alert("이름은 2~5자 한글을 사용하세요.");
-				return false;
-			}
-			if (!reusultNickname) {
-				alert("닉네임은 2~10자의 영문, 소문자, 대문자만 사용 가능합니다.");
-				return false;
-			}
-			if (!resultContact) {
-				alert("휴대전화번호를 다시 확인해주세요.");
-				return false;
-			}
-
-			if (!resultEmail) {
-				alert("이메일 양식을 확인해주세요.");
-				return false;
-			}
-		};
-		// 우편번호 카카오 api
-		document.getElementById("searchZipcode").onclick = function() {
-			new daum.Postcode(
-					{
-						oncomplete : function(data) {
-							document.getElementById("zipcode").value = data.zonecode;
-							document.getElementById("roadAddress").value = data.address;
-						},
-					}).open();
-		};
 	</script>
 </body>
 </html>
