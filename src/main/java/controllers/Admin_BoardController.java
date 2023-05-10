@@ -164,8 +164,8 @@ public class Admin_BoardController extends HttpServlet {
 			else if (cmd.equals("/freeboard_Delete.adminBoard")) {
 				request.setCharacterEncoding("utf8");
 				response.setContentType("text/html; charset=utf8");
-				int currentPage = request.getParameter("seq") == null ? 1
-						: Integer.parseInt(request.getParameter("seq"));
+				int currentPage = request.getParameter("cpage") == null ? 1
+						: Integer.parseInt(request.getParameter("cpage"));
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				int result = frdao.deleteBySeq(seq);
 				System.out.println("삭제됨");
@@ -173,8 +173,8 @@ public class Admin_BoardController extends HttpServlet {
 			} else if (cmd.equals("/studyboard_Delete.adminBoard")) {
 				request.setCharacterEncoding("utf8");
 				response.setContentType("text/html; charset=utf8");
-				int currentPage = request.getParameter("seq") == null ? 1
-						: Integer.parseInt(request.getParameter("seq"));
+				int currentPage = request.getParameter("cpage") == null ? 1
+						: Integer.parseInt(request.getParameter("cpage"));
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				sbdao.deletestudyboard(seq);
 				response.sendRedirect("/study_select.adminBoard?cpage=" + currentPage);
