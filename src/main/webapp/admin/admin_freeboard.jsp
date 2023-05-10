@@ -202,16 +202,15 @@
 								<td>${i.seq}</td>
 								<td>${i.writer}</td>
 								<td><a href="/detail.freeBoard?seq=${i.seq}">${i.title}</a></td>
-								
 								<td class="col d-none d-md-block" style="height: 55px;">${i.view_count}</td>
 								<td>${i.write_date}</td>
-								<td><a
-									href="/freeboard_Delete.adminBoard?seq=${i.seq}&cpage=${cpage}"><button
-											type="button" class="btn btn-outline-danger btn_del">삭제</button></a></td>
+								<td><a href="/freeboard_Delete.adminBoard?seq=${i.seq}&cpage=${cpage}">
+								<button type="button" class="btn btn-outline-danger btn_del">삭제</button></a></td>
+							
 
 							</tr>
-						</c:forEach>
 
+						</c:forEach>
 
 
 
