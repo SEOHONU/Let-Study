@@ -43,6 +43,12 @@ public class StudyApplyController extends HttpServlet {
 				int guestcount = dao.updateguestcount(new StudyBoardMembersDTO(null,seq,null));
 				String gresult = g.toJson(guestcount);
 				response.getWriter().append(gresult);
+			}else if(cmd.equals("/multiapply.studyapply")) {
+				int seq = Integer.parseInt(request.getParameter("board_seq"));
+				String id = request.getParameter("id");
+				boolean result = dao.multiapply(new StudyBoardMembersDTO(id, seq, null));
+				String gresult = g.toJson(result);
+				response.getWriter().append(gresult);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
