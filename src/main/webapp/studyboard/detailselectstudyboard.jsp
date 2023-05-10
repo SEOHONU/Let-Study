@@ -295,16 +295,22 @@
     <script>
     	let regexguestcount = /^[1]{0,1}[0-9]{1}$/;
     	$("#applybox").on("click",".applyacceptbtn",function(){
-    		$.ajax({
-    			url:"/update.studyapply",
-    			data:{
-    				board_seq:${dto.seq},
-    				id:$(this).next().val(),
-    				cpage:${cpage}
-    			}
-    		}).done(function(){
-    			location.href="/inner.studyboard?cpage="+${cpage}+"&seq="+${dto.seq};
-    		})
+    		if(${guestcount}==${dto.guestcount}){
+    			alert("신청인원이 다 찼습니다.");
+    			return false;
+    		}else{
+    			$.ajax({
+    				url:"/update.studyapply",
+    				data:{
+    					board_seq:${dto.seq},
+    					id:$(this).next().val(),
+    					cpage:${cpage}
+    				}
+    			}).done(function(){
+    				location.href="/inner.studyboard?cpage="+${cpage}+"&seq="+${dto.seq};
+    			})
+    		}
+    		
     	})
     	$("#applybox").on("click",".applycancelbtn",function(){
     		$.ajax({
