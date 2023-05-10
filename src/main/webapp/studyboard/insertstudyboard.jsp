@@ -47,11 +47,6 @@
         	background-color : white;
         }
         
-        .footer{
-        	border: 1px solid black;
-        	border-radius:5px;
-        	background-color : white;
-        }
 
         #studyprint {
             margin-top: 12px;
@@ -165,13 +160,67 @@
         	padding-left:3%;
         	padding-right:5%;
         }
-        
+        #freeboard_img {
+position:relative;
+width:100%;
+height: 200px;
+}
+
+#freeboard_img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+}
+
+#freeboard_img img{
+/* object-position : center -370px; */
+opacity:0.5;
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+#imgTitle{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* text 요소를 커버 위에 위치시킵니다. */
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+}
+.margin {
+	height: 28px;
+}
     </style>
 </head>
 
 <body style="background-color : #f3f3f3">
     <div class="container">
+    
         <c:import url="/board/topMenu.jsp"></c:import>
+        <div class="row">
+			<div class="col-12 " id="freeboard_img">
+			<a href="/select.studyboard">
+			<img src="/image/study.jpg" id="picture">
+			<h1 id=imgTitle>스터디 모임 게시판</h1>
+			</a>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col margin"></div>
+		</div>
+		
         <form action="/insert.studyboard" method="post" id="insertForm">
         	<div class="row header">
             	<div class="col-12">
@@ -232,7 +281,7 @@
         </form>
         <br>
         <div class="row footer">
-            <div class="col-12">아래 대충 띄어놓기</div>
+        <c:import url="/board/footer.jsp"></c:import>
         </div>
     </div>
     <script>
@@ -313,6 +362,45 @@
                 }
             });
         });
+        
+   	 $(window).on("load", function () {
+   		 const bodySize = parseInt($("body").css("width"));
+   		 if (bodySize > 1399) {
+   	            $("#picture").css("object-position", "center -370px");
+   	        }
+   		 else if (bodySize <= 1399 && bodySize > 1199){
+   			 $("#picture").css("object-position", "center -305px");
+   		 }
+   		 else if (bodySize <= 1199 && bodySize > 991){
+   			 $("#picture").css("object-position", "center -250px");
+   		 }
+           else if (bodySize <= 991){
+           	$("#picture").css("object-position", "center -155px");
+           }
+           else if (bodySize <=767){
+           	$("#picture").css("object-position", "center -95px");
+           }
+        });
+   	
+   	addEventListener("resize", function (event) {
+   		const bodySize = parseInt($("body").css("width"));
+           if (bodySize > 1399) {
+               $("#picture").css("object-position", "center -370px");
+           }
+           else if (bodySize <= 1399 && bodySize > 1199){
+   			 $("#picture").css("object-position", "center -305px");
+   		 }
+           else if (bodySize <= 1199 && bodySize > 991){
+   			 $("#picture").css("object-position", "center -250px");
+   		 }
+           else if (bodySize <= 991 && bodySize > 767){
+           	$("#picture").css("object-position", "center -155px");
+           }
+           else if (bodySize <=767){
+           	$("#picture").css("object-position", "center -95px");
+           }
+   	});
+   	
     </script>
 </body>
 </html>
