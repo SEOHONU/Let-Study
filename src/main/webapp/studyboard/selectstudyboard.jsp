@@ -92,7 +92,8 @@
 				}
 
 				.box-bottom {
-					background-color: white;
+					background-color: #3c7579;
+					color:white;
 				}
 
 				/* .leftorrightbtn {
@@ -103,7 +104,8 @@
 
 
 				.btns {
-					background-color: white;
+				color:white;
+					background-color: #3c7579;
 					border-radius: 5px;
 				}
 
@@ -196,6 +198,7 @@
 				}
 
 				.ininbox {
+				border:2px solid #3c7579;
 					border-radius: 10px;
 					overflow: hidden;
 				}
@@ -206,7 +209,9 @@
 				}
 
 				.seq {
-					background-color: white;
+					background-color: #3c7579;
+					color:white;
+					line-height: 52px;
 				}
 
 				.box {
@@ -218,6 +223,11 @@
 					position: absolute;
 					right: 2%;
 				}
+				
+				.margin {
+	height: 28px;
+}
+				
 			</style>
 		</head>
 
@@ -304,15 +314,7 @@
 							<div class="col-1"></div>
 						</div>
 					</div>
-					<div classs="col-12">
-						<div class="row">
-							<div class="col-1"></div>
-							<div class="col-10 box"><a href="/studyboard/insertstudyboard.jsp"><button
-										class="btns writebtn">글쓰기</button></a></div>
-							<div class="col-1"></div>
-						</div>
-
-					</div>
+					
 					<div class="col-12" align="center">
 						<c:forEach var="i" items="${navi}">
 							<c:choose>
@@ -339,6 +341,18 @@
 							</c:choose>
 						</c:forEach>
 					</div>
+					
+					<div classs="col-12">
+						<div class="row">
+							<div class="col-1"></div>
+							<div class="col-10 box"><a href="/studyboard/insertstudyboard.jsp"><button
+										class="btns writebtn">글쓰기</button></a></div>
+							<div class="col-1"></div>
+						</div>
+					</div>
+					<div class="row">
+			<div class="col margin"></div>
+		</div>
 
 				</div>
 				<div class="row footer">
