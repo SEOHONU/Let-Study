@@ -13,7 +13,18 @@ public class EncryptionUtils {
 		return builder.toString();
 	}
 	public static String AntiXSS(String text) {
-		return text.replaceAll("<script>", "&lt;script>");
+		text = text.replaceAll("<", "&lt;").replaceAll(">","&gt;");
+        text = text.replaceAll("\\(", "&#40;").replaceAll("\\)", "&#41;");
+        text = text.replaceAll("'", "&#39;");
+        text = text.replaceAll("eval\\((.*)\\)","");
+        text = text.replaceAll("[\\\"\\\'][\\s]*javascript:(.*)[\\\"\\\']", "\"\"");
+        text = text.replaceAll("script","");
+        text = text.replaceAll("<script>", "&lt;script>");
+        
+        System.out.println("XSS Filter after : " + text);
+		return text;
 	}
 	
+	
+	 
 }
