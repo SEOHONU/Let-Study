@@ -113,8 +113,8 @@ a {
 				</div>
 				<div class="rememberIdWrap">
 					<div class="checkBox">
-						<label><input type="checkbox" name="rememberId" value="1" />
-							아이디 기억하기</label>
+						<label><input type="checkbox" name="rememberId"
+							id="rememberId" value="1" /> 아이디 기억하기</label>
 					</div>
 				</div>
 				<br>
@@ -125,7 +125,7 @@ a {
 					<button type="button" class="btn btn-light" id="btnJoin">회원가입</button>
 				</div>
 				<div class="bottom-link">
-					<a href="/member/findId.jsp">아이디 찾기</a> | <a href="#">비밀번호 찾기 </a>
+					<a href="/member/findId.jsp">아이디 찾기</a> | <a href="/member/findPw.jsp">비밀번호 찾기 </a>
 				</div>
 			</div>
 		</div>
@@ -178,10 +178,75 @@ a {
 			});
 
 		});
-		
+		// 아이디 기억하기를 클릭하면 아이디가 저장되어야 함 
+		$(function() {
+			if (document.cookie != "") {
+				var cookies = cookieToJson(document.cookie);
+				console.log(cookies);
 
+				$("#id").val(cookies.userID);
+				console.log($("#id").val(cookies.userID));
+				$('#rememberId').prop("checked", true);
 
+			}
+		});
 
+		// 체크박스를 이용해서 쿠키에 사용자 ID를 저장하거나 삭제
+		$("#rememberId").on(
+				"change",
+				function() {
+					console.log($("#id").val());
+					var exdate = new Date();
+					console.log(exdate);
+
+					if ($("#rememberId").prop("checked")) {
+						exdate.setDate(exdate.getDate() + 30);
+						document.cookie = "userID=" + $("#id").val()
+								+ "; expires=" + exdate.toString();
+
+						console.log(document.cookie);
+					} else {
+						exdate.setDate(exdate.getDate() - 1);
+						document.cookie = "userID=" + $("#id").val()
+								+ "; expires=" + exdate.toString();
+						console.log(document.cookie);
+					}
+				});
+
+		// ID 저장하기를 체크한 상태에서 ID를 입력하는 경우, 이럴 때도 쿠키 저장.
+		$("#id").keyup(function() { // ID 입력 칸에 ID를 입력할 때,
+			if ($("#rememberId").is(":checked")) { // ID 저장하기를 체크한 상태라면,
+				setCookie("key", $("#id").val(), 7); // 7일 동안 쿠키 보관
+			}
+		});
+
+		function getCookie(key) {
+			var value = "; " + document.cookie;
+			var parts = value.split("; " + key + "=");
+			if (parts.length == 2)
+				return parts.pop().split(";").shift();
+		}
+
+		var userID = getCookie("userID");
+		console.log(userID);
+
+		function cookieToJson(cookie) {
+			var cookieJson = {};
+			var cookies = document.cookie;
+			var trimedCookies = cookies.replace(/ /g, "");
+			var cookieArr = trimedCookies.split(";")
+			for (var i = 0; i < cookieArr.length; i++) {
+				var entry = cookieArr[i].split("=");
+				cookieJson[entry[0]] = entry[1];
+			}
+			return cookieJson;
+		}
 	</script>
+
+
+
+
+
+
 </body>
 </html>

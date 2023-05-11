@@ -41,6 +41,48 @@ a>.btn {
 #shWrite {
     background-color: #1e3c3e;
 }
+#freeboard_img {
+position:relative;
+width:100%;
+height: 200px;
+}
+
+#freeboard_img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+}
+
+#freeboard_img img{
+/* object-position : center -370px; */
+opacity:0.5;
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+#imgTitle{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* text 요소를 커버 위에 위치시킵니다. */
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+}
+.margin {
+	height: 28px;
+}
+
 </style>
 <script>
         $(function () {
@@ -54,18 +96,50 @@ a>.btn {
 <body>
 	<div class="container">
 		<c:import url="/board/topMenu.jsp"></c:import>
-	<div align="center">
-		<img src="/image/shBanner_main.jpg">
-	</div>
-		<div class="row">
-			<div class="col-4"></div>
-			<div class="col-4" align="center">
-				<a href="/selectBound.secondHand?currentPage=1" class="btn_a"><button type="button" class="btn btn-primary p-0">1페이지로</button></a>
-				<a href="/secondHand/secondHandClusterer.jsp?currentPage=${currentPage}" class="btn_a"><button type="button" class="btn btn-primary p-0">동네 중고거래 찾기</button></a>
+	
+	<!-- 배너 -->
+	
+	<div class="row">
+			<div class="col-12 " id="freeboard_img">
+			<a href="/selectBound.secondHand">
+			<img src="/image/shBannerMain.jpg" id="picture">
+			<h1 id=imgTitle>중고책 거래 게시판</h1>
+			</a>
 			</div>
-			<div class="col-4"></div>
 		</div>
-		<div class="row">
+	<!-- 배너끝 -->
+	<div class="row">
+			<div class="col margin"></div>
+		</div>
+		<!--검색 바  -->
+		<form action="/searchSecondHand.secondHand" method="post">
+		<div class="row" id="searchRow">
+			<div class="col-12">
+				<div class="d-flex justify-content-center row" id="searchDiv">
+					<div class="col-2 p-0">
+						<select class="form-select text-center" id="option" aria-label="Default select example" name="option">
+							<option selected >-- 검색 선택 --</option>
+							<option value="title" >제목</option>
+							<option value="writer" >작성자</option>
+						</select>
+					</div>
+					<div class="col-10 p-0">
+						<div class="input-group mb-3">
+							<input type="text" class="form-control" placeholder="검색어를 입력하세요"
+								aria-label="Recipient's username" aria-describedby="basic-addon2" name="searchText">
+							<button class="btn btn-outline-secondary" type="submit"
+								id="searchBtn">
+								<i class="fa-solid fa-magnifying-glass"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	
+	
+		<!-- <div class="row">
 			<div class="col-12">
 				<div class="row">
 					<div class="col-lg-2 d-none d-lg-block"></div>
@@ -83,7 +157,7 @@ a>.btn {
 					<div class="col-lg-2 d-none d-lg-block"></div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="row">
 			<div class="col-12">
 				<div class="row">
@@ -171,35 +245,46 @@ a>.btn {
 			</div>
 		</div>
 		<div class="row">
+			<div class="col margin"></div>
+		</div>
+		<div class="row">
 			<div class="col-12">
 				<div class="row">
 					<div class="col-4"></div>
 					<div class="col-4" align="center">
+						<nav aria-label="Page navigation example" align="center">
+  						<ul class="pagination d-flex justify-content-center">
 						<c:choose>
 							<c:when test="${searchText != null}">
 								<c:forEach var="i" items="${pageNavi}" varStatus="status">
 									<c:choose>
 										<c:when test="${i eq '◀' }">
-											<a
+ 											<li class="page-item">
+											<a class="page-link"
 												href="/searchSecondHand.secondHand?
 												currentPage=${pageNavi[status.index+1]-1}&
 												option=${option}&
 												searchText=${searchText}">${i }
 											</a>
+ 											</li>
 										</c:when>
 										<c:when test="${i eq '▶' }">
-											<a
+										<li class="page-item">
+											<a class="page-link"
 												href="/searchSecondHand.secondHand?
 												currentPage=${pageNavi[status.index-1]+1}&
 												option=${option}&
 												searchText=${searchText}">${i }
 											</a>
+										</li>
 										</c:when>
 										<c:otherwise>
-											<a href="/searchSecondHand.secondHand?
+										<li class="page-item">
+											<a class="page-link" href="/searchSecondHand.secondHand?
 											currentPage=${i}&
 											option=${option}&
 											searchText=${searchText}">${i}</a>
+										</li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
@@ -208,29 +293,43 @@ a>.btn {
 								<c:forEach var="i" items="${pageNavi}" varStatus="status">
 									<c:choose>
 										<c:when test="${i eq '◀' }">
-											<a
+										<li class="page-item">
+											<a class="page-link"
 												href="/selectBound.secondHand?currentPage=${pageNavi[status.index+1]-1 }">${i }
 											</a>
+										</li>
 										</c:when>
 										<c:when test="${i eq '▶' }">
-											<a
+										<li class="page-item">
+											<a class="page-link"
 												href="/selectBound.secondHand?currentPage=${pageNavi[status.index-1]+1 }">${i }
 											</a>
+										</li>
 										</c:when>
 										<c:otherwise>
-											<a href="/selectBound.secondHand?currentPage=${i}">${i}</a>
+										<li class="page-item">
+											<a class="page-link" href="/selectBound.secondHand?currentPage=${i}">${i}</a>
+										</li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 							</c:otherwise>						
 						</c:choose>
+						  </ul>
+						</nav>
 					</div>
 					<div class="col-4" align="right">
+				<a href="/selectBound.secondHand?currentPage=1" class="btn_a"><button type="button" class="btn btn-primary p-0">1페이지로</button></a>
+				<a href="/secondHand/secondHandClusterer.jsp?currentPage=${currentPage}" class="btn_a"><button type="button" class="btn btn-primary p-0">동네 중고거래 찾기</button></a>
 						<button type="button" class="btn btn-primary p-0" id="shWrite">글쓰기</button>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col margin"></div>
+		</div>
+		
 		<c:import url="/board/footer.jsp"></c:import>
 	</div>
 </body>

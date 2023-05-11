@@ -153,14 +153,8 @@ object-fit:cover;
   color: white;
   text-align: center;
   font-size: 2rem;
-
-
 }
 
-
-.current-page2{
-color:white;
-}
 
 </style>
 
@@ -184,7 +178,7 @@ color:white;
 			</div>
 		</div>
 		<div class="row">
-			<div class="col margin"></div>
+			<div class="col "></div>
 		</div>
 		<!--검색 바  -->
 		<form action="/searchByOption.freeBoard" method="post">
@@ -214,7 +208,7 @@ color:white;
 		</div>
 		</form>
 		<!-- 자유게시판 리스트 -->
-		<div class="row margin"></div>
+		<div class="row "></div>
 		<table class="table">
 			<thead class="table-light">
 				<tr class="row">
@@ -303,10 +297,12 @@ color:white;
   currentPage2.style.color = 'white';
   
 </script>
-
 		<!-- 푸터 -->
 		 <c:import url="/board/footer.jsp"></c:import>
 	</div>
+	
+	
+	
 </body>
 
 </html>

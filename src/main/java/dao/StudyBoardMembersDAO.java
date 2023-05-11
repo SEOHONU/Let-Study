@@ -135,4 +135,20 @@ public class StudyBoardMembersDAO {
 		}
 	}
 	
+	public boolean multiapply(StudyBoardMembersDTO dto) throws Exception{
+		String sql = "select * from studyboardmembers where id=? and boardseq=?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, dto.getId());
+			pstat.setInt(2, dto.getBoard_seq());
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				return rs.next();
+			}
+		}
+	}
+	
 }

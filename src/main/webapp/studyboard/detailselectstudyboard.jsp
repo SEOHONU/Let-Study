@@ -12,10 +12,11 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script src="https://kit.fontawesome.com/09115628a5.js" crossorigin="anonymous"></script>
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d79f132798324278c93739a54ae859c&libraries=services"></script>
 </head>
-<body>
+<body style="background-color : #f3f3f3">
 
 	<c:choose>
 		<c:when test="${dto.writer == loggedID}">
@@ -25,18 +26,19 @@
         }
 
         div {
-            border: 1px solid black;
             position: relative;
             word-break: break-word;
         }
 
         #studyprint {
+        	border: 1px solid black;
             margin-top: 12px;
             margin-bottom: 12px;
             border-radius: 100%;
         }
 
         .studyguestprint {
+        	border: 1px solid black;
             margin-top: 12px;
             margin-bottom: 12px;
             border-radius: 100%;
@@ -49,6 +51,13 @@
         }
         .header{
             position: relative;
+            background-color: white;
+        }
+        .body{
+        	background-color: white;
+        }
+        .body2{
+        	background-color: white;
         }
         .navi {
             position:sticky;
@@ -68,6 +77,7 @@
         }
 
         #applybox {
+        	border: 1px solid black;
             overflow: auto;
         }
 
@@ -75,13 +85,10 @@
             display: none;
         }
 
-        #applybox>div {
-            height: 30%;
-        }
-        
         .applybtnyorn{
-        	position: relative;
-        	bottom: 0px;
+        	position: absolute;
+        	bottom: 3%;
+        	right: 1%;
         }
 
         .nicknamebox {
@@ -101,6 +108,7 @@
         }
 
         #replytext {
+        	border: 1px solid black;
             padding-right: 90px;
             min-height: 80px;
             max-height: 80px;
@@ -124,6 +132,17 @@
 		#applyguestcount{
 			display:inline-block;
 		}
+		.applysolobox{
+			height: 30%;
+			position: relative;
+			background-color: grey;
+		}
+		.studyapplybox{
+			border: 1px solid black;
+		}
+		.nicknamebox{
+			border: 1px solid black;
+		}
     </style>
     <script>
     	$(function(){
@@ -142,7 +161,6 @@
                 	<div class="row">
                     	<div class="col-2">
                         	<div class="ratio ratio-1x1" id="studyprint">
-                            	<img src="행복해요.gif" class="imgs">
                         	</div>
                     	</div>
                     	<div class="col-10">
@@ -157,6 +175,7 @@
                 	</div>
             	</div>
         	</div>
+        	<br>
         	<div class="row body">
             	<div class="col-3">
                 	<div class="row">
@@ -186,7 +205,7 @@
                    		<div class="col-12 ratio" style="--bs-aspect-ratio: 130%;">
                         	<div class="row m-0 p-0" id="applybox">
                         		<c:forEach var="sbm" items="${sbmlist}">
-                        			<div class="col-12 p-0">
+                        			<div class="col-12 p-0 applysolobox">
                         				<div>${sbm.id}</div>
                         				<div class="applybtnyorn" align="right">
                         					<button type="button" class="applyacceptbtn btns">수락</button>
@@ -202,14 +221,15 @@
             	<div class="col-12">
                 	<div class="row">
                     	<div class="col-1 p-0 m-0">스터디 멤버</div>
-                    	<div class="col-1">
+                    	<div class="col-1 studyapplybox">
                         	<div class="ratio ratio-1x1 studyguestprint"></div>
-                        	<div class="d-none d-md-block nicknamebox" align="center">host</div>
-                        	<div align="center">${dto.writer}</div>
+                        	<div class="d-none d-md-block" align="center">host</div>
+                        	<div align="center" class="nicknamebox">${dto.writer}</div>
                     	</div>
                     	<c:forEach var="cksbm" items="${cksbmlist}">
-                    		<div class="col-1">
+                    		<div class="col-1 studyapplybox">
                         	<div class="ratio ratio-1x1 studyguestprint"></div>
+                        	<br>
                         	<div class="d-none d-md-block nicknamebox" align="center">${cksbm.id}</div>
                     	</div>
                     	</c:forEach>
@@ -227,11 +247,13 @@
         	<input type="hidden" name="writer" value="${dto.writer}">
         	<input type="hidden" name="seq" value="${dto.seq}">
         </form>
+        <br>
         <form action="/insert.studyreply" method="post" id="replyForm">
-        	<div class="row footer">
+        	<div class="row body2">
         		<div class="col-12" id="replyfont">
                 	댓글
             	</div>
+            	<hr>
             	<div class="col-12">
                 	<div class="row" id="allreplybox">
                     	<c:forEach var="i" items="${replylist}">
@@ -252,6 +274,7 @@
                 					</div>
                 				</c:if>
                 			</div>
+                			<hr>
                 		</c:forEach>
                 	</div>
             	</div>
@@ -260,26 +283,35 @@
                 	<input type="hidden" name="studyreplycontents" id="studyreplycontents">
                 	<button type="submit" id="replywritebtn" class="btns">작성하기</button>
             	</div>
-            	<div class="col-12">아래 대충 띄어놓기</div>
         	</div>
         	<input type="hidden" name="studyreplywriter" value="213">
         	<input type="hidden" name="cpage" value="${cpage}">
         	<input type="hidden" name="parent_seq" value="${dto.seq}">
         </form>
+        <br>
+        <div class="row footer">
+        <c:import url="/board/footer.jsp"></c:import>
+        </div>
     </div>
     <script>
     	let regexguestcount = /^[1]{0,1}[0-9]{1}$/;
     	$("#applybox").on("click",".applyacceptbtn",function(){
-    		$.ajax({
-    			url:"/update.studyapply",
-    			data:{
-    				board_seq:${dto.seq},
-    				id:$(this).next().val(),
-    				cpage:${cpage}
-    			}
-    		}).done(function(){
-    			location.href="/inner.studyboard?cpage="+${cpage}+"&seq="+${dto.seq};
-    		})
+    		if(${guestcount}==${dto.guestcount}){
+    			alert("신청인원이 다 찼습니다.");
+    			return false;
+    		}else{
+    			$.ajax({
+    				url:"/update.studyapply",
+    				data:{
+    					board_seq:${dto.seq},
+    					id:$(this).next().val(),
+    					cpage:${cpage}
+    				}
+    			}).done(function(){
+    				location.href="/inner.studyboard?cpage="+${cpage}+"&seq="+${dto.seq};
+    			})
+    		}
+    		
     	})
     	$("#applybox").on("click",".applycancelbtn",function(){
     		$.ajax({
@@ -438,10 +470,10 @@
 			<style>
         *{box-sizing: border-box;}
         div{
-        border: 1px solid black;
         word-break: break-word;
         }
         #studyprint{
+        	border: 1px solid black;
             margin-top: 12px;
             margin-bottom: 12px;
             border-radius: 100%;
@@ -451,6 +483,13 @@
         }
         .header{
             position: relative;
+            background-color: white;
+        }
+        .body{
+        	background-color: white;
+        }
+        .body2{
+        	background-color: white;
         }
         .navi {
             position:sticky;
@@ -498,10 +537,14 @@
             height: 100%;
         }
         .nicknamebox{
+        	border: 1px solid black;
             overflow: hidden;
         }
         #totitle{
         	text-align: right;
+        }
+        #allreplybox{
+        	background-color: white;
         }
         #btnbox{
             text-align: right;
@@ -513,6 +556,7 @@
             position: relative;
         }
         #replytext{
+        	border: 1px solid black;
             padding-right: 90px;
             min-height: 80px;
             max-height: 80px;
@@ -530,6 +574,7 @@
         }
         
         .studyguestprint {
+        	border: 1px solid black;
             margin-top: 12px;
             margin-bottom: 12px;
             border-radius: 100%;
@@ -542,6 +587,59 @@
 		#applyguestcount{
 			display:inline-block;
 		}
+		.studyapplybox{
+			border: 1px solid black;
+		}
+		.bodybox{
+			padding-top: 2%;
+			padding-left: 3%;
+		}
+		#freeboard_img {
+position:relative;
+width:100%;
+height: 200px;
+}
+
+#freeboard_img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+}
+
+#freeboard_img img{
+/* object-position : center -370px; */
+opacity:0.5;
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+#imgTitle{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* text 요소를 커버 위에 위치시킵니다. */
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+}
+#searchDiv {
+	margin: auto;
+	display: relative;
+	margin-top: 5px;
+}
+.margin {
+	height: 28px;
+}
     </style>
     <script>
     	$(function(){
@@ -551,6 +649,18 @@
     </script>
     <div class="container">
         <c:import url="/board/topMenu.jsp"></c:import>
+        <div class="row">
+			<div class="col-12 " id="freeboard_img">
+			<a href="/select.studyboard">
+			<img src="/image/study.jpg" id="picture">
+			<h1 id=imgTitle>스터디 모임 게시판</h1>
+			</a>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col margin"></div>
+		</div>
         <div class="row header">
             <div class="col-12">
                 <div class="row">
@@ -568,43 +678,37 @@
                 </div>
             </div>
         </div>
+        <br>
         <div class="row body">
-            <div class="col-3">
-                <div class="row">
+            <div class="col-3 bodybox">약속 장소
+                <div class="row m-0">
                     <div class="ratio ratio-1x1">
                     	<div id="map" style="width:100%;height:100%"></div>
                     </div>
                 </div>
             </div>
-            <div class="col-6">상세내역<br>
+            <div class="col-6 bodybox">상세내역<br>
             	참여 인원수 : <div id="applyguestcount">${guestcount}</div>/${dto.guestcount}
             	<div>${dto.detailcontents}</div>
             </div>
             <div class="col-3 p-0">
                 <div class="row m-0">
-                    <div class="col-12 ratio" style="--bs-aspect-ratio: 130%;">
-                        <div class="row m-0" id="similarbox">
-                            <div id="similarstudyfont"><h5>연관 스터디 추천</h5></div>
-                            <div class="similarstudybox"><div class="similarstudy">연관 스터디1</div></div>
-                            <div class="similarstudybox"><div class="similarstudy">연관 스터디2</div></div>
-                            <div class="similarstudybox"><div class="similarstudy">연관 스터디3</div></div>
-                            <div class="similarstudybox"><div class="similarstudy">연관 스터디4</div></div>
-                            <div class="similarstudybox"><div class="similarstudy">연관 스터디5</div></div>
-                        </div>
-                    </div>
                 </div>
             </div>
+            <p>
+            <p>
             <div class="col-12">
                 <div class="row">
                     <div class="col-1 p-0 m-0">스터디 멤버</div>
-                    <div class="col-1">
+                    <div class="col-1 studyapplybox">
                         <div class="ratio ratio-1x1" id="studyprint"></div>
-                        <div class="nicknamebox" align="center">host</div>
-                        <div align="center">${dto.writer}</div>
+                        <div align="center">host</div>
+                        <div align="center" class="nicknamebox">${dto.writer}</div>
                     </div>
                     <c:forEach var="cksbm" items="${cksbmlist}">
-                    	<div class="col-1">
+                    	<div class="col-1 studyapplybox">
                         	<div class="ratio ratio-1x1 studyguestprint"></div>
+                        	<br>
                         	<div class="d-none d-md-block nicknamebox" align="center">${cksbm.id}</div>
                     	</div>
                     </c:forEach>
@@ -614,11 +718,13 @@
             	<a href="/select.studyboard?cpage=${cpage}"><button type="button" class="btns">목록으로</button></a>
             </div>
         </div>
+        <br>
         <form action="/insert.studyreply" method="post" id="replyForm">
-        	<div class="row footer">
+        	<div class="row body2">
         		<div class="col-12" id="replyfont">
                 	댓글
             	</div>
+            	<hr>
             	<div class="col-12">
                 	<div class="row" id="allreplybox">
                     	<c:forEach var="i" items="${replylist}">
@@ -639,6 +745,7 @@
                 					</div>
                 				</c:if>
                 			</div>
+                			<hr>
                 		</c:forEach>
                 	</div>
             	</div>
@@ -647,28 +754,51 @@
                 	<input type="hidden" name="studyreplycontents" id="studyreplycontents">
                 	<button type="submit" id="replywritebtn" class="btns">작성하기</button>
             	</div>
-            	<div class="col-12">아래 대충 띄어놓기</div>
         	</div>
         	<input type="hidden" name="studyreplywriter" value="213">
         	<input type="hidden" name="cpage" value="${cpage}">
         	<input type="hidden" name="parent_seq" value="${dto.seq}">
         </form>
+        <br>
+        <div class="row footer">
+        <c:import url="/board/footer.jsp"></c:import>
+        </div>
     </div>
+    
     <script>
     	$("#applybtn").on("click",function(){
-    		console.log("123");
-    		$.ajax({
-    			url:"/insert.studyapply",
-    			data:{
-    				id:'${loggedID}',
-    				board_seq:${dto.seq}
-    			}
-    		}).done(function(resp){
-    			resp = JSON.parse(resp);
-    			if(resp > 0){
-    				alert("신청 완료");
-    			}
-    		})
+    		if(${guestcount}==${dto.guestcount}){
+    			alert("신청인원이 다 찼습니다.");
+    			return false;
+    		}else{
+    			$.ajax({
+    				url:"/multiapply.studyapply",
+    				data:{
+						id:'${loggedID}',
+						board_seq:${dto.seq}
+						}
+    			}).done(function(resp){
+    				resp = JSON.parse(resp);
+    				if(!resp){
+    					$.ajax({
+    						url:"/insert.studyapply",
+    						data:{
+    							id:'${loggedID}',
+    							board_seq:${dto.seq}
+    							}
+    						}).done(function(resp){
+    							resp = JSON.parse(resp);
+    							if(resp > 0){
+    							alert("신청 완료");
+    						}
+    					})
+    				}else{
+    					alert("이미 신청한 스터디입니다.");
+    					return false;
+    				}
+    			})
+    			
+    		}
     	})
     	$("#replyForm").on("submit",function(){
 			$("#studyreplycontents").val($("#replytext").html());
@@ -734,5 +864,46 @@
     </script>
 		</c:otherwise>
 	</c:choose>
+	
+	<script>
+	 $(window).on("load", function () {
+		 const bodySize = parseInt($("body").css("width"));
+		 if (bodySize > 1399) {
+	            $("#picture").css("object-position", "center -370px");
+	        }
+		 else if (bodySize <= 1399 && bodySize > 1199){
+			 $("#picture").css("object-position", "center -305px");
+		 }
+		 else if (bodySize <= 1199 && bodySize > 991){
+			 $("#picture").css("object-position", "center -250px");
+		 }
+        else if (bodySize <= 991){
+        	$("#picture").css("object-position", "center -155px");
+        }
+        else if (bodySize <=767){
+        	$("#picture").css("object-position", "center -95px");
+        }
+     });
+	
+	addEventListener("resize", function (event) {
+		const bodySize = parseInt($("body").css("width"));
+        if (bodySize > 1399) {
+            $("#picture").css("object-position", "center -370px");
+        }
+        else if (bodySize <= 1399 && bodySize > 1199){
+			 $("#picture").css("object-position", "center -305px");
+		 }
+        else if (bodySize <= 1199 && bodySize > 991){
+			 $("#picture").css("object-position", "center -250px");
+		 }
+        else if (bodySize <= 991 && bodySize > 767){
+        	$("#picture").css("object-position", "center -155px");
+        }
+        else if (bodySize <=767){
+        	$("#picture").css("object-position", "center -95px");
+        }
+	});
+	
+	</script>
 </body>
 </html>

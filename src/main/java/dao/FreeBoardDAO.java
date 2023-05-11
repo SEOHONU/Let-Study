@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import commons.EncryptionUtils;
 import dto.FreeBoardAndMemberDTO;
 import dto.FreeBoardDTO;
 import statics.Settings;
