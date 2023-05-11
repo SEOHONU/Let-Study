@@ -152,7 +152,7 @@ public class MemberController extends HttpServlet {
 						roadAddress, detailAddress, null);
 				dao.update(dto);
 				request.getSession().setAttribute("loggedNickname", nickname);
-				response.sendRedirect("/myInfoSelect.member");
+				response.sendRedirect("/mypageboard.mypageboardController");
 				// delete 회원탈퇴
 			} else if (cmd.equals("/memberOut.member")) {
 				String id = (String) request.getSession().getAttribute("loggedID");

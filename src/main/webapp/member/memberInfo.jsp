@@ -144,7 +144,7 @@ h2 {
 
 				<div class="col-6">
 					<label for="birthInput" class="form-label">생년월일*</label> <input
-						type="text" class="form-control" id="birthYear" name="birth_date"
+						type="text" class="form-control" id="birthdate" name="birth_date"
 						value="${myInfo.birth_date}">
 				</div>
 				<div class="col-3"></div>
@@ -219,6 +219,7 @@ h2 {
 	</form>
 
 	<script>
+
 		let regexPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
 		let regexName = /^[가-힣]{2,5}$/;
 		let regexNickname = /^[a-zA-Z0-9가-힣]{2,10}$/;
@@ -310,6 +311,7 @@ h2 {
 					},
 				}).open();
 		};
+
 	</script>
 </body>
 </html>

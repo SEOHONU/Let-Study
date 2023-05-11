@@ -45,7 +45,7 @@ public class Profile_settingController extends HttpServlet {
 				String url = request.getParameter("url");
 				request.getSession().setAttribute("loggedNickname", nickname);
 				int result = dao.update(new Profile_settingDTO(loginId,nickname,introduce,instagram,facebook,url));
-				response.sendRedirect("/select.profile_settingController");
+				response.sendRedirect("/mypageboard.mypageboardController");
 			}
 
 			

@@ -185,7 +185,7 @@
 
                   <div class="nicknamebox P">
                      <b>닉네임</b><br>
-                     <input type="text" id="nickname" name="nickname" value="${select.profile_nickname}" maxlength="10" readonly><br>
+                     <input type="text" id="nickname" name="nickname" value="${loggedNickname}" maxlength="10" readonly><br>
                   </div>
 
                   <div class="introducebox P">
